@@ -2,11 +2,14 @@
 import { computed } from 'vue'
 import { PhArrowLeft } from '@phosphor-icons/vue'
 import { GUIA } from '../../domain/conteudo/guia'
+import { videoDaSecao } from '../../domain/conteudo/videos'
 import { ICONE_SECAO_GUIA } from '../icones'
 import CaixaAviso from '../components/CaixaAviso.vue'
+import VideoAnimado from '../components/VideoAnimado.vue'
 
 const props = defineProps<{ secaoId: string }>()
 const secao = computed(() => GUIA.find((candidata) => candidata.id === props.secaoId))
+const video = computed(() => videoDaSecao(props.secaoId))
 </script>
 
 <template>
@@ -23,6 +26,8 @@ const secao = computed(() => GUIA.find((candidata) => candidata.id === props.sec
     <CaixaAviso v-if="secao.aviso" :titulo="secao.aviso.titulo" :tipo="secao.aviso.critico ? 'critico' : 'atencao'">
       {{ secao.aviso.texto }}
     </CaixaAviso>
+
+    <VideoAnimado v-if="video" :key="video.id" :video="video" />
 
     <section v-for="bloco in secao.blocos" :key="bloco.titulo" class="space-y-4">
       <h2 class="titulo-2">{{ bloco.titulo }}</h2>

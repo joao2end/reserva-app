@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { PhCaretRight, PhMapPin } from '@phosphor-icons/vue'
+import { PhCaretRight, PhFilmStrip, PhMapPin } from '@phosphor-icons/vue'
 import { GUIA } from '../../domain/conteudo/guia'
+import { videoDaSecao } from '../../domain/conteudo/videos'
 import { ICONE_SECAO_GUIA } from '../icones'
 </script>
 
@@ -18,6 +19,9 @@ import { ICONE_SECAO_GUIA } from '../icones'
           <span class="flex-1">
             <span class="block text-[24px] font-bold">{{ secao.titulo }}</span>
             <span class="nota">{{ secao.resumo }}</span>
+            <span v-if="videoDaSecao(secao.id)" class="rotulo mt-2 flex items-center gap-2">
+              <PhFilmStrip :size="22" weight="bold" aria-hidden="true" />Tem vídeo
+            </span>
           </span>
           <PhCaretRight :size="24" weight="bold" class="shrink-0" aria-hidden="true" />
         </RouterLink>

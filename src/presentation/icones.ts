@@ -9,6 +9,7 @@ import {
   PhJar,
   PhOrangeSlice,
   PhPackage,
+  PhScales,
   PhShoppingCart,
   PhStorefront,
   PhSun,
@@ -30,6 +31,7 @@ export const ICONE_SECAO_GUIA: Record<string, Component> = {
   'el-nino': PhSun,
   armazenamento: PhThermometer,
   agua: PhDrop,
+  racionamento: PhScales,
   compra: PhStorefront,
   cuidados: PhWarningOctagon,
 }

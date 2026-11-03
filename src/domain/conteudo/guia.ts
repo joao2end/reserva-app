@@ -91,6 +91,54 @@ export const GUIA: SecaoGuia[] = [
     ],
   },
   {
+    id: 'racionamento',
+    titulo: 'Racionamento',
+    resumo: 'Água não se raciona. A comida pode ser dividida.',
+    aviso: {
+      critico: false,
+      titulo: 'Água é a regra número 1',
+      texto: 'Beba a água que o corpo pede. Só diminua se a Defesa Civil ou a companhia de água mandar, e nunca menos de 1 litro por dia.',
+    },
+    blocos: [
+      {
+        titulo: 'Água',
+        itens: [
+          'Beba o que precisar hoje e procure mais para amanhã.',
+          'Economize na limpeza, não no que se bebe: use a água do banho na descarga.',
+          'Fique na sombra e evite esforço. Assim o corpo pede menos água.',
+          'Não troque água por refrigerante, café ou bebida alcoólica: eles dão mais sede.',
+          'Água de origem duvidosa: coe, ferva 5 minutos ou use 2 gotas de hipoclorito por litro e espere 30 minutos.',
+        ],
+      },
+      {
+        titulo: 'A ordem para comer',
+        itens: [
+          '1º O que está na geladeira e estraga rápido.',
+          '2º O que está no congelador. Se ainda tem gelo no meio, costuma durar uns 3 dias.',
+          '3º Por último, a despensa: arroz, feijão, farinha e enlatados.',
+        ],
+      },
+      {
+        titulo: 'Dividir a comida',
+        itens: [
+          'Adultos com saúde e pouca atividade podem comer metade do normal por um tempo.',
+          'Crianças e gestantes não devem comer menos.',
+          'Quem tem doença ou toma remédio: pergunte no posto de saúde antes de diminuir.',
+          'Com pouca água, evite comida salgada, como charque, salgadinho e embutido. Ela dá mais sede.',
+          'Prefira enlatados com caldo e biscoito sem sal.',
+        ],
+      },
+      {
+        titulo: 'Fazer a conta',
+        itens: [
+          'Divida o que você tem pelo número de dias que precisa.',
+          'Exemplo: 10 kg de arroz para 40 dias dá 250 g por dia para a casa.',
+          'Separe a porção do dia em um pote. Quando acabar, só no dia seguinte.',
+        ],
+      },
+    ],
+  },
+  {
     id: 'compra',
     titulo: 'Onde e como comprar',
     resumo: 'Compre aos poucos, em fardo e nas promoções.',
