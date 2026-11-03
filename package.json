@@ -1,0 +1,35 @@
+{
+  "name": "reserva-app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "android": "npm run build && npx cap sync android && npx cap open android",
+    "test": "vitest run",
+    "test:e2e": "npm run build && python3 tests/e2e/cenarios.py"
+  },
+  "dependencies": {
+    "@capacitor/android": "6.1.2",
+    "@capacitor/app": "^6.0.1",
+    "@capacitor/core": "6.1.2",
+    "@capacitor/preferences": "6.0.2",
+    "@fontsource/atkinson-hyperlegible": "5.1.0",
+    "@phosphor-icons/vue": "^2.2.1",
+    "vue": "3.5.12",
+    "vue-router": "4.4.5"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "6.1.2",
+    "@phosphor-icons/core": "^2.1.1",
+    "@tailwindcss/vite": "4.1.11",
+    "@vitejs/plugin-vue": "5.1.4",
+    "tailwindcss": "4.1.11",
+    "typescript": "5.6.3",
+    "vite": "5.4.10",
+    "vitest": "^2.1.4",
+    "vue-tsc": "2.1.10"
+  }
+}

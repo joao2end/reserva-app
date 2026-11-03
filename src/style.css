@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Atkinson Hyperlegible", Verdana, Arial, sans-serif;
+  --color-papel: var(--papel);
+  --color-tinta: var(--tinta);
+  --color-tinta-suave: var(--tinta-suave);
+  --color-relevo: var(--relevo);
+}
+
+:root {
+  --papel: #ffffff;
+  --tinta: #000000;
+  --tinta-suave: #333333;
+  --relevo: #e6e6e6;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --papel: #000000;
+    --tinta: #ffffff;
+    --tinta-suave: #cccccc;
+    --relevo: #262626;
+    color-scheme: dark;
+  }
+}
+
+html {
+  font-size: 16px;
+  scroll-padding-bottom: 7rem;
+  scroll-padding-top: 1rem;
+}
+
+html,
+body {
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+body {
+  padding-top: env(safe-area-inset-top);
+}
+
+@layer components {
+  .titulo-1 {
+    @apply text-[40px] leading-[46px] font-bold;
+  }
+  .titulo-2 {
+    @apply text-[30px] leading-[38px] font-bold;
+  }
+  .rotulo {
+    @apply text-[18px] leading-6 font-bold uppercase tracking-[1px];
+  }
+  .nota {
+    @apply text-[18px] leading-7 text-tinta-suave;
+  }
+  .caixa {
+    @apply border-4 border-tinta p-6 bg-papel;
+  }
+  .bloco {
+    @apply bg-tinta text-papel;
+  }
+  .botao {
+    @apply min-h-14 px-6 border-4 border-tinta bg-tinta text-papel font-bold text-[22px] rounded-md w-full active:opacity-80;
+  }
+  .botao-secundario {
+    @apply min-h-14 px-6 border-4 border-tinta bg-papel text-tinta font-bold text-[22px] rounded-md w-full active:bg-relevo;
+  }
+  .campo {
+    @apply min-h-14 w-full border-4 border-tinta bg-papel text-tinta px-4 text-[22px] rounded-none;
+  }
+}
+
+*:focus-visible {
+  outline: 4px solid var(--tinta);
+  outline-offset: 3px;
+}
