@@ -12,17 +12,17 @@
     "test:e2e": "npm run build && python3 tests/e2e/cenarios.py"
   },
   "dependencies": {
-    "@capacitor/android": "6.1.2",
-    "@capacitor/app": "^6.0.1",
-    "@capacitor/core": "6.1.2",
-    "@capacitor/preferences": "6.0.2",
+    "@capacitor/android": "8.6.0",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "8.6.0",
+    "@capacitor/preferences": "8.0.1",
     "@fontsource/atkinson-hyperlegible": "5.1.0",
     "@phosphor-icons/vue": "^2.2.1",
     "vue": "3.5.12",
     "vue-router": "4.4.5"
   },
   "devDependencies": {
-    "@capacitor/cli": "6.1.2",
+    "@capacitor/cli": "8.6.0",
     "@phosphor-icons/core": "^2.1.1",
     "@tailwindcss/vite": "4.1.11",
     "@vitejs/plugin-vue": "5.1.4",
@@ -31,5 +31,8 @@
     "vite": "5.4.10",
     "vitest": "^2.1.4",
     "vue-tsc": "2.1.10"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }
