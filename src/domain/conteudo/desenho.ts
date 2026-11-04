@@ -78,6 +78,11 @@ export const DESENHOS = [
   'floco',
   'tampa',
   'braseiro',
+  'gerador',
+  'placa-solar',
+  'lanterna',
+  'bateria',
+  'fita-larga',
 ] as const
 
 export type DesenhoId = (typeof DESENHOS)[number]

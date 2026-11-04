@@ -73,6 +73,12 @@ export const CURSO_ENCANADOR: ModuloCurso = {
             'No vaso sanitário, jogue um pouco de pó de café na água do vaso. Se ele se mexer sozinho ou sumir sem dar descarga, a válvula ou a caixa acoplada estão vazando.',
           ],
         },
+        {
+          titulo: 'Boia da caixa d’água',
+          paragrafos: [
+            'Se a água escorre sem parar pelo ladrão da caixa, a boia não está fechando. Feche o registro que enche a caixa e troque a boia ou o reparo dela: é barato e acaba com o desperdício.',
+          ],
+        },
       ],
       erros: [
         'Só descobrir onde fica o registro na hora do cano estourado.',
@@ -152,24 +158,6 @@ export const CURSO_ENCANADOR: ModuloCurso = {
               { desenho: 'certo', x: 78, y: 72, largura: 20, movimento: 'entrar', atraso: 1.2 },
             ],
           },
-        },
-      ],
-      videosReais: [
-        {
-          arquivo: 'videos/torneira-pingando.mp4',
-          titulo: 'Torneira pingando',
-          legenda: 'Pingo contínuo com a torneira fechada: o vedante ou o reparo gastou.',
-          autor: 'ArtHouse Studio',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/close-up-of-a-leaky-faucet-4571346/',
-        },
-        {
-          arquivo: 'videos/torneira-conserto.mp4',
-          titulo: 'Apertando a torneira com chave',
-          legenda: 'Firme a chave na peça e gire com calma, sem arrancar o cano da parede.',
-          autor: 'Alejandro Torres',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/close-up-of-plumber-fixing-faucet-9890450/',
         },
       ],
       partes: [
@@ -268,16 +256,6 @@ export const CURSO_ENCANADOR: ModuloCurso = {
             ],
             rotulos: [{ texto: 'NUNCA MISTURE', x: 50, y: 86, tamanho: 7, atraso: 1.4, destaque: true }],
           },
-        },
-      ],
-      videosReais: [
-        {
-          arquivo: 'videos/sifao.mp4',
-          titulo: 'Soltando o sifão da pia',
-          legenda: 'A rosca do sifão solta com a mão. Guarde a borrachinha de vedação.',
-          autor: 'Stepan SK',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/a-person-doing-plumbing-7584762/',
         },
       ],
       partes: [

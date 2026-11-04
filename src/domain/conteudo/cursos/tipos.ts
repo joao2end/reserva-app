@@ -13,22 +13,12 @@ export interface PerguntaLicao {
   explicacao: string
 }
 
-export interface VideoReal {
-  arquivo: string
-  titulo: string
-  legenda: string
-  autor: string
-  licenca: string
-  origem: string
-}
-
 export interface LicaoCurso {
   id: string
   titulo: string
   objetivo: string
   minutos: number
   cenas: CenaVideo[]
-  videosReais?: VideoReal[]
   partes: ParteLicao[]
   erros: string[]
   teste: PerguntaLicao[]

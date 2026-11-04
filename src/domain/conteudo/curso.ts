@@ -195,16 +195,6 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
             segundos: 6,
           },
         ],
-        videosReais: [
-          {
-            arquivo: 'videos/ferver-agua.mp4',
-            titulo: 'Água fervendo',
-            legenda: 'Fervura forte, com bolhas grandes subindo sem parar. Conte a partir daí.',
-            autor: 'Anna Tarazevich',
-            licenca: 'Licença Pexels',
-            origem: 'https://www.pexels.com/video/close-up-of-boiling-water-7261519/',
-          },
-        ],
         partes: [
           {
             titulo: 'Primeiro: clarear',
@@ -461,16 +451,6 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
             segundos: 8,
           },
         ],
-        videosReais: [
-          {
-            arquivo: 'videos/massagem-peito.mp4',
-            titulo: 'Massagem no peito em boneco de treino',
-            legenda: 'Braços esticados, ombros em cima das mãos, mãos no meio do peito.',
-            autor: 'Gustavo Fring',
-            licenca: 'Licença Pexels',
-            origem: 'https://www.pexels.com/video/cardio-pulmonary-resuscitation-technique-demonstration-in-a-seminar-3981776/',
-          },
-        ],
         partes: [
           {
             titulo: 'Como reconhecer',
@@ -590,16 +570,6 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
             titulo: 'Bebê: costas e peito',
             texto: '5 tapas nas costas e 5 compressões com 2 dedos no peito. Nunca na barriga.',
             segundos: 8,
-          },
-        ],
-        videosReais: [
-          {
-            arquivo: 'videos/engasgo-mao.webm',
-            titulo: 'Posição das mãos nas compressões na barriga',
-            legenda: 'Mão fechada acima do umbigo, a outra mão por cima.',
-            autor: 'Doc James',
-            licenca: 'CC BY-SA 4.0',
-            origem: 'https://commons.wikimedia.org/wiki/File:VideoOfAbdoThrustsWM.webm',
           },
         ],
         partes: [
@@ -1009,6 +979,14 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
               'Não volte para dentro até o lugar ser ventilado e a fonte do gás ser apagada.',
             ],
           },
+          {
+            titulo: 'Cheiro de gás',
+            passos: [
+              'Feche o botijão, abra as janelas e não acenda nada, nem a luz.',
+              'Teste vazamento com espuma de sabão na mangueira e no regulador: se borbulhar, troque.',
+              'Mangueira e regulador têm validade: veja a data impressa e troque quando vencer.',
+            ],
+          },
         ],
         erros: [
           'Fazer churrasco ou acender braseiro dentro de casa porque está chovendo.',
@@ -1080,4 +1058,4 @@ export function proximaLicao(id: string): LicaoCurso | undefined {
   return indice >= 0 ? licoes[indice + 1] : undefined
 }
 
-export type { AreaCurso, LicaoCurso, ModuloCurso, ParteLicao, PerguntaLicao, VideoReal } from './cursos/tipos'
+export type { AreaCurso, LicaoCurso, ModuloCurso, ParteLicao, PerguntaLicao } from './cursos/tipos'

@@ -18,7 +18,9 @@ describe('narração dos vídeos', () => {
       const curso = moduloDaLicao(licao.id)
       expect(curso, licao.id).toBeDefined()
       const roteiro = roteiroDaLicao(licao, curso!)
-      expect(roteiro).toHaveLength(licao.cenas.length + 2)
+      const itens = licao.partes.reduce((soma, parte) => soma + (parte.paragrafos?.length ?? 0) + (parte.passos?.length ?? 0), 0)
+      expect(roteiro).toHaveLength(licao.cenas.length + itens + licao.erros.length + 2)
+      expect(roteiro.filter((trecho) => trecho.tipo === 'erro')).toHaveLength(licao.erros.length)
       expect(roteiro[0].tipo).toBe('abertura')
       expect(roteiro.at(-1)?.tipo).toBe('encerramento')
       for (const trecho of roteiro) {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { PhArrowLeft, PhArrowRight, PhBookOpen, PhCheckCircle, PhClock, PhVideoCamera, PhWarning } from '@phosphor-icons/vue'
+import { PhArrowLeft, PhArrowRight, PhBookOpen, PhCaretDown, PhCheckCircle, PhClock, PhListNumbers, PhWarning } from '@phosphor-icons/vue'
 import { licaoPorId, moduloDaLicao, proximaLicao } from '../../domain/conteudo/curso'
 import { videosYoutubeDaLicao } from '../../domain/conteudo/cursos/youtube'
 import type { VideoGuia } from '../../domain/conteudo/videos'
@@ -9,7 +9,6 @@ import { useAviso } from '../estado/useAviso'
 import CaixaAviso from '../components/CaixaAviso.vue'
 import TesteLicao from '../components/TesteLicao.vue'
 import VideoAnimado from '../components/VideoAnimado.vue'
-import VideoReal from '../components/VideoReal.vue'
 import VideoNarradoLicao from '../components/VideoNarradoLicao.vue'
 import VideosYoutube from '../components/VideosYoutube.vue'
 
@@ -25,7 +24,7 @@ const concluida = computed(() => licoesConcluidas.value.includes(props.licaoId))
 const posicao = computed(() => (modulo.value?.licoes.findIndex((item) => item.id === props.licaoId) ?? 0) + 1)
 
 const video = computed<VideoGuia | undefined>(() =>
-  licao.value ? { id: licao.value.id, secaoId: licao.value.id, titulo: 'Animação rápida (sem internet)', cenas: licao.value.cenas } : undefined,
+  licao.value ? { id: licao.value.id, secaoId: licao.value.id, titulo: 'Animação da lição', cenas: licao.value.cenas } : undefined,
 )
 
 async function aprovar() {
@@ -52,44 +51,47 @@ async function aprovar() {
       </p>
     </header>
 
-    <CaixaAviso titulo="O que você vai aprender">{{ licao.objetivo }}</CaixaAviso>
+    <p class="text-[24px] leading-9">{{ licao.objetivo }}</p>
 
-    <VideoNarradoLicao :key="`narrado-${licao.id}`" :licao-id="licao.id" :titulo="licao.titulo" />
+    <VideoNarradoLicao :key="`narrado-${licao.id}`" :licao-id="licao.id" :titulo="licao.titulo">
+      <VideoAnimado :key="video.id" :video="video" />
+    </VideoNarradoLicao>
 
-    <VideoAnimado :key="video.id" :video="video" />
-
-    <section v-if="licao.videosReais?.length" class="space-y-6" aria-labelledby="veja-de-verdade">
-      <h2 id="veja-de-verdade" class="titulo-2 flex items-center gap-3">
-        <PhVideoCamera :size="34" weight="bold" aria-hidden="true" />Veja de verdade
+    <section class="space-y-3" aria-labelledby="consultar">
+      <h2 id="consultar" class="titulo-2 flex items-center gap-3">
+        <PhListNumbers :size="34" weight="bold" aria-hidden="true" />Para consultar
       </h2>
-      <VideoReal v-for="real in licao.videosReais" :key="real.arquivo" :video="real" />
-    </section>
-
-    <VideosYoutube v-if="youtube.length" :videos="youtube" />
-
-    <section v-for="parte in licao.partes" :key="parte.titulo" class="space-y-4">
-      <h2 class="titulo-2">{{ parte.titulo }}</h2>
-      <p v-for="paragrafo in parte.paragrafos" :key="paragrafo">{{ paragrafo }}</p>
-      <ol v-if="parte.passos" class="space-y-4">
-        <li v-for="(passo, indice) in parte.passos" :key="passo" class="flex gap-4">
-          <span class="bloco flex size-10 shrink-0 items-center justify-center text-[22px] font-bold" aria-hidden="true">
-            {{ indice + 1 }}
-          </span>
-          <span class="min-w-0 flex-1 pt-1">{{ passo }}</span>
-        </li>
-      </ol>
-    </section>
-
-    <section class="caixa space-y-4" aria-labelledby="erros-comuns">
-      <h2 id="erros-comuns" class="titulo-2 flex items-center gap-3">
-        <PhWarning :size="34" weight="bold" aria-hidden="true" />Erros comuns
-      </h2>
-      <ul class="space-y-3">
-        <li v-for="erro in licao.erros" :key="erro" class="flex gap-3">
-          <span class="mt-3 size-3 shrink-0 bg-tinta" aria-hidden="true" />
-          <span>{{ erro }}</span>
-        </li>
-      </ul>
+      <p class="nota">O mesmo conteúdo da aula, por escrito. Toque para abrir.</p>
+      <details v-for="parte in licao.partes" :key="parte.titulo" class="consulta border-4 border-tinta" data-teste="parte-licao">
+        <summary class="flex min-h-18 cursor-pointer items-center gap-3 p-4 text-[22px] leading-7 font-bold">
+          <span class="min-w-0 flex-1">{{ parte.titulo }}</span>
+          <PhCaretDown :size="26" weight="bold" class="seta shrink-0" aria-hidden="true" />
+        </summary>
+        <div class="space-y-4 border-t-2 border-tinta p-4">
+          <p v-for="paragrafo in parte.paragrafos" :key="paragrafo">{{ paragrafo }}</p>
+          <ol v-if="parte.passos" class="space-y-4">
+            <li v-for="(passo, indice) in parte.passos" :key="passo" class="flex gap-4">
+              <span class="bloco flex size-10 shrink-0 items-center justify-center text-[22px] font-bold" aria-hidden="true">
+                {{ indice + 1 }}
+              </span>
+              <span class="min-w-0 flex-1 pt-1">{{ passo }}</span>
+            </li>
+          </ol>
+        </div>
+      </details>
+      <details class="consulta border-4 border-tinta" data-teste="erros-licao">
+        <summary class="flex min-h-18 cursor-pointer items-center gap-3 p-4 text-[22px] leading-7 font-bold">
+          <PhWarning :size="28" weight="bold" class="shrink-0" aria-hidden="true" />
+          <span class="min-w-0 flex-1">Erros comuns</span>
+          <PhCaretDown :size="26" weight="bold" class="seta shrink-0" aria-hidden="true" />
+        </summary>
+        <ul class="space-y-3 border-t-2 border-tinta p-4">
+          <li v-for="erro in licao.erros" :key="erro" class="flex gap-3">
+            <span class="mt-3 size-3 shrink-0 bg-tinta" aria-hidden="true" />
+            <span>{{ erro }}</span>
+          </li>
+        </ul>
+      </details>
     </section>
 
     <section class="space-y-4" aria-labelledby="teste-rapido">
@@ -97,6 +99,8 @@ async function aprovar() {
       <p class="nota">Acerte todas para concluir a lição.</p>
       <TesteLicao :key="licao.id" :perguntas="licao.teste" :licao-id="licao.id" @aprovado="aprovar" />
     </section>
+
+    <VideosYoutube v-if="youtube.length" :videos="youtube" />
 
     <RouterLink
       v-if="proxima"
@@ -123,3 +127,17 @@ async function aprovar() {
     <RouterLink :to="{ name: 'cursos' }" class="botao-secundario flex items-center justify-center">Ver os cursos</RouterLink>
   </section>
 </template>
+
+<style scoped>
+.consulta summary {
+  list-style: none;
+}
+
+.consulta summary::-webkit-details-marker {
+  display: none;
+}
+
+.consulta[open] .seta {
+  transform: rotate(180deg);
+}
+</style>

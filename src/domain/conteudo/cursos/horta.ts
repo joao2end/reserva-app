@@ -148,16 +148,6 @@ export const CURSO_HORTA: ModuloCurso = {
           },
         },
       ],
-      videosReais: [
-        {
-          arquivo: 'videos/plantar-mudas.mp4',
-          titulo: 'Plantando mudas de alface',
-          legenda: 'Mudas em fileiras, na mesma fundura em que estavam na bandeja.',
-          autor: 'Andi Farruku',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/person-planting-lettuce-5766086/',
-        },
-      ],
       partes: [
         {
           titulo: 'Semear direto no canteiro',
@@ -175,6 +165,16 @@ export const CURSO_HORTA: ModuloCurso = {
             'Molhe a muda e o canteiro antes.',
             'Plante nas horas mais frescas do dia, na mesma fundura em que a muda estava.',
             'Aperte a terra em volta com os dedos e regue.',
+          ],
+        },
+        {
+          titulo: 'O que plantar na seca',
+          passos: [
+            'Feijão-de-corda (caupi), mandioca e macaxeira.',
+            'Batata-doce, jerimum (abóbora) e quiabo.',
+            'Palma: alimenta os animais, e a palma doce também vai para a panela.',
+            'Em vasos: coentro, cebolinha, pimenta e couve.',
+            'Guarde sementes da colheita em garrafa PET bem seca e fechada.',
           ],
         },
         {
@@ -255,24 +255,6 @@ export const CURSO_HORTA: ModuloCurso = {
           },
         },
       ],
-      videosReais: [
-        {
-          arquivo: 'videos/cobertura-palha.mp4',
-          titulo: 'Cobrindo o canteiro',
-          legenda: 'Uma camada de palha ou folhas secas em volta das plantas.',
-          autor: 'K',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/gardener-spreading-mulch-on-garden-bed-31145883/',
-        },
-        {
-          arquivo: 'videos/regar.mp4',
-          titulo: 'Regando junto ao pé',
-          legenda: 'Regue perto do pé da planta, devagar, para a água entrar na terra.',
-          autor: 'Kaboompics',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/person-watering-plants-4238308/',
-        },
-      ],
       partes: [
         {
           titulo: 'Quando e quanto regar',
@@ -287,6 +269,7 @@ export const CURSO_HORTA: ModuloCurso = {
             'Cubra a terra em volta das plantas com palha, capim seco ou folhas. Isso deixa o solo mais fresco e perde menos água.',
             'Regue no pé da planta, devagar, e não em cima das folhas.',
             'Faça gotejamento com garrafa PET: fure a tampa com um prego quente, encha de água e enterre a garrafa de boca para baixo ao lado da planta.',
+            'Faça sombra com tela ou palha nas horas mais quentes.',
             'Reaproveite a água de lavar verduras. Água com sabão, detergente ou água sanitária não serve para a horta.',
           ],
         },

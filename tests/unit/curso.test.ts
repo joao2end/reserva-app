@@ -1,14 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { readFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { AREAS_CURSO, CURSO, LICOES, cursoPorId, cursosDaArea, licaoPorId, moduloDaLicao, proximaLicao } from '../../src/domain/conteudo/curso'
 import { DESENHOS } from '../../src/domain/conteudo/desenho'
 import { DESENHO } from '../../src/presentation/desenhos'
 import { ICONE_CURSO } from '../../src/presentation/icones'
 
-const MANIFESTO: { arquivo: string; sha256: string; url: string }[] = JSON.parse(
-  readFileSync(join(__dirname, '../../scripts/videos_reais.json'), 'utf8'),
-)
 
 describe('curso de sobrevivência', () => {
   it('cada lição tem id único', () => {
@@ -78,15 +73,4 @@ describe('curso de sobrevivência', () => {
     expect(Object.keys(DESENHO).sort()).toEqual([...DESENHOS].sort())
   })
 
-  it('todo vídeo real é baixado no build, com hash para conferir', () => {
-    const arquivos = MANIFESTO.map((video) => `videos/${video.arquivo}`)
-    const usados = LICOES.flatMap((licao) => licao.videosReais ?? [])
-    expect(usados.length).toBeGreaterThanOrEqual(10)
-    for (const video of usados) {
-      expect(arquivos, video.arquivo).toContain(video.arquivo)
-      expect(video.autor.length, video.arquivo).toBeGreaterThan(0)
-      expect(video.origem, video.arquivo).toMatch(/^https:\/\/(www\.pexels\.com|commons\.wikimedia\.org)\//)
-    }
-    expect(MANIFESTO.every((video) => /^[0-9a-f]{64}$/.test(video.sha256))).toBe(true)
-  })
 })

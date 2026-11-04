@@ -69,16 +69,6 @@ export const CURSO_ELETRICISTA: ModuloCurso = {
           },
         },
       ],
-      videosReais: [
-        {
-          arquivo: 'videos/quadro-disjuntores.mp4',
-          titulo: 'Desligando disjuntores no quadro',
-          legenda: 'Cada alavanca é um circuito. Para baixo, o circuito fica sem energia.',
-          autor: 'RDNE Stock project',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/person-flicking-switches-6520278/',
-        },
-      ],
       partes: [
         {
           titulo: 'Por que o choque é tão perigoso',
@@ -430,16 +420,6 @@ export const CURSO_ELETRICISTA: ModuloCurso = {
           },
         },
       ],
-      videosReais: [
-        {
-          arquivo: 'videos/trocar-lampada.mp4',
-          titulo: 'Rosqueando a lâmpada',
-          legenda: 'Rosqueie até firmar, sem forçar, e só então ligue o interruptor.',
-          autor: 'cottonbro studio',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/hands-house-lamp-light-bulb-4109223/',
-        },
-      ],
       partes: [
         {
           titulo: 'Como a lâmpada é ligada',
@@ -718,6 +698,127 @@ export const CURSO_ELETRICISTA: ModuloCurso = {
         },
       ],
       fontes: [MANUAL_PROCOBRE, NBR_5410, 'O Setor Elétrico: a divisão da instalação em circuitos conforme a NBR 5410'],
+    },
+    {
+      id: 'eletrica-gerador',
+      titulo: 'Gerador, energia sem rede e fio caído',
+      objetivo: 'Usar gerador sem risco de morte, ter luz quando falta energia e agir certo diante de fio caído.',
+      minutos: 6,
+      cenas: [
+        {
+          titulo: 'Gerador só do lado de fora',
+          texto: 'A pelo menos 6 metros da casa, longe de portas e janelas. O gás dele mata sem cheiro.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'gerador', x: 68, y: 46, largura: 46, movimento: 'entrar' },
+              { desenho: 'seta', x: 30, y: 46, largura: 22, giro: 180, movimento: 'surgir', atraso: 0.8 },
+            ],
+            rotulos: [{ texto: '6 METROS OU MAIS', x: 50, y: 86, tamanho: 7, atraso: 1.4, destaque: true }],
+          },
+        },
+        {
+          titulo: 'Nunca na tomada da casa',
+          texto: 'A energia volta pela rede e pode matar quem conserta os fios na rua.',
+          segundos: 7,
+          desenho: {
+            pecas: [
+              { desenho: 'gerador', x: 30, y: 44, largura: 40, movimento: 'entrar' },
+              { desenho: 'tomada', x: 76, y: 44, largura: 26, movimento: 'entrar', atraso: 0.5 },
+              { desenho: 'errado', x: 76, y: 44, largura: 34, movimento: 'entrar', atraso: 1.2 },
+            ],
+            rotulos: [{ texto: 'SÓ COM CHAVE REVERSORA', x: 50, y: 84, tamanho: 6, atraso: 1.8 }],
+          },
+        },
+        {
+          titulo: 'Luz quando falta energia',
+          texto: 'Lanterna de LED, carregador portátil e placa solar pequena com bateria.',
+          segundos: 7,
+          desenho: {
+            pecas: [
+              { desenho: 'lanterna', x: 34, y: 42, largura: 42, movimento: 'acender', atraso: 0.8 },
+              { desenho: 'placa-solar', x: 74, y: 58, largura: 36, movimento: 'entrar', atraso: 0.4 },
+              { desenho: 'sol', x: 82, y: 18, largura: 18, movimento: 'girar' },
+            ],
+          },
+        },
+        {
+          titulo: 'Fio caído: fique longe',
+          texto: 'Fique a 10 metros, mesmo que pareça desligado. Ligue para a distribuidora e para o 193.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'fio-fase', x: 50, y: 36, largura: 66, giro: 18, movimento: 'tremer' },
+              { desenho: 'raio', x: 22, y: 70, largura: 22, movimento: 'piscar', atraso: 0.6 },
+            ],
+            rotulos: [
+              { texto: '10 METROS', x: 66, y: 68, tamanho: 8, atraso: 1, destaque: true },
+              { texto: '193', x: 66, y: 86, tamanho: 9, atraso: 1.6 },
+            ],
+          },
+        },
+      ],
+      partes: [
+        {
+          titulo: 'Gerador sem acidente',
+          passos: [
+            'Use só ao ar livre, a pelo menos 6 metros da casa e longe de portas e janelas.',
+            'Nunca dentro de casa ou na garagem, nem com a janela aberta: o gás que ele solta mata sem cheiro.',
+            'Ligue os aparelhos direto no gerador, com extensão grossa e sem emenda.',
+            'Para ligar no quadro da casa, só com chave reversora instalada por eletricista.',
+            'Desligue e espere esfriar antes de pôr combustível.',
+          ],
+        },
+        {
+          titulo: 'Energia quando falta luz',
+          passos: [
+            'Tenha lanternas e lampiões de LED, com pilhas recarregáveis.',
+            'Deixe um carregador portátil (power bank) sempre carregado para o celular.',
+            'Uma placa solar pequena com controlador de carga e bateria serve para luz e celular.',
+            'Vela só em pires firme, longe de cortina e de criança. Prefira LED.',
+          ],
+        },
+        {
+          titulo: 'Fio caído e alagamento',
+          passos: [
+            'Fique a 10 metros do fio caído, mesmo que pareça desligado.',
+            'Não encoste em quem levou choque enquanto a energia não for cortada.',
+            'Ligue para a distribuidora de energia e para os Bombeiros no 193.',
+            'Depois de alagamento, só religue a energia depois que um eletricista olhar a casa.',
+          ],
+        },
+      ],
+      erros: [
+        'Ligar o gerador numa tomada para "alimentar a casa".',
+        'Deixar o gerador na garagem ou na varanda fechada.',
+        'Pôr combustível com o gerador ligado ou quente.',
+        'Puxar com a mão quem está levando choque.',
+      ],
+      teste: [
+        {
+          pergunta: 'Onde deixar o gerador funcionando?',
+          opcoes: ['Na garagem, com a porta aberta', 'Ao ar livre, a pelo menos 6 metros da casa', 'Na cozinha, perto da janela'],
+          correta: 1,
+          explicacao: 'O gás do motor mata sem cheiro. Só ao ar livre e longe de portas e janelas.',
+        },
+        {
+          pergunta: 'Pode ligar o gerador numa tomada para a energia ir para a casa toda?',
+          opcoes: ['Sim, é o jeito mais fácil', 'Não, a energia volta pela rede e pode matar', 'Só à noite'],
+          correta: 1,
+          explicacao: 'Para ligar no quadro é preciso chave reversora instalada por eletricista.',
+        },
+        {
+          pergunta: 'Viu um fio caído na rua. O que fazer?',
+          opcoes: ['Afastar com um pedaço de pau', 'Ficar a 10 metros e ligar para a distribuidora e o 193', 'Passar por cima com cuidado'],
+          correta: 1,
+          explicacao: 'Mesmo parado, o fio pode estar com energia. Fique longe e chame quem sabe.',
+        },
+      ],
+      fontes: [
+        'Ready.gov (governo dos EUA): segurança com geradores portáteis',
+        'Corpo de Bombeiros: emergência 193',
+        MANUAL_PROCOBRE,
+      ],
     },
   ],
 }

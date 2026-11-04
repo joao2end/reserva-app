@@ -1,10 +1,12 @@
 import type { LicaoCurso, ModuloCurso } from './cursos/tipos'
 
-export type TipoTrecho = 'abertura' | 'cena' | 'encerramento'
+export type TipoTrecho = 'abertura' | 'cena' | 'parte' | 'erro' | 'encerramento'
 
 export interface TrechoNarrado {
   tipo: TipoTrecho
   indiceCena?: number
+  indiceParte?: number
+  indiceItem?: number
   fala: string
   minimoSegundos: number
 }
@@ -63,6 +65,17 @@ function frase(texto: string): string {
   return /[.!?:]$/.test(limpo) ? limpo : `${limpo}.`
 }
 
+function itensDaParte(parte: LicaoCurso['partes'][number]): string[] {
+  return [...(parte.paragrafos ?? []), ...(parte.passos ?? [])]
+}
+
+export function itensParaTela(parte: LicaoCurso['partes'][number]): { texto: string; numero?: number }[] {
+  return [
+    ...(parte.paragrafos ?? []).map((texto) => ({ texto })),
+    ...(parte.passos ?? []).map((texto, indice) => ({ texto, numero: indice + 1 })),
+  ]
+}
+
 export function roteiroDaLicao(licao: LicaoCurso, curso: ModuloCurso): TrechoNarrado[] {
   return [
     { tipo: 'abertura', fala: paraFala(`${curso.titulo}. ${frase(licao.titulo)} ${frase(licao.objetivo)}`), minimoSegundos: 5 },
@@ -72,9 +85,24 @@ export function roteiroDaLicao(licao: LicaoCurso, curso: ModuloCurso): TrechoNar
       fala: paraFala(`${frase(cena.titulo)} ${frase(cena.texto)}`),
       minimoSegundos: cena.segundos,
     })),
+    ...licao.partes.flatMap((parte, indiceParte) =>
+      itensDaParte(parte).map((item, indiceItem) => ({
+        tipo: 'parte' as const,
+        indiceParte,
+        indiceItem,
+        fala: paraFala(indiceItem === 0 ? `${frase(parte.titulo)} ${frase(item)}` : frase(item)),
+        minimoSegundos: 3.5,
+      })),
+    ),
+    ...licao.erros.map((erro, indiceItem) => ({
+      tipo: 'erro' as const,
+      indiceItem,
+      fala: paraFala(indiceItem === 0 ? `Cuidado com estes erros. ${frase(erro)}` : frase(erro)),
+      minimoSegundos: 3.5,
+    })),
     {
       tipo: 'encerramento',
-      fala: 'Agora é com você. Veja o passo a passo completo e faça o teste rápido no aplicativo.',
+      fala: 'Agora é com você. No aplicativo, você pode consultar este passo a passo por escrito e fazer o teste rápido.',
       minimoSegundos: 5,
     },
   ]

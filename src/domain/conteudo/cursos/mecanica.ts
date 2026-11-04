@@ -59,24 +59,6 @@ export const CURSO_MECANICA: ModuloCurso = {
           },
         },
       ],
-      videosReais: [
-        {
-          arquivo: 'videos/bicicleta-pneu.mp4',
-          titulo: 'Soltando o pneu com espátulas',
-          legenda: 'As espátulas fazem alavanca na borda do pneu sem furar a câmara.',
-          autor: 'Erkan Avanoğlu',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/faceless-man-repairing-a-tire-5700508/',
-        },
-        {
-          arquivo: 'videos/bicicleta-camara.mp4',
-          titulo: 'Consertando a câmara de ar',
-          legenda: 'Com a câmara fora do pneu, fica fácil achar o furo e remendar.',
-          autor: 'manas patra',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/man-repairing-inner-tube-of-bike-wheel-11798540/',
-        },
-      ],
       partes: [
         {
           titulo: 'O que ter em casa',
@@ -174,16 +156,6 @@ export const CURSO_MECANICA: ModuloCurso = {
           },
         },
       ],
-      videosReais: [
-        {
-          arquivo: 'videos/apertar-porcas.mp4',
-          titulo: 'Apertando as porcas da roda',
-          legenda: 'Aperte em cruz, uma porca e depois a do lado oposto.',
-          autor: 'utopia 36',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/high-angle-view-of-a-mechanic-tightening-nuts-on-a-wheel-14514834/',
-        },
-      ],
       partes: [
         {
           titulo: 'Primeiro, a segurança',
@@ -277,16 +249,6 @@ export const CURSO_MECANICA: ModuloCurso = {
           },
         },
       ],
-      videosReais: [
-        {
-          arquivo: 'videos/vareta-oleo.mp4',
-          titulo: 'Conferindo o óleo na vareta',
-          legenda: 'O óleo deve marcar entre o mínimo e o máximo.',
-          autor: 'Gustavo Fring',
-          licenca: 'Licença Pexels',
-          origem: 'https://www.pexels.com/video/a-person-checking-oil-level-in-a-car-6870339/',
-        },
-      ],
       partes: [
         {
           titulo: 'Óleo do motor',
@@ -338,6 +300,106 @@ export const CURSO_MECANICA: ModuloCurso = {
         },
       ],
       fontes: ['AutoPapo: conferir o nível do óleo exige 3 cuidados'],
+    },
+    {
+      id: 'mecanica-ferramentas',
+      titulo: 'Caixa de ferramentas e consertos de emergência',
+      objetivo: 'Ter as ferramentas certas em casa e resolver cano rachado e carro sem bateria até o conserto definitivo.',
+      minutos: 6,
+      cenas: [
+        {
+          titulo: 'Monte sua caixa',
+          texto: 'Chaves de fenda, alicate, martelo, chave inglesa e fitas.',
+          segundos: 7,
+          desenho: {
+            pecas: [
+              { desenho: 'chave-fenda', x: 50, y: 24, largura: 62, movimento: 'deslizar', vindoDe: [-60, 0] },
+              { desenho: 'alicate', x: 44, y: 50, largura: 52, movimento: 'deslizar', vindoDe: [60, 0], atraso: 0.5 },
+              { desenho: 'chave-inglesa', x: 54, y: 76, largura: 56, movimento: 'deslizar', vindoDe: [-60, 0], atraso: 1 },
+            ],
+          },
+        },
+        {
+          titulo: 'Cano rachado',
+          texto: 'Seque, enrole fita larga bem esticada e prenda com abraçadeira.',
+          segundos: 7,
+          desenho: {
+            pecas: [
+              { desenho: 'fita-larga', x: 50, y: 44, largura: 70, movimento: 'entrar' },
+              { desenho: 'gota', x: 82, y: 22, largura: 12, movimento: 'pingar' },
+            ],
+            rotulos: [{ texto: 'ATÉ TROCAR O CANO', x: 50, y: 84, tamanho: 7, atraso: 1.2, destaque: true }],
+          },
+        },
+        {
+          titulo: 'Carro sem bateria',
+          texto: 'Vermelho no mais das duas baterias. Preto no menos da boa e no metal do carro parado.',
+          segundos: 8,
+          desenho: {
+            pecas: [{ desenho: 'bateria', x: 50, y: 42, largura: 64, movimento: 'entrar' }],
+            rotulos: [
+              { texto: 'VERMELHO: + e +', x: 50, y: 76, tamanho: 6.5, atraso: 1 },
+              { texto: 'PRETO: − e metal', x: 50, y: 88, tamanho: 6.5, atraso: 1.6, destaque: true },
+            ],
+          },
+        },
+      ],
+      partes: [
+        {
+          titulo: 'A caixa de ferramentas',
+          passos: [
+            'Chave de fenda e Philips, alicate, martelo e chave inglesa.',
+            'Fita isolante, fita larga (silver tape), fita veda-rosca e abraçadeiras de plástico.',
+            'Arame, pregos, parafusos, cola epóxi e silicone.',
+            'Lima ou pedra de amolar para faca, facão e enxada.',
+          ],
+        },
+        {
+          titulo: 'Cano rachado',
+          passos: [
+            'Feche o registro e seque bem o cano.',
+            'Enrole fita larga bem esticada, passando alguns centímetros dos dois lados da rachadura.',
+            'Prenda as pontas com abraçadeira.',
+            'É um conserto provisório: troque o pedaço de cano assim que puder.',
+          ],
+        },
+        {
+          titulo: 'Carro sem bateria (chupeta)',
+          passos: [
+            'Os dois carros desligados, sem encostar um no outro.',
+            'Cabo vermelho: uma ponta no + da bateria arriada, a outra no + da bateria boa.',
+            'Cabo preto: uma ponta no − da bateria boa, a outra numa parte de metal sem pintura do carro parado, longe da bateria.',
+            'Ligue o carro bom, espere alguns minutos e tente ligar o outro.',
+            'Tire os cabos na ordem contrária. Em época de alerta, mantenha o tanque pela metade.',
+          ],
+        },
+      ],
+      erros: [
+        'Usar fita crepe em cano rachado: ela solta com a água.',
+        'Encostar as pontas dos cabos uma na outra durante a chupeta.',
+        'Ligar o cabo preto no − da bateria arriada, perto dos gases dela.',
+      ],
+      teste: [
+        {
+          pergunta: 'O que fazer primeiro com um cano rachado?',
+          opcoes: ['Fechar o registro e secar o cano', 'Passar fita molhado mesmo', 'Bater no cano'],
+          correta: 0,
+          explicacao: 'A fita só gruda no cano seco e sem água correndo.',
+        },
+        {
+          pergunta: 'Na chupeta, onde vai o cabo vermelho?',
+          opcoes: ['No + das duas baterias', 'No − das duas baterias', 'Em qualquer lugar'],
+          correta: 0,
+          explicacao: 'Vermelho liga os dois polos positivos (+).',
+        },
+        {
+          pergunta: 'Onde prender a última ponta do cabo preto?',
+          opcoes: ['No − da bateria arriada', 'Numa parte de metal sem pintura do carro parado', 'No para-choque de plástico'],
+          correta: 1,
+          explicacao: 'Longe da bateria arriada, para evitar faísca perto dos gases dela.',
+        },
+      ],
+      fontes: ['Manual do proprietário do carro: partida com cabos auxiliares'],
     },
   ],
 }

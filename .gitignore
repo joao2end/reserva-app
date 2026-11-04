@@ -13,6 +13,5 @@ tsconfig.tsbuildinfo
 *.jks
 *.keystore
 keystore.properties
-public/videos/
 saida-videos/
 voz/

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref } from 'vue'
 import { licaoPorId, moduloDaLicao } from '../src/domain/conteudo/curso'
-import { VOZ_NARRACAO, roteiroDaLicao } from '../src/domain/conteudo/narracao'
+import { VOZ_NARRACAO, itensParaTela, roteiroDaLicao } from '../src/domain/conteudo/narracao'
 import CenaDesenhada from '../src/presentation/components/CenaDesenhada.vue'
 import IlustracaoCena from '../src/presentation/components/IlustracaoCena.vue'
 import { ICONE_CURSO } from '../src/presentation/icones'
@@ -41,7 +41,31 @@ const indice = computed(() => inicios.reduce((achado, inicio, posicao) => (inici
 const local = computed(() => tempo.value - inicios[indice.value])
 const duracaoAtual = computed(() => duracoes[indice.value])
 const trecho = computed(() => roteiro[indice.value])
-const cena = computed(() => (trecho.value.indiceCena === undefined ? undefined : licao.cenas[trecho.value.indiceCena]))
+const cena = computed(() => (trecho.value.tipo === 'cena' && trecho.value.indiceCena !== undefined ? licao.cenas[trecho.value.indiceCena] : undefined))
+
+interface ItemQuadro {
+  texto: string
+  numero?: number
+}
+
+const quadro = computed(() => {
+  const indiceItem = trecho.value.indiceItem ?? 0
+  const itens: ItemQuadro[] =
+    trecho.value.tipo === 'parte' && trecho.value.indiceParte !== undefined
+      ? itensParaTela(licao.partes[trecho.value.indiceParte])
+      : trecho.value.tipo === 'erro'
+        ? licao.erros.map((texto) => ({ texto }))
+        : []
+  const inicio = Math.max(0, indiceItem - 2)
+  return {
+    titulo:
+      trecho.value.tipo === 'erro' ? 'Erros comuns' : trecho.value.indiceParte !== undefined ? licao.partes[trecho.value.indiceParte].titulo : '',
+    rotulo: trecho.value.tipo === 'erro' ? 'Cuidado' : `Passo a passo · ${(trecho.value.indiceParte ?? 0) + 1} de ${licao.partes.length}`,
+    itens: itens.slice(inicio, indiceItem + 1).map((item, posicao) => ({ ...item, atual: inicio + posicao === indiceItem })),
+    novaParte: indiceItem === 0,
+    cena: licao.cenas[(trecho.value.tipo === 'erro' ? licao.cenas.length - 1 : (trecho.value.indiceParte ?? 0)) % licao.cenas.length],
+  }
+})
 
 function suave(valor: number): number {
   const x = Math.min(1, Math.max(0, valor))
@@ -83,13 +107,7 @@ const bolhas = computed(() =>
 
 const linhaAbertura = computed(() => `${suave((local.value - 0.9) / 0.8) * 220}px`)
 
-function progressoCena(posicao: number): number {
-  const indiceCenaAtual = trecho.value.indiceCena
-  if (trecho.value.tipo === 'encerramento') return 1
-  if (indiceCenaAtual === undefined || posicao > indiceCenaAtual) return 0
-  if (posicao < indiceCenaAtual) return 1
-  return Math.min(1, local.value / duracaoAtual.value)
-}
+const progressoTotal = computed(() => Math.min(1, tempo.value / total))
 
 async function posicionar(segundos: number) {
   tempo.value = Math.min(segundos, total - 0.001)
@@ -149,24 +167,156 @@ onMounted(async () => {
       </div>
     </section>
 
+    <section
+      v-else-if="trecho.tipo === 'parte' || trecho.tipo === 'erro'"
+      :key="`q-${indice}`"
+      class="quadro-filme"
+      :class="{ erros: trecho.tipo === 'erro' }"
+      :style="{ opacity: quadro.novaParte ? visibilidade : 1 }"
+    >
+      <p class="rotulo-filme" :style="quadro.novaParte ? entrada(0.05) : {}">{{ quadro.rotulo }}</p>
+      <h2 class="titulo-quadro" :style="quadro.novaParte ? entrada(0.15) : {}">{{ quadro.titulo }}</h2>
+      <div class="corpo-quadro">
+        <div class="cartao-quadro" :style="quadro.novaParte ? palco : {}">
+          <CenaDesenhada v-if="quadro.cena?.desenho" :cena="quadro.cena.desenho" modo="estatico" :descricao="quadro.cena.titulo" />
+          <IlustracaoCena
+            v-else-if="quadro.cena?.ilustracao"
+            :ilustracao="quadro.cena.ilustracao"
+            modo="estatico"
+            :descricao="quadro.cena.titulo"
+          />
+        </div>
+      <ol class="lousa">
+        <li
+          v-for="item in quadro.itens"
+          :key="item.texto"
+          class="item-lousa"
+          :class="{ atual: item.atual }"
+          :style="item.atual ? entrada(0.25, 0.55, 40) : {}"
+        >
+          <span v-if="trecho.tipo === 'erro'" class="marca-item erro-marca">✕</span>
+          <span v-else-if="item.numero" class="marca-item">{{ item.numero }}</span>
+          <span v-else class="marca-item barra-item" />
+          <span class="texto-item">{{ item.texto }}</span>
+        </li>
+      </ol>
+      </div>
+    </section>
+
     <section v-else :key="`e-${indice}`" class="abertura" :style="{ opacity: visibilidade }">
       <div class="icone-grande" :style="palco"><component :is="icone" :size="120" weight="bold" /></div>
       <h1 class="titulo-abertura">
         <span v-for="(item, posicao) in palavras('Agora é com você')" :key="posicao" :style="item.estilo">{{ item.palavra }}&nbsp;</span>
       </h1>
-      <p class="objetivo final" :style="entrada(0.9)">Veja o passo a passo completo e faça o teste rápido no app SBV.</p>
+      <p class="objetivo final" :style="entrada(0.9)">Consulte o passo a passo por escrito e faça o teste rápido no app SBV.</p>
       <p class="creditos" :style="entrada(1.6)">Narração: {{ VOZ_NARRACAO }} · Animação: app SBV</p>
     </section>
 
     <footer class="progresso-filme">
-      <span v-for="posicao in totalCenas" :key="posicao" class="trilho">
-        <span class="enchido" :style="{ width: `${progressoCena(posicao - 1) * 100}%` }" />
+      <span class="trilho">
+        <span class="enchido" :style="{ width: `${progressoTotal * 100}%` }" />
       </span>
     </footer>
   </div>
 </template>
 
 <style>
+.quadro-filme {
+  position: absolute;
+  inset: 0;
+  padding: 104px 90px 90px;
+}
+
+.titulo-quadro {
+  margin: 0 0 22px;
+  font-size: 46px;
+  line-height: 1.1;
+}
+
+.corpo-quadro {
+  display: flex;
+  gap: 32px;
+  height: 400px;
+}
+
+.cartao-quadro {
+  flex: none;
+  width: 330px;
+  height: 330px;
+  align-self: center;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #ffffff;
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--destaque) 45%, transparent);
+}
+
+.lousa {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  margin: 0;
+  padding: 28px 36px;
+  list-style: none;
+  border-radius: 32px;
+  background: #ffffff;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+}
+
+.item-lousa {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  color: color-mix(in srgb, var(--escuro) 45%, #ffffff);
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.item-lousa.atual {
+  color: var(--escuro);
+  font-size: 31px;
+  font-weight: 700;
+}
+
+.marca-item {
+  display: flex;
+  flex: none;
+  width: 54px;
+  height: 54px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--destaque) 30%, #ffffff);
+  color: var(--escuro);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.item-lousa.atual .marca-item {
+  background: var(--destaque);
+}
+
+.barra-item {
+  width: 12px;
+  height: 54px;
+  border-radius: 6px;
+}
+
+.erro-marca {
+  background: #ffd6d6;
+  color: #b3261e;
+}
+
+.item-lousa.atual .erro-marca {
+  background: #e5484d;
+  color: #ffffff;
+}
+
+.texto-item {
+  padding-top: 8px;
+}
+
 html,
 body {
   margin: 0;

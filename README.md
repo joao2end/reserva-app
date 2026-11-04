@@ -24,19 +24,13 @@ Identidade visual **SBV**: preto e branco, fonte Atkinson Hyperlegible (feita pa
 | Cuidados no calor forte, com atenção a idosos e crianças | Guia › Calor forte |
 | Cursos de ofícios: eletricista, encanador, mecânica básica e horta | Aba Cursos |
 | Cursos de emergência: água e primeiros socorros | Aba Cursos |
-| Animações desenhadas em cada lição e vídeos reais de bancos com licença livre | Aba Cursos › lição |
-
-## Vídeos reais dos cursos
-
-Os vídeos reais não ficam no Git. A lista está em `scripts/videos_reais.json`, com endereço, autor, licença e o hash SHA-256 de cada arquivo. O build do GitHub roda `python3 scripts/baixar_videos.py`, que baixa os vídeos para `public/videos/`, confere o hash e falha se algum não bater. Eles vêm do [Pexels](https://www.pexels.com/license/) (uso livre, inclusive em aplicativos) e da [Wikimedia Commons](https://commons.wikimedia.org/) (CC BY-SA), sempre com o crédito do autor na tela.
-
-Para ver os vídeos no computador, rode o mesmo script antes de `npm run dev`.
+| Aula em vídeo narrada em cada lição, para assistir ou baixar no celular | Aba Cursos › lição |
 
 ## Vídeos narrados das lições
 
 Cada lição vira um vídeo MP4 com narração em português, feito com motion graphics em HTML:
 
-- `src/domain/conteudo/narracao.ts` monta o roteiro falado (abertura, uma fala por cena, encerramento) e escreve unidades e siglas por extenso.
+- `src/domain/conteudo/narracao.ts` monta o roteiro falado da aula inteira (abertura, demonstração de cada cena, cada item do passo a passo, erros comuns e encerramento) e escreve unidades e siglas por extenso.
 - `video/` é a página do vídeo (1280×720, cores por curso), posicionada quadro a quadro.
 - `scripts/videos/gerar_videos.py` narra com a voz Piper `pt_BR-faber-medium` (dados CC0), ajusta cada cena ao tamanho da fala, cria uma trilha original, fotografa os quadros e junta tudo com o ffmpeg.
 - O workflow **Vídeos dos cursos** roda quando o conteúdo muda, gera só as lições alteradas e publica na release `videos-cursos`.

@@ -481,4 +481,32 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
     altura: 100,
     svg: `<path class="t grosso" d="M50 6 V94 M12 28 L88 72 M12 72 L88 28"/><path class="t" d="M40 14 L50 24 L60 14 M40 86 L50 76 L60 86 M14 40 L26 36 L22 24 M86 60 L74 64 L78 76 M14 60 L26 64 L22 76 M86 40 L74 36 L78 24"/>`,
   },
+  gerador: {
+    largura: 140,
+    altura: 110,
+    svg: `<rect class="r" x="14" y="24" width="112" height="62" rx="8"/><rect class="c" x="26" y="36" width="54" height="38" rx="4"/><path class="t fino" d="M34 46 H72 M34 56 H72 M34 66 H72"/>
+      <circle class="c" cx="104" cy="46" r="8"/><circle class="f" cx="104" cy="66" r="4"/><path class="t" d="M20 24 V12 H120 V24"/><circle class="c" cx="34" cy="96" r="10"/><circle class="c" cx="106" cy="96" r="10"/>
+      <path class="t" d="M126 34 H134 V20"/>${[0, 1, 2].map((i) => `<circle class="bolha-sobe" style="animation-delay:${i * 0.5}s" cx="${134 + i * 2}" cy="14" r="${3 + i}"/>`).join('')}`,
+  },
+  'placa-solar': {
+    largura: 140,
+    altura: 110,
+    svg: `<path class="c" d="M10 70 L40 10 H130 L100 70 Z"/><path class="t fino" d="M32 26 H122 M24 42 H114 M17 56 H107 M64 10 L34 70 M88 10 L58 70 M112 10 L82 70"/><path class="t" d="M70 70 V100 M50 100 H90"/>`,
+  },
+  lanterna: {
+    largura: 130,
+    altura: 70,
+    svg: `<g class="luz"><path class="brilho" d="M96 20 L130 4 V66 L96 50 Z"/></g><rect class="c" x="6" y="22" width="64" height="26" rx="6"/><path class="c" d="M70 16 H96 V54 H70 Z"/><rect class="f" x="26" y="30" width="14" height="10" rx="2"/>`,
+  },
+  bateria: {
+    largura: 140,
+    altura: 100,
+    svg: `<rect class="c" x="10" y="30" width="120" height="64" rx="6"/><rect class="f" x="28" y="18" width="18" height="12" rx="2"/><rect class="f" x="94" y="18" width="18" height="12" rx="2"/>
+      <text class="letra" x="37" y="70">+</text><text class="letra" x="103" y="70">−</text><path class="t grosso" d="M37 18 C37 4 20 4 14 10"/><path class="t" d="M103 18 C103 4 120 4 126 10"/>`,
+  },
+  'fita-larga': {
+    largura: 130,
+    altura: 80,
+    svg: `<rect class="r" x="4" y="28" width="122" height="24"/><path class="t fino" d="M4 40 H126"/><rect class="c" x="44" y="18" width="42" height="44" rx="4"/><path class="t fino" d="M50 18 V62 M58 18 V62 M66 18 V62 M74 18 V62 M80 18 V62"/>`,
+  },
 }

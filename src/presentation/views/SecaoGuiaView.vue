@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { PhArrowLeft, PhBackpack } from '@phosphor-icons/vue'
+import { PhArrowLeft, PhBackpack, PhCaretRight, PhGraduationCap } from '@phosphor-icons/vue'
 import { GUIA } from '../../domain/conteudo/guia'
 import { videoDaSecao } from '../../domain/conteudo/videos'
 import { ICONE_SECAO_GUIA } from '../icones'
@@ -23,6 +23,20 @@ const video = computed(() => videoDaSecao(props.secaoId))
       <h1 class="titulo-1 mt-2">{{ secao.titulo }}</h1>
       <p class="nota">{{ secao.resumo }}</p>
     </header>
+
+    <RouterLink
+      v-if="secao.curso"
+      :to="{ name: 'curso', params: { cursoId: secao.curso.id } }"
+      class="bloco flex min-h-20 items-center gap-4 border-4 border-tinta p-4"
+      data-teste="link-curso"
+    >
+      <PhGraduationCap :size="40" weight="bold" class="shrink-0" aria-hidden="true" />
+      <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
+        <span class="block text-[18px]">Aqui é a consulta rápida. Para aprender com calma:</span>
+        <span class="block text-[24px] leading-8 font-bold">Curso {{ secao.curso.titulo }}</span>
+      </span>
+      <PhCaretRight :size="28" weight="bold" class="shrink-0" aria-hidden="true" />
+    </RouterLink>
 
     <CaixaAviso v-if="secao.aviso" :titulo="secao.aviso.titulo" :tipo="secao.aviso.critico ? 'critico' : 'atencao'">
       {{ secao.aviso.texto }}
