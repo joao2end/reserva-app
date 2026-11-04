@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { PhArrowLeft, PhCaretRight, PhCheck } from '@phosphor-icons/vue'
-import { cursoPorId } from '../../domain/conteudo/curso'
+import { cursoPorId, licoesPorNivel } from '../../domain/conteudo/curso'
 import { usePreferencias } from '../estado/usePreferencias'
 import { ICONE_CURSO } from '../icones'
 import BarraProgresso from '../components/BarraProgresso.vue'
@@ -13,6 +13,8 @@ const { licoesConcluidas } = usePreferencias()
 
 const curso = computed(() => cursoPorId(props.cursoId))
 const concluidas = computed(() => curso.value?.licoes.filter((licao) => licoesConcluidas.value.includes(licao.id)).length ?? 0)
+const grupos = computed(() => (curso.value ? licoesPorNivel(curso.value) : []))
+const numero = (id: string) => (curso.value?.licoes.findIndex((licao) => licao.id === id) ?? 0) + 1
 const videosNoCelular = ref<string[]>([])
 const percentual = computed(() => (curso.value ? Math.round((concluidas.value / curso.value.licoes.length) * 100) : 0))
 </script>
@@ -41,33 +43,43 @@ const percentual = computed(() => (curso.value ? Math.round((concluidas.value / 
       @atualizou="(ids) => (videosNoCelular = ids)"
     />
 
-    <ol class="border-4 border-tinta">
-      <li v-for="(licao, indice) in curso.licoes" :key="licao.id" class="border-b-2 border-tinta last:border-b-0">
-        <RouterLink
-          :to="{ name: 'licao', params: { licaoId: licao.id } }"
-          class="flex min-h-20 items-center gap-4 p-4"
-          :data-teste="`licao-${licao.id}`"
-        >
-          <span
-            class="flex size-12 shrink-0 items-center justify-center border-4 border-tinta text-[24px] font-bold"
-            :class="{ bloco: licoesConcluidas.includes(licao.id) }"
-            aria-hidden="true"
+    <section
+      v-for="grupo in grupos"
+      :key="grupo.nivel.id"
+      class="space-y-3"
+      :aria-labelledby="`nivel-${grupo.nivel.id}`"
+      :data-teste="`nivel-${grupo.nivel.id}`"
+    >
+      <h2 :id="`nivel-${grupo.nivel.id}`" class="titulo-2">Nível {{ grupo.nivel.titulo.toLowerCase() }}</h2>
+      <p class="nota">{{ grupo.nivel.resumo }}</p>
+      <ol class="border-4 border-tinta">
+        <li v-for="licao in grupo.licoes" :key="licao.id" class="border-b-2 border-tinta last:border-b-0">
+          <RouterLink
+            :to="{ name: 'licao', params: { licaoId: licao.id } }"
+            class="flex min-h-20 items-center gap-4 p-4"
+            :data-teste="`licao-${licao.id}`"
           >
-            <PhCheck v-if="licoesConcluidas.includes(licao.id)" :size="28" weight="bold" />
-            <template v-else>{{ indice + 1 }}</template>
-          </span>
-          <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
-            <span class="block text-[22px] leading-7 font-bold">{{ licao.titulo }}</span>
-            <span class="nota">
-              {{ licao.minutos }} min{{ videosNoCelular.includes(licao.id) ? ' · vídeo no celular' : '' }}{{
-                licoesConcluidas.includes(licao.id) ? ' · Concluída' : ''
-              }}
+            <span
+              class="flex size-12 shrink-0 items-center justify-center border-4 border-tinta text-[24px] font-bold"
+              :class="{ bloco: licoesConcluidas.includes(licao.id) }"
+              aria-hidden="true"
+            >
+              <PhCheck v-if="licoesConcluidas.includes(licao.id)" :size="28" weight="bold" />
+              <template v-else>{{ numero(licao.id) }}</template>
             </span>
-          </span>
-          <PhCaretRight :size="24" weight="bold" class="shrink-0" aria-hidden="true" />
-        </RouterLink>
-      </li>
-    </ol>
+            <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
+              <span class="block text-[22px] leading-7 font-bold">{{ licao.titulo }}</span>
+              <span class="nota">
+                {{ licao.minutos }} min{{ videosNoCelular.includes(licao.id) ? ' · vídeo no celular' : '' }}{{
+                  licoesConcluidas.includes(licao.id) ? ' · Concluída' : ''
+                }}
+              </span>
+            </span>
+            <PhCaretRight :size="24" weight="bold" class="shrink-0" aria-hidden="true" />
+          </RouterLink>
+        </li>
+      </ol>
+    </section>
   </section>
 
   <section v-else class="space-y-6">

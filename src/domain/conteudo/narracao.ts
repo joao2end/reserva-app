@@ -1,4 +1,4 @@
-import type { LicaoCurso, ModuloCurso } from './cursos/tipos'
+import type { LicaoCurso, ModuloCurso, NivelLicao } from './cursos/tipos'
 
 export type TipoTrecho = 'abertura' | 'cena' | 'parte' | 'erro' | 'encerramento'
 
@@ -76,9 +76,11 @@ export function itensParaTela(parte: LicaoCurso['partes'][number]): { texto: str
   ]
 }
 
+const NIVEL_FALADO: Record<NivelLicao, string> = { facil: 'Nível fácil', medio: 'Nível médio', avancado: 'Nível avançado' }
+
 export function roteiroDaLicao(licao: LicaoCurso, curso: ModuloCurso): TrechoNarrado[] {
   return [
-    { tipo: 'abertura', fala: paraFala(`${curso.titulo}. ${frase(licao.titulo)} ${frase(licao.objetivo)}`), minimoSegundos: 5 },
+    { tipo: 'abertura', fala: paraFala(`${curso.titulo}. ${NIVEL_FALADO[licao.nivel]}. ${frase(licao.titulo)} ${frase(licao.objetivo)}`), minimoSegundos: 5 },
     ...licao.cenas.map((cena, indiceCena) => ({
       tipo: 'cena' as const,
       indiceCena,

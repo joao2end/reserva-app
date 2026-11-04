@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref } from 'vue'
-import { licaoPorId, moduloDaLicao } from '../src/domain/conteudo/curso'
+import { licaoPorId, moduloDaLicao, nomeDoNivel } from '../src/domain/conteudo/curso'
 import { VOZ_NARRACAO, itensParaTela, roteiroDaLicao } from '../src/domain/conteudo/narracao'
 import CenaDesenhada from '../src/presentation/components/CenaDesenhada.vue'
 import IlustracaoCena from '../src/presentation/components/IlustracaoCena.vue'
@@ -139,13 +139,13 @@ onMounted(async () => {
     <div v-for="(estilo, posicao) in bolhas" :key="posicao" class="bolha" :style="estilo" />
 
     <header class="topo">
-      <span class="selo-curso"><component :is="icone" :size="30" weight="bold" />{{ curso.titulo }}</span>
+      <span class="selos"><span class="selo-curso"><component :is="icone" :size="30" weight="bold" />{{ curso.titulo }}</span><span class="selo-nivel">Nível {{ nomeDoNivel(licao.nivel).toLowerCase() }}</span></span>
       <span class="marca">SBV</span>
     </header>
 
     <section v-if="trecho.tipo === 'abertura'" :key="`a-${indice}`" class="abertura" :style="{ opacity: visibilidade }">
       <div class="icone-grande" :style="palco"><component :is="icone" :size="120" weight="bold" /></div>
-      <p class="rotulo-filme" :style="entrada(0.3)">Lição</p>
+      <p class="rotulo-filme" :style="entrada(0.3)">Lição · Nível {{ nomeDoNivel(licao.nivel).toLowerCase() }}</p>
       <h1 class="titulo-abertura">
         <span v-for="(item, posicao) in palavras(licao.titulo)" :key="posicao" :style="item.estilo">{{ item.palavra }}&nbsp;</span>
       </h1>
@@ -350,6 +350,21 @@ body {
   align-items: center;
   justify-content: space-between;
   z-index: 2;
+}
+
+.selos {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.selo-nivel {
+  padding: 10px 18px;
+  border: 2px solid var(--destaque);
+  border-radius: 999px;
+  color: var(--destaque);
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .selo-curso {

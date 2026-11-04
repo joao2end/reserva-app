@@ -13,8 +13,11 @@ export interface PerguntaLicao {
   explicacao: string
 }
 
+export type NivelLicao = 'facil' | 'medio' | 'avancado'
+
 export interface LicaoCurso {
   id: string
+  nivel: NivelLicao
   titulo: string
   objetivo: string
   minutos: number

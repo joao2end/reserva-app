@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { PhBackpack, PhCaretRight, PhFilmStrip, PhGraduationCap, PhMapPin } from '@phosphor-icons/vue'
+import { PhBackpack, PhBooks, PhCaretRight, PhFilmStrip, PhGraduationCap, PhMapPin } from '@phosphor-icons/vue'
+import { ACERVO } from '../../domain/conteudo/acervo'
 import { GUIA, GRUPOS_GUIA } from '../../domain/conteudo/guia'
 import { videoDaSecao } from '../../domain/conteudo/videos'
 import { LICOES } from '../../domain/conteudo/curso'
@@ -29,6 +30,16 @@ const grupos = GRUPOS_GUIA.map((grupo) => ({
         <span class="block text-[28px] leading-9 font-bold">Cursos</span>
         <span class="block text-[18px]">Eletricista, encanador, mecânica, horta, água e primeiros socorros</span>
         <span class="block text-[18px] font-bold">{{ concluidas }} de {{ LICOES.length }} lições concluídas</span>
+      </span>
+      <PhCaretRight :size="32" weight="bold" class="shrink-0" aria-hidden="true" />
+    </RouterLink>
+
+    <RouterLink :to="{ name: 'acervo' }" class="flex min-h-28 items-center gap-4 border-4 border-tinta p-4" data-teste="entrada-acervo">
+      <PhBooks :size="48" weight="bold" class="shrink-0" aria-hidden="true" />
+      <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
+        <span class="block text-[28px] leading-9 font-bold">Acervo de sobrevivência</span>
+        <span class="block text-[18px]">Enchente, raios, falta de energia, saúde e mais</span>
+        <span class="block text-[18px] font-bold">{{ ACERVO.length }} guias com busca</span>
       </span>
       <PhCaretRight :size="32" weight="bold" class="shrink-0" aria-hidden="true" />
     </RouterLink>

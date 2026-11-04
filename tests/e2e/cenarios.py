@@ -556,8 +556,10 @@ def curso(pagina: Page):
     sem_rolagem_horizontal(pagina)
     foto(pagina, "28-licao")
     pagina.set_viewport_size({"width": 412, "height": 915})
-    pagina.get_by_role("link", name="Próxima lição: Engasgo em adulto, criança e bebê").click()
-    expect(pagina.get_by_role("heading", level=1, name="Engasgo em adulto, criança e bebê")).to_be_visible()
+    expect(pagina.get_by_role("link", name="Próxima lição", exact=False)).to_have_count(0)
+    ir(pagina, "#/licao/engasgo")
+    pagina.get_by_role("link", name="Próxima lição: Parada cardíaca: massagem no peito").click()
+    expect(pagina.get_by_role("heading", level=1, name="Parada cardíaca: massagem no peito")).to_be_visible()
     pagina.reload()
     pagina.wait_for_load_state("networkidle")
     ir(pagina, "#/cursos/socorros")
@@ -613,6 +615,44 @@ def video_narrado(pagina: Page):
     pagina.unroute("**/videos-narrados.json")
 
 
+@cenario("30. Níveis das lições e acervo de sobrevivência")
+def niveis_e_acervo(pagina: Page):
+    ir(pagina, "#/cursos/eletricista")
+    for nivel, primeira in [("facil", "eletrica-seguranca"), ("medio", "eletrica-tomada"), ("avancado", "eletrica-planejar")]:
+        expect(pagina.locator(f"[data-teste=nivel-{nivel}]").locator(f"[data-teste=licao-{primeira}]")).to_be_visible()
+    expect(pagina.get_by_role("heading", level=2, name="Nível fácil")).to_be_visible()
+    ir(pagina, "#/cursos")
+    expect(pagina.locator("[data-teste=curso-eletricista]")).to_contain_text("2 fácil · 3 médio · 2 avançado")
+    ir(pagina, "#/licao/rcp")
+    expect(pagina.locator("[data-teste=nivel-licao]")).to_contain_text("Nível avançado")
+    ir(pagina, "#/guia")
+    pagina.locator("[data-teste=entrada-acervo]").click()
+    expect(pagina.get_by_role("heading", level=1, name="Acervo de sobrevivência")).to_be_visible()
+    expect(pagina.get_by_role("navigation").get_by_role("link", name="Guia")).to_have_attribute("aria-current", "page")
+    busca = pagina.locator("[data-teste=busca-acervo]")
+    busca.fill("escorpiao")
+    expect(pagina.locator("[data-teste^=guia-]")).to_have_count(1)
+    busca.fill("palavra-que-nao-existe")
+    expect(pagina.get_by_text("Nada encontrado. Tente outra palavra.")).to_be_visible()
+    busca.fill("")
+    pagina.locator("[data-teste=categoria-clima]").click()
+    expect(pagina.locator("[data-teste=guia-enchente]")).to_be_visible()
+    expect(pagina.locator("[data-teste=guia-remedios]")).to_have_count(0)
+    pagina.set_viewport_size({"width": 360, "height": 780})
+    sem_rolagem_horizontal(pagina)
+    foto(pagina, "30-acervo")
+    pagina.locator("[data-teste=guia-enchente]").click()
+    expect(pagina.get_by_role("heading", level=1, name="Enchente e alagamento")).to_be_visible()
+    expect(pagina.get_by_text("Não entre em água corrente")).to_be_visible()
+    sem_rolagem_horizontal(pagina)
+    foto(pagina, "30-guia-acervo")
+    pagina.set_viewport_size({"width": 412, "height": 915})
+    pagina.locator("[data-teste=ligacao-acervo]").first.click()
+    expect(pagina.get_by_role("heading", level=1, name="Para onde se deslocar")).to_be_visible()
+    ir(pagina, "#/acervo/nao-existe")
+    expect(pagina.get_by_text("Guia não encontrado")).to_be_visible()
+
+
 def principal():
     os.makedirs(PASTA_TELAS, exist_ok=True)
     servidor = subprocess.Popen(
@@ -632,7 +672,7 @@ def principal():
                 criar_estoque, comprar_agua, compra_data_futura, ciclo_do_item, esc_cancela, resumo_inicio,
                 persistencia, editar_estoque, locais, guia, rotas_invalidas, navegacao, letra_grande,
                 tela_estreita, tema_escuro, apagar_tudo, mochila, telefones_emergencia, fumaca, calor,
-                vencido, contato_familia, curso, video_narrado,
+                vencido, contato_familia, curso, video_narrado, niveis_e_acervo,
             ]:
                 executar(pagina)
             navegador.close()

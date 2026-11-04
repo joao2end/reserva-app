@@ -25,6 +25,8 @@ Identidade visual **SBV**: preto e branco, fonte Atkinson Hyperlegible (feita pa
 | Cursos de ofícios: eletricista, encanador, mecânica básica e horta | Aba Cursos |
 | Cursos de emergência: água e primeiros socorros | Aba Cursos |
 | Aula em vídeo narrada em cada lição, para assistir ou baixar no celular | Aba Cursos › lição |
+| Lições separadas em níveis fácil, médio e avançado | Aba Cursos › curso |
+| Acervo de sobrevivência com busca: enchente, raios, falta de energia, saúde, casa e comunicação | Guia › Acervo de sobrevivência |
 
 ## Vídeos narrados das lições
 
@@ -100,3 +102,7 @@ No Android Studio:
 Depois de mudar o código web, rode `npm run build && npx cap sync android` antes de compilar de novo.
 
 O ícone e a tela de abertura são gerados por `python3 scripts/gerar_icones.py` a partir do ícone Phosphor *package-bold*.
+
+## Loop de melhoria
+
+Uma tarefa agendada roda de hora em hora e segue `LOOP.md`: amplia o acervo, completa os níveis dos cursos e melhora os vídeos, uma mudança por rodada, sempre com testes.

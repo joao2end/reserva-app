@@ -8,6 +8,7 @@ export const CURSO_ENCANADOR: ModuloCurso = {
   licoes: [
     {
       id: 'encanador-vazamento',
+      nivel: 'facil',
       titulo: 'Fechar a água e achar vazamentos',
       objetivo: 'Saber onde fechar a água da casa e descobrir se há vazamento escondido.',
       minutos: 5,
@@ -109,6 +110,7 @@ export const CURSO_ENCANADOR: ModuloCurso = {
     },
     {
       id: 'encanador-torneira',
+      nivel: 'medio',
       titulo: 'Torneira pingando e rosca vazando',
       objetivo: 'Trocar o vedante ou o reparo da torneira e vedar roscas com fita veda-rosca.',
       minutos: 7,
@@ -218,6 +220,7 @@ export const CURSO_ENCANADOR: ModuloCurso = {
     },
     {
       id: 'encanador-desentupir',
+      nivel: 'facil',
       titulo: 'Desentupir pia e ralo',
       objetivo: 'Desentupir sem produto perigoso, com desentupidor e limpando o sifão.',
       minutos: 6,

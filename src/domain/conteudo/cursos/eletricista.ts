@@ -13,6 +13,7 @@ export const CURSO_ELETRICISTA: ModuloCurso = {
   licoes: [
     {
       id: 'eletrica-seguranca',
+      nivel: 'facil',
       titulo: 'Segurança antes de tudo',
       objetivo: 'Desligar o circuito certo e ter certeza de que não há energia antes de mexer.',
       minutos: 6,
@@ -135,6 +136,7 @@ export const CURSO_ELETRICISTA: ModuloCurso = {
     },
     {
       id: 'eletrica-fios',
+      nivel: 'facil',
       titulo: 'Fios, cores e disjuntores',
       objetivo: 'Reconhecer cada fio pela cor, escolher a grossura certa e entender o que o disjuntor e o DR fazem.',
       minutos: 7,
@@ -252,6 +254,7 @@ export const CURSO_ELETRICISTA: ModuloCurso = {
     },
     {
       id: 'eletrica-tomada',
+      nivel: 'medio',
       titulo: 'Trocar ou instalar uma tomada',
       objetivo: 'Ligar uma tomada de 3 pinos do jeito certo, com fase, neutro e terra.',
       minutos: 7,
@@ -366,6 +369,7 @@ export const CURSO_ELETRICISTA: ModuloCurso = {
     },
     {
       id: 'eletrica-lampada',
+      nivel: 'avancado',
       titulo: 'Ponto de luz com interruptor',
       objetivo: 'Ligar lâmpada e interruptor do jeito seguro e fazer emendas bem feitas.',
       minutos: 7,
@@ -477,6 +481,7 @@ export const CURSO_ELETRICISTA: ModuloCurso = {
     },
     {
       id: 'eletrica-chuveiro',
+      nivel: 'medio',
       titulo: 'Trocar a resistência do chuveiro',
       objetivo: 'Trocar a resistência queimada sem levar choque e sem queimar a peça nova.',
       minutos: 6,
@@ -580,6 +585,7 @@ export const CURSO_ELETRICISTA: ModuloCurso = {
     },
     {
       id: 'eletrica-planejar',
+      nivel: 'avancado',
       titulo: 'Planejar a rede elétrica de uma casa',
       objetivo: 'Dividir a casa em circuitos e saber quantas tomadas e pontos de luz cada cômodo precisa.',
       minutos: 9,
@@ -701,6 +707,7 @@ export const CURSO_ELETRICISTA: ModuloCurso = {
     },
     {
       id: 'eletrica-gerador',
+      nivel: 'medio',
       titulo: 'Gerador, energia sem rede e fio caído',
       objetivo: 'Usar gerador sem risco de morte, ter luz quando falta energia e agir certo diante de fio caído.',
       minutos: 6,

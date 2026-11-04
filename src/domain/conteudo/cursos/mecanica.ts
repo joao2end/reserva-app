@@ -8,6 +8,7 @@ export const CURSO_MECANICA: ModuloCurso = {
   licoes: [
     {
       id: 'mecanica-bike-pneu',
+      nivel: 'medio',
       titulo: 'Pneu de bicicleta furado',
       objetivo: 'Achar o furo e remendar a câmara de ar para voltar a pedalar.',
       minutos: 7,
@@ -110,6 +111,7 @@ export const CURSO_MECANICA: ModuloCurso = {
     },
     {
       id: 'mecanica-pneu-carro',
+      nivel: 'medio',
       titulo: 'Trocar o pneu do carro',
       objetivo: 'Trocar o pneu furado pelo estepe com segurança na rua ou na estrada.',
       minutos: 7,
@@ -210,6 +212,7 @@ export const CURSO_MECANICA: ModuloCurso = {
     },
     {
       id: 'mecanica-revisao-carro',
+      nivel: 'facil',
       titulo: 'Revisão de 5 minutos do carro',
       objetivo: 'Conferir óleo, água e pneus antes de viajar ou uma vez por semana.',
       minutos: 5,
@@ -303,6 +306,7 @@ export const CURSO_MECANICA: ModuloCurso = {
     },
     {
       id: 'mecanica-ferramentas',
+      nivel: 'avancado',
       titulo: 'Caixa de ferramentas e consertos de emergência',
       objetivo: 'Ter as ferramentas certas em casa e resolver cano rachado e carro sem bateria até o conserto definitivo.',
       minutos: 6,

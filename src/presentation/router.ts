@@ -15,6 +15,8 @@ export const router = createRouter({
     { path: '/guia/cultivo', redirect: { name: 'curso', params: { cursoId: 'horta' } } },
     { path: '/guia/purificar', redirect: { name: 'licao', params: { licaoId: 'agua-tratar' } } },
     { path: '/guia/:secaoId', name: 'secao', component: () => import('./views/SecaoGuiaView.vue'), props: true },
+    { path: '/acervo', name: 'acervo', component: () => import('./views/AcervoView.vue') },
+    { path: '/acervo/:guiaId', name: 'guia-acervo', component: () => import('./views/GuiaAcervoView.vue'), props: true },
     { path: '/cursos', name: 'cursos', component: () => import('./views/CursosView.vue') },
     { path: '/cursos/:cursoId', name: 'curso', component: () => import('./views/CursoView.vue'), props: true },
     { path: '/licao/:licaoId', name: 'licao', component: () => import('./views/LicaoView.vue'), props: true },

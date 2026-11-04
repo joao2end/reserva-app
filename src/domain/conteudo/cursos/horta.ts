@@ -10,6 +10,7 @@ export const CURSO_HORTA: ModuloCurso = {
   licoes: [
     {
       id: 'horta-canteiro',
+      nivel: 'facil',
       titulo: 'Preparar o canteiro e o adubo',
       objetivo: 'Escolher o lugar, montar o canteiro e adubar a terra.',
       minutos: 7,
@@ -106,6 +107,7 @@ export const CURSO_HORTA: ModuloCurso = {
     },
     {
       id: 'horta-plantar',
+      nivel: 'medio',
       titulo: 'Semear e transplantar mudas',
       objetivo: 'Semear na profundidade certa e passar mudas para o canteiro sem perdê-las.',
       minutos: 6,
@@ -216,6 +218,7 @@ export const CURSO_HORTA: ModuloCurso = {
     },
     {
       id: 'horta-agua',
+      nivel: 'facil',
       titulo: 'Regar gastando pouca água',
       objetivo: 'Manter a horta viva na seca com rega certa, palha e gotejamento.',
       minutos: 6,

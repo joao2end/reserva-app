@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { PhArrowLeft, PhArrowRight, PhBookOpen, PhCaretDown, PhCheckCircle, PhClock, PhListNumbers, PhWarning } from '@phosphor-icons/vue'
-import { licaoPorId, moduloDaLicao, proximaLicao } from '../../domain/conteudo/curso'
+import { licaoPorId, moduloDaLicao, nomeDoNivel, proximaLicao } from '../../domain/conteudo/curso'
 import { videosYoutubeDaLicao } from '../../domain/conteudo/cursos/youtube'
 import type { VideoGuia } from '../../domain/conteudo/videos'
 import { usePreferencias } from '../estado/usePreferencias'
@@ -45,7 +45,9 @@ async function aprovar() {
       </RouterLink>
       <p class="rotulo mt-6">{{ modulo.titulo }} · Lição {{ posicao }} de {{ modulo.licoes.length }}</p>
       <h1 class="titulo-1 mt-2">{{ licao.titulo }}</h1>
-      <p class="nota flex items-center gap-2"><PhClock :size="22" weight="bold" aria-hidden="true" />{{ licao.minutos }} minutos</p>
+      <p class="nota flex items-center gap-2" data-teste="nivel-licao">
+        <PhClock :size="22" weight="bold" aria-hidden="true" />{{ licao.minutos }} minutos · Nível {{ nomeDoNivel(licao.nivel).toLowerCase() }}
+      </p>
       <p v-if="concluida" class="bloco mt-4 inline-flex items-center gap-2 px-3 py-1 font-bold" data-teste="licao-concluida">
         <PhCheckCircle :size="26" weight="bold" aria-hidden="true" />Lição concluída
       </p>

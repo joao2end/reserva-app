@@ -1,5 +1,5 @@
 import { CURSOS_OFICIOS } from './cursos/oficios'
-import type { AreaCurso, LicaoCurso, ModuloCurso } from './cursos/tipos'
+import type { AreaCurso, LicaoCurso, ModuloCurso, NivelLicao } from './cursos/tipos'
 
 const CURSOS_EMERGENCIA: ModuloCurso[] = [
   {
@@ -10,6 +10,7 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
     licoes: [
       {
         id: 'agua-quanto',
+        nivel: 'facil',
         titulo: 'Quanto guardar e como',
         objetivo: 'Calcular a água da sua casa e guardar sem estragar.',
         minutos: 5,
@@ -121,6 +122,7 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
       },
       {
         id: 'agua-tratar',
+        nivel: 'medio',
         titulo: 'Tratar água em casa',
         objetivo: 'Deixar própria para beber uma água de origem duvidosa, com 4 métodos.',
         minutos: 7,
@@ -265,6 +267,7 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
       },
       {
         id: 'agua-cisterna',
+        nivel: 'avancado',
         titulo: 'Água de chuva e cisterna',
         objetivo: 'Captar água de chuva limpa e manter a cisterna e a caixa d’água sem contaminação.',
         minutos: 6,
@@ -388,6 +391,7 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
     licoes: [
       {
         id: 'rcp',
+        nivel: 'avancado',
         titulo: 'Parada cardíaca: massagem no peito',
         objetivo: 'Reconhecer uma parada cardíaca e fazer a massagem no peito até o socorro chegar.',
         minutos: 6,
@@ -509,6 +513,7 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
       },
       {
         id: 'engasgo',
+        nivel: 'medio',
         titulo: 'Engasgo em adulto, criança e bebê',
         objetivo: 'Desengasgar com o método atual: 5 golpes nas costas e 5 compressões.',
         minutos: 6,
@@ -637,6 +642,7 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
       },
       {
         id: 'sangramento-queimadura',
+        nivel: 'facil',
         titulo: 'Sangramento e queimadura',
         objetivo: 'Parar um sangramento e cuidar de uma queimadura nos primeiros minutos.',
         minutos: 6,
@@ -774,6 +780,7 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
     licoes: [
       {
         id: 'sem-geladeira',
+        nivel: 'facil',
         titulo: 'Faltou energia: o que salvar da geladeira',
         objetivo: 'Fazer a geladeira e o congelador segurarem o frio e saber o que comer e o que jogar fora.',
         minutos: 5,
@@ -890,6 +897,7 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
       },
       {
         id: 'pouco-gas',
+        nivel: 'medio',
         titulo: 'Cozinhar com pouco gás e com segurança',
         objetivo: 'Fazer o botijão render mais e usar carvão e fogareiro sem risco de intoxicação.',
         minutos: 5,
@@ -1028,7 +1036,29 @@ export const AREAS_CURSO: { id: AreaCurso; titulo: string; resumo: string }[] = 
   { id: 'emergencias', titulo: 'Emergências', resumo: 'Água, primeiros socorros e o que fazer quando tudo para.' },
 ]
 
-export const CURSO: ModuloCurso[] = [...CURSOS_OFICIOS, ...CURSOS_EMERGENCIA]
+export const NIVEIS: { id: NivelLicao; titulo: string; resumo: string }[] = [
+  { id: 'facil', titulo: 'Fácil', resumo: 'Para começar. Pouca ferramenta e nenhum risco grande.' },
+  { id: 'medio', titulo: 'Médio', resumo: 'Pede algumas ferramentas, atenção e um pouco de prática.' },
+  { id: 'avancado', titulo: 'Avançado', resumo: 'Trabalho maior. Faça com calma, com ajuda, ou chame um profissional.' },
+]
+
+const ORDEM_NIVEL: Record<NivelLicao, number> = { facil: 0, medio: 1, avancado: 2 }
+
+export function nomeDoNivel(nivel: NivelLicao): string {
+  return NIVEIS.find((item) => item.id === nivel)?.titulo ?? ''
+}
+
+function emOrdemDeNivel(modulo: ModuloCurso): ModuloCurso {
+  return { ...modulo, licoes: [...modulo.licoes].sort((a, b) => ORDEM_NIVEL[a.nivel] - ORDEM_NIVEL[b.nivel]) }
+}
+
+export const CURSO: ModuloCurso[] = [...CURSOS_OFICIOS, ...CURSOS_EMERGENCIA].map(emOrdemDeNivel)
+
+export function licoesPorNivel(modulo: ModuloCurso): { nivel: (typeof NIVEIS)[number]; licoes: LicaoCurso[] }[] {
+  return NIVEIS.map((nivel) => ({ nivel, licoes: modulo.licoes.filter((licao) => licao.nivel === nivel.id) })).filter(
+    (grupo) => grupo.licoes.length > 0,
+  )
+}
 
 export const LICOES: LicaoCurso[] = CURSO.flatMap((modulo) => modulo.licoes)
 
@@ -1058,4 +1088,4 @@ export function proximaLicao(id: string): LicaoCurso | undefined {
   return indice >= 0 ? licoes[indice + 1] : undefined
 }
 
-export type { AreaCurso, LicaoCurso, ModuloCurso, ParteLicao, PerguntaLicao } from './cursos/tipos'
+export type { AreaCurso, LicaoCurso, ModuloCurso, NivelLicao, ParteLicao, PerguntaLicao } from './cursos/tipos'

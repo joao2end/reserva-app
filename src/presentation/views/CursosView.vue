@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { PhCaretRight, PhGraduationCap } from '@phosphor-icons/vue'
-import { AREAS_CURSO, LICOES, cursosDaArea, type ModuloCurso } from '../../domain/conteudo/curso'
+import { AREAS_CURSO, LICOES, cursosDaArea, licoesPorNivel, type ModuloCurso } from '../../domain/conteudo/curso'
 import { usePreferencias } from '../estado/usePreferencias'
 import { ICONE_CURSO } from '../icones'
 import BarraProgresso from '../components/BarraProgresso.vue'
@@ -15,6 +15,12 @@ const areas = AREAS_CURSO.map((area) => ({ ...area, cursos: cursosDaArea(area.id
 
 function feitasNoCurso(curso: ModuloCurso): number {
   return curso.licoes.filter((licao) => licoesConcluidas.value.includes(licao.id)).length
+}
+
+function resumoDosNiveis(curso: ModuloCurso): string {
+  return licoesPorNivel(curso)
+    .map((grupo) => `${grupo.licoes.length} ${grupo.nivel.titulo.toLowerCase()}`)
+    .join(' · ')
 }
 </script>
 
@@ -53,6 +59,7 @@ function feitasNoCurso(curso: ModuloCurso): number {
               <span class="mt-1 block text-[18px] font-bold">
                 {{ feitasNoCurso(curso) }} de {{ curso.licoes.length }} lições
               </span>
+              <span class="block text-[18px]">{{ resumoDosNiveis(curso) }}</span>
             </span>
             <PhCaretRight :size="28" weight="bold" class="shrink-0" aria-hidden="true" />
           </RouterLink>

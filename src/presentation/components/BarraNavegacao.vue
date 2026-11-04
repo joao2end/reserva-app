@@ -6,6 +6,7 @@ const rota = useRoute()
 
 const ROTAS_DA_ABA: Record<string, string[]> = {
   cursos: ['cursos', 'curso', 'licao'],
+  guia: ['guia', 'secao', 'acervo', 'guia-acervo'],
 }
 
 function estaNaAba(nome: string, ativo: boolean, ativoExato: boolean): boolean {
