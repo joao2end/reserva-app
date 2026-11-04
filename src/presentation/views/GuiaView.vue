@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PhCaretRight, PhFilmStrip, PhMapPin } from '@phosphor-icons/vue'
+import { PhBackpack, PhCaretRight, PhFilmStrip, PhMapPin } from '@phosphor-icons/vue'
 import { GUIA, GRUPOS_GUIA } from '../../domain/conteudo/guia'
 import { videoDaSecao } from '../../domain/conteudo/videos'
 import { ICONE_SECAO_GUIA } from '../icones'
@@ -39,6 +39,16 @@ const grupos = GRUPOS_GUIA.map((grupo) => ({
             <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
               <span class="block text-[24px] font-bold">Meus locais de compra</span>
               <span class="nota">Anote onde você compra mais barato.</span>
+            </span>
+            <PhCaretRight :size="24" weight="bold" class="shrink-0" aria-hidden="true" />
+          </RouterLink>
+        </li>
+        <li v-if="grupo.id === 'sobrevivencia'" class="border-t-2 border-tinta">
+          <RouterLink :to="{ name: 'mochila' }" class="flex min-h-20 items-center gap-4 p-4">
+            <PhBackpack :size="36" weight="bold" class="shrink-0" aria-hidden="true" />
+            <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
+              <span class="block text-[24px] font-bold">Minha mochila de saída</span>
+              <span class="nota">Marque o que já está pronto.</span>
             </span>
             <PhCaretRight :size="24" weight="bold" class="shrink-0" aria-hidden="true" />
           </RouterLink>

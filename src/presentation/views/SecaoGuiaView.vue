@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { PhArrowLeft } from '@phosphor-icons/vue'
+import { PhArrowLeft, PhBackpack } from '@phosphor-icons/vue'
 import { GUIA } from '../../domain/conteudo/guia'
 import { videoDaSecao } from '../../domain/conteudo/videos'
 import { ICONE_SECAO_GUIA } from '../icones'
@@ -37,6 +37,13 @@ const video = computed(() => videoDaSecao(props.secaoId))
           <span>{{ texto }}</span>
         </li>
       </ul>
+      <RouterLink
+        v-if="secao.id === 'deslocamento' && bloco.titulo === 'Mochila de saída'"
+        :to="{ name: 'mochila' }"
+        class="botao-secundario flex items-center justify-center gap-3"
+      >
+        <PhBackpack :size="28" weight="bold" aria-hidden="true" />Marcar o que já tenho
+      </RouterLink>
     </section>
   </section>
 

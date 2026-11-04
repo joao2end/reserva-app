@@ -315,7 +315,7 @@ def letra_grande(pagina: Page):
     expect(pagina.locator("html")).to_have_attribute("style", "zoom: 1.3;")
     pagina.set_viewport_size({"width": 360, "height": 780})
     foto(pagina, "18-letra-grande")
-    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais"]:
+    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila"]:
         ir(pagina, rota)
         sem_rolagem_horizontal(pagina)
     ir(pagina, "#/compras")
@@ -331,7 +331,7 @@ def letra_grande(pagina: Page):
 @cenario("19. Tela estreita (360px) sem rolagem horizontal na letra normal")
 def tela_estreita(pagina: Page):
     pagina.set_viewport_size({"width": 360, "height": 780})
-    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais"]:
+    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila"]:
         ir(pagina, rota)
         sem_rolagem_horizontal(pagina)
     pagina.set_viewport_size({"width": 412, "height": 915})
@@ -363,6 +363,38 @@ def apagar_tudo(pagina: Page):
     expect(pagina.get_by_role("link", name="Começar")).to_be_visible()
 
 
+@cenario("22. Mochila de saída: marcar, salvar e desmarcar tudo com confirmação")
+def mochila(pagina: Page):
+    ir(pagina, "#/guia/deslocamento")
+    pagina.get_by_role("link", name="Marcar o que já tenho").click()
+    expect(pagina.get_by_role("heading", level=1, name="Mochila de saída")).to_be_visible()
+    progresso = pagina.locator("[data-teste=progresso-mochila]")
+    expect(progresso).to_have_text("0 de 14 prontos")
+    expect(botao(pagina, "Desmarcar tudo")).to_have_count(0)
+    pagina.get_by_label("Rádio a pilha").check()
+    pagina.get_by_label("Dinheiro trocado").check()
+    expect(progresso).to_have_text("2 de 14 prontos")
+    pagina.reload()
+    pagina.wait_for_load_state("networkidle")
+    expect(pagina.get_by_label("Rádio a pilha")).to_be_checked()
+    expect(progresso).to_have_text("2 de 14 prontos")
+    pagina.get_by_label("Dinheiro trocado").uncheck()
+    expect(progresso).to_have_text("1 de 14 prontos")
+    pagina.set_viewport_size({"width": 360, "height": 780})
+    sem_rolagem_horizontal(pagina)
+    foto(pagina, "22-mochila")
+    pagina.set_viewport_size({"width": 412, "height": 915})
+    botao(pagina, "Desmarcar tudo").click()
+    botao(pagina, "Não, manter").click()
+    expect(progresso).to_have_text("1 de 14 prontos")
+    botao(pagina, "Desmarcar tudo").click()
+    botao(pagina, "Sim, desmarcar").click()
+    expect(progresso).to_have_text("0 de 14 prontos")
+    ir(pagina, "#/guia")
+    pagina.get_by_role("link", name="Minha mochila de saída").click()
+    expect(pagina.get_by_label("Rádio a pilha")).not_to_be_checked()
+
+
 def principal():
     os.makedirs(PASTA_TELAS, exist_ok=True)
     servidor = subprocess.Popen(
@@ -381,7 +413,7 @@ def principal():
                 inicio_vazio, redireciona_sem_estoque, validacao_criacao, campo_numero, sair_do_assistente,
                 criar_estoque, comprar_agua, compra_data_futura, ciclo_do_item, esc_cancela, resumo_inicio,
                 persistencia, editar_estoque, locais, guia, rotas_invalidas, navegacao, letra_grande,
-                tela_estreita, tema_escuro, apagar_tudo,
+                tela_estreita, tema_escuro, apagar_tudo, mochila,
             ]:
                 executar(pagina)
             navegador.close()

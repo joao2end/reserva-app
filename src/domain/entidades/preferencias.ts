@@ -4,9 +4,10 @@ export type TamanhoTexto = (typeof TAMANHOS_TEXTO)[number]
 
 export interface Preferencias {
   tamanhoTexto: TamanhoTexto
+  mochila: string[]
 }
 
-export const PREFERENCIAS_PADRAO: Preferencias = { tamanhoTexto: 'normal' }
+export const PREFERENCIAS_PADRAO: Preferencias = { tamanhoTexto: 'normal', mochila: [] }
 
 export const ESCALA_TEXTO: Record<TamanhoTexto, number> = {
   normal: 1,
