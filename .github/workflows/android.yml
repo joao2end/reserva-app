@@ -80,7 +80,16 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "v$VERSAO" release/* \
-            --title "SBV $VERSAO" \
-            --notes-file "$RUNNER_TEMP/notas.md" \
-            --target "$GITHUB_SHA"
+          for tentativa in 1 2 3; do
+            if gh release view "v$VERSAO" >/dev/null 2>&1; then
+              gh release upload "v$VERSAO" release/* --clobber && exit 0
+            elif gh release create "v$VERSAO" release/* \
+              --title "SBV $VERSAO" \
+              --notes-file "$RUNNER_TEMP/notas.md" \
+              --target "$GITHUB_SHA"; then
+              exit 0
+            fi
+            echo "Tentativa $tentativa falhou. Tentando de novo em 20 segundos."
+            sleep 20
+          done
+          exit 1
