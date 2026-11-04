@@ -47,6 +47,14 @@ export function venceEmBreve(lote: Lote, hoje: Date): boolean {
   return diasAteVencer(lote.validade, hoje) <= DIAS_ALERTA_VALIDADE
 }
 
+export function estaVencido(lote: Lote, hoje: Date): boolean {
+  return diasAteVencer(lote.validade, hoje) < 0
+}
+
+export function lotesNoPrazo(lotes: Lote[], hoje: Date): Lote[] {
+  return lotes.filter((lote) => !estaVencido(lote, hoje))
+}
+
 export function validadeSugerida(item: ItemCatalogo, compradoEm: string): string {
   return somarMeses(compradoEm, item.validadeMeses)
 }

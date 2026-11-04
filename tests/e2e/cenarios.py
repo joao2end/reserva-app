@@ -443,6 +443,32 @@ def calor(pagina: Page):
     pagina.set_viewport_size({"width": 412, "height": 915})
 
 
+@cenario("26. Pacote vencido não conta no estoque e aparece em Venceu no início")
+def vencido(pagina: Page):
+    criar_pelo_assistente(pagina, "1 mês", "Casa Teste")
+    botao(pagina, "Criar meu estoque").click()
+    expect(pagina.get_by_role("heading", name="Faltam 21 itens")).to_be_visible()
+    mes_passado = date(HOJE.year - (1 if HOJE.month == 1 else 0), (HOJE.month - 2) % 12 + 1, 1)
+    ir(pagina, "#/estoque/feijao")
+    botao(pagina, "Comprei mais").click()
+    escolher_validade(pagina, mes_passado.year, mes_passado.month)
+    botao(pagina, "Guardar no estoque").click()
+    expect(pagina.locator("[data-teste=lote]")).to_contain_text("Vencido. Não conta no estoque.")
+    expect(pagina.locator("[data-teste=tenho]")).to_have_text("0 kg")
+    expect(pagina.locator("[data-teste=falta]")).to_have_text("6 kg")
+    pagina.set_viewport_size({"width": 360, "height": 780})
+    ir(pagina, "")
+    vencidos = pagina.locator("[data-teste=vencidos]")
+    expect(vencidos.get_by_role("heading", name="Venceu")).to_be_visible()
+    expect(vencidos).to_contain_text("Feijão")
+    expect(pagina.get_by_role("heading", name="Use primeiro")).to_have_count(0)
+    sem_rolagem_horizontal(pagina)
+    foto(pagina, "26-vencido")
+    vencidos.get_by_role("link").first.click()
+    expect(pagina.get_by_role("heading", level=1, name="Feijão")).to_be_visible()
+    pagina.set_viewport_size({"width": 412, "height": 915})
+
+
 def principal():
     os.makedirs(PASTA_TELAS, exist_ok=True)
     servidor = subprocess.Popen(
@@ -462,6 +488,7 @@ def principal():
                 criar_estoque, comprar_agua, compra_data_futura, ciclo_do_item, esc_cancela, resumo_inicio,
                 persistencia, editar_estoque, locais, guia, rotas_invalidas, navegacao, letra_grande,
                 tela_estreita, tema_escuro, apagar_tudo, mochila, telefones_emergencia, fumaca, calor,
+                vencido,
             ]:
                 executar(pagina)
             navegador.close()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { PhDrop, PhPencilSimple, PhPlus, PhShoppingCart, PhBookOpen, PhClockCountdown, PhCaretRight } from '@phosphor-icons/vue'
+import { PhDrop, PhPencilSimple, PhPlus, PhShoppingCart, PhBookOpen, PhClockCountdown, PhCaretRight, PhWarning } from '@phosphor-icons/vue'
 import { useEstoque } from '../estado/useEstoque'
 import { resumo } from '../../application/consultas/consultas'
 import { formatarMesAno, formatarPrazo, formatarQuantidade, plural } from '../formato'
@@ -82,6 +82,27 @@ const comoUsar = [
         <p v-else-if="dados.diasDeAgua !== null" data-teste="dias-agua">A água guardada dá para <strong class="text-[30px] tabular-nums">{{ plural(dados.diasDeAgua, 'dia', 'dias') }}</strong>.</p>
       </div>
     </div>
+
+    <section v-if="dados.vencidos.length" class="space-y-4" data-teste="vencidos">
+      <h2 class="titulo-2 flex items-center gap-3">
+        <PhWarning :size="34" weight="bold" aria-hidden="true" />Venceu
+      </h2>
+      <p class="nota">Passou da validade. Não conta mais no estoque. Troque por um novo.</p>
+      <ul class="border-4 border-tinta">
+        <li v-for="{ lote, item } in dados.vencidos" :key="lote.id" class="border-b-2 border-tinta last:border-b-0">
+          <RouterLink :to="{ name: 'item', params: { itemId: item.id } }" class="flex min-h-18 items-center justify-between gap-4 p-4">
+            <span>
+              <span class="block font-bold">{{ item.nome }}</span>
+              <span class="nota">{{ formatarQuantidade(lote.quantidade, item.unidade) }}</span>
+            </span>
+            <span class="text-right">
+              <span class="block font-bold tabular-nums">{{ formatarMesAno(lote.validade) }}</span>
+              <span class="nota">Vencido</span>
+            </span>
+          </RouterLink>
+        </li>
+      </ul>
+    </section>
 
     <section v-if="dados.consumirPrimeiro.length" class="space-y-4">
       <h2 class="titulo-2 flex items-center gap-3">

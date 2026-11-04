@@ -2,8 +2,10 @@ import type { Categoria, ConfiguracaoEstoque, EstadoEstoque, ItemCatalogo, Lote 
 import { CATALOGO, CATEGORIAS, encontrarItem } from '../../domain/conteudo/catalogo'
 import {
   diasDeAguaGuardada,
+  estaVencido,
   faltaComprar,
   litrosDeAguaPorDia,
+  lotesNoPrazo,
   metaDoItem,
   progressoGeral,
   totalEmEstoque,
@@ -24,6 +26,7 @@ export interface Resumo {
   litrosAguaDia: number
   diasDeAgua: number | null
   consumirPrimeiro: LoteComPrazo[]
+  vencidos: LoteComPrazo[]
 }
 
 export interface LinhaSituacao {
@@ -57,12 +60,20 @@ function comPrazo(lote: Lote, hoje: Date): LoteComPrazo | null {
   return item ? { lote, item, dias: diasAteVencer(lote.validade, hoje) } : null
 }
 
+function comPrazoOrdenado(lotes: Lote[], hoje: Date): LoteComPrazo[] {
+  return lotes
+    .map((lote) => comPrazo(lote, hoje))
+    .filter((linha): linha is LoteComPrazo => linha !== null)
+    .sort(porValidade)
+}
+
 function porValidade(a: LoteComPrazo, b: LoteComPrazo): number {
   return a.lote.validade.localeCompare(b.lote.validade)
 }
 
 export function situacaoDoEstoque(configuracao: ConfiguracaoEstoque, lotes: Lote[], hoje: Date): GrupoSituacao[] {
   const itens = itensDoPlano(configuracao)
+  const validos = lotesNoPrazo(lotes, hoje)
   return CATEGORIAS.map((categoria) => ({
     categoria,
     linhas: itens
@@ -70,8 +81,8 @@ export function situacaoDoEstoque(configuracao: ConfiguracaoEstoque, lotes: Lote
       .map((item) => ({
         item,
         meta: metaDoItem(item, configuracao),
-        atual: totalEmEstoque(item.id, lotes),
-        falta: faltaComprar(item, configuracao, lotes),
+        atual: totalEmEstoque(item.id, validos),
+        falta: faltaComprar(item, configuracao, validos),
         venceLogo: lotes.some((lote) => lote.itemId === item.id && venceEmBreve(lote, hoje)),
       })),
   })).filter((grupo) => grupo.linhas.length > 0)
@@ -87,17 +98,15 @@ export function resumo(estado: EstadoEstoque, hoje: Date): Resumo | null {
   const { configuracao, lotes } = estado
   if (!configuracao) return null
   const itens = itensDoPlano(configuracao)
+  const validos = lotesNoPrazo(lotes, hoje)
   return {
     configuracao,
-    progresso: progressoGeral(itens, configuracao, lotes),
-    itensFaltando: itens.filter((item) => faltaComprar(item, configuracao, lotes) > 0).length,
+    progresso: progressoGeral(itens, configuracao, validos),
+    itensFaltando: itens.filter((item) => faltaComprar(item, configuracao, validos) > 0).length,
     litrosAguaDia: litrosDeAguaPorDia(configuracao),
-    diasDeAgua: configuracao.itensSelecionados.includes('agua') ? diasDeAguaGuardada(configuracao, lotes) : null,
-    consumirPrimeiro: lotes
-      .filter((lote) => venceEmBreve(lote, hoje))
-      .map((lote) => comPrazo(lote, hoje))
-      .filter((linha): linha is LoteComPrazo => linha !== null)
-      .sort(porValidade),
+    diasDeAgua: configuracao.itensSelecionados.includes('agua') ? diasDeAguaGuardada(configuracao, validos) : null,
+    consumirPrimeiro: comPrazoOrdenado(validos.filter((lote) => venceEmBreve(lote, hoje)), hoje),
+    vencidos: comPrazoOrdenado(lotes.filter((lote) => estaVencido(lote, hoje)), hoje),
   }
 }
 
@@ -105,16 +114,13 @@ export function detalheDoItem(estado: EstadoEstoque, itemId: string, hoje: Date)
   const item = encontrarItem(itemId)
   const { configuracao, lotes } = estado
   if (!item || !configuracao) return null
+  const validos = lotesNoPrazo(lotes, hoje)
   return {
     item,
     noPlano: configuracao.itensSelecionados.includes(item.id),
     meta: metaDoItem(item, configuracao),
-    atual: totalEmEstoque(item.id, lotes),
-    falta: faltaComprar(item, configuracao, lotes),
-    lotes: lotes
-      .filter((lote) => lote.itemId === item.id)
-      .map((lote) => comPrazo(lote, hoje))
-      .filter((linha): linha is LoteComPrazo => linha !== null)
-      .sort(porValidade),
+    atual: totalEmEstoque(item.id, validos),
+    falta: faltaComprar(item, configuracao, validos),
+    lotes: comPrazoOrdenado(lotes.filter((lote) => lote.itemId === item.id), hoje),
   }
 }

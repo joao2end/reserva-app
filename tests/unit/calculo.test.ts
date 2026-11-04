@@ -11,6 +11,8 @@ import {
   totalEmEstoque,
   validadeSugerida,
   venceEmBreve,
+  estaVencido,
+  lotesNoPrazo,
 } from '../../src/domain/regras/calculo'
 import { diasAteVencer, ehDataIso, ehMesIso, somarMeses } from '../../src/domain/regras/datas'
 import type { ConfiguracaoEstoque, Lote } from '../../src/domain/entidades/tipos'
@@ -76,6 +78,12 @@ describe('validade', () => {
   it('conta os dias até o fim do mês de validade', () => {
     expect(diasAteVencer('2026-11', hoje)).toBe(28)
     expect(diasAteVencer('2026-10', hoje)).toBeLessThan(0)
+  })
+
+  it('considera vencido só depois do fim do mês da validade', () => {
+    expect(estaVencido(lote('arroz', 1, '2026-10'), hoje)).toBe(true)
+    expect(estaVencido(lote('arroz', 1, '2026-11'), hoje)).toBe(false)
+    expect(lotesNoPrazo([lote('arroz', 1, '2026-10'), lote('arroz', 2, '2027-01')], hoje).map((l) => l.quantidade)).toEqual([2])
   })
 
   it('alerta quando vence em até 60 dias', () => {

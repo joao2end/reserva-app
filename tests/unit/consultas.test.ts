@@ -32,6 +32,33 @@ describe('consultas', () => {
     expect(resumo(semAgua, HOJE)?.diasDeAgua).toBeNull()
   })
 
+  it('lote vencido não conta no estoque e aparece em vencidos', () => {
+    const comVencido = {
+      ...estado,
+      lotes: [
+        ...estado.lotes,
+        { id: 'v', itemId: 'feijao', quantidade: 4, compradoEm: '2025-10-01', validade: '2026-10' },
+        { id: 'w', itemId: 'agua', quantidade: 40, compradoEm: '2026-04-01', validade: '2026-10' },
+      ],
+    }
+    const dados = resumo(comVencido, HOJE)
+    expect(dados?.vencidos.map((linha) => linha.lote.id)).toEqual(['v', 'w'])
+    expect(dados?.consumirPrimeiro.map((linha) => linha.lote.id)).toEqual(['a'])
+    expect(dados?.diasDeAgua).toBe(0)
+    expect(dados?.itensFaltando).toBe(2)
+    expect(dados?.progresso).toBe(44)
+    expect(detalheDoItem(comVencido, 'feijao', HOJE)).toMatchObject({ atual: 2, falta: 4 })
+    expect(detalheDoItem(comVencido, 'feijao', HOJE)?.lotes).toHaveLength(2)
+    const feijao = situacaoDoEstoque(comVencido.configuracao!, comVencido.lotes, HOJE)[1].linhas.find((linha) => linha.item.id === 'feijao')
+    expect(feijao).toMatchObject({ atual: 2, falta: 4, venceLogo: true })
+  })
+
+  it('lote que vence no mês atual ainda conta', () => {
+    const dados = resumo({ ...estado, lotes: [{ id: 'x', itemId: 'agua', quantidade: 80, compradoEm: '2026-10-01', validade: '2026-11' }] }, HOJE)
+    expect(dados?.diasDeAgua).toBe(10)
+    expect(dados?.vencidos).toEqual([])
+  })
+
   it('retorna nulo sem estoque criado', () => {
     expect(resumo({ configuracao: null, lotes: [], locais: [] }, HOJE)).toBeNull()
   })

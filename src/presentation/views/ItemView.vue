@@ -116,7 +116,7 @@ async function confirmarDescarte(lote: Lote) {
             </span>
           </div>
           <p v-if="dias <= DIAS_ALERTA_VALIDADE" class="rotulo bloco flex items-center gap-2 px-4 py-2">
-            <PhClockCountdown :size="22" weight="bold" aria-hidden="true" />{{ formatarPrazo(dias) }}
+            <PhClockCountdown :size="22" weight="bold" aria-hidden="true" />{{ dias < 0 ? 'Vencido. Não conta no estoque.' : formatarPrazo(dias) }}
           </p>
           <form v-if="consumindo === lote.id" class="space-y-4 border-t-2 border-tinta p-4" novalidate @submit.prevent="confirmarConsumo(lote)">
             <CampoNumero v-model="quantidadeConsumo" rotulo="Quanto usou?" :minimo="passoConsumo" :maximo="lote.quantidade" :passo="passoConsumo" />
