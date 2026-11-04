@@ -316,7 +316,7 @@ def letra_grande(pagina: Page):
     expect(pagina.locator("html")).to_have_attribute("style", "zoom: 1.3;")
     pagina.set_viewport_size({"width": 360, "height": 780})
     foto(pagina, "18-letra-grande")
-    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia", "#/curso", "#/curso/agua-tratar", "#/curso/engasgo"]:
+    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia", "#/curso", "#/curso/agua-tratar", "#/curso/engasgo", "#/curso/sem-geladeira"]:
         ir(pagina, rota)
         sem_rolagem_horizontal(pagina)
     ir(pagina, "#/compras")
@@ -332,7 +332,7 @@ def letra_grande(pagina: Page):
 @cenario("19. Tela estreita (360px) sem rolagem horizontal na letra normal")
 def tela_estreita(pagina: Page):
     pagina.set_viewport_size({"width": 360, "height": 780})
-    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia", "#/curso", "#/curso/agua-tratar", "#/curso/engasgo"]:
+    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia", "#/curso", "#/curso/agua-tratar", "#/curso/engasgo", "#/curso/sem-geladeira"]:
         ir(pagina, rota)
         sem_rolagem_horizontal(pagina)
     pagina.set_viewport_size({"width": 412, "height": 915})
@@ -506,10 +506,10 @@ def contato_familia(pagina: Page):
 def curso(pagina: Page):
     ir(pagina, "#/guia")
     entrada = pagina.locator("[data-teste=entrada-curso]")
-    expect(entrada).to_contain_text("0 de 6 concluídas")
+    expect(entrada).to_contain_text("0 de 7 concluídas")
     entrada.click()
     expect(pagina.get_by_role("heading", level=1, name="Curso de sobrevivência")).to_be_visible()
-    expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("0 de 6 lições concluídas")
+    expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("0 de 7 lições concluídas")
     pagina.locator("[data-teste=licao-rcp]").click()
     expect(pagina.get_by_role("heading", level=1, name="Parada cardíaca: massagem no peito")).to_be_visible()
     botao(pagina, "Assistir o vídeo").first.click()
@@ -534,7 +534,7 @@ def curso(pagina: Page):
     pagina.reload()
     pagina.wait_for_load_state("networkidle")
     ir(pagina, "#/curso")
-    expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("1 de 6 lições concluídas")
+    expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("1 de 7 lições concluídas")
     expect(pagina.locator("[data-teste=licao-rcp]")).to_contain_text("Concluída")
     ir(pagina, "#/curso/nao-existe")
     expect(pagina.get_by_text("Lição não encontrada")).to_be_visible()

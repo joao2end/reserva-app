@@ -13,6 +13,7 @@ import {
   PhDrop,
   PhEyedropper,
   PhFlame,
+  PhForkKnife,
   PhGrains,
   PhHand,
   PhHandFist,
@@ -29,6 +30,7 @@ import {
   PhSun,
   PhThermometer,
   PhTimer,
+  PhTrash,
 } from '@phosphor-icons/vue'
 import type { IlustracaoId } from '../../domain/conteudo/videos'
 
@@ -581,6 +583,64 @@ defineProps<{ ilustracao: IlustracaoId; modo: 'animando' | 'pausado' | 'estatico
       <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 86%; font-size: 8cqw; animation-delay: 1.2s">10 A 20 MIN</p>
     </template>
 
+    <template v-else-if="ilustracao === 'porta-fechada'">
+      <div class="peca ani aparecer" style="left: 8%; top: 8%; width: 42%; height: 78%">
+        <div class="contorno arredondado geladeira" />
+      </div>
+      <div class="peca ani aparecer" style="left: 60%; top: 10%; width: 30%; animation-delay: 0.8s">
+        <PhClock size="100%" weight="bold" />
+      </div>
+      <p class="peca texto ani aparecer" style="left: 54%; width: 44%; top: 46%; font-size: 16cqw; animation-delay: 1.4s">4 h</p>
+      <p class="peca texto ani surgir" style="left: 52%; width: 48%; top: 72%; font-size: 6cqw; animation-delay: 2s">PORTA FECHADA</p>
+    </template>
+
+    <template v-else-if="ilustracao === 'congelador-cheio'">
+      <div class="peca contorno arredondado congelador" style="left: 4%; top: 6%; width: 42%; height: 54%">
+        <span
+          v-for="bloco in 8"
+          :key="bloco"
+          class="bloco-gelo ani aparecer"
+          :style="{ animationDelay: `${0.1 * bloco}s` }"
+        />
+      </div>
+      <p class="peca texto ani surgir" style="left: 0; width: 50%; top: 64%; font-size: 13cqw; animation-delay: 1s">48 h</p>
+      <p class="peca texto ani surgir" style="left: 0; width: 50%; top: 84%; font-size: 6cqw; animation-delay: 1.2s">CHEIO</p>
+      <div class="peca contorno arredondado congelador ani aparecer" style="left: 54%; top: 6%; width: 42%; height: 54%; animation-delay: 1.8s">
+        <span v-for="bloco in 3" :key="bloco" class="bloco-gelo" />
+      </div>
+      <p class="peca texto ani surgir" style="left: 50%; width: 50%; top: 64%; font-size: 13cqw; animation-delay: 2.4s">24 h</p>
+      <p class="peca texto ani surgir" style="left: 50%; width: 50%; top: 84%; font-size: 6cqw; animation-delay: 2.6s">METADE</p>
+    </template>
+
+    <template v-else-if="ilustracao === 'cristais-gelo'">
+      <div class="peca ani girar" style="left: 8%; top: 8%; width: 34%">
+        <PhSnowflake size="100%" weight="bold" />
+      </div>
+      <div class="peca ani aparecer" style="left: 50%; top: 6%; width: 40%; animation-delay: 0.6s">
+        <PhThermometer size="100%" weight="bold" />
+      </div>
+      <p class="peca texto ani surgir" style="left: 46%; width: 50%; top: 50%; font-size: 10cqw; animation-delay: 1.2s">até 4 °C</p>
+      <div class="peca selo ani aparecer" style="left: 10%; top: 54%; width: 22%; animation-delay: 1.8s">
+        <PhCheck size="70%" weight="bold" />
+      </div>
+      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 82%; font-size: 6.5cqw; animation-delay: 2.2s">PODE CONGELAR DE NOVO</p>
+    </template>
+
+    <template v-else-if="ilustracao === 'nao-prove'">
+      <div class="peca ani aparecer" style="left: 8%; top: 6%; width: 36%">
+        <PhForkKnife size="100%" weight="bold" />
+        <span class="risco"><span class="linha ani riscar" style="animation-delay: 0.8s" /></span>
+      </div>
+      <p class="peca texto ani surgir" style="left: 0; width: 52%; top: 48%; font-size: 7cqw; animation-delay: 1s">NÃO PROVE</p>
+      <div class="peca ani cair" style="left: 58%; top: 8%; width: 34%; animation-delay: 1.6s">
+        <PhTrash size="100%" weight="bold" />
+      </div>
+      <p class="peca texto ani surgir" style="left: 48%; width: 52%; top: 48%; font-size: 7cqw; animation-delay: 2.2s">JOGUE FORA</p>
+      <p class="peca texto bloco faixa ani surgir" style="left: 4%; width: 92%; top: 72%; font-size: 6.5cqw; animation-delay: 2.8s">
+        NA DÚVIDA, FORA
+      </p>
+    </template>
+
     <template v-else-if="ilustracao === 'nada-na-queimadura'">
       <div
         v-for="(item, posicao) in ['PASTA DE DENTE', 'MANTEIGA', 'PÓ DE CAFÉ']"
@@ -1011,6 +1071,19 @@ defineProps<{ ilustracao: IlustracaoId; modo: 'animando' | 'pausado' | 'estatico
 .escorrer {
   animation-name: encher;
   animation-duration: 1s;
+}
+
+.congelador {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: end;
+  gap: 1.5cqw;
+  padding: 2cqw;
+}
+
+.bloco-gelo {
+  height: 9cqw;
+  background: var(--tinta);
 }
 
 .pausado .ani {

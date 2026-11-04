@@ -35,6 +35,10 @@ export type IlustracaoId =
   | 'pano-por-cima'
   | 'agua-queimadura'
   | 'nada-na-queimadura'
+  | 'porta-fechada'
+  | 'congelador-cheio'
+  | 'cristais-gelo'
+  | 'nao-prove'
 
 export interface CenaVideo {
   ilustracao: IlustracaoId

@@ -596,6 +596,103 @@ export const CURSO: ModuloCurso[] = [
       },
     ],
   },
+  {
+    id: 'comida',
+    titulo: 'Comida sem geladeira e sem gás',
+    resumo: 'Salvar o que está na geladeira quando a luz cai e cozinhar gastando pouco.',
+    licoes: [
+      {
+        id: 'sem-geladeira',
+        titulo: 'Faltou energia: o que salvar da geladeira',
+        objetivo: 'Fazer a geladeira e o congelador segurarem o frio e saber o que comer e o que jogar fora.',
+        minutos: 5,
+        cenas: [
+          {
+            ilustracao: 'porta-fechada',
+            titulo: 'Não abra a porta',
+            texto: 'Fechada, a geladeira segura o frio por cerca de 4 horas.',
+            segundos: 6,
+          },
+          {
+            ilustracao: 'congelador-cheio',
+            titulo: 'Congelador cheio dura mais',
+            texto: 'Cheio: cerca de 48 horas. Pela metade: cerca de 24 horas.',
+            segundos: 7,
+          },
+          {
+            ilustracao: 'cristais-gelo',
+            titulo: 'Ainda tem gelo? Pode congelar de novo',
+            texto: 'Se ainda tem cristais de gelo ou está gelado como na geladeira.',
+            segundos: 6,
+          },
+          {
+            ilustracao: 'nao-prove',
+            titulo: 'Nunca prove para saber',
+            texto: 'Cheiro, cor ou textura estranha, ou morno? Jogue fora.',
+            segundos: 6,
+          },
+        ],
+        partes: [
+          {
+            titulo: 'Antes de faltar luz',
+            passos: [
+              'Encha os espaços vazios do congelador com garrafas PET de água. Congeladas, elas seguram o frio e viram água de beber depois.',
+              'Tenha um termômetro de geladeira, que é barato. A geladeira deve ficar em até 4 °C.',
+              'Não deixe a geladeira lotada de comida que estraga logo. Prefira o estoque que dura fora dela.',
+            ],
+          },
+          {
+            titulo: 'Quando a luz cair',
+            paragrafos: [
+              'Cada vez que a porta abre, o ar frio sai e o quente entra. Por isso o mais importante é manter tudo fechado.',
+            ],
+            passos: [
+              'Anote a hora em que a luz caiu.',
+              'Não abra a geladeira nem o congelador. Fechada, a geladeira segura cerca de 4 horas.',
+              'O congelador cheio segura uns 2 dias. Pela metade, 1 dia.',
+              'Enquanto isso, coma o que não precisa de geladeira.',
+            ],
+          },
+          {
+            titulo: 'Quando a luz voltar',
+            passos: [
+              'Se a geladeira ficou mais de 4 horas sem luz, jogue fora carne, frango, peixe, ovos, leite e comida pronta.',
+              'No congelador, o que ainda tem cristais de gelo, ou está gelado a 4 °C ou menos, pode ser congelado de novo.',
+              'O que descongelou de vez e ficou morno vai para o lixo.',
+              'Nunca prove para conferir. Cheiro, cor ou textura estranha: jogue fora.',
+            ],
+          },
+        ],
+        erros: [
+          'Abrir a porta toda hora para ver se ainda está gelado.',
+          'Provar um pedacinho para saber se estragou.',
+          'Congelar de novo carne que já descongelou de vez e ficou morna.',
+          'Achar que, se não tem cheiro, está bom: muitas bactérias não têm cheiro.',
+        ],
+        teste: [
+          {
+            pergunta: 'Com a porta fechada, por quanto tempo a geladeira segura a comida?',
+            opcoes: ['Cerca de 4 horas', 'Cerca de 3 dias', 'Só 10 minutos'],
+            correta: 0,
+            explicacao: 'Depois de 4 horas sem luz, carne, leite, ovos e comida pronta devem ir para o lixo.',
+          },
+          {
+            pergunta: 'Qual congelador segura o frio por mais tempo?',
+            opcoes: ['O vazio', 'O cheio', 'Tanto faz'],
+            correta: 1,
+            explicacao: 'Cheio, segura cerca de 48 horas. Pela metade, cerca de 24.',
+          },
+          {
+            pergunta: 'A carne do congelador ainda tem cristais de gelo. O que fazer?',
+            opcoes: ['Jogar fora na hora', 'Pode congelar de novo', 'Provar para ver'],
+            correta: 1,
+            explicacao: 'Com cristais de gelo, ou a 4 °C ou menos, pode voltar ao congelador.',
+          },
+        ],
+        fontes: ['FoodSafety.gov (governo dos EUA): como manter a comida segura quando falta energia'],
+      },
+    ],
+  },
 ]
 
 export const LICOES: LicaoCurso[] = CURSO.flatMap((modulo) => modulo.licoes)
