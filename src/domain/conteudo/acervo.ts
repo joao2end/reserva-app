@@ -74,6 +74,48 @@ export const ACERVO: GuiaAcervo[] = [
     fontes: ['Defesa Civil Nacional', 'Ready.gov: Power Outages', 'CDC: monóxido de carbono'],
   },
   {
+    id: 'elevador-parado',
+    categoria: 'energia',
+    nivel: 'facil',
+    titulo: 'Preso no elevador',
+    resumo: 'O elevador parou com você dentro, por falta de energia ou defeito.',
+    aviso: {
+      critico: true,
+      titulo: 'Parou fora do andar: não tente sair',
+      texto: 'O elevador pode voltar a funcionar enquanto você está saindo pela abertura. Espere a ajuda dentro da cabine.',
+    },
+    blocos: [
+      {
+        titulo: 'Se o elevador parar com você dentro',
+        itens: [
+          'Fique calmo. O perigo não é imediato.',
+          'Aperte o botão de alarme ou use o interfone para pedir ajuda.',
+          'Peça que chamem o zelador ou a empresa que cuida do elevador.',
+          'Se for preciso, ligue para os Bombeiros: 193.',
+          'Espere com calma e ajude a acalmar quem está com você.',
+        ],
+      },
+      {
+        titulo: 'O que não fazer',
+        itens: [
+          'Não force nem puxe a porta.',
+          'Não abra a porta do andar quando a cabine não está ali.',
+          'Não pule nem faça movimentos bruscos na cabine.',
+          'Não aperte o botão de chamada várias vezes.',
+        ],
+      },
+      {
+        titulo: 'No dia a dia',
+        itens: [
+          'Respeite o peso máximo escrito na cabine.',
+          'Não segure a porta com objetos.',
+          'Em incêndio, nunca use o elevador. Desça pela escada.',
+        ],
+      },
+    ],
+    fontes: ['Corpo de Bombeiros Militar de Santa Catarina: Elevadores', 'Corpo de Bombeiros Militar de Alagoas: Elevadores'],
+  },
+  {
     id: 'enchente',
     categoria: 'clima',
     nivel: 'medio',

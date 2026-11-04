@@ -26,7 +26,7 @@ Identidade visual **SBV**: preto e branco, fonte Atkinson Hyperlegible (feita pa
 | Cursos de emergência: água e primeiros socorros | Aba Cursos |
 | Aula em vídeo narrada em cada lição, para assistir ou baixar no celular | Aba Cursos › lição |
 | Lições separadas em níveis fácil, médio e avançado | Aba Cursos › curso |
-| Acervo de sobrevivência com busca: enchente, raios, ar seco, falta de energia, saúde, casa e comunicação | Guia › Acervo de sobrevivência |
+| Acervo de sobrevivência com busca: enchente, raios, ar seco, falta de energia, preso no elevador, saúde, casa e comunicação | Guia › Acervo de sobrevivência |
 
 ## Vídeos narrados das lições
 
