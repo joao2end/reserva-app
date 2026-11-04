@@ -41,6 +41,7 @@ Cada lição vira um vídeo MP4 com narração em português, feito com motion g
 - `scripts/videos/gerar_videos.py` narra com a voz Piper `pt_BR-faber-medium` (dados CC0), ajusta cada cena ao tamanho da fala, cria uma trilha original, fotografa os quadros e junta tudo com o ffmpeg.
 - O workflow **Vídeos dos cursos** roda quando o conteúdo muda, gera só as lições alteradas e publica na release `videos-cursos`.
 - No app, a lição mostra **Baixar vídeo**: o arquivo fica no celular, funciona sem internet e pode ser salvo ou enviado.
+- Na página de cada curso, **Baixar todos os vídeos** baixa as lições que faltam, uma depois da outra, com o progresso total. Também dá para apagar todos de uma vez.
 
 Para gerar um vídeo no computador: `python3 scripts/videos/gerar_videos.py --modelo voz/pt_BR-faber-medium.onnx --licoes rcp`.
 

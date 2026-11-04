@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { PhArrowLeft, PhCaretRight, PhCheck } from '@phosphor-icons/vue'
 import { cursoPorId } from '../../domain/conteudo/curso'
 import { usePreferencias } from '../estado/usePreferencias'
 import { ICONE_CURSO } from '../icones'
 import BarraProgresso from '../components/BarraProgresso.vue'
 import CaixaAviso from '../components/CaixaAviso.vue'
+import BaixarVideosCurso from '../components/BaixarVideosCurso.vue'
 
 const props = defineProps<{ cursoId: string }>()
 const { licoesConcluidas } = usePreferencias()
 
 const curso = computed(() => cursoPorId(props.cursoId))
 const concluidas = computed(() => curso.value?.licoes.filter((licao) => licoesConcluidas.value.includes(licao.id)).length ?? 0)
+const videosNoCelular = ref<string[]>([])
 const percentual = computed(() => (curso.value ? Math.round((concluidas.value / curso.value.licoes.length) * 100) : 0))
 </script>
 
@@ -33,6 +35,12 @@ const percentual = computed(() => (curso.value ? Math.round((concluidas.value / 
       <p class="font-bold" data-teste="progresso-curso">{{ concluidas }} de {{ curso.licoes.length }} lições concluídas</p>
     </div>
 
+    <BaixarVideosCurso
+      :key="curso.id"
+      :licao-ids="curso.licoes.map((licao) => licao.id)"
+      @atualizou="(ids) => (videosNoCelular = ids)"
+    />
+
     <ol class="border-4 border-tinta">
       <li v-for="(licao, indice) in curso.licoes" :key="licao.id" class="border-b-2 border-tinta last:border-b-0">
         <RouterLink
@@ -51,7 +59,7 @@ const percentual = computed(() => (curso.value ? Math.round((concluidas.value / 
           <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
             <span class="block text-[22px] leading-7 font-bold">{{ licao.titulo }}</span>
             <span class="nota">
-              {{ licao.minutos }} min{{ licao.videosReais?.length ? ' · com vídeo real' : '' }}{{
+              {{ licao.minutos }} min{{ videosNoCelular.includes(licao.id) ? ' · vídeo no celular' : '' }}{{
                 licoesConcluidas.includes(licao.id) ? ' · Concluída' : ''
               }}
             </span>

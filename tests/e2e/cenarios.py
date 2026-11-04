@@ -566,7 +566,7 @@ def curso(pagina: Page):
 
 @cenario("29. Vídeo narrado para baixar e vídeos do YouTube na lição")
 def video_narrado(pagina: Page):
-    manifesto = '{"videos":[{"licaoId":"rcp","arquivo":"rcp.mp4","bytes":2202009,"segundos":48.5}]}'
+    manifesto = '{"videos":[{"licaoId":"rcp","arquivo":"rcp.mp4","bytes":2202009,"segundos":48.5},{"licaoId":"engasgo","arquivo":"engasgo.mp4","bytes":1048576,"segundos":43}]}'
     pagina.route("**/videos-narrados.json", lambda rota: rota.fulfill(status=200, content_type="application/json", body=manifesto))
     ir(pagina, "#/licao/rcp")
     narrado = pagina.locator("[data-teste=video-narrado]")
@@ -582,6 +582,17 @@ def video_narrado(pagina: Page):
     sem_rolagem_horizontal(pagina)
     foto(pagina, "29-video-narrado")
     pagina.set_viewport_size({"width": 412, "height": 915})
+    ir(pagina, "#/cursos/socorros")
+    lote = pagina.locator("[data-teste=baixar-videos-curso]")
+    expect(lote).to_be_visible()
+    expect(pagina.locator("[data-teste=videos-no-celular]")).to_have_text("0 de 2 vídeos no celular")
+    expect(pagina.locator("[data-teste=baixar-todos]")).to_have_text("Baixar todos os vídeos (3,1 MB)")
+    pagina.set_viewport_size({"width": 360, "height": 780})
+    sem_rolagem_horizontal(pagina)
+    foto(pagina, "29-baixar-todos")
+    pagina.set_viewport_size({"width": 412, "height": 915})
+    ir(pagina, "#/cursos/eletricista")
+    expect(pagina.locator("[data-teste=baixar-videos-curso]")).to_have_count(0)
     ir(pagina, "#/licao/eletrica-seguranca")
     expect(pagina.locator("[data-teste=video-narrado]")).to_have_count(0)
     expect(pagina.locator("[data-teste=videos-youtube]")).to_be_visible()
