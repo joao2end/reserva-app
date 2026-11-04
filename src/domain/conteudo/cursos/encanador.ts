@@ -317,5 +317,129 @@ export const CURSO_ENCANADOR: ModuloCurso = {
       ],
       fontes: ['Leroy Merlin: como limpar um sifão'],
     },
+    {
+      id: 'encanador-trocar-cano',
+      nivel: 'avancado',
+      titulo: 'Trocar um pedaço de cano furado',
+      objetivo: 'Trocar o trecho furado do cano de água fria com duas luvas de correr, sem cola e abrindo pouco a parede.',
+      minutos: 9,
+      cenas: [
+        {
+          titulo: 'Feche a água',
+          texto: 'Feche o registro e abra a parede só num trecho pequeno, junto ao furo.',
+          segundos: 7,
+          desenho: {
+            pecas: [
+              { desenho: 'registro', x: 26, y: 40, largura: 40, movimento: 'apertar' },
+              { desenho: 'cano-furado', x: 72, y: 46, largura: 44, movimento: 'surgir', atraso: 1 },
+            ],
+            rotulos: [{ texto: 'TRECHO PEQUENO', x: 50, y: 86, tamanho: 6.5, atraso: 1.8 }],
+          },
+        },
+        {
+          titulo: 'Corte reto dos dois lados',
+          texto: 'Tire o pedaço furado com cortes retos, um de cada lado do furo.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'cano-furado', x: 50, y: 42, largura: 80, movimento: 'entrar' },
+              { desenho: 'gota', x: 50, y: 62, largura: 10, movimento: 'pingar', atraso: 0.8 },
+            ],
+            rotulos: [{ texto: 'CORTE NO ESQUADRO', x: 50, y: 88, tamanho: 6.5, atraso: 1.6, destaque: true }],
+          },
+        },
+        {
+          titulo: 'Duas luvas de correr',
+          texto: 'Ponha um pedaço de cano igual e uma luva de correr em cada ponta.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'cano-luva', x: 50, y: 44, largura: 84, movimento: 'deslizar', vindoDe: [0, -20] },
+              { desenho: 'seta', x: 26, y: 72, largura: 12, giro: -90, movimento: 'surgir', atraso: 1.2 },
+              { desenho: 'seta', x: 74, y: 72, largura: 12, giro: -90, movimento: 'surgir', atraso: 1.4 },
+            ],
+            rotulos: [{ texto: 'UMA EM CADA PONTA', x: 50, y: 90, tamanho: 6.5, atraso: 1.8, destaque: true }],
+          },
+        },
+        {
+          titulo: 'Sem cola e sem rosca',
+          texto: 'O anel de borracha da luva veda. Abra o registro devagar e confira.',
+          segundos: 7,
+          desenho: {
+            pecas: [
+              { desenho: 'cano-luva', x: 46, y: 40, largura: 76, movimento: 'surgir' },
+              { desenho: 'certo', x: 80, y: 74, largura: 18, movimento: 'entrar', atraso: 1.4 },
+            ],
+          },
+        },
+      ],
+      partes: [
+        {
+          titulo: 'Quando dá para fazer',
+          paragrafos: [
+            'Este conserto serve para o cano marrom de água fria (PVC soldável) furado ou rachado. Ele troca de vez o pedaço estragado, que a fita só segura por um tempo.',
+            'A luva de correr é uma conexão comprida com anéis de borracha por dentro. Ela corre sobre o cano e veda sem cola e sem rosca.',
+            'Cano de ferro, de cobre ou de água quente, cano perto de fios dentro da parede, ou um vazamento que você não acha: chame um encanador.',
+          ],
+        },
+        {
+          titulo: 'Material',
+          passos: [
+            'Um pedaço de cano do mesmo tipo e da mesma grossura (bitola) do cano da casa.',
+            'Duas luvas de correr da mesma bitola.',
+            'Serra para cano, lixa, trena, lápis e pasta lubrificante.',
+          ],
+        },
+        {
+          titulo: 'Passo a passo',
+          passos: [
+            'Feche o registro e abra uma torneira para sair o resto da água.',
+            'Abra a parede só num trecho pequeno, junto ao ponto estragado.',
+            'Corte o cano no esquadro (bem reto), um corte de cada lado do furo, e tire o pedaço estragado.',
+            'Corte o pedaço novo do mesmo tipo de cano e lixe a borda das pontas em chanfro (quebrando a quina), sem rebarba.',
+            'Passe pasta lubrificante e monte uma luva de correr em cada ponta, com o pedaço novo alinhado ao cano da casa.',
+            'Não precisa de cola nem de rosca. Abra o registro devagar e veja se secou.',
+          ],
+        },
+        {
+          titulo: 'Se for colar uma conexão',
+          paragrafos: ['Conexão comum de cano soldável não tem anel de borracha: ela precisa de cola.'],
+          passos: [
+            'Lixe as partes que vão ser coladas com lixa d’água número 100.',
+            'Limpe o cano e o lado de dentro da conexão com solução preparadora (o limpador de cano).',
+            'Passe o adesivo de cano por igual, sem excesso, e encaixe na hora, até o fundo.',
+            'Tire a cola que sobrou em volta.',
+            'Espere 1 hora antes de encher o cano de água e 12 horas antes de abrir a água com pressão.',
+          ],
+        },
+      ],
+      erros: [
+        'Usar uma luva só: o pedaço novo precisa de uma luva em cada ponta.',
+        'Cortar o cano torto: a luva não encaixa reta e vaza.',
+        'Abrir a água logo depois de colar uma conexão comum: espere o tempo da cola.',
+        'Quebrar a parede inteira à procura do furo, em vez de abrir só junto ao ponto molhado.',
+      ],
+      teste: [
+        {
+          pergunta: 'Quantas luvas de correr são usadas para trocar um pedaço de cano?',
+          opcoes: ['Uma', 'Duas, uma em cada ponta', 'Nenhuma, só cola'],
+          correta: 1,
+          explicacao: 'O pedaço novo fica entre duas luvas, uma de cada lado.',
+        },
+        {
+          pergunta: 'A luva de correr precisa de cola?',
+          opcoes: ['Sim, muita cola', 'Não, os anéis de borracha vedam', 'Só fita veda-rosca'],
+          correta: 1,
+          explicacao: 'Os anéis de borracha por dentro da luva fazem a vedação. A água pode voltar logo depois.',
+        },
+        {
+          pergunta: 'Colou uma conexão comum. Quanto esperar para abrir a água com pressão?',
+          opcoes: ['Nada', '10 minutos', '12 horas'],
+          correta: 2,
+          explicacao: 'Espere 1 hora para encher o cano e 12 horas para a pressão, como manda o fabricante.',
+        },
+      ],
+      fontes: ['Tigre: ficha técnica da Linha Soldável (água fria) — soldagem e reparo com luva de correr'],
+    },
   ],
 }

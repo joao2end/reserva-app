@@ -509,4 +509,16 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
     altura: 80,
     svg: `<rect class="r" x="4" y="28" width="122" height="24"/><path class="t fino" d="M4 40 H126"/><rect class="c" x="44" y="18" width="42" height="44" rx="4"/><path class="t fino" d="M50 18 V62 M58 18 V62 M66 18 V62 M74 18 V62 M80 18 V62"/>`,
   },
+  'cano-furado': {
+    largura: 160,
+    altura: 60,
+    svg: `<rect class="r" x="4" y="20" width="152" height="20"/><path class="t fino" d="M4 26 H156"/><path class="f" d="M76 22 L82 30 L78 34 L84 38 L80 40 L74 34 L78 30 Z"/>
+      <rect class="f" x="50" y="8" width="4" height="44" rx="2"/><rect class="f" x="106" y="8" width="4" height="44" rx="2"/>`,
+  },
+  'cano-luva': {
+    largura: 160,
+    altura: 60,
+    svg: `<rect class="r" x="4" y="22" width="152" height="16"/><path class="t fino" d="M4 27 H156"/><rect class="c" x="58" y="22" width="44" height="16"/>
+      <rect class="f" x="34" y="14" width="34" height="32" rx="4"/><rect class="f" x="92" y="14" width="34" height="32" rx="4"/><path class="t fino" d="M40 14 V46 M120 14 V46"/>`,
+  },
 }

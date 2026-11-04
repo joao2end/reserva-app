@@ -83,6 +83,8 @@ export const DESENHOS = [
   'lanterna',
   'bateria',
   'fita-larga',
+  'cano-furado',
+  'cano-luva',
 ] as const
 
 export type DesenhoId = (typeof DESENHOS)[number]
