@@ -1,6 +1,12 @@
 import type { Component } from 'vue'
 import {
   PhBookOpen,
+  PhFirstAid,
+  PhFunnel,
+  PhLightning,
+  PhPlant,
+  PhSignpost,
+  PhWrench,
   PhCookingPot,
   PhDrop,
   PhFish,
@@ -34,6 +40,12 @@ export const ICONE_SECAO_GUIA: Record<string, Component> = {
   racionamento: PhScales,
   compra: PhStorefront,
   cuidados: PhWarningOctagon,
+  eletrica: PhLightning,
+  mecanica: PhWrench,
+  cultivo: PhPlant,
+  deslocamento: PhSignpost,
+  purificar: PhFunnel,
+  socorros: PhFirstAid,
 }
 
 export const ICONE_NAVEGACAO: Record<string, Component> = {

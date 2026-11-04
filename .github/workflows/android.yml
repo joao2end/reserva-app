@@ -55,8 +55,8 @@ jobs:
         run: |
           ./gradlew assembleRelease bundleRelease --no-daemon
           mkdir -p ../release
-          cp app/build/outputs/apk/release/app-release.apk "../release/reserva-$VERSAO.apk"
-          cp app/build/outputs/bundle/release/app-release.aab "../release/reserva-$VERSAO-play-store.aab"
+          cp app/build/outputs/apk/release/app-release.apk "../release/sbv-$VERSAO.apk"
+          cp app/build/outputs/bundle/release/app-release.aab "../release/sbv-$VERSAO-play-store.aab"
 
       - name: Gerar APK de teste
         if: env.KEYSTORE_BASE64 == ''
@@ -64,7 +64,7 @@ jobs:
         run: |
           ./gradlew assembleDebug --no-daemon
           mkdir -p ../release
-          cp app/build/outputs/apk/debug/app-debug.apk "../release/reserva-$VERSAO-teste.apk"
+          cp app/build/outputs/apk/debug/app-debug.apk "../release/sbv-$VERSAO-teste.apk"
 
       - name: Apagar chave de assinatura
         if: always()
@@ -75,6 +75,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "v$VERSAO" release/* \
-            --title "Reserva $VERSAO" \
+            --title "SBV $VERSAO" \
             --notes "Baixe o arquivo .apk abaixo e abra no celular Android para instalar. O arquivo .aab é o pacote para enviar à Play Store." \
             --target "$GITHUB_SHA"

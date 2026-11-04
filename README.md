@@ -1,8 +1,8 @@
-# Reserva
+# SBV
 
 App Android para montar e manter um estoque de água e alimentos para a seca do El Niño. Funciona 100% offline: os dados ficam só no celular.
 
-Identidade visual **Reserva**: preto e branco, fonte Atkinson Hyperlegible (feita para baixa visão), texto mínimo de 18px e ícones Phosphor no peso *Bold*.
+Identidade visual **SBV**: preto e branco, fonte Atkinson Hyperlegible (feita para baixa visão), texto mínimo de 18px e ícones Phosphor no peso *Bold*.
 
 ## Casos de uso
 

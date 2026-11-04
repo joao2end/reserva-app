@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
   appId: 'br.reserva.estoque',
-  appName: 'Reserva',
+  appName: 'SBV',
   webDir: 'dist',
   android: {
     backgroundColor: '#000000',

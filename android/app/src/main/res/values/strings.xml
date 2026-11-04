@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Reserva</string>
-    <string name="title_activity_main">Reserva</string>
+    <string name="app_name">SBV</string>
+    <string name="title_activity_main">SBV</string>
     <string name="package_name">br.reserva.estoque</string>
     <string name="custom_url_scheme">br.reserva.estoque</string>
 </resources>

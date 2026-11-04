@@ -298,7 +298,7 @@ def rotas_invalidas(pagina: Page):
 
 @cenario("17. Navegação inferior marca a aba atual")
 def navegacao(pagina: Page):
-    for aba, titulo in [("Estoque", "Meu estoque"), ("Compras", None), ("Guia", "Como se preparar"), ("Início", "Casa El Niño")]:
+    for aba, titulo in [("Estoque", "Meu estoque"), ("Compras", None), ("Guia", "O que saber"), ("Início", "Casa El Niño")]:
         pagina.get_by_role("navigation").get_by_role("link", name=aba).click()
         expect(pagina.get_by_role("navigation").get_by_role("link", name=aba)).to_have_attribute("aria-current", "page")
         if titulo:
