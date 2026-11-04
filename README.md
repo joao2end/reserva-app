@@ -15,6 +15,7 @@ Identidade visual **SBV**: preto e branco, fonte Atkinson Hyperlegible (feita pa
 | Registrar compra com data e validade | Compras › Comprei, ou Estoque › item › Comprei mais |
 | Anotar o que usou e jogar fora pacotes vencidos | Estoque › item |
 | Alerta do que vence em até 60 dias | Início › Use primeiro |
+| Para quantos dias a água guardada dá | Início |
 | Como armazenar e onde comprar cada item | Estoque › item |
 | Fontes de compra (dicas e locais próprios) | Guia › Onde e como comprar / Meus locais de compra |
 | Guia de armazenamento, água e cuidados | Aba Guia |

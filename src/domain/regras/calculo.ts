@@ -18,6 +18,12 @@ export function litrosDeAguaPorDia(configuracao: Pick<ConfiguracaoEstoque, 'adul
   return Math.ceil(pessoasEquivalentes(configuracao) * LITROS_AGUA_POR_PESSOA_DIA)
 }
 
+export function diasDeAguaGuardada(configuracao: Pick<ConfiguracaoEstoque, 'adultos' | 'criancas'>, lotes: Lote[]): number {
+  const porDia = litrosDeAguaPorDia(configuracao)
+  if (porDia === 0) return 0
+  return Math.floor(totalEmEstoque('agua', lotes) / porDia)
+}
+
 export function arredondarParaCompra(valor: number, unidade: Unidade): number {
   if (unidade === 'kg') return Math.ceil(arredondar(valor) * 2) / 2
   return Math.ceil(arredondar(valor))

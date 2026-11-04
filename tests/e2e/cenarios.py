@@ -227,6 +227,7 @@ def resumo_inicio(pagina: Page):
     expect(pagina.get_by_role("heading", name="Casa El Niño")).to_be_visible()
     expect(pagina.locator("[data-teste=faltam]")).to_contain_text("Falta comprar 19 itens")
     expect(pagina.locator("[data-teste=agua]")).to_contain_text("8 litros")
+    expect(pagina.locator("[data-teste=dias-agua]")).to_have_text("A água guardada dá para 30 dias.")
     expect(pagina.get_by_role("heading", name="Use primeiro")).to_be_visible()
     expect(pagina.get_by_role("progressbar")).to_have_attribute("aria-valuenow", "10")
     foto(pagina, "11-inicio")

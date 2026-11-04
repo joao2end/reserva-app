@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { buscarItem } from '../../src/domain/conteudo/catalogo'
 import {
   arredondarParaCompra,
+  diasDeAguaGuardada,
   faltaComprar,
   litrosDeAguaPorDia,
   metaDoItem,
@@ -25,6 +26,13 @@ describe('pessoas e água', () => {
   it('calcula 4 litros por pessoa por dia, arredondando para cima', () => {
     expect(litrosDeAguaPorDia({ adultos: 2, criancas: 0 })).toBe(8)
     expect(litrosDeAguaPorDia({ adultos: 1, criancas: 1 })).toBe(7)
+  })
+
+  it('diz para quantos dias inteiros a água guardada dá', () => {
+    expect(diasDeAguaGuardada({ adultos: 2, criancas: 0 }, [lote('agua', 100), lote('agua', 20), lote('arroz', 50)])).toBe(15)
+    expect(diasDeAguaGuardada({ adultos: 2, criancas: 0 }, [lote('agua', 7)])).toBe(0)
+    expect(diasDeAguaGuardada({ adultos: 2, criancas: 0 }, [])).toBe(0)
+    expect(diasDeAguaGuardada({ adultos: 0, criancas: 0 }, [lote('agua', 20)])).toBe(0)
   })
 })
 

@@ -74,9 +74,13 @@ const comoUsar = [
     </RouterLink>
     <CaixaAviso v-else titulo="Tudo comprado">Seu estoque chegou na meta.</CaixaAviso>
 
-    <div class="caixa flex items-center gap-4" data-teste="agua">
+    <div class="caixa flex items-start gap-4" data-teste="agua">
       <PhDrop :size="44" weight="bold" class="shrink-0" aria-hidden="true" />
-      <p>A casa precisa de <strong class="text-[30px] tabular-nums">{{ dados.litrosAguaDia }} litros</strong> de água por dia.</p>
+      <div class="space-y-3">
+        <p>A casa precisa de <strong class="text-[30px] tabular-nums">{{ dados.litrosAguaDia }} litros</strong> de água por dia.</p>
+        <p v-if="dados.diasDeAgua === 0" data-teste="dias-agua">Ainda não há água guardada.</p>
+        <p v-else-if="dados.diasDeAgua !== null" data-teste="dias-agua">A água guardada dá para <strong class="text-[30px] tabular-nums">{{ plural(dados.diasDeAgua, 'dia', 'dias') }}</strong>.</p>
+      </div>
     </div>
 
     <section v-if="dados.consumirPrimeiro.length" class="space-y-4">

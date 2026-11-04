@@ -1,6 +1,7 @@
 import type { Categoria, ConfiguracaoEstoque, EstadoEstoque, ItemCatalogo, Lote } from '../../domain/entidades/tipos'
 import { CATALOGO, CATEGORIAS, encontrarItem } from '../../domain/conteudo/catalogo'
 import {
+  diasDeAguaGuardada,
   faltaComprar,
   litrosDeAguaPorDia,
   metaDoItem,
@@ -21,6 +22,7 @@ export interface Resumo {
   progresso: number
   itensFaltando: number
   litrosAguaDia: number
+  diasDeAgua: number | null
   consumirPrimeiro: LoteComPrazo[]
 }
 
@@ -90,6 +92,7 @@ export function resumo(estado: EstadoEstoque, hoje: Date): Resumo | null {
     progresso: progressoGeral(itens, configuracao, lotes),
     itensFaltando: itens.filter((item) => faltaComprar(item, configuracao, lotes) > 0).length,
     litrosAguaDia: litrosDeAguaPorDia(configuracao),
+    diasDeAgua: configuracao.itensSelecionados.includes('agua') ? diasDeAguaGuardada(configuracao, lotes) : null,
     consumirPrimeiro: lotes
       .filter((lote) => venceEmBreve(lote, hoje))
       .map((lote) => comPrazo(lote, hoje))

@@ -20,8 +20,16 @@ describe('consultas', () => {
     const dados = resumo(estado, HOJE)
     expect(dados?.itensFaltando).toBe(2)
     expect(dados?.litrosAguaDia).toBe(8)
+    expect(dados?.diasDeAgua).toBe(0)
     expect(dados?.progresso).toBe(44)
     expect(dados?.consumirPrimeiro.map((linha) => linha.lote.id)).toEqual(['a'])
+  })
+
+  it('conta os dias de água só quando a água está no plano', () => {
+    const comAgua = { ...estado, lotes: [...estado.lotes, { id: 'd', itemId: 'agua', quantidade: 40, compradoEm: '2026-10-01', validade: '2027-04' }] }
+    expect(resumo(comAgua, HOJE)?.diasDeAgua).toBe(5)
+    const semAgua = { ...comAgua, configuracao: { ...estado.configuracao!, itensSelecionados: ['arroz'] } }
+    expect(resumo(semAgua, HOJE)?.diasDeAgua).toBeNull()
   })
 
   it('retorna nulo sem estoque criado', () => {
