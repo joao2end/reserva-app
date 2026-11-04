@@ -1,5 +1,6 @@
 import { Preferences } from '@capacitor/preferences'
 import { ehItemMochila } from '../domain/conteudo/mochila'
+import { ehLicao } from '../domain/conteudo/curso'
 import { PREFERENCIAS_PADRAO, ehTamanhoTexto, type ContatoFamilia, type Preferencias } from '../domain/entidades/preferencias'
 import { LIMITE_NOME, ehTelefone } from '../domain/regras/validacao'
 import type { RepositorioPreferencias } from '../application/portas/RepositorioPreferencias'
@@ -25,9 +26,10 @@ export function normalizarPreferencias(bruto: string | null): Preferencias {
       tamanhoTexto: ehTamanhoTexto(tamanho) ? tamanho : PREFERENCIAS_PADRAO.tamanhoTexto,
       mochila,
       contatoFamilia: normalizarContato(registro.contatoFamilia),
+      licoesConcluidas: Array.isArray(registro.licoesConcluidas) ? [...new Set(registro.licoesConcluidas.filter(ehLicao))] : [],
     }
   } catch {
-    return { ...PREFERENCIAS_PADRAO, mochila: [] }
+    return { ...PREFERENCIAS_PADRAO, mochila: [], licoesConcluidas: [] }
   }
 }
 

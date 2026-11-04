@@ -569,7 +569,7 @@ export const GUIA: SecaoGuia[] = [
         titulo: 'Cortes e queimaduras',
         itens: [
           'Corte: aperte com pano limpo por 10 minutos sem tirar para olhar.',
-          'Queimadura: água corrente fria por 20 minutos.',
+          'Queimadura: água corrente fresca, em jato suave, de 10 a 20 minutos.',
           'Não passe pasta de dente, manteiga, borra de café nem pomada caseira.',
           'Não estoure bolhas.',
         ],

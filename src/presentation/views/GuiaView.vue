@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { PhBackpack, PhCaretRight, PhFilmStrip, PhMapPin } from '@phosphor-icons/vue'
+import { computed } from 'vue'
+import { PhBackpack, PhCaretRight, PhFilmStrip, PhGraduationCap, PhMapPin } from '@phosphor-icons/vue'
 import { GUIA, GRUPOS_GUIA } from '../../domain/conteudo/guia'
 import { videoDaSecao } from '../../domain/conteudo/videos'
+import { LICOES } from '../../domain/conteudo/curso'
+import { usePreferencias } from '../estado/usePreferencias'
 import { ICONE_SECAO_GUIA } from '../icones'
+
+const { licoesConcluidas } = usePreferencias()
+const concluidas = computed(() => LICOES.filter((licao) => licoesConcluidas.value.includes(licao.id)).length)
 
 const grupos = GRUPOS_GUIA.map((grupo) => ({
   ...grupo,
@@ -16,6 +22,16 @@ const grupos = GRUPOS_GUIA.map((grupo) => ({
       <p class="rotulo">Guia</p>
       <h1 class="titulo-1">O que saber</h1>
     </header>
+
+    <RouterLink :to="{ name: 'curso' }" class="bloco flex min-h-28 items-center gap-4 border-4 border-tinta p-4" data-teste="entrada-curso">
+      <PhGraduationCap :size="48" weight="bold" class="shrink-0" aria-hidden="true" />
+      <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
+        <span class="block text-[28px] leading-9 font-bold">Curso de sobrevivência</span>
+        <span class="block text-[18px]">{{ LICOES.length }} lições com animação, passo a passo e teste</span>
+        <span class="block text-[18px] font-bold">{{ concluidas }} de {{ LICOES.length }} concluídas</span>
+      </span>
+      <PhCaretRight :size="32" weight="bold" class="shrink-0" aria-hidden="true" />
+    </RouterLink>
 
     <section v-for="grupo in grupos" :key="grupo.id" class="space-y-4" :aria-labelledby="`grupo-${grupo.id}`">
       <h2 :id="`grupo-${grupo.id}`" class="titulo-2">{{ grupo.titulo }}</h2>

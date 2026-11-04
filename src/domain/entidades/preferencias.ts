@@ -11,9 +11,10 @@ export interface Preferencias {
   tamanhoTexto: TamanhoTexto
   mochila: string[]
   contatoFamilia: ContatoFamilia | null
+  licoesConcluidas: string[]
 }
 
-export const PREFERENCIAS_PADRAO: Preferencias = { tamanhoTexto: 'normal', mochila: [], contatoFamilia: null }
+export const PREFERENCIAS_PADRAO: Preferencias = { tamanhoTexto: 'normal', mochila: [], contatoFamilia: null, licoesConcluidas: [] }
 
 export const ESCALA_TEXTO: Record<TamanhoTexto, number> = {
   normal: 1,

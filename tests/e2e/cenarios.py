@@ -316,7 +316,7 @@ def letra_grande(pagina: Page):
     expect(pagina.locator("html")).to_have_attribute("style", "zoom: 1.3;")
     pagina.set_viewport_size({"width": 360, "height": 780})
     foto(pagina, "18-letra-grande")
-    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia"]:
+    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia", "#/curso", "#/curso/agua-tratar", "#/curso/engasgo"]:
         ir(pagina, rota)
         sem_rolagem_horizontal(pagina)
     ir(pagina, "#/compras")
@@ -332,7 +332,7 @@ def letra_grande(pagina: Page):
 @cenario("19. Tela estreita (360px) sem rolagem horizontal na letra normal")
 def tela_estreita(pagina: Page):
     pagina.set_viewport_size({"width": 360, "height": 780})
-    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia"]:
+    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia", "#/curso", "#/curso/agua-tratar", "#/curso/engasgo"]:
         ir(pagina, rota)
         sem_rolagem_horizontal(pagina)
     pagina.set_viewport_size({"width": 412, "height": 915})
@@ -502,6 +502,44 @@ def contato_familia(pagina: Page):
     expect(pagina.locator("[data-teste=contato-familia]")).to_have_count(0)
 
 
+@cenario("28. Curso: abrir lição, ver animação, errar e acertar o teste, concluir e salvar")
+def curso(pagina: Page):
+    ir(pagina, "#/guia")
+    entrada = pagina.locator("[data-teste=entrada-curso]")
+    expect(entrada).to_contain_text("0 de 6 concluídas")
+    entrada.click()
+    expect(pagina.get_by_role("heading", level=1, name="Curso de sobrevivência")).to_be_visible()
+    expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("0 de 6 lições concluídas")
+    pagina.locator("[data-teste=licao-rcp]").click()
+    expect(pagina.get_by_role("heading", level=1, name="Parada cardíaca: massagem no peito")).to_be_visible()
+    botao(pagina, "Assistir o vídeo").first.click()
+    expect(botao(pagina, "Pausar")).to_be_visible()
+    perguntas = pagina.locator("[data-teste=pergunta]")
+    expect(perguntas).to_have_count(3)
+    perguntas.nth(0).get_by_text("Está dormindo pesado", exact=True).click()
+    expect(perguntas.nth(0).locator("[data-teste=resposta]")).to_contain_text("Ainda não")
+    perguntas.nth(0).get_by_text("Pode ser parada cardíaca", exact=True).click()
+    expect(perguntas.nth(0).locator("[data-teste=resposta]")).to_contain_text("Certo!")
+    perguntas.nth(1).get_by_text("100 a 120 por minuto", exact=True).click()
+    expect(pagina.locator("[data-teste=licao-concluida]")).to_have_count(0)
+    perguntas.nth(2).get_by_text("Quando o socorro chegar ou a pessoa reagir", exact=True).click()
+    expect(pagina.locator("[data-teste=placar]")).to_have_text("3 de 3 certas")
+    expect(pagina.locator("[data-teste=licao-concluida]")).to_be_visible()
+    pagina.set_viewport_size({"width": 360, "height": 780})
+    sem_rolagem_horizontal(pagina)
+    foto(pagina, "28-licao")
+    pagina.set_viewport_size({"width": 412, "height": 915})
+    pagina.get_by_role("link", name="Próxima lição: Engasgo em adulto, criança e bebê").click()
+    expect(pagina.get_by_role("heading", level=1, name="Engasgo em adulto, criança e bebê")).to_be_visible()
+    pagina.reload()
+    pagina.wait_for_load_state("networkidle")
+    ir(pagina, "#/curso")
+    expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("1 de 6 lições concluídas")
+    expect(pagina.locator("[data-teste=licao-rcp]")).to_contain_text("Concluída")
+    ir(pagina, "#/curso/nao-existe")
+    expect(pagina.get_by_text("Lição não encontrada")).to_be_visible()
+
+
 def principal():
     os.makedirs(PASTA_TELAS, exist_ok=True)
     servidor = subprocess.Popen(
@@ -521,7 +559,7 @@ def principal():
                 criar_estoque, comprar_agua, compra_data_futura, ciclo_do_item, esc_cancela, resumo_inicio,
                 persistencia, editar_estoque, locais, guia, rotas_invalidas, navegacao, letra_grande,
                 tela_estreita, tema_escuro, apagar_tudo, mochila, telefones_emergencia, fumaca, calor,
-                vencido, contato_familia,
+                vencido, contato_familia, curso,
             ]:
                 executar(pagina)
             navegador.close()

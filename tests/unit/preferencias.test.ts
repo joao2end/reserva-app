@@ -7,7 +7,7 @@ import { ITENS_MOCHILA } from '../../src/domain/conteudo/mochila'
 import { normalizarPreferencias } from '../../src/infrastructure/RepositorioPreferenciasCapacitor'
 
 function repositorioEmMemoria(): RepositorioPreferencias {
-  let atual: Preferencias = { ...PREFERENCIAS_PADRAO, mochila: [] }
+  let atual: Preferencias = { ...PREFERENCIAS_PADRAO, mochila: [], licoesConcluidas: [] }
   return {
     carregar: async () => ({ ...atual }),
     salvar: async (novas) => {
@@ -30,10 +30,10 @@ describe('preferências', () => {
   })
 
   it('recupera preferências corrompidas', () => {
-    expect(normalizarPreferencias(null)).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null })
-    expect(normalizarPreferencias('{x')).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null })
-    expect(normalizarPreferencias('{"tamanhoTexto":"gigante"}')).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null })
-    expect(normalizarPreferencias('{"tamanhoTexto":"grande"}')).toEqual({ tamanhoTexto: 'grande', mochila: [], contatoFamilia: null })
+    expect(normalizarPreferencias(null)).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null, licoesConcluidas: [] })
+    expect(normalizarPreferencias('{x')).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null, licoesConcluidas: [] })
+    expect(normalizarPreferencias('{"tamanhoTexto":"gigante"}')).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null, licoesConcluidas: [] })
+    expect(normalizarPreferencias('{"tamanhoTexto":"grande"}')).toEqual({ tamanhoTexto: 'grande', mochila: [], contatoFamilia: null, licoesConcluidas: [] })
   })
 
   it('mantém a mochila salva e descarta itens desconhecidos', () => {
@@ -41,8 +41,9 @@ describe('preferências', () => {
       tamanhoTexto: 'grande',
       mochila: ['agua', 'radio'],
       contatoFamilia: null,
+      licoesConcluidas: [],
     })
-    expect(normalizarPreferencias('{"mochila":"agua"}')).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null })
+    expect(normalizarPreferencias('{"mochila":"agua"}')).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null, licoesConcluidas: [] })
   })
 
   it('marca, desmarca e esvazia a mochila sem mudar a letra', async () => {
@@ -54,7 +55,7 @@ describe('preferências', () => {
     await servico.alternarItemMochila('agua')
     expect((await servico.obter()).mochila).toEqual(['lanterna'])
     await servico.esvaziarMochila()
-    expect(await servico.obter()).toEqual({ tamanhoTexto: 'grande', mochila: [], contatoFamilia: null })
+    expect(await servico.obter()).toEqual({ tamanhoTexto: 'grande', mochila: [], contatoFamilia: null, licoesConcluidas: [] })
   })
 
   it('recusa item da mochila que não existe', async () => {
@@ -75,6 +76,7 @@ describe('preferências', () => {
       tamanhoTexto: 'normal',
       mochila: ['agua'],
       contatoFamilia: { nome: 'Maria filha', telefone: '82998765432' },
+      licoesConcluidas: [],
     })
     await servico.removerContatoFamilia()
     expect((await servico.obter()).contatoFamilia).toBeNull()
@@ -96,5 +98,19 @@ describe('preferências', () => {
     expect(normalizarPreferencias('{"contatoFamilia":{"nome":"Zé","telefone":"82 3333"}}').contatoFamilia).toBeNull()
     expect(normalizarPreferencias('{"contatoFamilia":{"nome":"","telefone":"8233334444"}}').contatoFamilia).toBeNull()
     expect(normalizarPreferencias('{"contatoFamilia":"Zé"}').contatoFamilia).toBeNull()
+  })
+
+  it('marca lição concluída uma vez só e recusa lição que não existe', async () => {
+    const servico = new ServicoPreferencias(repositorioEmMemoria())
+    await servico.concluirLicao('rcp')
+    await servico.concluirLicao('rcp')
+    await servico.concluirLicao('agua-tratar')
+    expect((await servico.obter()).licoesConcluidas).toEqual(['rcp', 'agua-tratar'])
+    await expect(servico.concluirLicao('voar')).rejects.toBeInstanceOf(ErroDeValidacao)
+  })
+
+  it('mantém as lições concluídas e descarta as desconhecidas', () => {
+    expect(normalizarPreferencias('{"licoesConcluidas":["rcp","voar","rcp",7]}').licoesConcluidas).toEqual(['rcp'])
+    expect(normalizarPreferencias('{"licoesConcluidas":"rcp"}').licoesConcluidas).toEqual([])
   })
 })
