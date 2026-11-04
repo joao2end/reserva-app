@@ -413,6 +413,21 @@ def telefones_emergencia(pagina: Page):
     pagina.set_viewport_size({"width": 412, "height": 915})
 
 
+@cenario("24. Fumaça e queimadas: seção abre com alerta, telefones e cabe em 360px")
+def fumaca(pagina: Page):
+    ir(pagina, "#/guia")
+    pagina.get_by_role("main").get_by_text("Fumaça e queimadas", exact=True).click()
+    expect(pagina.get_by_role("heading", level=1, name="Fumaça e queimadas")).to_be_visible()
+    expect(pagina.get_by_role("alert")).to_contain_text("193")
+    expect(pagina.get_by_text("Use máscara PFF2 ou N95, bem justa no rosto.")).to_be_visible()
+    expect(pagina.locator("[data-teste=emergencia]").locator('a[href="tel:193"]')).to_have_count(1)
+    pagina.set_viewport_size({"width": 360, "height": 780})
+    ir(pagina, "#/guia/fumaca")
+    sem_rolagem_horizontal(pagina)
+    foto(pagina, "24-fumaca")
+    pagina.set_viewport_size({"width": 412, "height": 915})
+
+
 def principal():
     os.makedirs(PASTA_TELAS, exist_ok=True)
     servidor = subprocess.Popen(
@@ -431,7 +446,7 @@ def principal():
                 inicio_vazio, redireciona_sem_estoque, validacao_criacao, campo_numero, sair_do_assistente,
                 criar_estoque, comprar_agua, compra_data_futura, ciclo_do_item, esc_cancela, resumo_inicio,
                 persistencia, editar_estoque, locais, guia, rotas_invalidas, navegacao, letra_grande,
-                tela_estreita, tema_escuro, apagar_tudo, mochila, telefones_emergencia,
+                tela_estreita, tema_escuro, apagar_tudo, mochila, telefones_emergencia, fumaca,
             ]:
                 executar(pagina)
             navegador.close()

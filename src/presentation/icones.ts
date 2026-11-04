@@ -1,6 +1,7 @@
 import type { Component } from 'vue'
 import {
   PhBookOpen,
+  PhFire,
   PhFirstAid,
   PhFunnel,
   PhLightning,
@@ -45,6 +46,7 @@ export const ICONE_SECAO_GUIA: Record<string, Component> = {
   cultivo: PhPlant,
   deslocamento: PhSignpost,
   purificar: PhFunnel,
+  fumaca: PhFire,
   socorros: PhFirstAid,
 }
 

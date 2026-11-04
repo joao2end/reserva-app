@@ -20,6 +20,7 @@ Identidade visual **SBV**: preto e branco, fonte Atkinson Hyperlegible (feita pa
 | Fontes de compra (dicas e locais próprios) | Guia › Onde e como comprar / Meus locais de compra |
 | Guia de armazenamento, água e cuidados | Aba Guia |
 | Checklist da mochila de saída, salvo no celular | Guia › Minha mochila de saída |
+| Cuidados com fumaça e queimadas na seca | Guia › Fumaça e queimadas |
 
 ## Fácil para idosos
 
@@ -57,7 +58,7 @@ A regra de dependência é verificada automaticamente em `tests/unit/arquitetura
 npm install
 npm run dev          # roda no navegador em http://localhost:5173
 npm test             # testes unitários (domínio, casos de uso, consultas, arquitetura)
-npm run test:e2e     # 22 cenários ponta a ponta (precisa de Python + Playwright e Chrome)
+npm run test:e2e     # 24 cenários ponta a ponta (precisa de Python + Playwright e Chrome)
 ```
 
 ## Gerar o APK

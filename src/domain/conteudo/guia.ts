@@ -430,6 +430,62 @@ export const GUIA: SecaoGuia[] = [
     ],
   },
   {
+    id: 'fumaca',
+    grupo: 'sobrevivencia',
+    telefones: true,
+    titulo: 'Fumaça e queimadas',
+    resumo: 'Na seca, o fogo se espalha. A fumaça faz mal, mais ainda para idosos e crianças.',
+    aviso: {
+      critico: true,
+      titulo: 'Procure ajuda',
+      texto: 'Falta de ar, chiado ou aperto no peito: procure atendimento logo. Fogo perto de casa: ligue 193.',
+    },
+    blocos: [
+      {
+        titulo: 'Dentro de casa',
+        itens: [
+          'Com muita fumaça, fique dentro de casa.',
+          'Feche portas e janelas.',
+          'Não acenda fogão a lenha, vela nem lamparina dentro de casa. Não fume.',
+          'Limpe a cinza com pano úmido. Não use aspirador de pó.',
+        ],
+      },
+      {
+        titulo: 'Se precisar sair',
+        itens: [
+          'Use máscara PFF2 ou N95, bem justa no rosto.',
+          'Não faça esforço nem exercício na rua, ainda mais entre 12h e 16h.',
+          'No carro, janelas fechadas e ar-condicionado no modo de recircular.',
+          'Saia menos: tenha comida e remédios guardados em casa.',
+        ],
+      },
+      {
+        titulo: 'Cuide da saúde',
+        itens: [
+          'Beba mais água ao longo do dia.',
+          'Fique atento a tosse, olhos ardendo, garganta irritada, dor de cabeça e cansaço.',
+          'Idosos, crianças pequenas, grávidas e quem tem doença crônica precisam de mais cuidado.',
+          'Quem tem doença crônica: tenha os remédios em casa e fale com o médico.',
+        ],
+      },
+      {
+        titulo: 'Evite o fogo',
+        itens: [
+          'Não jogue bituca de cigarro nem fósforo aceso no mato.',
+          'Não solte balão, não solte fogos e não faça fogueira.',
+          'Deixe uma faixa sem mato em volta da casa e do terreno.',
+        ],
+      },
+      {
+        titulo: 'Água perto do fogo',
+        itens: [
+          'Não use água de rio, poço ou nascente perto do fogo se ela tiver cor, cheiro ou cinza.',
+          'Prefira água tratada. Se não tiver, ferva ou use hipoclorito, como em Purificar a água.',
+        ],
+      },
+    ],
+  },
+  {
     id: 'socorros',
     grupo: 'sobrevivencia',
     telefones: true,

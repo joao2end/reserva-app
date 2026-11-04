@@ -12,8 +12,14 @@ describe('telefones de emergência', () => {
     ])
   })
 
-  it('aparecem nas seções de primeiros socorros e de deslocamento', () => {
+  it('aparecem nas seções de deslocamento, fumaça e primeiros socorros', () => {
     const comTelefones = GUIA.filter((secao) => secao.telefones).map((secao) => secao.id)
-    expect(comTelefones).toEqual(['deslocamento', 'socorros'])
+    expect(comTelefones).toEqual(['deslocamento', 'fumaca', 'socorros'])
+  })
+
+  it('a seção de fumaça manda ligar para os Bombeiros', () => {
+    const fumaca = GUIA.find((secao) => secao.id === 'fumaca')
+    expect(fumaca?.grupo).toBe('sobrevivencia')
+    expect(fumaca?.aviso?.texto).toContain('193')
   })
 })
