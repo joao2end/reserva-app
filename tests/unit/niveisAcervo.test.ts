@@ -77,6 +77,7 @@ describe('acervo de sobrevivência', () => {
     expect(buscarNoAcervo('escorpiao').map((guia) => guia.id)).toContain('escorpiao-cobra')
     expect(buscarNoAcervo('soro caseiro').map((guia) => guia.id)).toEqual(['desidratacao'])
     expect(buscarNoAcervo('', 'saude').every((guia) => guia.categoria === 'saude')).toBe(true)
+    expect(buscarNoAcervo('umidade do ar').map((guia) => guia.id)).toContain('ar-seco')
     expect(buscarNoAcervo('palavra-que-nao-existe')).toEqual([])
     expect(guiaDoAcervo('enchente')?.titulo).toContain('Enchente')
   })

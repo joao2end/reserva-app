@@ -118,6 +118,52 @@ export const ACERVO: GuiaAcervo[] = [
     fontes: ['Defesa Civil Nacional', 'Ministério da Saúde: leptospirose', 'Ready.gov: Floods'],
   },
   {
+    id: 'ar-seco',
+    categoria: 'clima',
+    nivel: 'facil',
+    titulo: 'Ar seco: umidade baixa',
+    resumo: 'O que fazer quando a umidade do ar cai muito na seca.',
+    aviso: {
+      critico: false,
+      titulo: 'Umidade abaixo de 12% é emergência',
+      texto: 'A Defesa Civil chama de emergência quando a umidade do ar fica abaixo de 12%. Nesses dias, fique dentro de casa das 10h às 16h.',
+    },
+    blocos: [
+      {
+        titulo: 'Os três avisos da Defesa Civil',
+        itens: [
+          'Atenção: umidade do ar entre 21% e 30%.',
+          'Alerta: umidade entre 12% e 20%.',
+          'Emergência: umidade abaixo de 12%.',
+        ],
+      },
+      {
+        titulo: 'Todo dia de ar seco',
+        itens: [
+          'Beba água à vontade, várias vezes ao dia.',
+          'Fique em lugares com sombra, protegido do sol.',
+          'Deixe a casa arejada.',
+          'Molhe o ar do quarto com toalha molhada, bacia com água ou vaporizador.',
+          'Nunca queime lixo, folhas ou galhos secos.',
+        ],
+      },
+      {
+        titulo: 'Em dia de alerta ou emergência',
+        itens: [
+          'Nada de exercício ou trabalho ao ar livre das 10h às 16h.',
+          'Pingue soro fisiológico nos olhos e no nariz.',
+          'Evite lugar fechado com muita gente.',
+          'Cuide mais do quarto de idosos e crianças: deixe o ar úmido.',
+        ],
+      },
+    ],
+    ligacoes: [
+      { tipo: 'secao', id: 'calor', titulo: 'Calor forte' },
+      { tipo: 'secao', id: 'fumaca', titulo: 'Fumaça e queimadas' },
+    ],
+    fontes: ['Defesa Civil de Hortolândia (SP): estados de atenção, alerta e emergência por umidade do ar', 'Defesa Civil de Jundiaí (SP): baixa umidade do ar'],
+  },
+  {
     id: 'temporal-raios',
     categoria: 'clima',
     nivel: 'facil',
