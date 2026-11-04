@@ -21,6 +21,7 @@ import {
   PhStorefront,
   PhSun,
   PhThermometer,
+  PhThermometerHot,
   PhWarningOctagon,
 } from '@phosphor-icons/vue'
 import type { CategoriaId } from '../domain/entidades/tipos'
@@ -47,6 +48,7 @@ export const ICONE_SECAO_GUIA: Record<string, Component> = {
   deslocamento: PhSignpost,
   purificar: PhFunnel,
   fumaca: PhFire,
+  calor: PhThermometerHot,
   socorros: PhFirstAid,
 }
 

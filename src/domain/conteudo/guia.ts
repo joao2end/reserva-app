@@ -486,6 +486,56 @@ export const GUIA: SecaoGuia[] = [
     ],
   },
   {
+    id: 'calor',
+    grupo: 'sobrevivencia',
+    telefones: true,
+    titulo: 'Calor forte',
+    resumo: 'O El Niño traz dias muito quentes. Idosos e crianças sentem menos sede e correm mais risco.',
+    aviso: {
+      critico: true,
+      titulo: 'Procure ajuda',
+      texto: 'Tontura, fraqueza, muita sede ou dor de cabeça: vá para um lugar fresco e beba água. Se não melhorar, procure o posto. Desmaio ou confusão: ligue 192.',
+    },
+    blocos: [
+      {
+        titulo: 'Beba água',
+        itens: [
+          'Beba água mesmo sem sede.',
+          'Ofereça água sempre a bebês, crianças, idosos e doentes. Eles podem não sentir sede.',
+          'Evite bebida alcoólica e bebida com muito açúcar.',
+          'Faça refeições leves, mais vezes ao dia.',
+        ],
+      },
+      {
+        titulo: 'Fuja do sol',
+        itens: [
+          'Evite o sol entre 10h e 16h.',
+          'Use roupa leve, chapéu e protetor solar.',
+          'Faça menos esforço. Descanse na sombra, em lugar fresco e ventilado.',
+          'Nunca deixe criança ou animal dentro de carro fechado.',
+        ],
+      },
+      {
+        titulo: 'Casa mais fresca',
+        itens: [
+          'De dia, feche a cortina ou a janela do lado do sol.',
+          'À noite, abra as janelas para o ar circular.',
+          'Use toalha molhada ou bacia com água para o ar ficar menos seco.',
+          'Durma com pouca coberta e roupa leve.',
+          'Na hora mais quente, tome banho morno, nem frio nem quente.',
+        ],
+      },
+      {
+        titulo: 'Cuide de quem precisa',
+        itens: [
+          'Visite ou ligue todo dia para vizinhos idosos, pessoas com deficiência e quem mora sozinho.',
+          'Guarde os remédios em lugar fresco, como manda a caixa.',
+          'Quem tem doença crônica ou toma vários remédios: fale com o médico sobre o calor.',
+        ],
+      },
+    ],
+  },
+  {
     id: 'socorros',
     grupo: 'sobrevivencia',
     telefones: true,

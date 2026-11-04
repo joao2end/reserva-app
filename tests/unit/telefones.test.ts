@@ -12,14 +12,21 @@ describe('telefones de emergência', () => {
     ])
   })
 
-  it('aparecem nas seções de deslocamento, fumaça e primeiros socorros', () => {
+  it('aparecem nas seções de deslocamento, fumaça, calor e primeiros socorros', () => {
     const comTelefones = GUIA.filter((secao) => secao.telefones).map((secao) => secao.id)
-    expect(comTelefones).toEqual(['deslocamento', 'fumaca', 'socorros'])
+    expect(comTelefones).toEqual(['deslocamento', 'fumaca', 'calor', 'socorros'])
   })
 
   it('a seção de fumaça manda ligar para os Bombeiros', () => {
     const fumaca = GUIA.find((secao) => secao.id === 'fumaca')
     expect(fumaca?.grupo).toBe('sobrevivencia')
     expect(fumaca?.aviso?.texto).toContain('193')
+  })
+
+  it('a seção de calor manda ligar para o SAMU e oferecer água a quem não sente sede', () => {
+    const calor = GUIA.find((secao) => secao.id === 'calor')
+    expect(calor?.grupo).toBe('sobrevivencia')
+    expect(calor?.aviso?.texto).toContain('192')
+    expect(calor?.blocos.flatMap((bloco) => bloco.itens).some((item) => item.includes('podem não sentir sede'))).toBe(true)
   })
 })
