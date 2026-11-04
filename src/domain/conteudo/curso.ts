@@ -1,40 +1,10 @@
-import type { CenaVideo } from './videos'
+import { CURSOS_OFICIOS } from './cursos/oficios'
+import type { AreaCurso, LicaoCurso, ModuloCurso } from './cursos/tipos'
 
-export interface ParteLicao {
-  titulo: string
-  paragrafos?: string[]
-  passos?: string[]
-}
-
-export interface PerguntaLicao {
-  pergunta: string
-  opcoes: string[]
-  correta: number
-  explicacao: string
-}
-
-export interface LicaoCurso {
-  id: string
-  titulo: string
-  objetivo: string
-  minutos: number
-  cenas: CenaVideo[]
-  partes: ParteLicao[]
-  erros: string[]
-  teste: PerguntaLicao[]
-  fontes: string[]
-}
-
-export interface ModuloCurso {
-  id: string
-  titulo: string
-  resumo: string
-  licoes: LicaoCurso[]
-}
-
-export const CURSO: ModuloCurso[] = [
+const CURSOS_EMERGENCIA: ModuloCurso[] = [
   {
     id: 'agua',
+    area: 'emergencias',
     titulo: 'Água que salva',
     resumo: 'Quanto guardar, como tratar e como cuidar da cisterna.',
     licoes: [
@@ -45,19 +15,50 @@ export const CURSO: ModuloCurso[] = [
         minutos: 5,
         cenas: [
           {
-            ilustracao: 'quatro-litros',
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa', x: 22, y: 46, largura: 22, movimento: 'surgir' },
+                { desenho: 'copo', x: 48, y: 34, largura: 14, movimento: 'entrar', atraso: 0.6 },
+                { desenho: 'panela', x: 80, y: 36, largura: 28, movimento: 'entrar', atraso: 1.2 },
+              ],
+              rotulos: [
+                { texto: '2 L beber', x: 46, y: 62, tamanho: 5.5, atraso: 1 },
+                { texto: '2 L cozinhar', x: 80, y: 62, tamanho: 5.5, atraso: 1.6 },
+                { texto: '4 LITROS POR DIA', x: 50, y: 86, tamanho: 7, atraso: 2.2, destaque: true },
+              ],
+            },
             titulo: '4 litros por pessoa por dia',
             texto: '2 para beber e 2 para cozinhar e para a higiene.',
             segundos: 6,
           },
           {
-            ilustracao: 'conta-agua',
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa', x: 14, y: 30, largura: 10, movimento: 'surgir' },
+                { desenho: 'pessoa', x: 26, y: 30, largura: 10, movimento: 'surgir', atraso: 0.2 },
+                { desenho: 'pessoa', x: 38, y: 30, largura: 10, movimento: 'surgir', atraso: 0.4 },
+                { desenho: 'galao', x: 78, y: 32, largura: 26, movimento: 'entrar', atraso: 1.4 },
+              ],
+              rotulos: [
+                { texto: '3 × 14 dias × 4 L', x: 50, y: 64, tamanho: 7, atraso: 1 },
+                { texto: '= 168 litros', x: 50, y: 82, tamanho: 9, atraso: 2.2, destaque: true },
+              ],
+            },
             titulo: 'Faça a conta',
             texto: 'Pessoas × dias × 4 litros. 3 pessoas por 14 dias = 168 litros.',
             segundos: 7,
           },
           {
-            ilustracao: 'guardar-agua',
+            desenho: {
+              pecas: [
+                { desenho: 'galao', x: 30, y: 50, largura: 34, movimento: 'entrar' },
+                { desenho: 'sol', x: 78, y: 24, largura: 22, movimento: 'girar', atraso: 0.6 },
+                { desenho: 'errado', x: 78, y: 24, largura: 30, movimento: 'entrar', atraso: 1.4 },
+              ],
+              rotulos: [
+                { texto: 'TAMPADA E NA SOMBRA', x: 50, y: 90, tamanho: 6.5, atraso: 2, destaque: true },
+              ],
+            },
             titulo: 'Tampada e na sombra',
             texto: 'Longe de produto de limpeza e de combustível. Troque a cada 6 meses.',
             segundos: 6,
@@ -125,34 +126,83 @@ export const CURSO: ModuloCurso[] = [
         minutos: 7,
         cenas: [
           {
-            ilustracao: 'decantar',
+            desenho: {
+              pecas: [
+                { desenho: 'balde', x: 44, y: 52, largura: 56, movimento: 'entrar' },
+                { desenho: 'relogio', x: 84, y: 22, largura: 20, movimento: 'entrar', atraso: 0.8 },
+              ],
+              rotulos: [
+                { texto: 'A SUJEIRA DESCE', x: 44, y: 90, tamanho: 7, atraso: 1.8 },
+              ],
+            },
             titulo: '1. Deixe descansar',
             texto: 'A sujeira desce para o fundo do balde tampado.',
             segundos: 6,
           },
           {
-            ilustracao: 'coar',
+            desenho: {
+              pecas: [
+                { desenho: 'pano', x: 50, y: 30, largura: 50, movimento: 'cair' },
+                { desenho: 'balde', x: 50, y: 70, largura: 40, movimento: 'surgir', atraso: 0.6 },
+                { desenho: 'seta', x: 50, y: 48, largura: 14, giro: 90, movimento: 'pulsar', atraso: 1.2 },
+              ],
+            },
             titulo: '2. Coe num pano limpo',
             texto: 'Passe só a parte de cima por pano dobrado ou filtro de café.',
             segundos: 6,
           },
           {
-            ilustracao: 'ferver',
+            desenho: {
+              pecas: [
+                { desenho: 'panela', x: 46, y: 46, largura: 64, movimento: 'entrar' },
+                { desenho: 'relogio', x: 86, y: 20, largura: 18, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [
+                { texto: '5 MINUTOS FERVENDO', x: 50, y: 90, tamanho: 6.5, atraso: 1.6, destaque: true },
+              ],
+            },
             titulo: '3. Ferva 5 minutos',
             texto: 'Depois que borbulhar. Deixe esfriar tampada.',
             segundos: 6,
           },
           {
-            ilustracao: 'hipoclorito',
+            desenho: {
+              pecas: [
+                { desenho: 'conta-gotas', x: 34, y: 32, largura: 14, movimento: 'deslizar', vindoDe: [0, -30] },
+                { desenho: 'garrafa-pet', x: 62, y: 56, largura: 20, movimento: 'entrar', atraso: 0.6 },
+                { desenho: 'relogio', x: 86, y: 24, largura: 16, movimento: 'entrar', atraso: 1.6 },
+              ],
+              rotulos: [
+                { texto: '2 GOTAS POR LITRO', x: 50, y: 92, tamanho: 6.5, atraso: 1.2, destaque: true },
+              ],
+            },
             titulo: 'Ou: 2 gotas por litro',
             texto: 'Hipoclorito 2,5%. Mexa e espere 30 minutos.',
             segundos: 6,
           },
           {
-            ilustracao: 'sol-pet',
+            desenho: {
+              pecas: [
+                { desenho: 'sol', x: 50, y: 22, largura: 30, movimento: 'girar' },
+                { desenho: 'garrafa-pet', x: 50, y: 66, largura: 20, giro: 90, movimento: 'cair', atraso: 0.6 },
+              ],
+              rotulos: [
+                { texto: '6 HORAS DE SOL', x: 50, y: 90, tamanho: 7, atraso: 1.6, destaque: true },
+              ],
+            },
             titulo: 'Ou: 6 horas de sol',
             texto: 'Garrafa PET transparente de até 2 litros, deitada no sol forte.',
             segundos: 6,
+          },
+        ],
+        videosReais: [
+          {
+            arquivo: 'videos/ferver-agua.mp4',
+            titulo: 'Água fervendo',
+            legenda: 'Fervura forte, com bolhas grandes subindo sem parar. Conte a partir daí.',
+            autor: 'Anna Tarazevich',
+            licenca: 'Licença Pexels',
+            origem: 'https://www.pexels.com/video/close-up-of-boiling-water-7261519/',
           },
         ],
         partes: [
@@ -230,19 +280,44 @@ export const CURSO: ModuloCurso[] = [
         minutos: 6,
         cenas: [
           {
-            ilustracao: 'desviar-chuva',
+            desenho: {
+              pecas: [
+                { desenho: 'cisterna-casa', x: 50, y: 46, largura: 90, movimento: 'entrar' },
+              ],
+              rotulos: [
+                { texto: 'DESVIE A 1ª CHUVA', x: 50, y: 88, tamanho: 7, atraso: 1.6, destaque: true },
+              ],
+            },
             titulo: 'Desvie a primeira chuva',
             texto: 'Ela lava o telhado e leva fezes de bicho, poeira e folhas.',
             segundos: 7,
           },
           {
-            ilustracao: 'bomba-manual',
+            desenho: {
+              pecas: [
+                { desenho: 'balde', x: 28, y: 40, largura: 30, movimento: 'balancar' },
+                { desenho: 'errado', x: 28, y: 40, largura: 34, movimento: 'entrar', atraso: 0.8 },
+                { desenho: 'bomba-ar', x: 74, y: 46, largura: 22, movimento: 'surgir', atraso: 1.2 },
+                { desenho: 'certo', x: 88, y: 22, largura: 14, movimento: 'entrar', atraso: 2 },
+              ],
+              rotulos: [
+                { texto: 'BOMBA MANUAL', x: 72, y: 86, tamanho: 6.5, atraso: 2.2 },
+              ],
+            },
             titulo: 'Tire com bomba, não com balde',
             texto: 'Balde e corda levam sujeira para dentro da cisterna.',
             segundos: 6,
           },
           {
-            ilustracao: 'limpar-reservatorio',
+            desenho: {
+              pecas: [
+                { desenho: 'caixa-dagua', x: 48, y: 46, largura: 62, movimento: 'entrar' },
+                { desenho: 'relogio', x: 86, y: 24, largura: 18, movimento: 'entrar', atraso: 1.2 },
+              ],
+              rotulos: [
+                { texto: '1 L para 1.000 L · 2 horas', x: 50, y: 88, tamanho: 6, atraso: 1.6, destaque: true },
+              ],
+            },
             titulo: '1 litro de água sanitária para 1.000 litros',
             texto: 'Na limpeza da caixa: espere 2 horas, esvazie e encha de novo.',
             segundos: 7,
@@ -317,6 +392,7 @@ export const CURSO: ModuloCurso[] = [
   },
   {
     id: 'socorros',
+    area: 'emergencias',
     titulo: 'Primeiros socorros',
     resumo: 'Parada cardíaca, engasgo, sangramento e queimadura.',
     licoes: [
@@ -327,28 +403,72 @@ export const CURSO: ModuloCurso[] = [
         minutos: 6,
         cenas: [
           {
-            ilustracao: 'chamar-pessoa',
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa-deitada', x: 50, y: 62, largura: 84, movimento: 'surgir' },
+                { desenho: 'mao', x: 40, y: 34, largura: 16, giro: 180, movimento: 'empurrar', atraso: 0.6 },
+              ],
+              rotulos: [
+                { texto: 'Você está bem?', x: 50, y: 14, tamanho: 7, atraso: 1, destaque: true },
+                { texto: 'NÃO RESPONDE?', x: 50, y: 88, tamanho: 7, atraso: 2.2 },
+              ],
+            },
             titulo: 'Chame e toque nos ombros',
             texto: 'Não responde e não respira normal? É parada.',
             segundos: 6,
           },
           {
-            ilustracao: 'ligar-192',
+            desenho: {
+              pecas: [
+                { desenho: 'telefone', x: 40, y: 44, largura: 32, movimento: 'acender', atraso: 0.6 },
+              ],
+              rotulos: [
+                { texto: '192', x: 76, y: 44, tamanho: 16, atraso: 1, destaque: true },
+                { texto: 'VIVA-VOZ', x: 50, y: 88, tamanho: 7, atraso: 1.6 },
+              ],
+            },
             titulo: 'Ligue 192 no viva-voz',
             texto: 'Ou peça para alguém ligar enquanto você começa.',
             segundos: 5,
           },
           {
-            ilustracao: 'maos-peito',
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa-deitada', x: 50, y: 72, largura: 84, movimento: 'surgir' },
+                { desenho: 'maos-rcp', x: 52, y: 40, largura: 30, movimento: 'deslizar', vindoDe: [0, -30], atraso: 0.6 },
+              ],
+              rotulos: [
+                { texto: 'MEIO DO PEITO', x: 50, y: 12, tamanho: 7, atraso: 1.6, destaque: true },
+              ],
+            },
             titulo: 'Mãos no meio do peito',
             texto: 'Uma sobre a outra, braços retos.',
             segundos: 6,
           },
           {
-            ilustracao: 'ritmo-rcp',
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa-deitada', x: 50, y: 74, largura: 84 },
+                { desenho: 'maos-rcp', x: 52, y: 44, largura: 30, movimento: 'empurrar', atraso: 0.3 },
+              ],
+              rotulos: [
+                { texto: '5 cm', x: 86, y: 46, tamanho: 8, atraso: 0.6 },
+                { texto: '100 a 120 por minuto', x: 50, y: 12, tamanho: 6.5, atraso: 1, destaque: true },
+              ],
+            },
             titulo: 'Forte e rápido',
             texto: 'Afunde uns 5 cm, de 100 a 120 vezes por minuto. Não pare.',
             segundos: 8,
+          },
+        ],
+        videosReais: [
+          {
+            arquivo: 'videos/massagem-peito.mp4',
+            titulo: 'Massagem no peito em boneco de treino',
+            legenda: 'Braços esticados, ombros em cima das mãos, mãos no meio do peito.',
+            autor: 'Gustavo Fring',
+            licenca: 'Licença Pexels',
+            origem: 'https://www.pexels.com/video/cardio-pulmonary-resuscitation-technique-demonstration-in-a-seminar-3981776/',
           },
         ],
         partes: [
@@ -414,28 +534,72 @@ export const CURSO: ModuloCurso[] = [
         minutos: 6,
         cenas: [
           {
-            ilustracao: 'tosse',
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa', x: 40, y: 50, largura: 26, movimento: 'tremer' },
+              ],
+              rotulos: [
+                { texto: 'cof! cof!', x: 76, y: 30, tamanho: 8, atraso: 0.6 },
+                { texto: 'DEIXE TOSSIR', x: 50, y: 90, tamanho: 7, atraso: 1.4, destaque: true },
+              ],
+            },
             titulo: 'Tossindo forte? Deixe tossir',
             texto: 'Não dê tapas enquanto a pessoa consegue tossir e falar.',
             segundos: 6,
           },
           {
-            ilustracao: 'golpes-costas',
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa', x: 42, y: 54, largura: 26, giro: 20 },
+                { desenho: 'mao', x: 62, y: 36, largura: 16, giro: -60, movimento: 'empurrar', atraso: 0.4 },
+              ],
+              rotulos: [
+                { texto: '5 GOLPES', x: 50, y: 90, tamanho: 8, atraso: 1.2, destaque: true },
+              ],
+            },
             titulo: '5 golpes nas costas',
             texto: 'Incline a pessoa para a frente. Bata entre as escápulas.',
             segundos: 6,
           },
           {
-            ilustracao: 'compressao-abdominal',
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa', x: 40, y: 52, largura: 26 },
+                { desenho: 'mao', x: 56, y: 54, largura: 16, giro: -90, movimento: 'empurrar', atraso: 0.4 },
+                { desenho: 'seta', x: 74, y: 40, largura: 14, giro: -45, movimento: 'surgir', atraso: 1 },
+              ],
+              rotulos: [
+                { texto: 'PARA DENTRO E PARA CIMA', x: 50, y: 90, tamanho: 5.5, atraso: 1.4 },
+              ],
+            },
             titulo: '5 compressões na barriga',
             texto: 'Abrace por trás, punho acima do umbigo, puxe para dentro e para cima.',
             segundos: 7,
           },
           {
-            ilustracao: 'bebe-golpes',
+            desenho: {
+              pecas: [
+                { desenho: 'bebe', x: 46, y: 52, largura: 54, movimento: 'surgir' },
+                { desenho: 'mao', x: 50, y: 28, largura: 14, giro: 180, movimento: 'empurrar', atraso: 0.6 },
+              ],
+              rotulos: [
+                { texto: '5 nas costas + 5 no peito', x: 50, y: 84, tamanho: 6, atraso: 1.2 },
+                { texto: 'NUNCA NA BARRIGA', x: 50, y: 12, tamanho: 6.5, atraso: 2, destaque: true },
+              ],
+            },
             titulo: 'Bebê: costas e peito',
             texto: '5 tapas nas costas e 5 compressões com 2 dedos no peito. Nunca na barriga.',
             segundos: 8,
+          },
+        ],
+        videosReais: [
+          {
+            arquivo: 'videos/engasgo-mao.webm',
+            titulo: 'Posição das mãos nas compressões na barriga',
+            legenda: 'Mão fechada acima do umbigo, a outra mão por cima.',
+            autor: 'Doc James',
+            licenca: 'CC BY-SA 4.0',
+            origem: 'https://commons.wikimedia.org/wiki/File:VideoOfAbdoThrustsWM.webm',
           },
         ],
         partes: [
@@ -508,25 +672,61 @@ export const CURSO: ModuloCurso[] = [
         minutos: 6,
         cenas: [
           {
-            ilustracao: 'pressao-ferida',
+            desenho: {
+              pecas: [
+                { desenho: 'braco', x: 50, y: 56, largura: 90, movimento: 'surgir' },
+                { desenho: 'pano', x: 40, y: 44, largura: 30, movimento: 'cair', atraso: 0.6 },
+                { desenho: 'mao', x: 40, y: 26, largura: 16, giro: 180, movimento: 'empurrar', atraso: 1.4 },
+              ],
+              rotulos: [
+                { texto: 'APERTE SEM PARAR', x: 50, y: 88, tamanho: 7, atraso: 1.8, destaque: true },
+              ],
+            },
             titulo: 'Aperte com pano limpo',
             texto: 'Pressão firme e contínua, sem tirar para olhar.',
             segundos: 6,
           },
           {
-            ilustracao: 'pano-por-cima',
+            desenho: {
+              pecas: [
+                { desenho: 'braco', x: 50, y: 60, largura: 90 },
+                { desenho: 'pano', x: 40, y: 48, largura: 30 },
+                { desenho: 'pano', x: 42, y: 40, largura: 32, giro: 8, movimento: 'cair', atraso: 0.6 },
+              ],
+              rotulos: [
+                { texto: 'NÃO TIRE O PRIMEIRO', x: 50, y: 88, tamanho: 6.5, atraso: 1.6, destaque: true },
+              ],
+            },
             titulo: 'Encharcou? Ponha outro por cima',
             texto: 'Não tire o primeiro pano. Continue apertando.',
             segundos: 6,
           },
           {
-            ilustracao: 'agua-queimadura',
+            desenho: {
+              pecas: [
+                { desenho: 'torneira', x: 38, y: 24, largura: 44, movimento: 'entrar' },
+                { desenho: 'braco', x: 56, y: 68, largura: 80, movimento: 'surgir', atraso: 0.6 },
+                { desenho: 'relogio', x: 86, y: 26, largura: 16, movimento: 'entrar', atraso: 1.4 },
+              ],
+              rotulos: [
+                { texto: '10 a 20 min', x: 50, y: 92, tamanho: 7, atraso: 1.8, destaque: true },
+              ],
+            },
             titulo: 'Queimadura: água corrente',
             texto: 'De 10 a 20 minutos, em jato suave e fresco. Nada de gelo.',
             segundos: 7,
           },
           {
-            ilustracao: 'nada-na-queimadura',
+            desenho: {
+              pecas: [
+                { desenho: 'pasta', x: 50, y: 34, largura: 54, movimento: 'entrar' },
+                { desenho: 'errado', x: 50, y: 34, largura: 34, movimento: 'entrar', atraso: 1 },
+                { desenho: 'braco', x: 50, y: 72, largura: 80, movimento: 'surgir', atraso: 0.4 },
+              ],
+              rotulos: [
+                { texto: 'NADA DE CREME', x: 50, y: 92, tamanho: 7, atraso: 1.6, destaque: true },
+              ],
+            },
             titulo: 'Não passe nada',
             texto: 'Nem pasta de dente, nem manteiga, nem borra de café.',
             segundos: 6,
@@ -598,6 +798,7 @@ export const CURSO: ModuloCurso[] = [
   },
   {
     id: 'comida',
+    area: 'emergencias',
     titulo: 'Comida sem geladeira e sem gás',
     resumo: 'Salvar o que está na geladeira quando a luz cai e cozinhar gastando pouco.',
     licoes: [
@@ -608,25 +809,51 @@ export const CURSO: ModuloCurso[] = [
         minutos: 5,
         cenas: [
           {
-            ilustracao: 'porta-fechada',
+            desenho: {
+              pecas: [
+                { desenho: 'geladeira', x: 38, y: 48, largura: 40, movimento: 'entrar' },
+                { desenho: 'relogio', x: 78, y: 34, largura: 24, movimento: 'entrar', atraso: 0.8 },
+              ],
+              rotulos: [{ texto: 'FECHADA: ~4 HORAS', x: 50, y: 90, tamanho: 6.5, atraso: 1.4, destaque: true }],
+            },
             titulo: 'Não abra a porta',
             texto: 'Fechada, a geladeira segura o frio por cerca de 4 horas.',
             segundos: 6,
           },
           {
-            ilustracao: 'congelador-cheio',
+            desenho: {
+              pecas: [
+                { desenho: 'geladeira', x: 24, y: 50, largura: 32, movimento: 'entrar' },
+              ],
+              rotulos: [
+                { texto: 'CHEIO: ~48 h', x: 70, y: 38, tamanho: 6.5, atraso: 1, destaque: true },
+                { texto: 'METADE: ~24 h', x: 70, y: 58, tamanho: 6.5, atraso: 1.8 },
+              ],
+            },
             titulo: 'Congelador cheio dura mais',
             texto: 'Cheio: cerca de 48 horas. Pela metade: cerca de 24 horas.',
             segundos: 7,
           },
           {
-            ilustracao: 'cristais-gelo',
+            desenho: {
+              pecas: [
+                { desenho: 'floco', x: 40, y: 42, largura: 40, movimento: 'girar' },
+                { desenho: 'certo', x: 78, y: 62, largura: 22, movimento: 'entrar', atraso: 1.2 },
+              ],
+              rotulos: [{ texto: 'TEM GELO? PODE', x: 50, y: 88, tamanho: 7, atraso: 1.6 }],
+            },
             titulo: 'Ainda tem gelo? Pode congelar de novo',
             texto: 'Se ainda tem cristais de gelo ou está gelado como na geladeira.',
             segundos: 6,
           },
           {
-            ilustracao: 'nao-prove',
+            desenho: {
+              pecas: [
+                { desenho: 'copo', x: 40, y: 42, largura: 26, movimento: 'surgir' },
+                { desenho: 'errado', x: 40, y: 42, largura: 44, movimento: 'entrar', atraso: 0.8 },
+              ],
+              rotulos: [{ texto: 'NA DÚVIDA, JOGUE FORA', x: 50, y: 88, tamanho: 6.5, atraso: 1.4, destaque: true }],
+            },
             titulo: 'Nunca prove para saber',
             texto: 'Cheiro, cor ou textura estranha, ou morno? Jogue fora.',
             segundos: 6,
@@ -695,7 +922,22 @@ export const CURSO: ModuloCurso[] = [
   },
 ]
 
+export const AREAS_CURSO: { id: AreaCurso; titulo: string; resumo: string }[] = [
+  { id: 'oficios', titulo: 'Ofícios e consertos', resumo: 'Aprenda a fazer e consertar as coisas da casa com as próprias mãos.' },
+  { id: 'emergencias', titulo: 'Emergências', resumo: 'Água, primeiros socorros e o que fazer quando tudo para.' },
+]
+
+export const CURSO: ModuloCurso[] = [...CURSOS_OFICIOS, ...CURSOS_EMERGENCIA]
+
 export const LICOES: LicaoCurso[] = CURSO.flatMap((modulo) => modulo.licoes)
+
+export function cursoPorId(id: string): ModuloCurso | undefined {
+  return CURSO.find((modulo) => modulo.id === id)
+}
+
+export function cursosDaArea(area: AreaCurso): ModuloCurso[] {
+  return CURSO.filter((modulo) => modulo.area === area)
+}
 
 export function ehLicao(valor: unknown): valor is string {
   return typeof valor === 'string' && LICOES.some((licao) => licao.id === valor)
@@ -710,6 +952,9 @@ export function moduloDaLicao(id: string): ModuloCurso | undefined {
 }
 
 export function proximaLicao(id: string): LicaoCurso | undefined {
-  const indice = LICOES.findIndex((licao) => licao.id === id)
-  return indice >= 0 ? LICOES[indice + 1] : undefined
+  const licoes = moduloDaLicao(id)?.licoes ?? []
+  const indice = licoes.findIndex((licao) => licao.id === id)
+  return indice >= 0 ? licoes[indice + 1] : undefined
 }
+
+export type { AreaCurso, LicaoCurso, ModuloCurso, ParteLicao, PerguntaLicao, VideoReal } from './cursos/tipos'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { PhArrowLeft, PhArrowRight, PhBookOpen, PhCheckCircle, PhClock, PhWarning } from '@phosphor-icons/vue'
+import { PhArrowLeft, PhArrowRight, PhBookOpen, PhCheckCircle, PhClock, PhVideoCamera, PhWarning } from '@phosphor-icons/vue'
 import { licaoPorId, moduloDaLicao, proximaLicao } from '../../domain/conteudo/curso'
 import type { VideoGuia } from '../../domain/conteudo/videos'
 import { usePreferencias } from '../estado/usePreferencias'
@@ -8,6 +8,7 @@ import { useAviso } from '../estado/useAviso'
 import CaixaAviso from '../components/CaixaAviso.vue'
 import TesteLicao from '../components/TesteLicao.vue'
 import VideoAnimado from '../components/VideoAnimado.vue'
+import VideoReal from '../components/VideoReal.vue'
 
 const props = defineProps<{ licaoId: string }>()
 const { licoesConcluidas, concluirLicao } = usePreferencias()
@@ -33,7 +34,10 @@ async function aprovar() {
 <template>
   <article v-if="licao && modulo && video" class="space-y-8">
     <header>
-      <RouterLink :to="{ name: 'curso' }" class="rotulo inline-flex items-center gap-2 underline underline-offset-4">
+      <RouterLink
+        :to="{ name: 'curso', params: { cursoId: modulo.id } }"
+        class="rotulo inline-flex items-center gap-2 underline underline-offset-4"
+      >
         <PhArrowLeft :size="22" weight="bold" aria-hidden="true" />Voltar ao curso
       </RouterLink>
       <p class="rotulo mt-6">{{ modulo.titulo }} · Lição {{ posicao }} de {{ modulo.licoes.length }}</p>
@@ -47,6 +51,13 @@ async function aprovar() {
     <CaixaAviso titulo="O que você vai aprender">{{ licao.objetivo }}</CaixaAviso>
 
     <VideoAnimado :key="video.id" :video="video" />
+
+    <section v-if="licao.videosReais?.length" class="space-y-6" aria-labelledby="veja-de-verdade">
+      <h2 id="veja-de-verdade" class="titulo-2 flex items-center gap-3">
+        <PhVideoCamera :size="34" weight="bold" aria-hidden="true" />Veja de verdade
+      </h2>
+      <VideoReal v-for="real in licao.videosReais" :key="real.arquivo" :video="real" />
+    </section>
 
     <section v-for="parte in licao.partes" :key="parte.titulo" class="space-y-4">
       <h2 class="titulo-2">{{ parte.titulo }}</h2>
@@ -87,7 +98,7 @@ async function aprovar() {
       <span class="min-w-0">Próxima lição: {{ proxima.titulo }}</span>
       <PhArrowRight :size="28" weight="bold" class="shrink-0" aria-hidden="true" />
     </RouterLink>
-    <RouterLink v-else :to="{ name: 'curso' }" class="botao flex items-center justify-center gap-3">
+    <RouterLink v-else :to="{ name: 'curso', params: { cursoId: modulo.id } }" class="botao flex items-center justify-center gap-3">
       <PhBookOpen :size="28" weight="bold" aria-hidden="true" />Voltar ao curso
     </RouterLink>
 
@@ -100,7 +111,7 @@ async function aprovar() {
   </article>
 
   <section v-else class="space-y-6">
-    <CaixaAviso titulo="Lição não encontrada" tipo="atencao">Volte ao curso e escolha outra lição.</CaixaAviso>
-    <RouterLink :to="{ name: 'curso' }" class="botao-secundario flex items-center justify-center">Voltar ao curso</RouterLink>
+    <CaixaAviso titulo="Lição não encontrada" tipo="atencao">Volte aos cursos e escolha outra lição.</CaixaAviso>
+    <RouterLink :to="{ name: 'cursos' }" class="botao-secundario flex items-center justify-center">Ver os cursos</RouterLink>
   </section>
 </template>

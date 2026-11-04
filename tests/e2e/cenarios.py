@@ -299,7 +299,7 @@ def rotas_invalidas(pagina: Page):
 
 @cenario("17. Navegação inferior marca a aba atual")
 def navegacao(pagina: Page):
-    for aba, titulo in [("Estoque", "Meu estoque"), ("Compras", None), ("Guia", "O que saber"), ("Início", "Casa El Niño")]:
+    for aba, titulo in [("Estoque", "Meu estoque"), ("Compras", None), ("Cursos", "Aprenda a fazer"), ("Guia", "O que saber"), ("Início", "Casa El Niño")]:
         pagina.get_by_role("navigation").get_by_role("link", name=aba).click()
         expect(pagina.get_by_role("navigation").get_by_role("link", name=aba)).to_have_attribute("aria-current", "page")
         if titulo:
@@ -316,7 +316,7 @@ def letra_grande(pagina: Page):
     expect(pagina.locator("html")).to_have_attribute("style", "zoom: 1.3;")
     pagina.set_viewport_size({"width": 360, "height": 780})
     foto(pagina, "18-letra-grande")
-    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia", "#/curso", "#/curso/agua-tratar", "#/curso/engasgo", "#/curso/sem-geladeira"]:
+    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia", "#/cursos", "#/cursos/eletricista", "#/cursos/horta", "#/licao/agua-tratar", "#/licao/engasgo", "#/licao/eletrica-planejar", "#/licao/mecanica-bike-pneu", "#/licao/sem-geladeira"]:
         ir(pagina, rota)
         sem_rolagem_horizontal(pagina)
     ir(pagina, "#/compras")
@@ -332,7 +332,7 @@ def letra_grande(pagina: Page):
 @cenario("19. Tela estreita (360px) sem rolagem horizontal na letra normal")
 def tela_estreita(pagina: Page):
     pagina.set_viewport_size({"width": 360, "height": 780})
-    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia", "#/curso", "#/curso/agua-tratar", "#/curso/engasgo", "#/curso/sem-geladeira"]:
+    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia", "#/cursos", "#/cursos/eletricista", "#/cursos/horta", "#/licao/agua-tratar", "#/licao/engasgo", "#/licao/eletrica-planejar", "#/licao/mecanica-bike-pneu", "#/licao/sem-geladeira"]:
         ir(pagina, rota)
         sem_rolagem_horizontal(pagina)
     pagina.set_viewport_size({"width": 412, "height": 915})
@@ -502,16 +502,34 @@ def contato_familia(pagina: Page):
     expect(pagina.locator("[data-teste=contato-familia]")).to_have_count(0)
 
 
-@cenario("28. Curso: abrir lição, ver animação, errar e acertar o teste, concluir e salvar")
+@cenario("28. Cursos: aba própria, abrir curso e lição, ver animação, acertar o teste, concluir e salvar")
 def curso(pagina: Page):
     ir(pagina, "#/guia")
     entrada = pagina.locator("[data-teste=entrada-curso]")
-    expect(entrada).to_contain_text("0 de 7 concluídas")
+    expect(entrada).to_contain_text("0 de 22 lições concluídas")
     entrada.click()
-    expect(pagina.get_by_role("heading", level=1, name="Curso de sobrevivência")).to_be_visible()
-    expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("0 de 7 lições concluídas")
+    expect(pagina.get_by_role("heading", level=1, name="Aprenda a fazer")).to_be_visible()
+    expect(pagina.get_by_role("navigation").get_by_role("link", name="Cursos")).to_have_attribute("aria-current", "page")
+    expect(pagina.get_by_role("heading", level=2, name="Ofícios e consertos")).to_be_visible()
+    for curso_id in ["eletricista", "encanador", "mecanica", "horta", "agua", "socorros", "comida"]:
+        expect(pagina.locator(f"[data-teste=curso-{curso_id}]")).to_be_visible()
+    foto(pagina, "28-cursos")
+    pagina.locator("[data-teste=curso-eletricista]").click()
+    expect(pagina.get_by_role("heading", level=1, name="Eletricista da casa")).to_be_visible()
+    expect(pagina.get_by_text("Choque elétrico mata.")).to_be_visible()
+    pagina.locator("[data-teste=licao-eletrica-planejar]").click()
+    expect(pagina.get_by_role("heading", level=1, name="Planejar a rede elétrica de uma casa")).to_be_visible()
+    botao(pagina, "Assistir o vídeo").first.click()
+    expect(pagina.locator(".cena-d").first).to_be_visible()
+    expect(pagina.get_by_role("navigation").get_by_role("link", name="Cursos")).to_have_attribute("aria-current", "page")
+    pagina.get_by_role("link", name="Voltar ao curso").first.click()
+    expect(pagina.get_by_role("heading", level=1, name="Eletricista da casa")).to_be_visible()
+    ir(pagina, "#/cursos/socorros")
+    expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("0 de 3 lições concluídas")
     pagina.locator("[data-teste=licao-rcp]").click()
     expect(pagina.get_by_role("heading", level=1, name="Parada cardíaca: massagem no peito")).to_be_visible()
+    expect(pagina.locator("[data-teste=video-real]")).to_have_count(1)
+    expect(pagina.get_by_text("Gustavo Fring · Licença Pexels")).to_be_visible()
     botao(pagina, "Assistir o vídeo").first.click()
     expect(botao(pagina, "Pausar")).to_be_visible()
     perguntas = pagina.locator("[data-teste=pergunta]")
@@ -533,11 +551,17 @@ def curso(pagina: Page):
     expect(pagina.get_by_role("heading", level=1, name="Engasgo em adulto, criança e bebê")).to_be_visible()
     pagina.reload()
     pagina.wait_for_load_state("networkidle")
-    ir(pagina, "#/curso")
-    expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("1 de 7 lições concluídas")
+    ir(pagina, "#/cursos/socorros")
+    expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("1 de 3 lições concluídas")
     expect(pagina.locator("[data-teste=licao-rcp]")).to_contain_text("Concluída")
-    ir(pagina, "#/curso/nao-existe")
+    ir(pagina, "#/cursos")
+    expect(pagina.locator("[data-teste=progresso-cursos]")).to_have_text("1 de 22 lições concluídas")
+    ir(pagina, "#/curso/rcp")
+    expect(pagina.get_by_role("heading", level=1, name="Parada cardíaca: massagem no peito")).to_be_visible()
+    ir(pagina, "#/licao/nao-existe")
     expect(pagina.get_by_text("Lição não encontrada")).to_be_visible()
+    ir(pagina, "#/cursos/nao-existe")
+    expect(pagina.get_by_text("Curso não encontrado")).to_be_visible()
 
 
 def principal():

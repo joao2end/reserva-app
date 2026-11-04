@@ -1,36 +1,21 @@
 <script setup lang="ts">
 import {
-  PhArrowDownLeft,
-  PhArrowUp,
   PhBaby,
   PhCalendar,
   PhCaretRight,
-  PhCalendarBlank,
   PhCheck,
-  PhClock,
-  PhCloudRain,
-  PhCookingPot,
   PhDrop,
   PhEyedropper,
-  PhFlame,
-  PhForkKnife,
   PhGrains,
   PhHand,
-  PhHandFist,
-  PhHandPalm,
-  PhHeart,
   PhJar,
   PhLeaf,
   PhPackage,
   PhPerson,
-  PhPhoneCall,
-  PhProhibit,
   PhSnowflake,
-  PhSpeakerHigh,
   PhSun,
   PhThermometer,
   PhTimer,
-  PhTrash,
 } from '@phosphor-icons/vue'
 import type { IlustracaoId } from '../../domain/conteudo/videos'
 
@@ -298,364 +283,29 @@ defineProps<{ ilustracao: IlustracaoId; modo: 'animando' | 'pausado' | 'estatico
       <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 82%; font-size: 8cqw; animation-delay: 3.3s">POR DIA</p>
     </template>
 
-    <template v-else-if="ilustracao === 'conta-agua'">
-      <div
-        v-for="pessoa in 3"
-        :key="pessoa"
-        class="peca ani aparecer"
-        :style="{ left: `${4 + (pessoa - 1) * 14}%`, top: '6%', width: '13%', animationDelay: `${0.2 * pessoa}s` }"
-      >
-        <PhPerson size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 0; width: 48%; top: 26%; font-size: 6cqw; animation-delay: 0.8s">3 PESSOAS</p>
-      <p class="peca texto ani surgir" style="left: 46%; width: 8%; top: 8%; font-size: 10cqw; animation-delay: 1s">×</p>
-      <div class="peca ani aparecer" style="left: 62%; top: 2%; width: 20%; animation-delay: 1.2s">
-        <PhCalendarBlank size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 52%; width: 40%; top: 26%; font-size: 6cqw; animation-delay: 1.4s">14 DIAS</p>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 38%; font-size: 11cqw; animation-delay: 2s">× 4 litros</p>
-      <div class="peca barra ani riscar" style="left: 14%; width: 72%; top: 56%; height: 1.4cqw; animation-delay: 2.6s" />
-      <p class="peca texto ani aparecer" style="left: 0; width: 100%; top: 61%; font-size: 17cqw; animation-delay: 3s">168 L</p>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 86%; font-size: 6cqw; animation-delay: 3.6s">9 GALÕES DE 20 L</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'decantar'">
-      <div class="peca barra ani cair" style="left: 20%; top: 14%; width: 60%; height: 3cqw; animation-delay: 2.8s" />
-      <div class="peca contorno copo" style="left: 24%; top: 20%; width: 52%; height: 64%">
-        <div class="enchimento" style="height: 86%; opacity: 0.2" />
-        <div class="enchimento ani encher" style="height: 16%; animation-delay: 0.6s; animation-duration: 2.4s" />
-        <span
-          v-for="grao in 6"
-          :key="grao"
-          class="peca grao ani assentar"
-          :style="{ left: `${12 + grao * 12}%`, top: '18%', animationDelay: `${0.2 + grao * 0.25}s` }"
-        />
-      </div>
-      <div class="peca ani surgir" style="left: 80%; top: 4%; width: 16%">
-        <PhClock size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 88%; font-size: 6.5cqw; animation-delay: 3.2s">TAMPADO, SEM MEXER</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'coar'">
-      <div class="peca ani inclinar" style="left: 14%; top: 2%; width: 28%">
-        <PhCookingPot size="100%" weight="bold" />
-      </div>
-      <span
-        v-for="gota in 4"
-        :key="gota"
-        class="peca grao ani pingar"
-        :style="{ left: `${46 + (gota % 2) * 4}%`, top: '30%', animationDelay: `${0.8 + gota * 0.3}s` }"
-      />
-      <div class="peca pano ani surgir" style="left: 22%; top: 42%; width: 56%; height: 7%; animation-delay: 0.3s" />
-      <div class="peca contorno copo" style="left: 30%; top: 52%; width: 40%; height: 40%">
-        <div class="enchimento ani encher" style="height: 60%; opacity: 0.3; animation-delay: 1.2s; animation-duration: 2.6s" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 72%; width: 28%; top: 44%; font-size: 5.5cqw; animation-delay: 0.6s">PANO</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'ferver'">
-      <span
-        v-for="bolha in 5"
-        :key="bolha"
-        class="peca bolha ani subir"
-        :style="{ left: `${30 + bolha * 7}%`, top: '30%', animationDelay: `${0.2 + bolha * 0.3}s` }"
-      />
-      <div class="peca" style="left: 18%; top: 28%; width: 60%">
-        <PhCookingPot size="100%" weight="bold" />
-      </div>
-      <div class="peca ani pulsar-lento" style="left: 36%; top: 76%; width: 22%">
-        <PhFlame size="100%" weight="fill" />
-      </div>
-      <div class="peca ani aparecer" style="left: 74%; top: 4%; width: 22%; animation-delay: 1s">
-        <PhTimer size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 64%; width: 36%; top: 30%; font-size: 9cqw; animation-delay: 1.4s">5 min</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'sol-pet'">
-      <div class="peca ani girar" style="left: 6%; top: 4%; width: 30%">
-        <PhSun size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani aparecer" style="left: 50%; width: 46%; top: 10%; font-size: 16cqw; animation-delay: 1.2s">6 h</p>
-      <div class="peca contorno garrafa ani entrar-direita" style="left: 14%; top: 50%; width: 64%; height: 22%; animation-delay: 0.4s">
-        <div class="enchimento" style="height: 100%; opacity: 0.25" />
-      </div>
-      <div class="peca barra ani entrar-direita" style="left: 78%; top: 56%; width: 8%; height: 10%; animation-delay: 0.4s" />
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 80%; font-size: 7cqw; animation-delay: 2s">PET TRANSPARENTE, ATÉ 2 L</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'desviar-chuva'">
-      <div class="peca ani surgir" style="left: 64%; top: 0%; width: 30%">
-        <PhCloudRain size="100%" weight="bold" />
-      </div>
-      <div class="peca telhado" style="left: 6%; top: 12%; width: 52%; height: 20%" />
-      <div class="peca barra" style="left: 52%; top: 32%; width: 3cqw; height: 26%" />
-      <span
-        v-for="gota in 3"
-        :key="gota"
-        class="peca grao ani pingar"
-        :style="{ left: '52.5%', top: '36%', animationDelay: `${0.6 + gota * 0.4}s` }"
-      />
-      <div class="peca ani surgir" style="left: 30%; top: 58%; width: 14%; animation-delay: 1s">
-        <PhArrowDownLeft size="100%" weight="bold" />
-      </div>
-      <div class="peca ani aparecer" style="left: 2%; top: 74%; width: 40%; animation-delay: 1.4s">
-        <p class="texto" style="font-size: 6cqw">1ª CHUVA</p>
-        <p class="texto" style="font-size: 8cqw; margin-top: 2cqw">JOGA FORA</p>
-      </div>
-      <div class="peca contorno arredondado cisterna ani aparecer" style="left: 56%; top: 62%; width: 38%; height: 30%; animation-delay: 2.4s">
-        CISTERNA
-      </div>
-      <div class="peca selo ani aparecer" style="left: 84%; top: 52%; width: 14%; animation-delay: 3s">
-        <PhCheck size="70%" weight="bold" />
-      </div>
-    </template>
 
-    <template v-else-if="ilustracao === 'bomba-manual'">
-      <div class="peca contorno arredondado" style="left: 4%; top: 50%; width: 52%; height: 42%">
-        <div class="enchimento" style="height: 60%; opacity: 0.3" />
-      </div>
-      <div class="peca barra" style="left: 26%; top: 18%; width: 3cqw; height: 34%" />
-      <div class="peca barra" style="left: 28%; top: 24%; width: 16%; height: 3cqw" />
-      <div class="peca barra alavanca ani bombear" style="left: 8%; top: 18%; width: 22%; height: 3cqw" />
-      <span
-        v-for="gota in 3"
-        :key="gota"
-        class="peca grao ani pingar"
-        :style="{ left: '42%', top: '30%', animationDelay: `${0.4 + gota * 0.5}s` }"
-      />
-      <div class="peca barra" style="left: 76%; top: 8%; width: 1cqw; height: 32%" />
-      <div class="peca contorno copo" style="left: 66%; top: 38%; width: 22%; height: 20%" />
-      <span class="risco" style="left: 60%; top: 34%; width: 34%"><span class="linha ani riscar" style="animation-delay: 1.8s" /></span>
-      <p class="peca texto ani surgir" style="left: 58%; width: 40%; top: 66%; font-size: 6cqw; animation-delay: 2.2s">BALDE NÃO</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'limpar-reservatorio'">
-      <div class="peca contorno arredondado cisterna ani aparecer" style="left: 6%; top: 10%; width: 26%; height: 34%; font-size: 8cqw">1 L</div>
-      <p class="peca texto ani surgir" style="left: 2%; width: 34%; top: 46%; font-size: 4.5cqw; animation-delay: 0.4s">ÁGUA SANITÁRIA</p>
-      <div class="peca ani surgir" style="left: 35%; top: 20%; width: 9%; animation-delay: 0.8s">
-        <PhCaretRight size="100%" weight="bold" />
-      </div>
-      <div class="peca contorno arredondado cisterna ani aparecer" style="left: 46%; top: 6%; width: 48%; height: 44%; font-size: 9cqw; animation-delay: 1.1s">
-        1.000 L
-        <div class="enchimento" style="height: 50%; opacity: 0.2" />
-      </div>
-      <div class="peca ani aparecer" style="left: 12%; top: 62%; width: 24%; animation-delay: 2s">
-        <PhTimer size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 40%; width: 58%; top: 68%; font-size: 12cqw; animation-delay: 2.4s">2 horas</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'chamar-pessoa'">
-      <p class="peca texto balao ani aparecer" style="left: 8%; width: 84%; top: 4%; font-size: 7cqw; animation-delay: 0.3s">
-        Você está bem?
-      </p>
-      <div class="peca ani empurrar" style="left: 8%; top: 34%; width: 20%; animation-delay: 1s">
-        <PhHand size="100%" weight="bold" />
-      </div>
-      <div class="peca deitado" style="left: 30%; top: 30%; width: 44%">
-        <PhPerson size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 84%; font-size: 7cqw; animation-delay: 2.4s">NÃO RESPONDE?</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'ligar-192'">
-      <div class="peca ani tocar" style="left: 28%; top: 6%; width: 40%">
-        <PhPhoneCall size="100%" weight="bold" />
-      </div>
-      <div class="peca ani surgir" style="left: 72%; top: 12%; width: 20%; animation-delay: 1.6s">
-        <PhSpeakerHigh size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani aparecer" style="left: 0; width: 100%; top: 56%; font-size: 24cqw; animation-delay: 0.8s">192</p>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 86%; font-size: 6.5cqw; animation-delay: 1.8s">NO VIVA-VOZ</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'maos-peito'">
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 3%; font-size: 6.5cqw; animation-delay: 1.8s">MEIO DO PEITO</p>
-      <div class="peca contorno peito" style="left: 6%; top: 22%; width: 88%; height: 90%" />
-      <div class="peca ani cair" style="left: 37%; top: 40%; width: 26%; animation-delay: 0.3s">
-        <PhHandPalm size="100%" weight="bold" />
-      </div>
-      <div class="peca ani cair" style="left: 39%; top: 45%; width: 22%; animation-delay: 1s">
-        <PhHandPalm size="100%" weight="fill" />
-      </div>
-    </template>
 
-    <template v-else-if="ilustracao === 'ritmo-rcp'">
-      <div class="peca ani pulsar" style="left: 30%; top: 6%; width: 40%">
-        <PhHeart size="100%" weight="fill" />
-      </div>
-      <p class="peca texto ani aparecer" style="left: 0; width: 100%; top: 58%; font-size: 15cqw; animation-delay: 0.4s">100–120</p>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 80%; font-size: 6.5cqw; animation-delay: 0.8s">POR MINUTO · 5 cm</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'tosse'">
-      <div class="peca" style="left: 8%; top: 16%; width: 42%">
-        <PhPerson size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani tremer" style="left: 50%; width: 46%; top: 8%; font-size: 12cqw; animation-delay: 0.4s">COF!</p>
-      <div
-        v-for="linha in 3"
-        :key="linha"
-        class="peca barra ani surgir"
-        :style="{ left: '52%', top: `${28 + linha * 6}%`, width: `${10 + linha * 4}%`, height: '1.6cqw', animationDelay: `${0.4 + linha * 0.2}s` }"
-      />
-      <div class="peca selo ani aparecer" style="left: 74%; top: 52%; width: 18%; animation-delay: 1.6s">
-        <PhCheck size="70%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 84%; font-size: 7cqw; animation-delay: 2s">DEIXE TOSSIR</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'golpes-costas'">
-      <div class="peca inclinado" style="left: 10%; top: 20%; width: 42%">
-        <PhPerson size="100%" weight="bold" />
-      </div>
-      <div class="peca ani bater" style="left: 50%; top: 18%; width: 24%; animation-delay: 0.4s">
-        <PhHandPalm size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani aparecer" style="left: 60%; width: 38%; top: 58%; font-size: 16cqw; animation-delay: 0.4s">5×</p>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 86%; font-size: 6cqw; animation-delay: 1.2s">ENTRE AS ESCÁPULAS</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'compressao-abdominal'">
-      <div class="peca" style="left: 24%; top: 4%; width: 50%">
-        <PhPerson size="100%" weight="bold" />
-      </div>
-      <div class="peca ani puxar" style="left: 40%; top: 44%; width: 20%; animation-delay: 0.4s">
-        <PhHandFist size="100%" weight="fill" />
-      </div>
-      <div class="peca ani surgir" style="left: 64%; top: 40%; width: 12%; animation-delay: 0.8s">
-        <PhArrowUp size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani aparecer" style="left: 2%; width: 30%; top: 50%; font-size: 14cqw; animation-delay: 0.4s">5×</p>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 86%; font-size: 6cqw; animation-delay: 1.2s">ACIMA DO UMBIGO</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'bebe-golpes'">
-      <div class="peca" style="left: 6%; top: 18%; width: 34%">
-        <PhBaby size="100%" weight="bold" />
-      </div>
-      <div class="peca ani bater" style="left: 24%; top: 4%; width: 18%; animation-delay: 0.3s">
-        <PhHandPalm size="100%" weight="bold" />
-      </div>
-      <p class="peca texto" style="left: 0; width: 48%; top: 56%; font-size: 7cqw">5 COSTAS</p>
-      <div class="peca ani aparecer" style="left: 58%; top: 18%; width: 34%; animation-delay: 3s">
-        <PhBaby size="100%" weight="bold" />
-      </div>
-      <div class="peca ani apertar" style="left: 68%; top: 4%; width: 14%; animation-delay: 3.4s">
-        <PhHand size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 50%; width: 50%; top: 56%; font-size: 7cqw; animation-delay: 3s">5 PEITO</p>
-      <p class="peca texto bloco faixa ani surgir" style="left: 4%; width: 92%; top: 76%; font-size: 6.5cqw; animation-delay: 5.6s">
-        NUNCA NA BARRIGA
-      </p>
-    </template>
 
-    <template v-else-if="ilustracao === 'pressao-ferida'">
-      <div class="peca contorno braco" style="left: 2%; top: 48%; width: 96%; height: 20%" />
-      <div class="peca pano ani cair" style="left: 34%; top: 40%; width: 32%; height: 30%; animation-delay: 0.3s" />
-      <div class="peca ani cair" style="left: 32%; top: 8%; width: 36%; animation-delay: 1s">
-        <div class="ani apertar" style="animation-delay: 2s"><PhHandPalm size="100%" weight="fill" /></div>
-      </div>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 82%; font-size: 7cqw; animation-delay: 2.2s">APERTE SEM TIRAR</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'pano-por-cima'">
-      <div class="peca contorno braco" style="left: 2%; top: 48%; width: 96%; height: 20%" />
-      <div class="peca barra" style="left: 36%; top: 42%; width: 28%; height: 26%" />
-      <div class="peca pano ani cair" style="left: 32%; top: 36%; width: 36%; height: 30%; animation-delay: 0.8s" />
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 8%; font-size: 7cqw; animation-delay: 0.2s">ENCHARCOU?</p>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 80%; font-size: 7cqw; animation-delay: 1.8s">OUTRO POR CIMA</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'agua-queimadura'">
-      <div class="peca barra" style="left: 18%; top: 8%; width: 40%; height: 6%" />
-      <div class="peca barra" style="left: 50%; top: 8%; width: 8%; height: 14%" />
-      <div class="peca jato ani escorrer" style="left: 51.5%; top: 22%; width: 5%; height: 38%; animation-delay: 0.3s" />
-      <div class="peca" style="left: 36%; top: 52%; width: 34%">
-        <PhHand size="100%" weight="bold" />
-      </div>
-      <div class="peca ani aparecer" style="left: 76%; top: 28%; width: 18%; animation-delay: 2s">
-        <PhSnowflake size="100%" weight="bold" />
-        <span class="risco"><span class="linha ani riscar" style="animation-delay: 2.5s" /></span>
-      </div>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 86%; font-size: 8cqw; animation-delay: 1.2s">10 A 20 MIN</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'porta-fechada'">
-      <div class="peca ani aparecer" style="left: 8%; top: 8%; width: 42%; height: 78%">
-        <div class="contorno arredondado geladeira" />
-      </div>
-      <div class="peca ani aparecer" style="left: 60%; top: 10%; width: 30%; animation-delay: 0.8s">
-        <PhClock size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani aparecer" style="left: 54%; width: 44%; top: 46%; font-size: 16cqw; animation-delay: 1.4s">4 h</p>
-      <p class="peca texto ani surgir" style="left: 52%; width: 48%; top: 72%; font-size: 6cqw; animation-delay: 2s">PORTA FECHADA</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'congelador-cheio'">
-      <div class="peca contorno arredondado congelador" style="left: 4%; top: 6%; width: 42%; height: 54%">
-        <span
-          v-for="bloco in 8"
-          :key="bloco"
-          class="bloco-gelo ani aparecer"
-          :style="{ animationDelay: `${0.1 * bloco}s` }"
-        />
-      </div>
-      <p class="peca texto ani surgir" style="left: 0; width: 50%; top: 64%; font-size: 13cqw; animation-delay: 1s">48 h</p>
-      <p class="peca texto ani surgir" style="left: 0; width: 50%; top: 84%; font-size: 6cqw; animation-delay: 1.2s">CHEIO</p>
-      <div class="peca contorno arredondado congelador ani aparecer" style="left: 54%; top: 6%; width: 42%; height: 54%; animation-delay: 1.8s">
-        <span v-for="bloco in 3" :key="bloco" class="bloco-gelo" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 50%; width: 50%; top: 64%; font-size: 13cqw; animation-delay: 2.4s">24 h</p>
-      <p class="peca texto ani surgir" style="left: 50%; width: 50%; top: 84%; font-size: 6cqw; animation-delay: 2.6s">METADE</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'cristais-gelo'">
-      <div class="peca ani girar" style="left: 8%; top: 8%; width: 34%">
-        <PhSnowflake size="100%" weight="bold" />
-      </div>
-      <div class="peca ani aparecer" style="left: 50%; top: 6%; width: 40%; animation-delay: 0.6s">
-        <PhThermometer size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 46%; width: 50%; top: 50%; font-size: 10cqw; animation-delay: 1.2s">até 4 °C</p>
-      <div class="peca selo ani aparecer" style="left: 10%; top: 54%; width: 22%; animation-delay: 1.8s">
-        <PhCheck size="70%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 0; width: 100%; top: 82%; font-size: 6.5cqw; animation-delay: 2.2s">PODE CONGELAR DE NOVO</p>
-    </template>
 
-    <template v-else-if="ilustracao === 'nao-prove'">
-      <div class="peca ani aparecer" style="left: 8%; top: 6%; width: 36%">
-        <PhForkKnife size="100%" weight="bold" />
-        <span class="risco"><span class="linha ani riscar" style="animation-delay: 0.8s" /></span>
-      </div>
-      <p class="peca texto ani surgir" style="left: 0; width: 52%; top: 48%; font-size: 7cqw; animation-delay: 1s">NÃO PROVE</p>
-      <div class="peca ani cair" style="left: 58%; top: 8%; width: 34%; animation-delay: 1.6s">
-        <PhTrash size="100%" weight="bold" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 48%; width: 52%; top: 48%; font-size: 7cqw; animation-delay: 2.2s">JOGUE FORA</p>
-      <p class="peca texto bloco faixa ani surgir" style="left: 4%; width: 92%; top: 72%; font-size: 6.5cqw; animation-delay: 2.8s">
-        NA DÚVIDA, FORA
-      </p>
-    </template>
 
-    <template v-else-if="ilustracao === 'nada-na-queimadura'">
-      <div
-        v-for="(item, posicao) in ['PASTA DE DENTE', 'MANTEIGA', 'PÓ DE CAFÉ']"
-        :key="item"
-        class="peca item-proibido ani aparecer"
-        :style="{ left: '8%', top: `${4 + posicao * 22}%`, width: '84%', height: '17%', animationDelay: `${0.2 + posicao * 0.9}s` }"
-      >
-        <PhProhibit size="9cqw" weight="bold" class="shrink-0" />
-        <span>{{ item }}</span>
-      </div>
-      <div class="peca ani aparecer" style="left: 20%; top: 72%; width: 16%; animation-delay: 3.2s">
-        <PhDrop size="100%" weight="fill" />
-      </div>
-      <p class="peca texto ani surgir" style="left: 36%; width: 56%; top: 76%; font-size: 9cqw; animation-delay: 3.4s">SÓ ÁGUA</p>
-    </template>
   </div>
 </template>
 

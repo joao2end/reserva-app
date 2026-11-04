@@ -23,12 +23,12 @@ const grupos = GRUPOS_GUIA.map((grupo) => ({
       <h1 class="titulo-1">O que saber</h1>
     </header>
 
-    <RouterLink :to="{ name: 'curso' }" class="bloco flex min-h-28 items-center gap-4 border-4 border-tinta p-4" data-teste="entrada-curso">
+    <RouterLink :to="{ name: 'cursos' }" class="bloco flex min-h-28 items-center gap-4 border-4 border-tinta p-4" data-teste="entrada-curso">
       <PhGraduationCap :size="48" weight="bold" class="shrink-0" aria-hidden="true" />
       <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
-        <span class="block text-[28px] leading-9 font-bold">Curso de sobrevivência</span>
-        <span class="block text-[18px]">{{ LICOES.length }} lições com animação, passo a passo e teste</span>
-        <span class="block text-[18px] font-bold">{{ concluidas }} de {{ LICOES.length }} concluídas</span>
+        <span class="block text-[28px] leading-9 font-bold">Cursos</span>
+        <span class="block text-[18px]">Eletricista, encanador, mecânica, horta, água e primeiros socorros</span>
+        <span class="block text-[18px] font-bold">{{ concluidas }} de {{ LICOES.length }} lições concluídas</span>
       </span>
       <PhCaretRight :size="32" weight="bold" class="shrink-0" aria-hidden="true" />
     </RouterLink>

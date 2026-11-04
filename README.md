@@ -22,6 +22,17 @@ Identidade visual **SBV**: preto e branco, fonte Atkinson Hyperlegible (feita pa
 | Checklist da mochila de saída, salvo no celular | Guia › Minha mochila de saída |
 | Cuidados com fumaça e queimadas na seca | Guia › Fumaça e queimadas |
 | Cuidados no calor forte, com atenção a idosos e crianças | Guia › Calor forte |
+| Cursos de ofícios: eletricista, encanador, mecânica básica e horta | Aba Cursos |
+| Cursos de emergência: água e primeiros socorros | Aba Cursos |
+| Animações desenhadas em cada lição e vídeos reais de bancos com licença livre | Aba Cursos › lição |
+
+## Vídeos reais dos cursos
+
+Os vídeos reais não ficam no Git. A lista está em `scripts/videos_reais.json`, com endereço, autor, licença e o hash SHA-256 de cada arquivo. O build do GitHub roda `python3 scripts/baixar_videos.py`, que baixa os vídeos para `public/videos/`, confere o hash e falha se algum não bater. Eles vêm do [Pexels](https://www.pexels.com/license/) (uso livre, inclusive em aplicativos) e da [Wikimedia Commons](https://commons.wikimedia.org/) (CC BY-SA), sempre com o crédito do autor na tela.
+
+Para ver os vídeos no computador, rode o mesmo script antes de `npm run dev`.
+
+As animações das lições são cenas desenhadas em SVG: cada cena lista as peças (`src/presentation/desenhos.ts`), a posição e o movimento, em `src/domain/conteudo/cursos/`.
 
 ## Fácil para idosos
 

@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import { CURSO, LICOES, licaoPorId, moduloDaLicao, proximaLicao } from '../../src/domain/conteudo/curso'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { AREAS_CURSO, CURSO, LICOES, cursoPorId, cursosDaArea, licaoPorId, moduloDaLicao, proximaLicao } from '../../src/domain/conteudo/curso'
+import { DESENHOS } from '../../src/domain/conteudo/desenho'
+import { DESENHO } from '../../src/presentation/desenhos'
+import { ICONE_CURSO } from '../../src/presentation/icones'
+
+const MANIFESTO: { arquivo: string; sha256: string; url: string }[] = JSON.parse(
+  readFileSync(join(__dirname, '../../scripts/videos_reais.json'), 'utf8'),
+)
 
 describe('curso de sobrevivência', () => {
   it('cada lição tem id único', () => {
@@ -31,10 +40,53 @@ describe('curso de sobrevivência', () => {
     }
   })
 
-  it('navega entre lições e módulos', () => {
+  it('navega entre as lições de um mesmo curso', () => {
     expect(licaoPorId('rcp')?.titulo).toContain('massagem')
     expect(moduloDaLicao('engasgo')?.id).toBe('socorros')
-    expect(proximaLicao(CURSO[0].licoes[2].id)?.id).toBe(CURSO[1].licoes[0].id)
-    expect(proximaLicao(LICOES[LICOES.length - 1].id)).toBeUndefined()
+    expect(proximaLicao(CURSO[0].licoes[0].id)?.id).toBe(CURSO[0].licoes[1].id)
+    for (const curso of CURSO) expect(proximaLicao(curso.licoes[curso.licoes.length - 1].id)).toBeUndefined()
+  })
+
+  it('tem cursos de ofícios além das emergências', () => {
+    expect(cursosDaArea('oficios').map((curso) => curso.id)).toEqual(['eletricista', 'encanador', 'mecanica', 'horta'])
+    expect(cursosDaArea('emergencias').length).toBeGreaterThanOrEqual(2)
+    expect(cursoPorId('eletricista')?.licoes.some((licao) => licao.id === 'eletrica-planejar')).toBe(true)
+    expect(AREAS_CURSO.every((area) => cursosDaArea(area.id).length > 0)).toBe(true)
+  })
+
+  it('todo curso tem ícone e id único', () => {
+    const ids = CURSO.map((curso) => curso.id)
+    expect(new Set(ids).size).toBe(ids.length)
+    expect(ids.every((id) => ICONE_CURSO[id])).toBe(true)
+  })
+
+  it('cada cena tem animação: ilustração antiga ou cena desenhada', () => {
+    for (const cena of LICOES.flatMap((licao) => licao.cenas)) {
+      expect(Boolean(cena.ilustracao) !== Boolean(cena.desenho), cena.titulo).toBe(true)
+    }
+  })
+
+  it('as cenas desenhadas só usam desenhos que existem e cabem no palco', () => {
+    for (const cena of LICOES.flatMap((licao) => licao.cenas)) {
+      for (const peca of cena.desenho?.pecas ?? []) {
+        expect(DESENHOS, cena.titulo).toContain(peca.desenho)
+        expect(peca.x, cena.titulo).toBeGreaterThanOrEqual(0)
+        expect(peca.x, cena.titulo).toBeLessThanOrEqual(100)
+        expect(peca.largura, cena.titulo).toBeLessThanOrEqual(100)
+      }
+    }
+    expect(Object.keys(DESENHO).sort()).toEqual([...DESENHOS].sort())
+  })
+
+  it('todo vídeo real é baixado no build, com hash para conferir', () => {
+    const arquivos = MANIFESTO.map((video) => `videos/${video.arquivo}`)
+    const usados = LICOES.flatMap((licao) => licao.videosReais ?? [])
+    expect(usados.length).toBeGreaterThanOrEqual(10)
+    for (const video of usados) {
+      expect(arquivos, video.arquivo).toContain(video.arquivo)
+      expect(video.autor.length, video.arquivo).toBeGreaterThan(0)
+      expect(video.origem, video.arquivo).toMatch(/^https:\/\/(www\.pexels\.com|commons\.wikimedia\.org)\//)
+    }
+    expect(MANIFESTO.every((video) => /^[0-9a-f]{64}$/.test(video.sha256))).toBe(true)
   })
 })

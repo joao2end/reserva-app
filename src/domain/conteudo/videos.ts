@@ -1,3 +1,5 @@
+import type { CenaDesenhada } from './desenho'
+
 export type IlustracaoId =
   | 'lugar-fresco'
   | 'prateleira'
@@ -15,37 +17,15 @@ export type IlustracaoId =
   | 'quem-nao-corta'
   | 'sem-sal'
   | 'porcao-do-dia'
-  | 'conta-agua'
-  | 'decantar'
-  | 'coar'
-  | 'ferver'
-  | 'sol-pet'
-  | 'desviar-chuva'
-  | 'bomba-manual'
-  | 'limpar-reservatorio'
-  | 'chamar-pessoa'
-  | 'ligar-192'
-  | 'maos-peito'
-  | 'ritmo-rcp'
-  | 'tosse'
-  | 'golpes-costas'
-  | 'compressao-abdominal'
-  | 'bebe-golpes'
-  | 'pressao-ferida'
-  | 'pano-por-cima'
-  | 'agua-queimadura'
-  | 'nada-na-queimadura'
-  | 'porta-fechada'
-  | 'congelador-cheio'
-  | 'cristais-gelo'
-  | 'nao-prove'
 
-export interface CenaVideo {
-  ilustracao: IlustracaoId
+interface CenaBase {
   titulo: string
   texto: string
   segundos: number
 }
+
+export type CenaVideo = CenaBase &
+  ({ ilustracao: IlustracaoId; desenho?: undefined } | { desenho: CenaDesenhada; ilustracao?: undefined })
 
 export interface VideoGuia {
   id: string

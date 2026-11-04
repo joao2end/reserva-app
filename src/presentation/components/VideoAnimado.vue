@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { PhArrowCounterClockwise, PhCaretLeft, PhCaretRight, PhFilmStrip, PhPause, PhPlay } from '@phosphor-icons/vue'
 import { duracaoTotal, type VideoGuia } from '../../domain/conteudo/videos'
 import { useReprodutor } from '../estado/useReprodutor'
+import CenaDesenhada from './CenaDesenhada.vue'
 import IlustracaoCena from './IlustracaoCena.vue'
 
 const props = defineProps<{ video: VideoGuia }>()
@@ -32,7 +33,16 @@ const modo = computed(() => {
 
     <div class="border-4 border-tinta">
       <div class="relative">
-        <IlustracaoCena :key="rodada" :ilustracao="cena.ilustracao" :modo="modo" :descricao="`${cena.titulo}. ${cena.texto}`" />
+        <Transition name="troca-cena">
+          <CenaDesenhada
+            v-if="cena.desenho"
+            :key="rodada"
+            :cena="cena.desenho"
+            :modo="modo"
+            :descricao="`${cena.titulo}. ${cena.texto}`"
+          />
+          <IlustracaoCena v-else :key="rodada" :ilustracao="cena.ilustracao" :modo="modo" :descricao="`${cena.titulo}. ${cena.texto}`" />
+        </Transition>
         <button
           v-if="estado === 'parado'"
           type="button"
@@ -82,3 +92,27 @@ const modo = computed(() => {
     </div>
   </section>
 </template>
+
+<style scoped>
+.troca-cena-enter-active,
+.troca-cena-leave-active {
+  transition: opacity 0.45s ease;
+}
+
+.troca-cena-leave-active {
+  position: absolute;
+  inset: 0;
+}
+
+.troca-cena-enter-from,
+.troca-cena-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .troca-cena-enter-active,
+  .troca-cena-leave-active {
+    transition: none;
+  }
+}
+</style>

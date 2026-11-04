@@ -1,63 +1,69 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { PhArrowLeft, PhCaretRight, PhCheck, PhGraduationCap } from '@phosphor-icons/vue'
-import { CURSO, LICOES } from '../../domain/conteudo/curso'
+import { PhArrowLeft, PhCaretRight, PhCheck } from '@phosphor-icons/vue'
+import { cursoPorId } from '../../domain/conteudo/curso'
 import { usePreferencias } from '../estado/usePreferencias'
+import { ICONE_CURSO } from '../icones'
 import BarraProgresso from '../components/BarraProgresso.vue'
+import CaixaAviso from '../components/CaixaAviso.vue'
 
+const props = defineProps<{ cursoId: string }>()
 const { licoesConcluidas } = usePreferencias()
 
-const concluidas = computed(() => LICOES.filter((licao) => licoesConcluidas.value.includes(licao.id)).length)
-const percentual = computed(() => Math.round((concluidas.value / LICOES.length) * 100))
+const curso = computed(() => cursoPorId(props.cursoId))
+const concluidas = computed(() => curso.value?.licoes.filter((licao) => licoesConcluidas.value.includes(licao.id)).length ?? 0)
+const percentual = computed(() => (curso.value ? Math.round((concluidas.value / curso.value.licoes.length) * 100) : 0))
 </script>
 
 <template>
-  <section class="space-y-8">
+  <section v-if="curso" class="space-y-8">
     <header>
-      <RouterLink :to="{ name: 'guia' }" class="rotulo inline-flex items-center gap-2 underline underline-offset-4">
-        <PhArrowLeft :size="22" weight="bold" aria-hidden="true" />Voltar ao guia
+      <RouterLink :to="{ name: 'cursos' }" class="rotulo inline-flex items-center gap-2 underline underline-offset-4">
+        <PhArrowLeft :size="22" weight="bold" aria-hidden="true" />Todos os cursos
       </RouterLink>
-      <PhGraduationCap :size="56" weight="bold" class="mt-6" aria-hidden="true" />
-      <h1 class="titulo-1 mt-2">Curso de sobrevivência</h1>
-      <p class="nota">Cada lição tem animação, passo a passo e um teste rápido no fim. O progresso fica salvo no celular.</p>
+      <component :is="ICONE_CURSO[curso.id]" :size="56" weight="bold" class="mt-6" aria-hidden="true" />
+      <h1 class="titulo-1 mt-2">{{ curso.titulo }}</h1>
+      <p class="nota">{{ curso.resumo }}</p>
     </header>
 
+    <CaixaAviso v-if="curso.aviso" titulo="Atenção" tipo="atencao">{{ curso.aviso }}</CaixaAviso>
+
     <div class="space-y-2">
-      <BarraProgresso :percentual="percentual" rotulo="Meu progresso" />
-      <p class="font-bold" data-teste="progresso-curso">{{ concluidas }} de {{ LICOES.length }} lições concluídas</p>
+      <BarraProgresso :percentual="percentual" rotulo="Meu progresso neste curso" />
+      <p class="font-bold" data-teste="progresso-curso">{{ concluidas }} de {{ curso.licoes.length }} lições concluídas</p>
     </div>
 
-    <section v-for="(modulo, indiceModulo) in CURSO" :key="modulo.id" class="space-y-4" :aria-labelledby="`modulo-${modulo.id}`">
-      <div>
-        <p class="rotulo">Módulo {{ indiceModulo + 1 }}</p>
-        <h2 :id="`modulo-${modulo.id}`" class="titulo-2">{{ modulo.titulo }}</h2>
-        <p class="nota">{{ modulo.resumo }}</p>
-      </div>
-      <ol class="border-4 border-tinta">
-        <li v-for="(licao, indiceLicao) in modulo.licoes" :key="licao.id" class="border-b-2 border-tinta last:border-b-0">
-          <RouterLink
-            :to="{ name: 'licao', params: { licaoId: licao.id } }"
-            class="flex min-h-20 items-center gap-4 p-4"
-            :data-teste="`licao-${licao.id}`"
+    <ol class="border-4 border-tinta">
+      <li v-for="(licao, indice) in curso.licoes" :key="licao.id" class="border-b-2 border-tinta last:border-b-0">
+        <RouterLink
+          :to="{ name: 'licao', params: { licaoId: licao.id } }"
+          class="flex min-h-20 items-center gap-4 p-4"
+          :data-teste="`licao-${licao.id}`"
+        >
+          <span
+            class="flex size-12 shrink-0 items-center justify-center border-4 border-tinta text-[24px] font-bold"
+            :class="{ bloco: licoesConcluidas.includes(licao.id) }"
+            aria-hidden="true"
           >
-            <span
-              class="flex size-12 shrink-0 items-center justify-center border-4 border-tinta text-[24px] font-bold"
-              :class="{ bloco: licoesConcluidas.includes(licao.id) }"
-              aria-hidden="true"
-            >
-              <PhCheck v-if="licoesConcluidas.includes(licao.id)" :size="28" weight="bold" />
-              <template v-else>{{ indiceLicao + 1 }}</template>
+            <PhCheck v-if="licoesConcluidas.includes(licao.id)" :size="28" weight="bold" />
+            <template v-else>{{ indice + 1 }}</template>
+          </span>
+          <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
+            <span class="block text-[22px] leading-7 font-bold">{{ licao.titulo }}</span>
+            <span class="nota">
+              {{ licao.minutos }} min{{ licao.videosReais?.length ? ' · com vídeo real' : '' }}{{
+                licoesConcluidas.includes(licao.id) ? ' · Concluída' : ''
+              }}
             </span>
-            <span class="min-w-0 flex-1 [overflow-wrap:anywhere]">
-              <span class="block text-[22px] leading-7 font-bold">{{ licao.titulo }}</span>
-              <span class="nota">
-                {{ licao.minutos }} min{{ licoesConcluidas.includes(licao.id) ? ' · Concluída' : '' }}
-              </span>
-            </span>
-            <PhCaretRight :size="24" weight="bold" class="shrink-0" aria-hidden="true" />
-          </RouterLink>
-        </li>
-      </ol>
-    </section>
+          </span>
+          <PhCaretRight :size="24" weight="bold" class="shrink-0" aria-hidden="true" />
+        </RouterLink>
+      </li>
+    </ol>
+  </section>
+
+  <section v-else class="space-y-6">
+    <CaixaAviso titulo="Curso não encontrado" tipo="atencao">Volte e escolha outro curso.</CaixaAviso>
+    <RouterLink :to="{ name: 'cursos' }" class="botao-secundario flex items-center justify-center">Ver os cursos</RouterLink>
   </section>
 </template>

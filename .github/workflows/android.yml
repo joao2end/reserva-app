@@ -36,6 +36,9 @@ jobs:
       - name: Testes
         run: npm test
 
+      - name: Baixar vídeos reais dos cursos
+        run: python3 scripts/baixar_videos.py
+
       - name: Build web
         run: npm run build
 
