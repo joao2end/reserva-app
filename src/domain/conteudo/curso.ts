@@ -918,6 +918,129 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
         ],
         fontes: ['FoodSafety.gov (governo dos EUA): como manter a comida segura quando falta energia'],
       },
+      {
+        id: 'pouco-gas',
+        titulo: 'Cozinhar com pouco gás e com segurança',
+        objetivo: 'Fazer o botijão render mais e usar carvão e fogareiro sem risco de intoxicação.',
+        minutos: 5,
+        cenas: [
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'panela', x: 40, y: 50, largura: 44, movimento: 'entrar' },
+                { desenho: 'tampa', x: 40, y: 34, largura: 38, movimento: 'cair', atraso: 0.7 },
+                { desenho: 'certo', x: 82, y: 28, largura: 20, movimento: 'entrar', atraso: 1.4 },
+              ],
+              rotulos: [{ texto: 'TAMPA FECHADA', x: 50, y: 88, tamanho: 7, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Cozinhe com a tampa',
+            texto: 'A tampa segura o calor e a comida fica pronta mais rápido.',
+            segundos: 6,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'panela', x: 36, y: 46, largura: 40, movimento: 'tremer' },
+                { desenho: 'relogio', x: 78, y: 40, largura: 24, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [{ texto: 'CHIOU? FOGO BAIXO', x: 50, y: 88, tamanho: 7, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Panela de pressão economiza',
+            texto: 'Quando começar a chiar, abaixe o fogo.',
+            segundos: 6,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'panela', x: 40, y: 50, largura: 40, movimento: 'entrar' },
+                { desenho: 'pano', x: 40, y: 30, largura: 38, movimento: 'cair', atraso: 1 },
+              ],
+              rotulos: [{ texto: 'FERVEU? DESLIGUE E ABAFE', x: 50, y: 88, tamanho: 6.5, atraso: 1.8, destaque: true }],
+            },
+            titulo: 'Arroz abafado',
+            texto: 'Desligue quando a água ferver, cubra com pano e tampa e deixe terminar.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'braseiro', x: 50, y: 38, largura: 38, movimento: 'surgir' },
+                { desenho: 'errado', x: 50, y: 38, largura: 52, movimento: 'entrar', atraso: 0.8 },
+              ],
+              rotulos: [
+                { texto: 'CARVÃO E FOGAREIRO', x: 50, y: 78, tamanho: 6.5, atraso: 1.2 },
+                { texto: 'NUNCA DENTRO DE CASA', x: 50, y: 90, tamanho: 6.5, atraso: 1.6, destaque: true },
+              ],
+            },
+            titulo: 'Carvão só ao ar livre',
+            texto: 'A fumaça tem um gás sem cheiro que mata. Use fora de casa, longe das janelas.',
+            segundos: 7,
+          },
+        ],
+        partes: [
+          {
+            titulo: 'Fazer o botijão render',
+            passos: [
+              'Cozinhe sempre com a panela tampada.',
+              'Use a panela de pressão para feijão, carne e legumes duros. Quando chiar, abaixe o fogo.',
+              'Arroz: quando a água ferver, desligue, cubra a panela com um pano de prato, tampe e deixe o calor terminar.',
+              'Deixe o fogão longe de vento e de janela aberta: o vento rouba o calor.',
+              'No forno, não fique abrindo a porta. Asse mais de uma coisa de uma vez.',
+            ],
+          },
+          {
+            titulo: 'Carvão, fogareiro e lampião',
+            paragrafos: [
+              'Carvão, fogareiro de acampamento, lampião e gerador soltam monóxido de carbono. É um gás que não tem cor nem cheiro e mata em pouco tempo, principalmente quem está dormindo.',
+            ],
+            passos: [
+              'Nunca use carvão, braseiro, fogareiro ou lampião a gás dentro de casa, nem na garagem.',
+              'Use só ao ar livre, longe de portas e janelas abertas.',
+              'Nunca use o forno ou as bocas do fogão para esquentar a casa.',
+              'Se não tiver onde cozinhar com segurança, peça ajuda a vizinhos ou procure um abrigo.',
+            ],
+          },
+          {
+            titulo: 'Sinais de intoxicação',
+            paragrafos: ['Dor de cabeça, tontura, fraqueza, enjoo, vômito, dor no peito e confusão. Se várias pessoas da casa sentirem isso ao mesmo tempo, desconfie.'],
+            passos: [
+              'Saia na hora para o ar livre e leve todos com você.',
+              'Ligue 192.',
+              'Não volte para dentro até o lugar ser ventilado e a fonte do gás ser apagada.',
+            ],
+          },
+        ],
+        erros: [
+          'Fazer churrasco ou acender braseiro dentro de casa porque está chovendo.',
+          'Achar que a janela aberta resolve: não resolve.',
+          'Cozinhar com a panela destampada e o fogo alto o tempo todo.',
+          'Deixar a panela de pressão no fogo alto depois que chia.',
+        ],
+        teste: [
+          {
+            pergunta: 'A panela de pressão começou a chiar. O que fazer?',
+            opcoes: ['Aumentar o fogo', 'Abaixar o fogo', 'Abrir a panela'],
+            correta: 1,
+            explicacao: 'Depois que chia, o fogo baixo basta e o gás rende mais.',
+          },
+          {
+            pergunta: 'Pode usar braseiro de carvão dentro de casa com a janela aberta?',
+            opcoes: ['Pode, se a janela estiver aberta', 'Não, só ao ar livre', 'Pode, se for por pouco tempo'],
+            correta: 1,
+            explicacao: 'O gás do carvão não tem cheiro e mata. Use só ao ar livre, longe das janelas.',
+          },
+          {
+            pergunta: 'Todos em casa estão com dor de cabeça e tontura perto do fogareiro aceso. O que fazer?',
+            opcoes: ['Deitar para descansar', 'Sair para o ar livre e ligar 192', 'Tomar um remédio e esperar'],
+            correta: 1,
+            explicacao: 'São sinais de intoxicação por monóxido de carbono. Saia de casa e ligue 192.',
+          },
+        ],
+        fontes: [
+          'Idec: guia para economizar energia e gás em casa',
+          'CDC (Centros de Controle de Doenças dos EUA): prevenção da intoxicação por monóxido de carbono, em português',
+        ],
+      },
     ],
   },
 ]

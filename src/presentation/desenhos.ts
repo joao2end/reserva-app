@@ -399,6 +399,19 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
       <path class="c" d="M14 36 H116 V74 C116 82 110 86 102 86 H28 C20 86 14 82 14 74 Z"/><path class="t" d="M4 40 H14 M116 40 H126"/><path class="agua" d="M18 46 H112 V72 C112 78 108 82 102 82 H28 C22 82 18 78 18 72 Z"/>
       ${[30, 52, 74, 96].map((x, i) => `<circle class="bolha-sobe" style="animation-delay:${(i * 0.35).toFixed(2)}s" cx="${x}" cy="40" r="${4 + (i % 2) * 2}"/>`).join('')}`,
   },
+  tampa: {
+    largura: 120,
+    altura: 40,
+    svg: `<path class="c" d="M8 34 Q60 6 112 34 Z"/><rect class="f" x="48" y="8" width="24" height="9" rx="3"/><path class="t" d="M4 34 H116"/>`,
+  },
+  braseiro: {
+    largura: 120,
+    altura: 124,
+    svg: `<path class="t fino" d="M40 26 C34 18 46 12 40 4 M64 26 C58 18 70 12 64 4 M88 26 C82 18 94 12 88 4"/>
+      ${[30, 50, 70, 90].map((x, i) => `<circle class="f" cx="${x}" cy="${36 + (i % 2) * 3}" r="9"/>`).join('')}
+      <path class="c" d="M8 44 H112 C112 76 90 90 60 90 C30 90 8 76 8 44 Z"/><path class="t" d="M4 44 H116"/>
+      <path class="t" d="M38 86 L26 120 M82 86 L94 120 M60 90 V120"/>`,
+  },
   pano: {
     largura: 110,
     altura: 70,

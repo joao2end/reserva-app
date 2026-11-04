@@ -506,7 +506,7 @@ def contato_familia(pagina: Page):
 def curso(pagina: Page):
     ir(pagina, "#/guia")
     entrada = pagina.locator("[data-teste=entrada-curso]")
-    expect(entrada).to_contain_text("0 de 22 lições concluídas")
+    expect(entrada).to_contain_text("0 de 23 lições concluídas")
     entrada.click()
     expect(pagina.get_by_role("heading", level=1, name="Aprenda a fazer")).to_be_visible()
     expect(pagina.get_by_role("navigation").get_by_role("link", name="Cursos")).to_have_attribute("aria-current", "page")
@@ -555,7 +555,7 @@ def curso(pagina: Page):
     expect(pagina.locator("[data-teste=progresso-curso]")).to_have_text("1 de 3 lições concluídas")
     expect(pagina.locator("[data-teste=licao-rcp]")).to_contain_text("Concluída")
     ir(pagina, "#/cursos")
-    expect(pagina.locator("[data-teste=progresso-cursos]")).to_have_text("1 de 22 lições concluídas")
+    expect(pagina.locator("[data-teste=progresso-cursos]")).to_have_text("1 de 23 lições concluídas")
     ir(pagina, "#/curso/rcp")
     expect(pagina.get_by_role("heading", level=1, name="Parada cardíaca: massagem no peito")).to_be_visible()
     ir(pagina, "#/licao/nao-existe")
