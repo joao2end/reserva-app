@@ -32,6 +32,20 @@ Os vídeos reais não ficam no Git. A lista está em `scripts/videos_reais.json`
 
 Para ver os vídeos no computador, rode o mesmo script antes de `npm run dev`.
 
+## Vídeos narrados das lições
+
+Cada lição vira um vídeo MP4 com narração em português, feito com motion graphics em HTML:
+
+- `src/domain/conteudo/narracao.ts` monta o roteiro falado (abertura, uma fala por cena, encerramento) e escreve unidades e siglas por extenso.
+- `video/` é a página do vídeo (1280×720, cores por curso), posicionada quadro a quadro.
+- `scripts/videos/gerar_videos.py` narra com a voz Piper `pt_BR-faber-medium` (dados CC0), ajusta cada cena ao tamanho da fala, cria uma trilha original, fotografa os quadros e junta tudo com o ffmpeg.
+- O workflow **Vídeos dos cursos** roda quando o conteúdo muda, gera só as lições alteradas e publica na release `videos-cursos`.
+- No app, a lição mostra **Baixar vídeo**: o arquivo fica no celular, funciona sem internet e pode ser salvo ou enviado.
+
+Para gerar um vídeo no computador: `python3 scripts/videos/gerar_videos.py --modelo voz/pt_BR-faber-medium.onnx --licoes rcp`.
+
+As lições também indicam vídeos do YouTube de canais oficiais e de profissionais (`src/domain/conteudo/cursos/youtube.ts`). Eles abrem no app do YouTube; o download para ver sem internet é feito pelo próprio YouTube.
+
 As animações das lições são cenas desenhadas em SVG: cada cena lista as peças (`src/presentation/desenhos.ts`), a posição e o movimento, em `src/domain/conteudo/cursos/`.
 
 ## Fácil para idosos

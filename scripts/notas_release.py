@@ -20,7 +20,7 @@ def mudancas(faixa: str) -> list[tuple[str, list[str]]]:
 
 
 def principal(repositorio: str, versao: str) -> None:
-    anterior = git("describe", "--tags", "--abbrev=0")
+    anterior = git("describe", "--tags", "--abbrev=0", "--match", "v*")
     faixa = f"{anterior}..HEAD" if anterior else "HEAD"
     print("## O que mudou\n")
     for titulo, paragrafos in mudancas(faixa):

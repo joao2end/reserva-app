@@ -39,6 +39,11 @@ jobs:
       - name: Baixar vídeos reais dos cursos
         run: python3 scripts/baixar_videos.py
 
+      - name: Lista dos vídeos narrados
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download videos-cursos -p manifesto.json -O public/videos-narrados.json --clobber || echo "Ainda sem vídeos narrados."
+
       - name: Build web
         run: npm run build
 

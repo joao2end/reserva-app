@@ -1,0 +1,80 @@
+name: Vídeos dos cursos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/domain/conteudo/**'
+      - 'src/presentation/desenhos.ts'
+      - 'src/presentation/components/CenaDesenhada.vue'
+      - 'src/presentation/components/IlustracaoCena.vue'
+      - 'video/**'
+      - 'scripts/videos/**'
+      - '.github/workflows/videos.yml'
+  workflow_dispatch:
+    inputs:
+      todos:
+        description: 'Gerar de novo todos os vídeos'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: videos-cursos
+  cancel-in-progress: false
+
+env:
+  VOZ_URL: https://huggingface.co/rhasspy/piper-voices/resolve/main/pt/pt_BR/faber/medium
+  VOZ_ONNX_SHA256: 858555e3a064209c57088fe6bd70c4c3dc54d03eaa00c45d5ecaf43a33f95aa7
+  VOZ_JSON_SHA256: 7e694de195ae3fc36dd732c445eb04fb49b649854893cb5506b978f0d50a1d6f
+
+jobs:
+  videos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependências
+        run: |
+          npm ci
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install piper-tts==1.8.0 numpy playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Baixar a voz em português (Piper faber, dados CC0)
+        run: |
+          mkdir -p voz
+          curl -sSfL "$VOZ_URL/pt_BR-faber-medium.onnx" -o voz/pt_BR-faber-medium.onnx
+          curl -sSfL "$VOZ_URL/pt_BR-faber-medium.onnx.json" -o voz/pt_BR-faber-medium.onnx.json
+          echo "$VOZ_ONNX_SHA256  voz/pt_BR-faber-medium.onnx" | sha256sum -c
+          echo "$VOZ_JSON_SHA256  voz/pt_BR-faber-medium.onnx.json" | sha256sum -c
+
+      - name: Buscar o manifesto anterior
+        if: ${{ !inputs.todos }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download videos-cursos -p manifesto.json -D anterior || echo "Ainda não há vídeos publicados."
+
+      - name: Gerar os vídeos que mudaram
+        run: python scripts/videos/gerar_videos.py --modelo voz/pt_BR-faber-medium.onnx --manifesto-anterior anterior/manifesto.json --saida saida-videos
+
+      - name: Publicar na release videos-cursos
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view videos-cursos >/dev/null 2>&1; then
+            gh release create videos-cursos --title "Vídeos narrados dos cursos" --latest=false --prerelease --target "$GITHUB_SHA" \
+              --notes "Vídeos das lições do SBV, gerados automaticamente: motion graphics em HTML, narração com a voz sintética Piper (faber, dados CC0) e trilha original. O app baixa daqui quando a pessoa toca em Baixar vídeo."
+          fi
+          gh release upload videos-cursos saida-videos/* --clobber

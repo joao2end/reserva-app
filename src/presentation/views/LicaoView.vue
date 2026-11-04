@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { PhArrowLeft, PhArrowRight, PhBookOpen, PhCheckCircle, PhClock, PhVideoCamera, PhWarning } from '@phosphor-icons/vue'
 import { licaoPorId, moduloDaLicao, proximaLicao } from '../../domain/conteudo/curso'
+import { videosYoutubeDaLicao } from '../../domain/conteudo/cursos/youtube'
 import type { VideoGuia } from '../../domain/conteudo/videos'
 import { usePreferencias } from '../estado/usePreferencias'
 import { useAviso } from '../estado/useAviso'
@@ -9,6 +10,8 @@ import CaixaAviso from '../components/CaixaAviso.vue'
 import TesteLicao from '../components/TesteLicao.vue'
 import VideoAnimado from '../components/VideoAnimado.vue'
 import VideoReal from '../components/VideoReal.vue'
+import VideoNarradoLicao from '../components/VideoNarradoLicao.vue'
+import VideosYoutube from '../components/VideosYoutube.vue'
 
 const props = defineProps<{ licaoId: string }>()
 const { licoesConcluidas, concluirLicao } = usePreferencias()
@@ -17,11 +20,12 @@ const { mostrar } = useAviso()
 const licao = computed(() => licaoPorId(props.licaoId))
 const modulo = computed(() => moduloDaLicao(props.licaoId))
 const proxima = computed(() => proximaLicao(props.licaoId))
+const youtube = computed(() => videosYoutubeDaLicao(props.licaoId))
 const concluida = computed(() => licoesConcluidas.value.includes(props.licaoId))
 const posicao = computed(() => (modulo.value?.licoes.findIndex((item) => item.id === props.licaoId) ?? 0) + 1)
 
 const video = computed<VideoGuia | undefined>(() =>
-  licao.value ? { id: licao.value.id, secaoId: licao.value.id, titulo: 'Veja como fazer', cenas: licao.value.cenas } : undefined,
+  licao.value ? { id: licao.value.id, secaoId: licao.value.id, titulo: 'Animação rápida (sem internet)', cenas: licao.value.cenas } : undefined,
 )
 
 async function aprovar() {
@@ -50,6 +54,8 @@ async function aprovar() {
 
     <CaixaAviso titulo="O que você vai aprender">{{ licao.objetivo }}</CaixaAviso>
 
+    <VideoNarradoLicao :key="`narrado-${licao.id}`" :licao-id="licao.id" :titulo="licao.titulo" />
+
     <VideoAnimado :key="video.id" :video="video" />
 
     <section v-if="licao.videosReais?.length" class="space-y-6" aria-labelledby="veja-de-verdade">
@@ -58,6 +64,8 @@ async function aprovar() {
       </h2>
       <VideoReal v-for="real in licao.videosReais" :key="real.arquivo" :video="real" />
     </section>
+
+    <VideosYoutube v-if="youtube.length" :videos="youtube" />
 
     <section v-for="parte in licao.partes" :key="parte.titulo" class="space-y-4">
       <h2 class="titulo-2">{{ parte.titulo }}</h2>

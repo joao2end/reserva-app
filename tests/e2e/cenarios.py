@@ -564,6 +564,30 @@ def curso(pagina: Page):
     expect(pagina.get_by_text("Curso não encontrado")).to_be_visible()
 
 
+@cenario("29. Vídeo narrado para baixar e vídeos do YouTube na lição")
+def video_narrado(pagina: Page):
+    manifesto = '{"videos":[{"licaoId":"rcp","arquivo":"rcp.mp4","bytes":2202009,"segundos":48.5}]}'
+    pagina.route("**/videos-narrados.json", lambda rota: rota.fulfill(status=200, content_type="application/json", body=manifesto))
+    ir(pagina, "#/licao/rcp")
+    narrado = pagina.locator("[data-teste=video-narrado]")
+    expect(narrado).to_be_visible()
+    expect(narrado).to_contain_text("Vídeo com narração")
+    expect(pagina.locator("[data-teste=baixar-video]")).to_have_text("Baixar vídeo (2,1 MB)")
+    expect(narrado).to_contain_text("Voz sintética Piper")
+    youtube = pagina.locator("[data-teste=videos-youtube]")
+    expect(youtube.get_by_role("link")).to_have_count(2)
+    expect(youtube.get_by_role("link").first).to_have_attribute("href", "https://www.youtube.com/watch?v=_astzJ-IAiw")
+    expect(youtube).to_contain_text("Ministério da Saúde · canal oficial")
+    pagina.set_viewport_size({"width": 360, "height": 780})
+    sem_rolagem_horizontal(pagina)
+    foto(pagina, "29-video-narrado")
+    pagina.set_viewport_size({"width": 412, "height": 915})
+    ir(pagina, "#/licao/eletrica-seguranca")
+    expect(pagina.locator("[data-teste=video-narrado]")).to_have_count(0)
+    expect(pagina.locator("[data-teste=videos-youtube]")).to_be_visible()
+    pagina.unroute("**/videos-narrados.json")
+
+
 def principal():
     os.makedirs(PASTA_TELAS, exist_ok=True)
     servidor = subprocess.Popen(
@@ -583,7 +607,7 @@ def principal():
                 criar_estoque, comprar_agua, compra_data_futura, ciclo_do_item, esc_cancela, resumo_inicio,
                 persistencia, editar_estoque, locais, guia, rotas_invalidas, navegacao, letra_grande,
                 tela_estreita, tema_escuro, apagar_tudo, mochila, telefones_emergencia, fumaca, calor,
-                vencido, contato_familia, curso,
+                vencido, contato_familia, curso, video_narrado,
             ]:
                 executar(pagina)
             navegador.close()

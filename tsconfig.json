@@ -17,5 +17,6 @@
     "noFallthroughCasesInSwitch": true,
     "types": ["vite/client"]
   },
-  "include": ["src/**/*.ts", "src/**/*.vue", "vite.config.ts"]
+  "include": ["src/**/*.ts", "src/**/*.vue", "vite.config.ts", "video/**/*.ts", "video/**/*.vue"],
+  "exclude": ["video/vite.config.ts"]
 }
