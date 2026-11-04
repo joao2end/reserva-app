@@ -30,3 +30,13 @@ describe('telefones de emergência', () => {
     expect(calor?.blocos.flatMap((bloco) => bloco.itens).some((item) => item.includes('podem não sentir sede'))).toBe(true)
   })
 })
+
+describe('formato do telefone', () => {
+  it('mostra o número de um jeito fácil de ler', async () => {
+    const { formatarTelefone } = await import('../../src/presentation/formato')
+    expect(formatarTelefone('82998765432')).toBe('(82) 99876-5432')
+    expect(formatarTelefone('8233334444')).toBe('(82) 3333-4444')
+    expect(formatarTelefone('998765432')).toBe('99876-5432')
+    expect(formatarTelefone('33334444')).toBe('3333-4444')
+  })
+})

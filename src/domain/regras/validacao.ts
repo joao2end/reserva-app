@@ -27,6 +27,23 @@ export function exigirMes(valor: string, campo: string) {
   exigir(ehMesIso(valor), `${campo} inválida. Use mês e ano.`)
 }
 
+export const DIGITOS_TELEFONE = { minimo: 8, maximo: 13 }
+
+export function apenasDigitos(valor: string): string {
+  return valor.replace(/\D/g, '')
+}
+
+export function ehTelefone(valor: string): boolean {
+  return /^\d+$/.test(valor) && valor.length >= DIGITOS_TELEFONE.minimo && valor.length <= DIGITOS_TELEFONE.maximo
+}
+
+export function exigirTelefone(valor: string): string {
+  const digitos = apenasDigitos(valor)
+  exigir(digitos.length > 0, 'Informe o telefone.')
+  exigir(ehTelefone(digitos), 'Telefone inválido. Escreva o número com DDD, por exemplo 82 99999-9999.')
+  return digitos
+}
+
 export function exigirTexto(valor: string, limite: number, campo: string): string {
   const limpo = valor.trim()
   exigir(limpo.length > 0, `Informe ${campo}.`)

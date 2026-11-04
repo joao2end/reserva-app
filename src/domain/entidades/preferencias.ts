@@ -2,12 +2,18 @@ export const TAMANHOS_TEXTO = ['normal', 'grande', 'muito-grande'] as const
 
 export type TamanhoTexto = (typeof TAMANHOS_TEXTO)[number]
 
+export interface ContatoFamilia {
+  nome: string
+  telefone: string
+}
+
 export interface Preferencias {
   tamanhoTexto: TamanhoTexto
   mochila: string[]
+  contatoFamilia: ContatoFamilia | null
 }
 
-export const PREFERENCIAS_PADRAO: Preferencias = { tamanhoTexto: 'normal', mochila: [] }
+export const PREFERENCIAS_PADRAO: Preferencias = { tamanhoTexto: 'normal', mochila: [], contatoFamilia: null }
 
 export const ESCALA_TEXTO: Record<TamanhoTexto, number> = {
   normal: 1,

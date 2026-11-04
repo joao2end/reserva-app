@@ -30,18 +30,19 @@ describe('preferências', () => {
   })
 
   it('recupera preferências corrompidas', () => {
-    expect(normalizarPreferencias(null)).toEqual({ tamanhoTexto: 'normal', mochila: [] })
-    expect(normalizarPreferencias('{x')).toEqual({ tamanhoTexto: 'normal', mochila: [] })
-    expect(normalizarPreferencias('{"tamanhoTexto":"gigante"}')).toEqual({ tamanhoTexto: 'normal', mochila: [] })
-    expect(normalizarPreferencias('{"tamanhoTexto":"grande"}')).toEqual({ tamanhoTexto: 'grande', mochila: [] })
+    expect(normalizarPreferencias(null)).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null })
+    expect(normalizarPreferencias('{x')).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null })
+    expect(normalizarPreferencias('{"tamanhoTexto":"gigante"}')).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null })
+    expect(normalizarPreferencias('{"tamanhoTexto":"grande"}')).toEqual({ tamanhoTexto: 'grande', mochila: [], contatoFamilia: null })
   })
 
   it('mantém a mochila salva e descarta itens desconhecidos', () => {
     expect(normalizarPreferencias('{"tamanhoTexto":"grande","mochila":["agua","foguete",3,"agua","radio"]}')).toEqual({
       tamanhoTexto: 'grande',
       mochila: ['agua', 'radio'],
+      contatoFamilia: null,
     })
-    expect(normalizarPreferencias('{"mochila":"agua"}')).toEqual({ tamanhoTexto: 'normal', mochila: [] })
+    expect(normalizarPreferencias('{"mochila":"agua"}')).toEqual({ tamanhoTexto: 'normal', mochila: [], contatoFamilia: null })
   })
 
   it('marca, desmarca e esvazia a mochila sem mudar a letra', async () => {
@@ -53,7 +54,7 @@ describe('preferências', () => {
     await servico.alternarItemMochila('agua')
     expect((await servico.obter()).mochila).toEqual(['lanterna'])
     await servico.esvaziarMochila()
-    expect(await servico.obter()).toEqual({ tamanhoTexto: 'grande', mochila: [] })
+    expect(await servico.obter()).toEqual({ tamanhoTexto: 'grande', mochila: [], contatoFamilia: null })
   })
 
   it('recusa item da mochila que não existe', async () => {
@@ -64,5 +65,36 @@ describe('preferências', () => {
   it('itens da mochila têm id único', () => {
     const ids = ITENS_MOCHILA.map((item) => item.id)
     expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('salva o telefone da família só com os números', async () => {
+    const servico = new ServicoPreferencias(repositorioEmMemoria())
+    await servico.alternarItemMochila('agua')
+    await servico.definirContatoFamilia('  Maria filha ', '(82) 99876-5432')
+    expect(await servico.obter()).toEqual({
+      tamanhoTexto: 'normal',
+      mochila: ['agua'],
+      contatoFamilia: { nome: 'Maria filha', telefone: '82998765432' },
+    })
+    await servico.removerContatoFamilia()
+    expect((await servico.obter()).contatoFamilia).toBeNull()
+  })
+
+  it('recusa telefone da família sem nome, curto demais ou longo demais', async () => {
+    const servico = new ServicoPreferencias(repositorioEmMemoria())
+    await expect(servico.definirContatoFamilia('', '82998765432')).rejects.toBeInstanceOf(ErroDeValidacao)
+    await expect(servico.definirContatoFamilia('Maria', '1234')).rejects.toBeInstanceOf(ErroDeValidacao)
+    await expect(servico.definirContatoFamilia('Maria', '12345678901234')).rejects.toBeInstanceOf(ErroDeValidacao)
+    await expect(servico.definirContatoFamilia('Maria', 'sem número')).rejects.toBeInstanceOf(ErroDeValidacao)
+  })
+
+  it('mantém o telefone da família salvo e descarta um contato estragado', () => {
+    expect(normalizarPreferencias('{"contatoFamilia":{"nome":"Zé","telefone":"8233334444"}}').contatoFamilia).toEqual({
+      nome: 'Zé',
+      telefone: '8233334444',
+    })
+    expect(normalizarPreferencias('{"contatoFamilia":{"nome":"Zé","telefone":"82 3333"}}').contatoFamilia).toBeNull()
+    expect(normalizarPreferencias('{"contatoFamilia":{"nome":"","telefone":"8233334444"}}').contatoFamilia).toBeNull()
+    expect(normalizarPreferencias('{"contatoFamilia":"Zé"}').contatoFamilia).toBeNull()
   })
 })

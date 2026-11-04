@@ -316,7 +316,7 @@ def letra_grande(pagina: Page):
     expect(pagina.locator("html")).to_have_attribute("style", "zoom: 1.3;")
     pagina.set_viewport_size({"width": 360, "height": 780})
     foto(pagina, "18-letra-grande")
-    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila"]:
+    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia"]:
         ir(pagina, rota)
         sem_rolagem_horizontal(pagina)
     ir(pagina, "#/compras")
@@ -332,7 +332,7 @@ def letra_grande(pagina: Page):
 @cenario("19. Tela estreita (360px) sem rolagem horizontal na letra normal")
 def tela_estreita(pagina: Page):
     pagina.set_viewport_size({"width": 360, "height": 780})
-    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila"]:
+    for rota in ["", "#/criar", "#/estoque", "#/estoque/arroz", "#/compras", "#/guia", "#/guia/armazenamento", "#/locais", "#/mochila", "#/familia"]:
         ir(pagina, rota)
         sem_rolagem_horizontal(pagina)
     pagina.set_viewport_size({"width": 412, "height": 915})
@@ -469,6 +469,39 @@ def vencido(pagina: Page):
     pagina.set_viewport_size({"width": 412, "height": 915})
 
 
+@cenario("27. Telefone da família: validar, salvar, ligar, mudar e apagar com confirmação")
+def contato_familia(pagina: Page):
+    ir(pagina, "")
+    emergencia = pagina.locator("[data-teste=emergencia]")
+    expect(emergencia.locator("[data-teste=contato-familia]")).to_have_count(0)
+    emergencia.get_by_role("link", name="Salvar telefone da família").click()
+    expect(pagina.get_by_role("heading", level=1, name="Telefone da família")).to_be_visible()
+    pagina.get_by_label("Nome").fill("Maria")
+    pagina.get_by_label("Telefone com DDD").fill("1234")
+    botao(pagina, "Salvar").click()
+    expect(pagina.get_by_role("alert")).to_contain_text("Telefone inválido")
+    pagina.get_by_label("Telefone com DDD").fill("(82) 99876-5432")
+    botao(pagina, "Salvar").click()
+    expect(pagina.get_by_role("status")).to_contain_text("Telefone da família salvo")
+    contato = pagina.locator("[data-teste=contato-familia] a")
+    expect(contato).to_have_attribute("href", "tel:82998765432")
+    expect(contato).to_contain_text("(82) 99876-5432")
+    pagina.reload()
+    pagina.wait_for_load_state("networkidle")
+    expect(contato).to_contain_text("Maria")
+    ir(pagina, "#/guia/socorros")
+    expect(pagina.locator("[data-teste=contato-familia] a")).to_have_attribute("href", "tel:82998765432")
+    pagina.get_by_role("link", name="Mudar telefone da família").click()
+    expect(pagina.get_by_label("Telefone com DDD")).to_have_value("(82) 99876-5432")
+    botao(pagina, "Apagar telefone da família").click()
+    botao(pagina, "Não, manter").click()
+    expect(pagina.get_by_label("Nome")).to_have_value("Maria")
+    botao(pagina, "Apagar telefone da família").click()
+    botao(pagina, "Sim, apagar").click()
+    expect(pagina.get_by_role("heading", level=1, name="Primeiros socorros")).to_be_visible()
+    expect(pagina.locator("[data-teste=contato-familia]")).to_have_count(0)
+
+
 def principal():
     os.makedirs(PASTA_TELAS, exist_ok=True)
     servidor = subprocess.Popen(
@@ -488,7 +521,7 @@ def principal():
                 criar_estoque, comprar_agua, compra_data_futura, ciclo_do_item, esc_cancela, resumo_inicio,
                 persistencia, editar_estoque, locais, guia, rotas_invalidas, navegacao, letra_grande,
                 tela_estreita, tema_escuro, apagar_tudo, mochila, telefones_emergencia, fumaca, calor,
-                vencido,
+                vencido, contato_familia,
             ]:
                 executar(pagina)
             navegador.close()

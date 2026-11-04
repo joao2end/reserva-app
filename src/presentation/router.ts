@@ -12,6 +12,7 @@ export const router = createRouter({
     { path: '/guia', name: 'guia', component: () => import('./views/GuiaView.vue') },
     { path: '/guia/:secaoId', name: 'secao', component: () => import('./views/SecaoGuiaView.vue'), props: true },
     { path: '/mochila', name: 'mochila', component: () => import('./views/MochilaView.vue') },
+    { path: '/familia', name: 'familia', component: () => import('./views/ContatoFamiliaView.vue') },
     { path: '/locais', name: 'locais', component: () => import('./views/LocaisView.vue') },
     { path: '/:caminho(.*)*', redirect: { name: 'inicio' } },
   ],

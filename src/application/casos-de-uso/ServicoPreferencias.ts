@@ -1,6 +1,6 @@
 import { ehTamanhoTexto, type Preferencias, type TamanhoTexto } from '../../domain/entidades/preferencias'
 import { ehItemMochila } from '../../domain/conteudo/mochila'
-import { exigir } from '../../domain/regras/validacao'
+import { LIMITE_NOME, exigir, exigirTelefone, exigirTexto } from '../../domain/regras/validacao'
 import type { RepositorioPreferencias } from '../portas/RepositorioPreferencias'
 
 export class ServicoPreferencias {
@@ -28,6 +28,19 @@ export class ServicoPreferencias {
 
   async esvaziarMochila(): Promise<Preferencias> {
     const novas = { ...(await this.repositorio.carregar()), mochila: [] }
+    await this.repositorio.salvar(novas)
+    return novas
+  }
+
+  async definirContatoFamilia(nome: string, telefone: string): Promise<Preferencias> {
+    const contatoFamilia = { nome: exigirTexto(nome, LIMITE_NOME, 'o nome'), telefone: exigirTelefone(telefone) }
+    const novas = { ...(await this.repositorio.carregar()), contatoFamilia }
+    await this.repositorio.salvar(novas)
+    return novas
+  }
+
+  async removerContatoFamilia(): Promise<Preferencias> {
+    const novas = { ...(await this.repositorio.carregar()), contatoFamilia: null }
     await this.repositorio.salvar(novas)
     return novas
   }

@@ -23,6 +23,14 @@ export function formatarPrazo(dias: number): string {
   return `Vence em ${dias} dias`
 }
 
+export function formatarTelefone(digitos: string): string {
+  if (digitos.length === 11) return `(${digitos.slice(0, 2)}) ${digitos.slice(2, 7)}-${digitos.slice(7)}`
+  if (digitos.length === 10) return `(${digitos.slice(0, 2)}) ${digitos.slice(2, 6)}-${digitos.slice(6)}`
+  if (digitos.length === 9) return `${digitos.slice(0, 5)}-${digitos.slice(5)}`
+  if (digitos.length === 8) return `${digitos.slice(0, 4)}-${digitos.slice(4)}`
+  return digitos
+}
+
 export function plural(quantidade: number, singular: string, pluralTexto: string): string {
   return `${quantidade} ${quantidade === 1 ? singular : pluralTexto}`
 }
