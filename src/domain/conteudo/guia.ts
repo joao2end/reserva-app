@@ -12,6 +12,7 @@ export interface SecaoGuia {
   resumo: string
   blocos: { titulo: string; itens: string[] }[]
   aviso?: { critico: boolean; titulo: string; texto: string }
+  telefones?: boolean
 }
 
 export const GUIA: SecaoGuia[] = [
@@ -348,6 +349,7 @@ export const GUIA: SecaoGuia[] = [
   {
     id: 'deslocamento',
     grupo: 'sobrevivencia',
+    telefones: true,
     titulo: 'Para onde se deslocar',
     resumo: 'Combine antes para onde ir e como se encontrar.',
     blocos: [
@@ -430,6 +432,7 @@ export const GUIA: SecaoGuia[] = [
   {
     id: 'socorros',
     grupo: 'sobrevivencia',
+    telefones: true,
     titulo: 'Primeiros socorros',
     resumo: 'O que fazer até o socorro chegar.',
     aviso: {

@@ -6,6 +6,7 @@ import { videoDaSecao } from '../../domain/conteudo/videos'
 import { ICONE_SECAO_GUIA } from '../icones'
 import CaixaAviso from '../components/CaixaAviso.vue'
 import VideoAnimado from '../components/VideoAnimado.vue'
+import TelefonesEmergencia from '../components/TelefonesEmergencia.vue'
 
 const props = defineProps<{ secaoId: string }>()
 const secao = computed(() => GUIA.find((candidata) => candidata.id === props.secaoId))
@@ -28,6 +29,8 @@ const video = computed(() => videoDaSecao(props.secaoId))
     </CaixaAviso>
 
     <VideoAnimado v-if="video" :key="video.id" :video="video" />
+
+    <TelefonesEmergencia v-if="secao.telefones" />
 
     <section v-for="bloco in secao.blocos" :key="bloco.titulo" class="space-y-4">
       <h2 class="titulo-2">{{ bloco.titulo }}</h2>

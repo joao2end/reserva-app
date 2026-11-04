@@ -7,6 +7,7 @@ import { formatarMesAno, formatarPrazo, formatarQuantidade, plural } from '../fo
 import BarraProgresso from '../components/BarraProgresso.vue'
 import CaixaAviso from '../components/CaixaAviso.vue'
 import SeletorTamanhoTexto from '../components/SeletorTamanhoTexto.vue'
+import TelefonesEmergencia from '../components/TelefonesEmergencia.vue'
 
 const { estado, hoje } = useEstoque()
 
@@ -29,7 +30,7 @@ const comoUsar = [
 
 <template>
   <section v-if="!dados" class="space-y-8">
-    <h1 class="text-[64px] leading-[64px] font-bold">RESERVA</h1>
+    <h1 class="text-[64px] leading-[64px] font-bold">SBV</h1>
     <p>Monte e mantenha um estoque de comida e água para atravessar a seca do El Niño.</p>
 
     <section class="caixa space-y-4">
@@ -48,6 +49,8 @@ const comoUsar = [
     <RouterLink :to="{ name: 'guia' }" class="botao-secundario flex items-center justify-center gap-3">
       <PhBookOpen :size="28" weight="bold" aria-hidden="true" />Ler o guia primeiro
     </RouterLink>
+
+    <TelefonesEmergencia />
 
     <SeletorTamanhoTexto />
   </section>
@@ -100,6 +103,8 @@ const comoUsar = [
     <RouterLink :to="{ name: 'criar' }" class="botao-secundario flex items-center justify-center gap-3">
       <PhPencilSimple :size="28" weight="bold" aria-hidden="true" />Mudar pessoas ou tempo
     </RouterLink>
+
+    <TelefonesEmergencia />
 
     <SeletorTamanhoTexto />
   </section>

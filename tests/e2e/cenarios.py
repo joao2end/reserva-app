@@ -69,7 +69,7 @@ def escolher_validade(pagina: Page, ano: int, mes: int):
 @cenario("1. Início sem estoque explica como usar em 3 passos")
 def inicio_vazio(pagina: Page):
     ir(pagina, "")
-    expect(pagina.get_by_role("heading", name="RESERVA")).to_be_visible()
+    expect(pagina.get_by_role("heading", name="SBV", exact=True)).to_be_visible()
     expect(pagina.get_by_role("heading", name="Como usar")).to_be_visible()
     expect(pagina.locator("ol li")).to_have_count(3)
     expect(pagina.get_by_role("link", name="Começar")).to_be_visible()
@@ -122,7 +122,7 @@ def campo_numero(pagina: Page):
 def sair_do_assistente(pagina: Page):
     ir(pagina, "#/criar")
     botao(pagina, "Sair").click()
-    expect(pagina.get_by_role("heading", name="RESERVA")).to_be_visible()
+    expect(pagina.get_by_role("heading", name="SBV", exact=True)).to_be_visible()
 
 
 @cenario("6. Criar estoque passo a passo: 2 adultos por 1 mês")
@@ -358,7 +358,7 @@ def apagar_tudo(pagina: Page):
     expect(pagina.locator("[data-teste=passo]")).to_have_text("Passo 4 de 4")
     botao(pagina, "Apagar tudo e recomeçar").click()
     botao(pagina, "Sim, apagar tudo").click()
-    expect(pagina.get_by_role("heading", name="RESERVA")).to_be_visible()
+    expect(pagina.get_by_role("heading", name="SBV", exact=True)).to_be_visible()
     pagina.reload()
     expect(pagina.get_by_role("link", name="Começar")).to_be_visible()
 
@@ -395,6 +395,23 @@ def mochila(pagina: Page):
     expect(pagina.get_by_label("Rádio a pilha")).not_to_be_checked()
 
 
+@cenario("23. Telefones de emergência: botões de ligar no início e nos primeiros socorros")
+def telefones_emergencia(pagina: Page):
+    for rota in ["", "#/guia/socorros", "#/guia/deslocamento"]:
+        ir(pagina, rota)
+        emergencia = pagina.locator("[data-teste=emergencia]")
+        expect(emergencia).to_be_visible()
+        for numero in ["192", "193", "199", "190"]:
+            expect(emergencia.locator(f'a[href="tel:{numero}"]')).to_have_count(1)
+    ir(pagina, "#/guia/cultivo")
+    expect(pagina.locator("[data-teste=emergencia]")).to_have_count(0)
+    pagina.set_viewport_size({"width": 360, "height": 780})
+    ir(pagina, "#/guia/socorros")
+    sem_rolagem_horizontal(pagina)
+    foto(pagina, "23-telefones-socorros")
+    pagina.set_viewport_size({"width": 412, "height": 915})
+
+
 def principal():
     os.makedirs(PASTA_TELAS, exist_ok=True)
     servidor = subprocess.Popen(
@@ -413,7 +430,7 @@ def principal():
                 inicio_vazio, redireciona_sem_estoque, validacao_criacao, campo_numero, sair_do_assistente,
                 criar_estoque, comprar_agua, compra_data_futura, ciclo_do_item, esc_cancela, resumo_inicio,
                 persistencia, editar_estoque, locais, guia, rotas_invalidas, navegacao, letra_grande,
-                tela_estreita, tema_escuro, apagar_tudo, mochila,
+                tela_estreita, tema_escuro, apagar_tudo, mochila, telefones_emergencia,
             ]:
                 executar(pagina)
             navegador.close()
