@@ -17,6 +17,9 @@ jobs:
       KEYSTORE_BASE64: ${{ secrets.RESERVA_KEYSTORE_BASE64 }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - uses: actions/setup-node@v5
         with:
@@ -70,11 +73,14 @@ jobs:
         if: always()
         run: rm -f "$RUNNER_TEMP/upload.jks"
 
+      - name: Escrever o que mudou
+        run: python3 scripts/notas_release.py "${{ github.server_url }}/${{ github.repository }}" "$VERSAO" > "$RUNNER_TEMP/notas.md"
+
       - name: Publicar release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "v$VERSAO" release/* \
             --title "SBV $VERSAO" \
-            --notes "Baixe o arquivo .apk abaixo e abra no celular Android para instalar. O arquivo .aab é o pacote para enviar à Play Store." \
+            --notes-file "$RUNNER_TEMP/notas.md" \
             --target "$GITHUB_SHA"
