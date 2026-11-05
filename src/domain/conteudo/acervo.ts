@@ -354,6 +354,70 @@ export const ACERVO: GuiaAcervo[] = [
     ],
   },
   {
+    id: 'fogo-no-mato',
+    categoria: 'clima',
+    nivel: 'medio',
+    titulo: 'Fogo no mato perto de casa',
+    resumo: 'O que fazer quando um incêndio no mato chega perto da sua casa, e como voltar depois.',
+    aviso: {
+      critico: true,
+      titulo: 'Não tente apagar o fogo sozinho',
+      texto: 'Ligue 193 e fique longe do fogo. Se houver perigo, saia de casa antes que o fogo ou a fumaça fechem o caminho. Coisas se recuperam. Calor e fumaça podem matar.',
+    },
+    blocos: [
+      {
+        titulo: 'Viu fogo no mato',
+        itens: [
+          'Ligue 193, dos Bombeiros, na hora.',
+          'Diga onde está o fogo: o endereço ou um ponto de referência perto.',
+          'Diga para onde o fogo está indo e se há pessoas, carros ou casas em perigo.',
+          'Não chegue perto do fogo para olhar. Dá para avisar de longe.',
+          'Não siga nem filme o fogo. A fumaça e o calor chegam rápido.',
+        ],
+      },
+      {
+        titulo: 'Se o fogo chegar perto de casa',
+        itens: [
+          'Faça o que os Bombeiros ou a Defesa Civil mandarem.',
+          'Se sentir perigo, saia. Nem sempre vem um aviso oficial para sair.',
+          'Saia logo, antes que o fogo ou a fumaça fechem a única saída.',
+          'Leve a mochila de saída e os remédios.',
+          'Dirigindo na fumaça, vá devagar. Se a fumaça for muito forte, desvie do trecho se der com segurança.',
+        ],
+      },
+      {
+        titulo: 'Para voltar para casa',
+        itens: [
+          'Só volte quando as autoridades disserem que é seguro.',
+          'Volte de dia, com luz.',
+          'Não pise em cinza quente, tronco queimado ou brasa.',
+          'O chão pode estar quente por baixo, queimar o pé e acender o fogo de novo.',
+          'Água de poço pode ficar contaminada depois do fogo. Beba água tratada.',
+        ],
+      },
+      {
+        titulo: 'Para limpar a cinza',
+        itens: [
+          'Use luva, camisa de manga comprida, calça, meia e sapato fechado.',
+          'Use máscara PFF2 ou N95 para respirar menos cinza.',
+          'Cinza caiu na pele, no olho ou na boca? Lave logo com água.',
+          'Criança não ajuda na limpeza.',
+        ],
+      },
+    ],
+    ligacoes: [
+      { tipo: 'secao', id: 'fumaca', titulo: 'Fumaça e queimadas' },
+      { tipo: 'secao', id: 'deslocamento', titulo: 'Mochila de saída' },
+    ],
+    fontes: [
+      'Corpo de Bombeiros Militar do Distrito Federal, pela Agência Brasília (2026): incêndio florestal perto de casa',
+      'Governo de São Paulo (Semil e Secretaria de Agricultura): Guia de orientações sobre incêndios (2025)',
+      'Defesa Civil do Rio de Janeiro: Incêndios florestais',
+      'Cruz Vermelha Americana: Wildfire Safety',
+      'CDC: Safety Guidelines After a Wildfire',
+    ],
+  },
+  {
     id: 'temporal-raios',
     categoria: 'clima',
     nivel: 'facil',
