@@ -580,6 +580,25 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
       <circle class="f" cx="42" cy="52" r="6"/><path class="f" d="M72 50 H86 C86 56 82 58 79 58 C76 58 72 56 72 50 Z"/>
       <path class="t" d="M58 64 L56 80 H62"/><path class="t grosso" d="M34 90 C42 98 52 98 60 96 C68 96 76 100 84 106"/>`,
   },
+  'fatias-fruta': {
+    largura: 140,
+    altura: 100,
+    svg: `${[
+      [34, 40],
+      [76, 34],
+      [110, 58],
+      [56, 72],
+    ]
+      .map(([x, y]) => `<circle class="f" cx="${x}" cy="${y}" r="24"/><circle class="c" cx="${x}" cy="${y}" r="18"/><circle class="r" cx="${x}" cy="${y}" r="4"/>`)
+      .join('')}`,
+  },
+  'tela-secagem': {
+    largura: 180,
+    altura: 110,
+    svg: `<rect class="r" x="14" y="76" width="22" height="26" rx="2"/><rect class="r" x="144" y="76" width="22" height="26" rx="2"/>
+      <rect class="c" x="6" y="64" width="168" height="12" rx="3"/>${Array.from({ length: 4 }, (_, i) => `<ellipse class="f" cx="${36 + i * 36}" cy="58" rx="14" ry="6"/>`).join('')}
+      <path class="t fino" d="M8 30 H172 M8 30 V64 M172 30 V64"/>${Array.from({ length: 11 }, (_, i) => `<path class="t fino" d="M${18 + i * 15} 30 V64"/>`).join('')}<path class="t" d="M2 104 H178"/>`,
+  },
   'pessoa-bracos': {
     largura: 130,
     altura: 140,

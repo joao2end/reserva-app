@@ -94,6 +94,8 @@ export const DESENHOS = [
   'pote-sementes',
   'rosto-torto',
   'pessoa-bracos',
+  'fatias-fruta',
+  'tela-secagem',
 ] as const
 
 export type DesenhoId = (typeof DESENHOS)[number]

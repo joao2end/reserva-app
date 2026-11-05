@@ -1443,6 +1443,156 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
           'CDC (Centros de Controle de Doenças dos EUA): prevenção da intoxicação por monóxido de carbono, em português',
         ],
       },
+      {
+        id: 'comida-secar-frutas',
+        nivel: 'avancado',
+        titulo: 'Secar frutas no sol para guardar',
+        objetivo: 'Transformar fruta madura em fruta seca que dura meses fora da geladeira, sem deixar estragar.',
+        minutos: 7,
+        cenas: [
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'fatias-fruta', x: 36, y: 46, largura: 40, movimento: 'entrar' },
+                { desenho: 'certo', x: 80, y: 40, largura: 20, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [{ texto: 'NO SOL, SÓ FRUTA', x: 50, y: 88, tamanho: 7, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'No sol, só fruta',
+            texto: 'Legume e carne não devem secar ao ar livre: estragam com facilidade.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'balde', x: 38, y: 48, largura: 34, movimento: 'entrar' },
+                { desenho: 'relogio', x: 78, y: 40, largura: 22, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [
+                { texto: '100 mL DE ÁGUA SANITÁRIA', x: 50, y: 80, tamanho: 6, atraso: 1.4 },
+                { texto: 'EM 10 LITROS: 15 MINUTOS', x: 50, y: 91, tamanho: 6, atraso: 1.9, destaque: true },
+              ],
+            },
+            titulo: 'Desinfete a fruta com casca',
+            texto: 'Deixe de molho 15 minutos e enxágue em água de beber corrente.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'tela-secagem', x: 44, y: 54, largura: 56, movimento: 'deslizar' },
+                { desenho: 'sol', x: 84, y: 24, largura: 22, movimento: 'girar', atraso: 0.8 },
+              ],
+              rotulos: [{ texto: 'TELA EMBAIXO E EM CIMA', x: 50, y: 90, tamanho: 6, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Tela suspensa e coberta',
+            texto: 'Uma tela segura a fruta no alto e outra cobre contra inseto e passarinho.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'tela-secagem', x: 40, y: 52, largura: 50, movimento: 'surgir' },
+                { desenho: 'relogio', x: 82, y: 34, largura: 22, movimento: 'pulsar', atraso: 0.8 },
+              ],
+              rotulos: [{ texto: 'À NOITE, PARA DENTRO', x: 50, y: 90, tamanho: 6.5, atraso: 1.4, destaque: true }],
+            },
+            titulo: 'Recolha à noite',
+            texto: 'O sereno da noite molha a fruta de novo.',
+            segundos: 6,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'geladeira', x: 36, y: 48, largura: 34, movimento: 'entrar' },
+                { desenho: 'floco', x: 76, y: 40, largura: 24, movimento: 'girar', atraso: 1 },
+              ],
+              rotulos: [{ texto: '48 HORAS NO CONGELADOR', x: 50, y: 90, tamanho: 6.5, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Mate os ovos de inseto',
+            texto: 'Antes de guardar, deixe a fruta seca pelo menos 48 horas no congelador.',
+            segundos: 7,
+          },
+        ],
+        partes: [
+          {
+            titulo: 'Escolher e preparar',
+            paragrafos: [
+              'A fruta tem açúcar e acidez, e por isso pode secar ao ar livre. Legume e carne têm risco maior de estragar e não devem secar no sol.',
+            ],
+            passos: [
+              'Escolha frutas maduras e firmes. Separe as machucadas ou doentes.',
+              'Abacaxi e manga dão ótima fruta seca.',
+              'Lave em água corrente com escova ou esponja usadas só para isso.',
+              'Deixe a fruta com casca de molho por 15 minutos em 100 mL de água sanitária para cada 10 litros de água de beber.',
+              'Use água sanitária que o rótulo permite para alimentos, sem perfume. Depois enxágue em água corrente.',
+            ],
+          },
+          {
+            titulo: 'Secar no sol',
+            paragrafos: ['O melhor é dia quente, seco e com vento, com pelo menos 29 °C. Com tempo úmido ou chuva, a fruta não seca e a chuva estraga tudo. Leva alguns dias.'],
+            passos: [
+              'Use tela de inox ou de plástico. Não use tela de arame galvanizado, de cobre nem de alumínio.',
+              'Ponha a tela em cima de tijolos ou blocos, para o ar passar por baixo. Sobre o chão de cimento o calor é maior.',
+              'Cubra com outra tela ou com um pano fino tipo gaze, contra inseto e passarinho.',
+              'À noite, cubra bem ou leve para dentro. O sereno molha a fruta de novo.',
+            ],
+          },
+          {
+            titulo: 'Saber se secou',
+            passos: [
+              'Espere esfriar e corte alguns pedaços ao meio. Não pode aparecer umidade, nem sair líquido quando apertar.',
+              'A fruta pode ficar macia, mas não pode grudar. Dobrada, não gruda nela mesma.',
+              'Ponha solta num vidro fechado por 7 a 10 dias. Sacuda todo dia.',
+              'Se o vidro suar por dentro, a fruta não secou: volte com ela para o sol.',
+            ],
+          },
+          {
+            titulo: 'Matar os ovos de inseto e guardar',
+            paragrafos: ['A fruta seca no sol precisa desse cuidado antes de ser guardada, porque insetos podem ter deixado ovos nela.'],
+            passos: [
+              'Feche em saco plástico de congelar e deixe pelo menos 48 horas no congelador, a −18 °C ou menos.',
+              'Ou espalhe numa assadeira, uma camada só, e deixe 30 minutos no forno já quente a 71 °C.',
+              'Guarde em vidro com tampa, pote de plástico próprio para alimento ou saco de congelar bem fechado.',
+              'Deixe em lugar escuro, seco e fresco. A 16 °C dura cerca de 1 ano. No calor de 27 °C, cerca de 6 meses.',
+              'Quer vender? Antes, converse com a vigilância sanitária da sua cidade.',
+            ],
+          },
+        ],
+        erros: [
+          'Secar legume ou carne no sol: estragam com facilidade.',
+          'Deixar a tela no chão, sem ar por baixo e sem cobrir.',
+          'Esquecer a fruta fora à noite ou na chuva.',
+          'Usar tela de arame galvanizado, de cobre ou de alumínio.',
+          'Guardar sem passar pelo congelador ou pelo forno.',
+        ],
+        teste: [
+          {
+            pergunta: 'O que pode secar no sol, ao ar livre?',
+            opcoes: ['Carne', 'Fruta', 'Legumes'],
+            correta: 1,
+            explicacao: 'A fruta tem açúcar e acidez. Legume e carne estragam com facilidade e devem secar dentro de casa, em secador.',
+          },
+          {
+            pergunta: 'Anoiteceu e a fruta ainda não secou. O que fazer?',
+            opcoes: ['Deixar no quintal', 'Cobrir bem ou levar para dentro', 'Jogar água para não ressecar'],
+            correta: 1,
+            explicacao: 'O sereno da noite molha a fruta de novo.',
+          },
+          {
+            pergunta: 'A fruta secou. O que fazer antes de guardar?',
+            opcoes: ['Guardar logo no pote', 'Deixar pelo menos 48 horas no congelador', 'Lavar de novo'],
+            correta: 1,
+            explicacao: 'Assim morrem os ovos de inseto. Também dá para deixar 30 minutos no forno a 71 °C.',
+          },
+        ],
+        fontes: [
+          'Embrapa Cerrados: Processamento de frutas e hortaliças em agroindústrias da agricultura familiar (2021)',
+          'Embrapa Pantanal: Desidratação de frutas utilizando secador solar, Comunicado Técnico 98 (2015)',
+          'National Center for Home Food Preservation (Universidade da Geórgia, EUA): secagem ao sol',
+          'Montana State University Extension (EUA): Drying Fruits (2017)',
+        ],
+      },
     ],
   },
 ]
