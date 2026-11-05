@@ -645,4 +645,12 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
       <rect class="r" x="34" y="54" width="28" height="20" rx="4"/><rect class="r" x="88" y="92" width="28" height="20" rx="4" transform="rotate(-20 102 102)"/>
       <path class="t fino" d="M48 74 C48 100 60 124 70 138 M102 112 C98 126 80 132 72 138"/>`,
   },
+  'caminhao-pipa': {
+    largura: 180,
+    altura: 100,
+    svg: `<rect class="f" x="54" y="4" width="22" height="10" rx="2"/><rect class="c" x="6" y="12" width="116" height="54" rx="26"/><path class="t grosso" d="M6 52 H2 V60"/>
+      <text class="letra-p" x="64" y="44">ÁGUA POTÁVEL</text>
+      <path class="c" d="M126 66 V30 C126 26 128 24 132 24 H154 C158 24 160 26 162 30 L172 48 V66 Z"/><path class="r" d="M134 30 H152 L162 48 H134 Z"/>
+      <rect class="f" x="4" y="66" width="170" height="8" rx="2"/><circle class="c" cx="34" cy="80" r="12"/><circle class="f" cx="34" cy="80" r="5"/><circle class="c" cx="100" cy="80" r="12"/><circle class="f" cx="100" cy="80" r="5"/><circle class="c" cx="150" cy="80" r="12"/><circle class="f" cx="150" cy="80" r="5"/>`,
+  },
 }

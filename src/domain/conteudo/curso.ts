@@ -401,6 +401,160 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
         ],
       },
       {
+        id: 'agua-carro-pipa',
+        nivel: 'medio',
+        titulo: 'Receber água do carro-pipa',
+        objetivo: 'Conferir o caminhão, limpar a vasilha e guardar a água do carro-pipa sem sujar.',
+        minutos: 6,
+        cenas: [
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'caminhao-pipa', x: 50, y: 46, largura: 80, movimento: 'deslizar', vindoDe: [-40, 0] },
+                { desenho: 'certo', x: 88, y: 18, largura: 12, movimento: 'surgir', atraso: 1.6 },
+              ],
+              rotulos: [
+                { texto: 'ESCRITO ÁGUA POTÁVEL', x: 50, y: 90, tamanho: 6.5, atraso: 1.2, destaque: true },
+              ],
+            },
+            titulo: 'Confira o caminhão',
+            texto: 'No tanque deve estar escrito ÁGUA POTÁVEL, com o nome e o telefone do responsável.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'galao', x: 40, y: 50, largura: 30, movimento: 'balancar' },
+                { desenho: 'relogio', x: 76, y: 34, largura: 20, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [
+                { texto: '30 MINUTOS TAMPADA', x: 50, y: 90, tamanho: 6.5, atraso: 1.6, destaque: true },
+              ],
+            },
+            titulo: 'Limpe a vasilha antes',
+            texto: '1 litro de água com 2 colheres de sopa de água sanitária. Tampe, chacoalhe e espere 30 minutos.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'galao', x: 50, y: 52, largura: 30, movimento: 'surgir' },
+                { desenho: 'tampa', x: 50, y: 18, largura: 20, movimento: 'cair', atraso: 0.8 },
+              ],
+              rotulos: [
+                { texto: 'SÓ PARA ÁGUA DE BEBER', x: 50, y: 90, tamanho: 6.5, atraso: 1.4 },
+              ],
+            },
+            titulo: 'Enxágue, encha e tampe',
+            texto: 'Enxágue com água tratada. Encha e tampe logo.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'galao', x: 36, y: 54, largura: 28, movimento: 'entrar' },
+                { desenho: 'mao', x: 72, y: 46, largura: 22, movimento: 'entrar', atraso: 0.8 },
+                { desenho: 'errado', x: 72, y: 46, largura: 16, movimento: 'pulsar', atraso: 1.6 },
+              ],
+            },
+            titulo: 'Não enfie a mão',
+            texto: 'Despeje ou use torneirinha. Guarde longe do sol, de gasolina e de veneno.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'conta-gotas', x: 34, y: 32, largura: 14, movimento: 'pingar' },
+                { desenho: 'galao', x: 62, y: 58, largura: 26, movimento: 'entrar', atraso: 0.6 },
+              ],
+              rotulos: [
+                { texto: '40 GOTAS EM 20 LITROS', x: 50, y: 92, tamanho: 6.5, atraso: 1.2, destaque: true },
+              ],
+            },
+            titulo: 'Na dúvida, trate',
+            texto: 'Hipoclorito 2,5%: 2 gotas por litro. Mexa e espere 30 minutos antes de beber.',
+            segundos: 8,
+          },
+        ],
+        partes: [
+          {
+            titulo: 'Conferir o caminhão',
+            paragrafos: [
+              'O carro-pipa que leva água de beber precisa seguir regras do Ministério da Saúde. Antes de encher suas vasilhas, olhe o caminhão.',
+            ],
+            passos: [
+              'No tanque deve estar escrito ÁGUA POTÁVEL, bem visível.',
+              'No tanque também ficam o nome, o telefone e o endereço do responsável.',
+              'A tampa de cima tem borracha de vedação e trava. A torneira de saída fica fechada.',
+              'O tanque não pode ter furo, vazamento, amassado ou ferrugem.',
+              'O motorista precisa levar a autorização da Saúde para transportar água de beber.',
+            ],
+          },
+          {
+            titulo: 'Se algo estiver errado',
+            paragrafos: [
+              'Caminhão sem a placa ÁGUA POTÁVEL, com vazamento ou ferrugem: não beba essa água sem tratar. Avise a vigilância sanitária da prefeitura.',
+            ],
+          },
+          {
+            titulo: 'Limpar a vasilha antes do caminhão chegar',
+            passos: [
+              'Use vasilha firme, com tampa, só para água de beber.',
+              'Nunca use vasilha que já teve água sanitária, veneno, óleo ou gasolina.',
+              'Coloque 1 litro de água e 2 colheres de sopa (30 ml) de água sanitária.',
+              'Tampe e chacoalhe para molhar toda a parte de dentro.',
+              'Deixe tampada por 30 minutos. Depois jogue fora e enxágue com água tratada.',
+            ],
+          },
+          {
+            titulo: 'Guardar e usar',
+            passos: [
+              'Encha e tampe logo. Sem tampa, cubra com prato limpo ou pano limpo.',
+              'Guarde em lugar fresco, longe do sol, de gasolina e de veneno.',
+              'Escreva na vasilha "água de beber" e a data.',
+              'Para tirar, despeje ou use torneirinha. Não enfie a mão nem a caneca.',
+              'Na dúvida, trate: 2 gotas de hipoclorito 2,5% por litro, ou 40 gotas em 20 litros. Mexa, espere 30 minutos e beba em até 24 horas.',
+            ],
+          },
+        ],
+        erros: [
+          'Encher vasilha suja ou sem tampa.',
+          'Reaproveitar galão de água sanitária, de óleo ou de veneno.',
+          'Pegar água enfiando a mão ou a caneca na vasilha.',
+          'Tratar a água de beber com água sanitária perfumada ou com alvejante.',
+          'Beber sem tratar a água de caminhão sem a placa ÁGUA POTÁVEL.',
+        ],
+        teste: [
+          {
+            pergunta: 'O que deve estar escrito no tanque do carro-pipa?',
+            opcoes: ['ÁGUA POTÁVEL', 'Só o nome da cidade', 'Nada, basta ser azul'],
+            correta: 0,
+            explicacao: 'O tanque de água de beber mostra ÁGUA POTÁVEL e o nome e o telefone do responsável.',
+          },
+          {
+            pergunta: 'Como limpar a vasilha antes de encher?',
+            opcoes: [
+              'Encher direto, sem limpar',
+              '1 litro de água com 2 colheres de sopa de água sanitária, tampar, chacoalhar e esperar 30 minutos',
+              'Passar só um pano seco',
+            ],
+            correta: 1,
+            explicacao: 'Depois dos 30 minutos, jogue fora e enxágue com água tratada.',
+          },
+          {
+            pergunta: 'Quantas gotas de hipoclorito 2,5% para tratar 20 litros?',
+            opcoes: ['2 gotas', '40 gotas', '1 copo cheio'],
+            correta: 1,
+            explicacao: '2 gotas por litro: 20 litros pedem 40 gotas. Mexa e espere 30 minutos.',
+          },
+        ],
+        fontes: [
+          'Ministério da Saúde: Cuidados com carro-pipa (desastres e emergências)',
+          'Secretaria da Saúde de São Paulo (CVE): uso do hipoclorito de sódio e limpeza de recipientes',
+          'CDC: Safe Water Storage',
+        ],
+      },
+      {
         id: 'agua-cisterna',
         nivel: 'avancado',
         titulo: 'Água de chuva e cisterna',
