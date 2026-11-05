@@ -215,6 +215,63 @@ export const ACERVO: GuiaAcervo[] = [
     ],
   },
   {
+    id: 'conta-de-luz',
+    categoria: 'energia',
+    nivel: 'facil',
+    titulo: 'Conta de luz mais leve na seca',
+    resumo: 'Por que a conta sobe sem chuva, o desconto da Tarifa Social e como gastar menos.',
+    blocos: [
+      {
+        titulo: 'Por que a conta sobe na seca',
+        itens: [
+          'Com pouca chuva, as hidrelétricas fazem menos energia.',
+          'Aí entram as termelétricas, que fazem uma energia mais cara.',
+          'A cor da bandeira na conta mostra isso. Verde: não cobra a mais.',
+          'Amarela, vermelha patamar 1 e vermelha patamar 2: cobram um valor a mais por kWh gasto, cada uma mais que a outra.',
+          'A ANEEL, a agência que cuida da energia, anuncia a cor de cada mês.',
+        ],
+      },
+      {
+        titulo: 'Quem tem a Tarifa Social',
+        itens: [
+          'Família no Cadastro Único com renda de até meio salário mínimo por pessoa.',
+          'Família no Cadastro Único com renda de até 3 salários mínimos e alguém que usa aparelho elétrico todo dia por doença ou deficiência. Precisa de relatório e atestado médico.',
+          'Quem tem 65 anos ou mais, ou tem deficiência, e recebe o BPC, o benefício do INSS.',
+          'Quem tem direito não paga os primeiros 80 kWh do mês. O que passar disso paga sem desconto. Imposto e iluminação pública podem continuar na conta.',
+        ],
+      },
+      {
+        titulo: 'Para o desconto chegar',
+        itens: [
+          'O desconto é automático. Não precisa pedir.',
+          'A conta precisa estar no nome de alguém da família.',
+          'O Cadastro Único precisa ter sido atualizado nos últimos 2 anos.',
+          'Vale só para a casa onde a família mora, uma casa por família.',
+          'Tem direito e o desconto não veio? Ligue para a companhia de energia.',
+        ],
+      },
+      {
+        titulo: 'Para gastar menos',
+        itens: [
+          'Deixe o chuveiro na posição verão. Em dia muito quente, tome banho frio.',
+          'Pense no que vai pegar antes de abrir a geladeira. Espere a comida esfriar antes de guardar.',
+          'Não desligue a geladeira à noite.',
+          'Use lâmpada de LED e deixe a cortina aberta de dia.',
+          'Passe várias roupas de uma vez e lave com a máquina cheia.',
+        ],
+      },
+    ],
+    ligacoes: [
+      { tipo: 'secao', id: 'calor', titulo: 'Calor forte' },
+      { tipo: 'secao', id: 'racionamento', titulo: 'Racionamento' },
+    ],
+    fontes: [
+      'ANEEL (Agência Nacional de Energia Elétrica): Tarifa Social',
+      'Ministério de Minas e Energia: como funcionam as bandeiras tarifárias',
+      'Ministério de Minas e Energia: dicas de como economizar energia durante o verão',
+    ],
+  },
+  {
     id: 'enchente',
     categoria: 'clima',
     nivel: 'medio',
