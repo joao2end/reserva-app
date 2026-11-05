@@ -28,6 +28,7 @@
   "sangramento-queimadura": ["first aid kit", "bandage wound", "applying pressure bandage", "cold running water hand", "burn first aid", "gauze", "ambulance", "washing hands"],
   "engasgo": ["choking person", "heimlich maneuver", "first aid training", "back blows", "baby first aid", "people eating meal", "calling emergency phone", "ambulance"],
   "avc-reconhecer": ["elderly man face", "smiling elderly", "raising arms", "elderly speaking", "clock time", "calling emergency phone", "ambulance", "hospital emergency"],
+  "dea-desfibrilador": ["calling emergency phone", "aed defibrillator wall cabinet", "aed training class", "cpr training mannequin", "aed pads training", "first aid training", "cpr training", "ambulance"],
   "rcp": ["cpr training", "chest compressions", "checking breathing", "calling emergency phone", "defibrillator aed", "first aid course", "ambulance", "paramedics"],
   "sem-geladeira": ["power outage", "refrigerator door closed", "freezer food", "food thermometer", "cooler with ice", "spoiled food", "kitchen in dark", "candle flashlight kitchen"],
   "comida-enlatados": ["canned food pantry", "canned goods shelf", "can expiration date", "dented can", "opening can", "pantry organization", "cooking canned beans", "storage shelves"],

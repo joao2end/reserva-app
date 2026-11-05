@@ -629,4 +629,20 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
     svg: `<path class="t grosso" d="M42 26 V12 H78 V26"/><rect class="c" x="8" y="26" width="104" height="68" rx="10"/>
       <path class="f" d="M52 40 H68 V52 H80 V68 H68 V80 H52 V68 H40 V52 H52 Z"/>`,
   },
+  dea: {
+    largura: 120,
+    altura: 110,
+    svg: `<path class="t grosso" d="M44 20 V8 H76 V20"/><rect class="c" x="8" y="20" width="104" height="82" rx="10"/>
+      <path class="r" d="M60 84 C40 70 30 60 30 48 C30 38 38 32 46 32 C52 32 57 36 60 41 C63 36 68 32 74 32 C82 32 90 38 90 48 C90 60 80 70 60 84 Z"/>
+      <path class="f" d="M64 38 L52 58 H60 L56 76 L70 52 H62 L66 38 Z"/><g class="luz"><circle class="f" cx="98" cy="34" r="5"/></g>
+      <text class="letra-p" x="60" y="98">DEA</text>`,
+  },
+  'peito-pas': {
+    largura: 140,
+    altura: 140,
+    svg: `<circle class="c" cx="70" cy="18" r="14"/><path class="c" d="M30 40 C44 34 96 34 110 40 C122 46 126 60 124 80 L118 136 H22 L16 80 C14 60 18 46 30 40 Z"/>
+      <path class="t fino" d="M40 44 C54 50 64 50 70 48 M100 44 C86 50 76 50 70 48"/>
+      <rect class="r" x="34" y="54" width="28" height="20" rx="4"/><rect class="r" x="88" y="92" width="28" height="20" rx="4" transform="rotate(-20 102 102)"/>
+      <path class="t fino" d="M48 74 C48 100 60 124 70 138 M102 112 C98 126 80 132 72 138"/>`,
+  },
 }

@@ -789,6 +789,158 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
         fontes: ['American Heart Association: RCP somente com as mãos'],
       },
       {
+        id: 'dea-desfibrilador',
+        nivel: 'avancado',
+        titulo: 'Usar o desfibrilador (DEA)',
+        objetivo: 'Ligar o DEA, colar as pás no peito e seguir a voz do aparelho sem parar a massagem.',
+        minutos: 6,
+        cenas: [
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'telefone', x: 30, y: 46, largura: 18, movimento: 'pulsar' },
+                { desenho: 'dea', x: 68, y: 46, largura: 34, movimento: 'deslizar', vindoDe: [24, 0], atraso: 0.8 },
+              ],
+              rotulos: [{ texto: 'BUSQUE O DEA', x: 50, y: 88, tamanho: 7.5, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Peça para alguém buscar o DEA',
+            texto: 'Ligue 192. Você não para a massagem para ir buscar.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [{ desenho: 'dea', x: 50, y: 46, largura: 46, movimento: 'acender' }],
+              rotulos: [{ texto: 'LIGUE E ESCUTE', x: 50, y: 88, tamanho: 7.5, atraso: 1.4, destaque: true }],
+            },
+            titulo: 'Ligue e siga a voz',
+            texto: 'Aperte o botão de ligar. O aparelho fala cada passo.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [{ desenho: 'peito-pas', x: 50, y: 52, largura: 40, movimento: 'surgir' }],
+              rotulos: [
+                { texto: 'ALTO DO PEITO', x: 50, y: 10, tamanho: 6.5, atraso: 1.2 },
+                { texto: 'ABAIXO DA AXILA', x: 50, y: 92, tamanho: 6.5, atraso: 2, destaque: true },
+              ],
+            },
+            titulo: 'Pás no peito sem roupa',
+            texto: 'Uma no alto do peito, à direita. A outra no lado esquerdo, abaixo da axila.',
+            segundos: 10,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa-deitada', x: 50, y: 64, largura: 80, movimento: 'surgir' },
+                { desenho: 'mao', x: 50, y: 30, largura: 14, movimento: 'tremer', atraso: 0.8 },
+                { desenho: 'errado', x: 50, y: 30, largura: 20, movimento: 'surgir', atraso: 1.4 },
+              ],
+              rotulos: [{ texto: 'AFASTEM-SE!', x: 50, y: 90, tamanho: 8, atraso: 2, destaque: true }],
+            },
+            titulo: 'Ninguém encosta',
+            texto: 'Enquanto o aparelho analisa e dá o choque, ninguém toca na pessoa.',
+            segundos: 9,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa-deitada', x: 50, y: 74, largura: 84 },
+                { desenho: 'maos-rcp', x: 52, y: 44, largura: 30, movimento: 'empurrar', atraso: 0.4 },
+              ],
+              rotulos: [{ texto: 'VOLTE À MASSAGEM', x: 50, y: 12, tamanho: 7, atraso: 1, destaque: true }],
+            },
+            titulo: 'Volte a empurrar o peito',
+            texto: 'Logo depois do choque, ou se o aparelho disser que não precisa, volte à massagem.',
+            segundos: 9,
+          },
+        ],
+        partes: [
+          {
+            titulo: 'O que é o DEA',
+            paragrafos: [
+              'O DEA (desfibrilador externo automático) é uma caixa com duas pás adesivas. Ele dá um choque que pode fazer o coração voltar a bater direito numa parada cardíaca.',
+              'Qualquer pessoa pode usar, mesmo sem curso. Depois de ligado, ele fala o que fazer.',
+              'O próprio aparelho examina o coração e só manda dar o choque se for preciso. Você não dá choque em quem não precisa.',
+              'Em prédio, shopping ou estação, pergunte ao segurança ou à portaria se há um DEA.',
+            ],
+          },
+          {
+            titulo: 'Antes do aparelho chegar',
+            passos: [
+              'Ligue 192 no viva-voz.',
+              'Comece a massagem no peito, como na lição de parada cardíaca.',
+              'Peça para outra pessoa buscar o DEA. Não pare a massagem para ir procurar.',
+            ],
+          },
+          {
+            titulo: 'Usar o aparelho',
+            passos: [
+              'Ligue o DEA e faça o que a voz mandar.',
+              'Tire a roupa do peito. Se precisar, corte a roupa ou o sutiã. Muitos estojos têm tesoura.',
+              'Se o peito estiver molhado, seque. Se a pessoa estiver na água, tire-a de lá antes.',
+              'Cole uma pá no alto do peito, à direita da pessoa. Cole a outra no lado esquerdo, alguns dedos abaixo da axila. O desenho na pá mostra o lugar.',
+              'Se houver um adesivo de remédio no lugar da pá, tire e limpe a pele antes.',
+              'Se notar um caroço de marca-passo debaixo da pele, cole a pá longe dele.',
+              'Se o aparelho tiver um fio solto, encaixe na caixa.',
+            ],
+          },
+          {
+            titulo: 'Análise e choque',
+            passos: [
+              'Quando o aparelho disser que vai analisar, pare a massagem e não toque na pessoa.',
+              'Se ele mandar dar o choque, confira que ninguém está encostando e fale alto: "Afastem-se!".',
+              'Aperte o botão do choque.',
+              'Logo depois do choque, ou se ele disser que não precisa, volte à massagem.',
+              'Não tire as pás. O aparelho avisa quando vai analisar de novo.',
+              'Só pare quando a pessoa mostrar sinal de vida, o aparelho mandar parar ou o SAMU assumir.',
+            ],
+          },
+          {
+            titulo: 'Criança',
+            paragrafos: [
+              'Estes passos valem para adulto e para criança de 8 anos ou mais com mais de 25 kg. Para criança menor, siga a voz do aparelho e o atendente do 192.',
+            ],
+          },
+        ],
+        erros: [
+          'Parar a massagem para ir procurar o DEA.',
+          'Encostar na pessoa enquanto o aparelho analisa ou dá o choque.',
+          'Colar a pá por cima da roupa ou com o peito molhado.',
+          'Tirar as pás depois do primeiro choque.',
+          'Não usar por medo de machucar: o aparelho só dá choque se for preciso.',
+        ],
+        teste: [
+          {
+            pergunta: 'Quem pode usar o DEA?',
+            opcoes: ['Só médico', 'Qualquer pessoa, seguindo a voz do aparelho', 'Só bombeiro'],
+            correta: 1,
+            explicacao: 'O DEA fala cada passo e só manda dar o choque se for preciso.',
+          },
+          {
+            pergunta: 'Onde colar as pás?',
+            opcoes: [
+              'No peito sem roupa: alto do peito à direita e lado esquerdo abaixo da axila',
+              'Por cima da camisa, na barriga',
+              'Nas costas, por cima da roupa',
+            ],
+            correta: 0,
+            explicacao: 'Pele seca e sem roupa, no lugar que o desenho da pá mostra.',
+          },
+          {
+            pergunta: 'O aparelho deu o choque. E agora?',
+            opcoes: ['Tirar as pás e esperar', 'Voltar logo à massagem no peito', 'Dar água para a pessoa'],
+            correta: 1,
+            explicacao: 'Volte à massagem e deixe as pás coladas. O aparelho avisa quando vai analisar de novo.',
+          },
+        ],
+        fontes: [
+          'Cruz Vermelha Americana: passos para usar o DEA',
+          'Ebserh, Hospital Universitário da UFS (gov.br): Suporte Básico de Vida no Adulto (2024)',
+          'British Heart Foundation: como usar um desfibrilador',
+          'West Midlands Ambulance Service (NHS): desfibriladores',
+        ],
+      },
+      {
         id: 'engasgo',
         nivel: 'medio',
         titulo: 'Engasgo em adulto, criança e bebê',
