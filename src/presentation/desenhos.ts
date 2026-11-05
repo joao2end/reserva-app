@@ -534,4 +534,15 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
       <path class="agua" d="M25 74 H67 V127 C67 131 64 133 60 133 H32 C28 133 25 131 25 127 Z"/>
       ${[0, 1, 2].map((i) => `<path class="gota-cai longe" style="animation-delay:${(i * 0.3).toFixed(2)}s" d="M${10 - i * 3} ${24 + i * 5} q3 6 0 9 q-3 -3 0 -9 Z"/>`).join('')}`,
   },
+  'pessoa-quatro-apoios': {
+    largura: 170,
+    altura: 100,
+    svg: `<circle class="c" cx="150" cy="34" r="13"/><path class="c" d="M44 28 H132 C138 28 140 32 140 38 V44 C140 50 138 54 132 54 H44 C38 54 36 50 36 44 V38 C36 32 38 28 44 28 Z"/>
+      <rect class="c" x="120" y="50" width="12" height="44" rx="4"/><rect class="c" x="40" y="50" width="16" height="34" rx="4"/><rect class="c" x="10" y="80" width="46" height="14" rx="5"/><path class="t" d="M4 96 H166"/>`,
+  },
+  cadeira: {
+    largura: 100,
+    altura: 140,
+    svg: `<rect class="c" x="66" y="6" width="12" height="70" rx="3"/><rect class="c" x="14" y="66" width="72" height="12" rx="3"/><path class="t grosso" d="M20 78 V134 M80 78 V134"/><path class="t" d="M20 108 H80"/>`,
+  },
 }

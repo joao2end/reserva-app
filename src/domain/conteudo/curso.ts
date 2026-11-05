@@ -387,8 +387,150 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
     id: 'socorros',
     area: 'emergencias',
     titulo: 'Primeiros socorros',
-    resumo: 'Parada cardíaca, engasgo, sangramento e queimadura.',
+    resumo: 'Parada cardíaca, engasgo, sangramento, queimadura e quedas.',
     licoes: [
+      {
+        id: 'queda-levantar',
+        nivel: 'facil',
+        titulo: 'Caiu no chão: levantar sem se machucar',
+        objetivo: 'Saber quando dá para levantar sozinho, levantar devagar com apoio e pedir ajuda quando não dá.',
+        minutos: 6,
+        cenas: [
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa-deitada', x: 50, y: 60, largura: 80, movimento: 'surgir' },
+                { desenho: 'relogio', x: 84, y: 24, largura: 18, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [{ texto: 'DEVAGAR', x: 50, y: 88, tamanho: 7, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Calma, não levante rápido',
+            texto: 'Respire. Veja se tem dor forte ou se não consegue mexer um braço ou uma perna.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa-deitada', x: 34, y: 34, largura: 50, movimento: 'balancar' },
+                { desenho: 'seta', x: 50, y: 52, largura: 12, giro: 90, movimento: 'surgir', atraso: 0.8 },
+                { desenho: 'pessoa-quatro-apoios', x: 60, y: 66, largura: 56, movimento: 'deslizar', vindoDe: [-16, 0], atraso: 1.4 },
+              ],
+              rotulos: [{ texto: 'MÃOS E JOELHOS', x: 50, y: 90, tamanho: 7, atraso: 2, destaque: true }],
+            },
+            titulo: 'Vire de lado e fique de quatro',
+            texto: 'Role de lado e use os braços para apoiar as mãos e os joelhos no chão.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'cadeira', x: 72, y: 50, largura: 22, movimento: 'cair' },
+                { desenho: 'pessoa-quatro-apoios', x: 36, y: 60, largura: 50, movimento: 'deslizar', vindoDe: [-20, 0], atraso: 0.8 },
+                { desenho: 'seta', x: 56, y: 30, largura: 12, giro: -90, movimento: 'pulsar', atraso: 1.6 },
+              ],
+              rotulos: [{ texto: 'UM PÉ NO CHÃO', x: 50, y: 90, tamanho: 7, atraso: 2, destaque: true }],
+            },
+            titulo: 'Segure num móvel firme',
+            texto: 'Vá até uma cadeira ou um sofá firme. Ponha um pé no chão e suba devagar.',
+            segundos: 9,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa-deitada', x: 40, y: 62, largura: 64, movimento: 'surgir' },
+                { desenho: 'pano', x: 46, y: 52, largura: 34, movimento: 'cair', atraso: 0.8 },
+                { desenho: 'telefone', x: 84, y: 40, largura: 14, movimento: 'pulsar', atraso: 1.4 },
+              ],
+              rotulos: [{ texto: 'LIGUE 192', x: 50, y: 88, tamanho: 7, atraso: 2, destaque: true }],
+            },
+            titulo: 'Não dá para levantar? Peça ajuda',
+            texto: 'Use o telefone ou bata na parede. Cubra-se e mexa o corpo enquanto espera.',
+            segundos: 9,
+          },
+        ],
+        partes: [
+          {
+            titulo: 'Antes de levantar',
+            passos: [
+              'Não se desespere. Fique parado um pouco e respire.',
+              'Veja se sente dor forte ou se não consegue mexer algum braço ou perna.',
+              'Se pode ter machucado a cabeça, as costas, o pescoço ou o quadril, não levante: peça ajuda.',
+              'Se der, chame alguém pelo telefone ou pelo alarme.',
+            ],
+          },
+          {
+            titulo: 'Levantar com apoio',
+            passos: [
+              'Não tenha pressa. Não levante de uma vez.',
+              'Role para o lado e use os braços para ficar de quatro, com as mãos e os joelhos no chão.',
+              'Vá engatinhando até um móvel firme, como uma cadeira, um sofá ou a pia.',
+              'Segure no móvel, ponha um pé no chão, bem firme, e suba devagar.',
+              'Sente e descanse até se sentir bem.',
+            ],
+          },
+          {
+            titulo: 'Se não conseguir levantar',
+            passos: [
+              'Se o telefone ou o alarme estiver ao alcance, use para pedir ajuda.',
+              'Se não estiver, grite por socorro ou bata na parede ou no chão.',
+              'Cubra-se com o que alcançar: toalha, casaco, tapete ou cobertor.',
+              'Mexa o corpo: role de um lado para o outro ou mexa devagar os braços e as pernas.',
+              'Mude de posição mais ou menos a cada 30 minutos, para não ferir a pele.',
+            ],
+          },
+          {
+            titulo: 'Se outra pessoa caiu',
+            passos: [
+              'Ligue 192 se ela pode ter machucado a cabeça, as costas, o pescoço ou o quadril, ou se não consegue levantar.',
+              'Deixe a pessoa confortável e aquecida enquanto espera.',
+              'Só ajude a levantar se ela conseguir fazer força sozinha. Não levante a pessoa no colo.',
+            ],
+          },
+          {
+            titulo: 'Para não cair de novo',
+            passos: [
+              'Tire tapetes soltos e fios do caminho. No banheiro, use tapete antiderrapante.',
+              'Ponha barras de apoio perto do vaso e dentro do box.',
+              'Deixe um interruptor ou uma luminária perto da cama e luz noturna no corredor.',
+              'Use sapato fechado, com sola antiderrapante e firme no calcanhar.',
+              'Guarde o que usa todo dia na altura entre a cintura e o ombro, para não subir em banco.',
+              'Ande com o celular no bolso.',
+              'Se um remédio dá tontura, fale com o médico ou o farmacêutico.',
+            ],
+          },
+        ],
+        erros: [
+          'Levantar de uma vez, logo depois de cair.',
+          'Levantar sozinho depois de bater a cabeça, as costas, o pescoço ou o quadril.',
+          'Pegar no colo ou puxar pelos braços uma pessoa que não consegue fazer força.',
+          'Ficar no chão frio sem se cobrir e sem mudar de posição.',
+        ],
+        teste: [
+          {
+            pergunta: 'Você caiu e acha que não se machucou. Como levantar?',
+            opcoes: ['De uma vez, bem rápido', 'De lado, de quatro, segurando num móvel firme e devagar', 'Puxando a toalha da mesa'],
+            correta: 1,
+            explicacao: 'Role de lado, fique de quatro, vá até um móvel firme, ponha um pé no chão e suba devagar.',
+          },
+          {
+            pergunta: 'Você bateu o quadril e sente dor forte. O que fazer?',
+            opcoes: ['Levantar logo para ver se passa', 'Não levantar e pedir ajuda pelo telefone, gritando ou batendo na parede', 'Ir andando até a cama'],
+            correta: 1,
+            explicacao: 'Se pode ter machucado a cabeça, as costas, o pescoço ou o quadril, fique no chão e peça ajuda. Ligue 192.',
+          },
+          {
+            pergunta: 'Esperando ajuda no chão, o que ajuda?',
+            opcoes: ['Ficar imóvel e descoberto', 'Cobrir-se e mudar de posição mais ou menos a cada 30 minutos', 'Tirar a roupa para refrescar'],
+            correta: 1,
+            explicacao: 'Cobrir-se mantém o corpo quente e mudar de posição protege a pele.',
+          },
+        ],
+        fontes: [
+          'NHS (serviço público de saúde do Reino Unido): o que fazer se você cair',
+          'NHS 111 Wales: quedas',
+          'Secretaria Municipal de Saúde de Santos (SP): cartilha de prevenção de quedas em idosos',
+        ],
+      },
       {
         id: 'rcp',
         nivel: 'avancado',
