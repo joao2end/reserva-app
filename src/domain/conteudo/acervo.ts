@@ -254,6 +254,55 @@ export const ACERVO: GuiaAcervo[] = [
     fontes: ['Defesa Civil de Hortolândia (SP): estados de atenção, alerta e emergência por umidade do ar', 'Defesa Civil de Jundiaí (SP): baixa umidade do ar'],
   },
   {
+    id: 'deslizamento',
+    categoria: 'clima',
+    nivel: 'medio',
+    titulo: 'Deslizamento de terra: sinais e saída',
+    resumo: 'Para quem mora perto de morro, encosta ou barranco.',
+    aviso: {
+      critico: true,
+      titulo: 'Viu o sinal: saia de casa já',
+      texto: 'Não espere a terra descer. Saia, avise os vizinhos e ligue 199 para a Defesa Civil ou 193 para os Bombeiros.',
+    },
+    blocos: [
+      {
+        titulo: 'Sinais de que a terra está se mexendo',
+        itens: [
+          'Rachaduras no chão, nos muros ou nas paredes.',
+          'Árvores, postes ou cercas ficando tortos.',
+          'Piso da casa levantando ou degrau novo no terreno.',
+          'Barulho vindo do chão, como estalos.',
+          'Água mais barrenta que o normal escorrendo do terreno.',
+        ],
+      },
+      {
+        titulo: 'Na hora',
+        itens: [
+          'Saia de casa logo e vá para um lugar firme, longe do barranco e do rio.',
+          'Leve documentos, remédios e água, se der tempo.',
+          'Avise os vizinhos e ajude quem anda com dificuldade.',
+          'Não volte para casa até a Defesa Civil liberar.',
+        ],
+      },
+      {
+        titulo: 'Para a encosta não ceder',
+        itens: [
+          'Não jogue lixo nem entulho no barranco: ele junta água e pesa.',
+          'Não jogue água de pia, tanque ou chuveiro na encosta: leve por cano ou canaleta.',
+          'Não plante bananeira nem árvore grande, como manga, mamão e abacate: plante grama ou capim.',
+          'Não corte o barranco nem faça aterro sem um técnico da prefeitura.',
+        ],
+      },
+    ],
+    ligacoes: [{ tipo: 'secao', id: 'deslocamento', titulo: 'Para onde se deslocar' }],
+    fontes: [
+      'Defesa Civil Nacional (Ministério da Integração), pela Brasil 61: medidas de autoproteção em deslizamentos',
+      'Defesa Civil do Estado de São Paulo: como evitar deslizamento',
+      'Defesa Civil do Estado do Rio de Janeiro: cartilha de deslizamento',
+      'Defesa Civil de Joinville (SC): deslizamentos, como agir',
+    ],
+  },
+  {
     id: 'temporal-raios',
     categoria: 'clima',
     nivel: 'facil',
