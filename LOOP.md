@@ -82,10 +82,10 @@ A voz é baixada do HuggingFace pelo workflow `videos.yml`. Se a rede da sessão
 
 ### 4. Vídeos com o MoneyPrinterTurbo
 
-O MoneyPrinterTurbo monta o vídeo com cenas reais do Pexels, voz pt-BR (Edge TTS, Antonio), legendas e a nossa trilha. No SBV ele **não inventa o texto**: recebe a narração exata da lição (`roteiroDaLicao`) e os termos de busca de `scripts/videos/termos_moneyprinter.json`. As cenas seguem a ordem dos termos ao longo da narração (`--match-materials-to-script`).
+O MoneyPrinterTurbo monta o vídeo com cenas reais do Pexels ou do Pixabay, voz pt-BR (Edge TTS, Antonio), legendas e a nossa trilha. No SBV ele **não inventa o texto**: recebe a narração exata da lição (`roteiroDaLicao`) e os termos de busca de `scripts/videos/termos_moneyprinter.json`. As cenas seguem a ordem dos termos ao longo da narração (`--match-materials-to-script`).
 
 - Quem gera: `scripts/videos/gerar_moneyprinter.py`, rodando no workflow **Vídeos MoneyPrinterTurbo** (`.github/workflows/videos-moneyprinter.yml`). Ele publica na release `videos-moneyprinter`, com `manifesto.json`. Só gera de novo as lições cuja narração, termos ou ajustes mudaram.
-- Precisa do secret `PEXELS_API_KEY`. Se o workflow falhar por falta dele, não tente contornar: diga no fim da rodada que a chave ainda falta.
+- Precisa do secret `PEXELS_API_KEY` ou `PIXABAY_API_KEY` (o Pexels pausou a emissão de chaves novas; o workflow usa o Pexels se houver chave e, se não, o Pixabay). Se o workflow falhar por falta das duas, não tente contornar: diga no fim da rodada que a chave ainda falta.
 - Para pedir vídeos: `gh api -X POST repos/joao2end/reserva-app/actions/workflows/videos-moneyprinter.yml/dispatches -f ref=main -f "inputs[licoes]=<ids>"`, com os ids separados por espaço. Com `inputs[licoes]=` vazio, gera todas as lições que mudaram. Para ver o resultado: `gh api "repos/joao2end/reserva-app/actions/workflows/videos-moneyprinter.yml/runs?per_page=1"`.
 - Enquanto houver lição sem vídeo nesta release, gere até 5 por rodada.
 

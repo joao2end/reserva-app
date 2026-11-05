@@ -28,12 +28,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 180
     steps:
-      - name: Conferir a chave do Pexels
+      - name: Escolher o banco de vídeos
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
         run: |
-          if [ -z "$PEXELS_API_KEY" ]; then
-            echo "::error::Falta o secret PEXELS_API_KEY. Crie a chave gratuita em https://www.pexels.com/api/ e salve em Settings > Secrets and variables > Actions."
+          if [ -n "$PEXELS_API_KEY" ]; then
+            echo "FONTE=pexels" >> "$GITHUB_ENV"
+          elif [ -n "$PIXABAY_API_KEY" ]; then
+            echo "FONTE=pixabay" >> "$GITHUB_ENV"
+          else
+            echo "::error::Falta a chave de um banco de vídeos. Crie a chave gratuita do Pixabay em https://pixabay.com/api/docs/ (ou do Pexels) e salve como PIXABAY_API_KEY (ou PEXELS_API_KEY) em Settings > Secrets and variables > Actions."
             exit 1
           fi
 
@@ -67,9 +72,10 @@ jobs:
       - name: Gerar os vídeos
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
           LICOES: ${{ inputs.licoes }}
         run: |
-          python scripts/videos/gerar_moneyprinter.py --mpt mpt --fonte pexels \
+          python scripts/videos/gerar_moneyprinter.py --mpt mpt --fonte "$FONTE" \
             --manifesto-anterior anterior/manifesto.json --saida saida-moneyprinter \
             ${LICOES:+--licoes $LICOES}
 
@@ -79,6 +85,6 @@ jobs:
         run: |
           if ! gh release view videos-moneyprinter >/dev/null 2>&1; then
             gh release create videos-moneyprinter --title "Vídeos das lições (MoneyPrinterTurbo)" --latest=false --prerelease --target "$GITHUB_SHA" \
-              --notes "Vídeos das lições do SBV gerados com o MoneyPrinterTurbo (MIT): roteiro da própria lição, imagens do Pexels, voz pt-BR Antonio do Edge TTS, legendas e trilha original."
+              --notes "Vídeos das lições do SBV gerados com o MoneyPrinterTurbo (MIT): roteiro da própria lição, imagens do Pexels ou do Pixabay, voz pt-BR Antonio do Edge TTS, legendas e trilha original."
           fi
           gh release upload videos-moneyprinter saida-moneyprinter/* --clobber
