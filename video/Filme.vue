@@ -56,16 +56,24 @@ const quadro = computed(() => {
       : trecho.value.tipo === 'erro'
         ? licao.erros.map((texto) => ({ texto }))
         : []
-  const inicio = Math.max(0, indiceItem - 2)
+  const atual = itens[indiceItem] ?? { texto: '' }
   return {
     titulo:
       trecho.value.tipo === 'erro' ? 'Erros comuns' : trecho.value.indiceParte !== undefined ? licao.partes[trecho.value.indiceParte].titulo : '',
     rotulo: trecho.value.tipo === 'erro' ? 'Cuidado' : `Passo a passo · ${(trecho.value.indiceParte ?? 0) + 1} de ${licao.partes.length}`,
-    itens: itens.slice(inicio, indiceItem + 1).map((item, posicao) => ({ ...item, atual: inicio + posicao === indiceItem })),
+    item: atual,
+    tamanho: tamanhoDoItem(atual.texto),
+    pontos: itens.map((_, posicao) => posicao === indiceItem),
     novaParte: indiceItem === 0,
     cena: licao.cenas[(trecho.value.tipo === 'erro' ? licao.cenas.length - 1 : (trecho.value.indiceParte ?? 0)) % licao.cenas.length],
   }
 })
+
+function tamanhoDoItem(texto: string): number {
+  if (texto.length <= 110) return 42
+  if (texto.length <= 170) return 38
+  return 34
+}
 
 function suave(valor: number): number {
   const x = Math.min(1, Math.max(0, valor))
@@ -76,6 +84,12 @@ function entrada(atraso: number, duracao = 0.6, distancia = 36) {
   const progresso = suave((local.value - atraso) / duracao)
   return { opacity: progresso, transform: `translateY(${(1 - progresso) * distancia}px)` }
 }
+
+const itemNaTela = computed(() => {
+  const chegada = entrada(0.1, 0.5, 40)
+  const saida = suave((duracaoAtual.value - local.value) / 0.3)
+  return { ...chegada, opacity: Math.min(chegada.opacity, saida) }
+})
 
 const visibilidade = computed(() => {
   const chegada = suave(local.value / 0.35)
@@ -186,20 +200,17 @@ onMounted(async () => {
             :descricao="quadro.cena.titulo"
           />
         </div>
-      <ol class="lousa">
-        <li
-          v-for="item in quadro.itens"
-          :key="item.texto"
-          class="item-lousa"
-          :class="{ atual: item.atual }"
-          :style="item.atual ? entrada(0.25, 0.55, 40) : {}"
-        >
-          <span v-if="trecho.tipo === 'erro'" class="marca-item erro-marca">✕</span>
-          <span v-else-if="item.numero" class="marca-item">{{ item.numero }}</span>
-          <span v-else class="marca-item barra-item" />
-          <span class="texto-item">{{ item.texto }}</span>
-        </li>
-      </ol>
+        <div class="lousa">
+          <p class="item-lousa" :style="{ ...itemNaTela, fontSize: `${quadro.tamanho}px` }">
+            <span v-if="trecho.tipo === 'erro'" class="marca-item erro-marca">✕</span>
+            <span v-else-if="quadro.item.numero" class="marca-item">{{ quadro.item.numero }}</span>
+            <span v-else class="marca-item barra-item" />
+            <span class="texto-item">{{ quadro.item.texto }}</span>
+          </p>
+          <span v-if="quadro.pontos.length > 1" class="pontos-lousa">
+            <span v-for="(ligado, posicao) in quadro.pontos" :key="posicao" class="ponto-lousa" :class="{ ligado }" />
+          </span>
+        </div>
       </div>
     </section>
 
@@ -241,8 +252,8 @@ onMounted(async () => {
 
 .cartao-quadro {
   flex: none;
-  width: 330px;
-  height: 330px;
+  width: 280px;
+  height: 280px;
   align-self: center;
   overflow: hidden;
   border-radius: 32px;
@@ -251,14 +262,12 @@ onMounted(async () => {
 }
 
 .lousa {
+  position: relative;
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  gap: 16px;
-  margin: 0;
-  padding: 28px 36px;
-  list-style: none;
+  padding: 28px 40px 52px;
   border-radius: 32px;
   background: #ffffff;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
@@ -267,40 +276,52 @@ onMounted(async () => {
 .item-lousa {
   display: flex;
   align-items: flex-start;
-  gap: 22px;
-  color: color-mix(in srgb, var(--escuro) 45%, #ffffff);
-  font-size: 26px;
-  line-height: 1.3;
-}
-
-.item-lousa.atual {
+  gap: 24px;
+  margin: 0;
   color: var(--escuro);
-  font-size: 31px;
   font-weight: 700;
+  line-height: 1.28;
 }
 
 .marca-item {
   display: flex;
   flex: none;
-  width: 54px;
-  height: 54px;
+  width: 58px;
+  height: 58px;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--destaque) 30%, #ffffff);
-  color: var(--escuro);
-  font-size: 28px;
-  font-weight: 700;
-}
-
-.item-lousa.atual .marca-item {
   background: var(--destaque);
+  color: var(--escuro);
+  font-size: 34px;
+  font-weight: 700;
 }
 
 .barra-item {
   width: 12px;
-  height: 54px;
+  height: 58px;
   border-radius: 6px;
+}
+
+.pontos-lousa {
+  position: absolute;
+  left: 40px;
+  bottom: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.ponto-lousa {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--escuro) 18%, #ffffff);
+}
+
+.ponto-lousa.ligado {
+  width: 40px;
+  border-radius: 7px;
+  background: var(--escuro);
 }
 
 .erro-marca {
@@ -308,13 +329,13 @@ onMounted(async () => {
   color: #b3261e;
 }
 
-.item-lousa.atual .erro-marca {
+.erros .erro-marca {
   background: #e5484d;
   color: #ffffff;
 }
 
 .texto-item {
-  padding-top: 8px;
+  padding-top: 4px;
 }
 
 html,
