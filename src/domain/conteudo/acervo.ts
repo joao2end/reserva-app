@@ -116,6 +116,54 @@ export const ACERVO: GuiaAcervo[] = [
     fontes: ['Corpo de Bombeiros Militar de Santa Catarina: Elevadores', 'Corpo de Bombeiros Militar de Alagoas: Elevadores'],
   },
   {
+    id: 'aparelho-de-saude',
+    categoria: 'energia',
+    nivel: 'medio',
+    titulo: 'Aparelho de saúde que usa energia',
+    resumo: 'Para quem usa oxigênio, aparelho de respirar ou outro aparelho de saúde na tomada.',
+    aviso: {
+      critico: true,
+      titulo: 'Faça o plano antes de faltar energia',
+      texto: 'Combine com o médico o que fazer se o aparelho parar. Se a pessoa passar mal sem o aparelho, ligue 192 (SAMU).',
+    },
+    blocos: [
+      {
+        titulo: 'Avise a companhia de energia',
+        itens: [
+          'Peça o cadastro de usuário de equipamento vital na companhia de energia da sua cidade.',
+          'Com o cadastro, a companhia avisa antes de desligar a energia para conserto.',
+          'Leve os documentos e o formulário assinado pelo médico. Pergunte quando renovar.',
+          'O cadastro não impede o corte se a conta ficar sem pagar.',
+          'Mantenha o telefone e o e-mail atualizados na companhia para receber os avisos.',
+        ],
+      },
+      {
+        titulo: 'Prepare a casa',
+        itens: [
+          'Faça uma lista de cada aparelho que a pessoa usa na tomada.',
+          'Pergunte ao médico ou ao fornecedor quanto tempo o aparelho fica sem energia.',
+          'Tenha um jeito reserva de ligar o aparelho, como bateria extra.',
+          'Deixe o celular sempre carregado.',
+          'Combine um lugar com energia para ir se a falta for longa.',
+        ],
+      },
+      {
+        titulo: 'Remédio de geladeira',
+        itens: [
+          'Pergunte ao médico ou ao farmacêutico quanto tempo cada remédio aguenta fora da geladeira.',
+          'Sem energia por mais de um dia, só use o remédio de geladeira se a bula disser que pode.',
+          'Se precisar jogar o remédio fora, peça outro ao médico ou ao farmacêutico logo.',
+        ],
+      },
+    ],
+    ligacoes: [{ tipo: 'licao', id: 'eletrica-gerador', titulo: 'Gerador sem acidente' }],
+    fontes: [
+      'Governo do Paraná e Copel: cadastro de usuário de equipamento vital',
+      'Cemig: avisos de desligamento programado',
+      'Ready.gov: Power Outages',
+    ],
+  },
+  {
     id: 'enchente',
     categoria: 'clima',
     nivel: 'medio',
