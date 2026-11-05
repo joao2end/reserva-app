@@ -678,6 +678,57 @@ export const ACERVO: GuiaAcervo[] = [
     fontes: ['Ministério da Saúde: orientações ao paciente com dengue', 'Ministério da Saúde: diarreia e desidratação'],
   },
   {
+    id: 'infarto',
+    categoria: 'saude',
+    nivel: 'facil',
+    titulo: 'Infarto: dor no peito é urgência',
+    resumo: 'Os sinais do ataque do coração e o que fazer até o socorro chegar.',
+    aviso: {
+      critico: true,
+      titulo: 'Não espere a dor passar',
+      texto: 'Teve sinal de infarto: ligue 192 na hora. Quanto mais cedo o tratamento começa, maior a chance de sobreviver.',
+    },
+    blocos: [
+      {
+        titulo: 'Sinais do infarto',
+        itens: [
+          'Dor ou aperto no meio ou no lado esquerdo do peito.',
+          'A dor pode ir para o braço, o ombro, o pescoço, a mandíbula ou as costas.',
+          'Falta de ar, que pode vir antes da dor.',
+          'Suor frio, palidez, enjoo ou vômito.',
+          'Fraqueza, tontura ou sensação de desmaio.',
+        ],
+      },
+      {
+        titulo: 'Nem sempre a dor é forte',
+        itens: [
+          'A mulher pode sentir mais cansaço sem motivo, enjoo ou mal-estar.',
+          'Às vezes parece uma má digestão, com queimação no peito.',
+          'Na dúvida, ligue 192 e conte o que está sentindo.',
+        ],
+      },
+      {
+        titulo: 'Enquanto o socorro não chega',
+        itens: [
+          'Não vá dirigindo sozinho para o hospital.',
+          'Sente no chão com os joelhos dobrados e as costas apoiadas, ou numa cadeira.',
+          'Se o médico já receitou remédio para dor no peito, use como ele ensinou.',
+          'Fique junto e veja se a pessoa responde e respira.',
+          'Parou de responder e não respira: comece a massagem no peito.',
+        ],
+      },
+    ],
+    ligacoes: [
+      { tipo: 'licao', id: 'rcp', titulo: 'Parada cardíaca: massagem no peito' },
+      { tipo: 'secao', id: 'socorros', titulo: 'Primeiros socorros' },
+    ],
+    fontes: [
+      'Ebserh, Hospital Universitário Onofre Lopes (UFRN), gov.br: cartilha Dicas de saúde, infarto',
+      'CDC: About Heart Attack Symptoms, Risk, and Recovery',
+      'NHS (Reino Unido): Heart attack, symptoms',
+    ],
+  },
+  {
     id: 'dengue-agua-guardada',
     categoria: 'saude',
     nivel: 'facil',
