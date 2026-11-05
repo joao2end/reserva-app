@@ -1897,6 +1897,151 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
         ],
       },
       {
+        id: 'comida-graos-sem-bicho',
+        nivel: 'medio',
+        titulo: 'Guardar arroz, feijão e farinha sem bicho',
+        objetivo: 'Proteger os grãos e a farinha do estoque contra caruncho e mofo, e salvar o que ainda dá para salvar.',
+        minutos: 6,
+        cenas: [
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'pote-graos', x: 36, y: 48, largura: 30, movimento: 'entrar' },
+                { desenho: 'certo', x: 76, y: 40, largura: 22, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [{ texto: 'VIDRO COM TAMPA DE ROSCA', x: 50, y: 88, tamanho: 6, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Pote bem fechado',
+            texto: 'Passe os grãos para vidro com tampa de rosca ou pote de plástico com tampa justa.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'caruncho', x: 36, y: 46, largura: 30, movimento: 'tremer' },
+                { desenho: 'errado', x: 76, y: 42, largura: 24, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [{ texto: 'O BICHO FURA O SACO PLÁSTICO', x: 50, y: 88, tamanho: 6, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Saco plástico não segura',
+            texto: 'O bicho fura até saco plástico grosso.',
+            segundos: 6,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'floco', x: 36, y: 46, largura: 28, movimento: 'girar' },
+                { desenho: 'relogio', x: 76, y: 42, largura: 24, movimento: 'pulsar', atraso: 1 },
+              ],
+              rotulos: [{ texto: '1 SEMANA A −18 °C', x: 50, y: 88, tamanho: 7, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Freezer mata o bicho',
+            texto: 'Feijão com pouco bicho: 1 semana no freezer, depois peneire e confira.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'pote-graos', x: 34, y: 48, largura: 28, movimento: 'entrar' },
+                { desenho: 'errado', x: 74, y: 42, largura: 24, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [{ texto: 'MOFO: JOGUE FORA', x: 50, y: 88, tamanho: 7, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Mofo vai para o lixo',
+            texto: 'Feijão, amendoim ou castanha com mofo: jogue fora sem cheirar.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'balde', x: 36, y: 50, largura: 30, movimento: 'entrar' },
+                { desenho: 'pano', x: 74, y: 44, largura: 30, movimento: 'balancar', atraso: 0.8 },
+              ],
+              rotulos: [{ texto: 'ÁGUA QUENTE E SABÃO', x: 50, y: 88, tamanho: 6.5, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Limpe o armário',
+            texto: 'Tire tudo, varra os farelos e lave com água quente e sabão.',
+            segundos: 7,
+          },
+        ],
+        partes: [
+          {
+            titulo: 'Guardar do jeito certo',
+            passos: [
+              'Na compra, confira se o pacote não está furado e se não tem bichinho.',
+              'Compre a quantidade que dá para usar logo.',
+              'Em casa, passe arroz, feijão, farinha e fubá para vidro com tampa de rosca ou pote de plástico com tampa bem justa.',
+              'Não confie no saco plástico: o bicho fura até saco grosso.',
+              'Não deixe cair farelo no armário. Farelo atrai bicho.',
+              'Use primeiro o que está há mais tempo guardado.',
+            ],
+          },
+          {
+            titulo: 'Achou bicho?',
+            paragrafos: [
+              'O bicho costuma começar no pacote que quase não se usa. Confira todos os potes e pacotes do armário.',
+              'Comer um bichinho sem querer não faz mal. Mas o pacote cheio de bicho não se salva.',
+            ],
+            passos: [
+              'Pacote com muito bicho: jogue fora num saco bem fechado.',
+              'Pouco bicho ou na dúvida: deixe 1 semana no freezer, a −18 °C ou mais frio.',
+              'Sem freezer: espalhe numa assadeira rasa e deixe pelo menos 30 minutos no forno a 68 °C.',
+              'Depois, peneire ou cate os bichos mortos e confira de novo.',
+              'Semente para plantar não vai ao freezer nem ao forno: ela pode não brotar mais.',
+            ],
+          },
+          {
+            titulo: 'Mofo',
+            passos: [
+              'Feijão, amendoim, castanha e pasta de amendoim com mofo: jogue fora inteiro.',
+              'Não cheire o que está mofado: o mofo faz mal para a respiração.',
+              'Guarde longe de umidade, porque umidade traz mofo.',
+            ],
+          },
+          {
+            titulo: 'Limpar o armário',
+            passos: [
+              'Tire toda a comida e os pacotes.',
+              'Varra ou aspire os cantos e jogue o lixo fora de casa na hora.',
+              'Lave as prateleiras com água quente e sabão e espere secar bem.',
+              'Não borrife inseticida perto de comida nem de panela e talher.',
+            ],
+          },
+        ],
+        erros: [
+          'Guardar o feijão no saquinho do mercado aberto, preso com prendedor.',
+          'Achar um bicho e só tirar ele, sem olhar os outros pacotes.',
+          'Lavar o armário e pôr os potes de volta com a prateleira molhada.',
+          'Borrifar inseticida dentro do armário de comida.',
+        ],
+        teste: [
+          {
+            pergunta: 'Qual é o melhor lugar para guardar o feijão?',
+            opcoes: ['No saco plástico do mercado', 'Em vidro com tampa de rosca', 'Numa caixa de papelão'],
+            correta: 1,
+            explicacao: 'O bicho fura até saco plástico grosso. Vidro com tampa de rosca segura.',
+          },
+          {
+            pergunta: 'O feijão tem poucos bichinhos. Como salvar?',
+            opcoes: ['1 semana no freezer, depois peneirar', 'Borrifar inseticida', 'Lavar e guardar molhado'],
+            correta: 0,
+            explicacao: 'O frio do freezer mata o bicho. Depois é só peneirar e conferir.',
+          },
+          {
+            pergunta: 'O amendoim está com mofo. O que fazer?',
+            opcoes: ['Tirar a parte mofada e comer o resto', 'Cheirar para ver se estragou', 'Jogar fora inteiro, sem cheirar'],
+            correta: 2,
+            explicacao: 'Mofo em amendoim, feijão e castanha pode fazer mal. Jogue fora e não cheire.',
+          },
+        ],
+        fontes: [
+          'Universidade do Arkansas, Serviço de Extensão (FSA-7024): pragas dos alimentos guardados',
+          'Universidade Rutgers, Extensão em Segurança dos Alimentos: bichos no armário de comida',
+          'Departamento de Agricultura dos EUA (USDA FSIS): mofo nos alimentos (Molds on Food)',
+          'Embrapa, pelo Portal Agrolink (2026): como evitar perdas por caruncho no feijão guardado',
+        ],
+      },
+      {
         id: 'comida-secar-frutas',
         nivel: 'avancado',
         titulo: 'Secar frutas no sol para guardar',

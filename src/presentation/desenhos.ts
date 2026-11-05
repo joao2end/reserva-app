@@ -653,4 +653,17 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
       <path class="c" d="M126 66 V30 C126 26 128 24 132 24 H154 C158 24 160 26 162 30 L172 48 V66 Z"/><path class="r" d="M134 30 H152 L162 48 H134 Z"/>
       <rect class="f" x="4" y="66" width="170" height="8" rx="2"/><circle class="c" cx="34" cy="80" r="12"/><circle class="f" cx="34" cy="80" r="5"/><circle class="c" cx="100" cy="80" r="12"/><circle class="f" cx="100" cy="80" r="5"/><circle class="c" cx="150" cy="80" r="12"/><circle class="f" cx="150" cy="80" r="5"/>`,
   },
+  'pote-graos': {
+    largura: 100,
+    altura: 130,
+    svg: `<rect class="f" x="20" y="6" width="60" height="20" rx="4"/><path class="t fino" d="M26 12 H74 M26 19 H74"/><path class="c" d="M16 30 H84 V116 C84 122 80 126 74 126 H26 C20 126 16 122 16 116 Z"/>
+      ${Array.from({ length: 21 }, (_, i) => `<ellipse class="r" cx="${26 + (i % 7) * 8}" cy="${116 - Math.floor(i / 7) * 9}" rx="4.5" ry="3"/>`).join('')}
+      <path class="t fino" d="M24 40 V70"/>`,
+  },
+  caruncho: {
+    largura: 110,
+    altura: 110,
+    svg: `<path class="t" d="M34 44 L14 32 M30 60 L8 60 M34 76 L14 88 M76 44 L96 32 M80 60 L102 60 M76 76 L96 88 M48 26 L40 8 M62 26 L70 8"/>
+      <ellipse class="f" cx="55" cy="34" rx="14" ry="11"/><ellipse class="f" cx="55" cy="68" rx="26" ry="34"/><path class="t fino" d="M55 40 V100"/>`,
+  },
 }

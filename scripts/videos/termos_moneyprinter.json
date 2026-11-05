@@ -34,5 +34,6 @@
   "sem-geladeira": ["power outage", "refrigerator door closed", "freezer food", "food thermometer", "cooler with ice", "spoiled food", "kitchen in dark", "candle flashlight kitchen"],
   "comida-enlatados": ["canned food pantry", "canned goods shelf", "can expiration date", "dented can", "opening can", "pantry organization", "cooking canned beans", "storage shelves"],
   "pouco-gas": ["gas stove flame", "pressure cooker", "pot with lid", "cooking rice", "gas cylinder", "kitchen window open", "charcoal grill outdoors", "family meal"],
-  "comida-secar-frutas": ["slicing fruit", "drying fruit in sun", "dried fruit", "fruit on tray", "mesh cover food", "sunny day", "glass jars storage", "banana slices"]
+  "comida-secar-frutas": ["slicing fruit", "drying fruit in sun", "dried fruit", "fruit on tray", "mesh cover food", "sunny day", "glass jars storage", "banana slices"],
+  "comida-graos-sem-bicho": ["glass jar with lid", "dry beans in jar", "rice storage containers", "plastic bag of beans", "freezer drawer food", "sifting dry beans", "pantry shelves", "cleaning kitchen cabinet", "washing shelf with sponge", "organized pantry jars"]
 }
