@@ -437,6 +437,58 @@ export const ACERVO: GuiaAcervo[] = [
     ],
   },
   {
+    id: 'alerta-no-celular',
+    categoria: 'comunicacao',
+    nivel: 'facil',
+    titulo: 'Alerta da Defesa Civil no celular',
+    resumo: 'O aviso que toca sozinho no celular quando há perigo perto de você.',
+    aviso: {
+      critico: false,
+      titulo: 'Receber o alerta é grátis',
+      texto: 'Ninguém cobra pelo alerta. Se alguém pedir dinheiro em nome do alerta, pode ser golpe.',
+    },
+    blocos: [
+      {
+        titulo: 'Como ele chega',
+        itens: [
+          'Chega sozinho, sem cadastro, em quem está numa área de risco.',
+          'Aparece por cima de tudo na tela do celular.',
+          'Alerta extremo: perigo grande para a vida. Toca como sirene, mesmo no silencioso.',
+          'Alerta severo: é preciso se proteger, mas sem tanta pressa. Faz um bipe, como mensagem, e não toca no silencioso.',
+          'O celular precisa estar com sinal 4G ou 5G. Só com Wi-Fi ou no modo avião, o alerta não chega.',
+        ],
+      },
+      {
+        titulo: 'Quando o alerta tocar',
+        itens: [
+          'Mantenha a calma.',
+          'Leia a mensagem até o fim antes de fechar.',
+          'Faça o que a mensagem manda. Quem escreve é a Defesa Civil da sua região.',
+          'Se tiver dúvida, ligue para a Defesa Civil no 199.',
+        ],
+      },
+      {
+        titulo: 'Deixe o celular pronto',
+        itens: [
+          'O alerta já vem ligado nos celulares mais novos, em geral de 2020 para cá.',
+          'No Android, confira em Configurações, depois Segurança e emergência, depois Alertas de emergência sem fio.',
+          'No iPhone, confira em Ajustes, depois Notificações, depois Alertas de Governo.',
+          'Não desligue esses alertas.',
+          'Para receber também por mensagem no WhatsApp, mande "oi" para o número (61) 2034-4611.',
+        ],
+      },
+    ],
+    ligacoes: [
+      { tipo: 'secao', id: 'deslocamento', titulo: 'Alertas por SMS e para onde ir' },
+    ],
+    fontes: [
+      'Ministério da Integração e do Desenvolvimento Regional: Defesa Civil Alerta',
+      'Agência Gov: primeiro Defesa Civil Alerta marca início do novo sistema de alertas',
+      'Gov.br: solicitar cadastro para recebimento de avisos e alertas de desastres',
+      'Governo do Rio Grande do Sul: como receber avisos e alertas da Defesa Civil no celular',
+    ],
+  },
+  {
     id: 'desidratacao',
     categoria: 'saude',
     nivel: 'facil',
