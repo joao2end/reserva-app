@@ -589,6 +589,59 @@ export const ACERVO: GuiaAcervo[] = [
     ],
   },
   {
+    id: 'golpes-na-emergencia',
+    categoria: 'comunicacao',
+    nivel: 'facil',
+    titulo: 'Golpes na hora do desastre',
+    resumo: 'Pedido falso de doação, falso agente e o que fazer se cair num golpe.',
+    aviso: {
+      critico: false,
+      titulo: 'Ajuda do governo não é cobrada',
+      texto: 'Quem trabalha no socorro não pede dinheiro para fazer vistoria nem para ajudar no cadastro. Se pedir, desconfie.',
+    },
+    blocos: [
+      {
+        titulo: 'Antes de doar',
+        itens: [
+          'Doe só pelos canais oficiais da prefeitura, do governo do estado ou da Defesa Civil.',
+          'Desconfie de chave Pix que chegou por mensagem e não aparece no site oficial.',
+          'Antes de confirmar o Pix, confira o nome, o CNPJ e o banco que aparecem na tela.',
+          'Se o nome, o CNPJ ou o banco não forem iguais aos do site oficial, não pague.',
+        ],
+      },
+      {
+        titulo: 'Mensagem, ligação ou visita estranha',
+        itens: [
+          'Desconfie de mensagem de número desconhecido pedindo dinheiro ou dados.',
+          'Não ligue para o telefone que veio na mensagem. Procure o número no site oficial.',
+          'Peça para ver o crachá com foto de quem bate na porta dizendo que é do governo.',
+          'Se tiver dúvida, não passe nenhum dado e confirme no órgão antes.',
+          'Para consertar a casa, peça referência e não pague tudo adiantado.',
+        ],
+      },
+      {
+        titulo: 'Se caiu num golpe pelo Pix',
+        itens: [
+          'Avise o seu banco o quanto antes, pelo aplicativo ou pelo telefone do banco.',
+          'Diga que foi golpe e peça a devolução do Pix.',
+          'Anote o número do protocolo que o banco der.',
+          'O pedido de devolução precisa ser feito em até 80 dias depois do Pix.',
+          'Avise a Polícia Civil e faça o boletim de ocorrência. O banco pode pedir.',
+        ],
+      },
+    ],
+    ligacoes: [
+      { tipo: 'secao', id: 'deslocamento', titulo: 'Alertas por SMS e para onde ir' },
+    ],
+    fontes: [
+      'Anatel: campanha #FiqueEsperto contra golpes com chave Pix falsa nas enchentes do RS e de SC',
+      'Defesa Civil do Rio Grande do Sul: como fazer doações para vítimas das enchentes',
+      'Governo do Paraná (Agência Estadual de Notícias): Polícia Civil alerta para golpes em doações',
+      'Banco Central do Brasil: Mecanismo Especial de Devolução do Pix (MED)',
+      'FEMA: proteja-se de fraudes e golpes depois do desastre',
+    ],
+  },
+  {
     id: 'desidratacao',
     categoria: 'saude',
     nivel: 'facil',
