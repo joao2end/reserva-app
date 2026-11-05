@@ -164,6 +164,57 @@ export const ACERVO: GuiaAcervo[] = [
     ],
   },
   {
+    id: 'choque-eletrico',
+    categoria: 'energia',
+    nivel: 'medio',
+    titulo: 'Alguém levou choque: como socorrer',
+    resumo: 'Separar a pessoa da energia sem levar choque junto e cuidar dela até o socorro chegar.',
+    aviso: {
+      critico: true,
+      titulo: 'Não encoste na pessoa ainda',
+      texto: 'Enquanto ela estiver encostada no fio ou no aparelho, a energia passa para você. Primeiro corte a energia.',
+    },
+    blocos: [
+      {
+        titulo: 'Na hora',
+        itens: [
+          'Desligue o disjuntor geral, se puder chegar até ele sem perigo.',
+          'Se não der para desligar, pise em cima de algo seco que não conduz energia.',
+          'Afaste o fio ou a pessoa com um objeto seco de madeira, plástico ou papelão, como um cabo de vassoura.',
+          'Ligue para os Bombeiros no 193 e para o SAMU no 192.',
+        ],
+      },
+      {
+        titulo: 'Depois de separar da energia',
+        itens: [
+          'Se ela não respira, não tosse e não se mexe, comece a massagem no peito.',
+          'Não mude a pessoa de lugar, a não ser que ela corra perigo ali.',
+          'Mantenha a pessoa aquecida.',
+          'Cubra a queimadura com gaze ou pano limpo. Não use cobertor nem toalha: os fiapos grudam na ferida.',
+          'Mesmo que ela pareça bem, leve para ver um médico.',
+        ],
+      },
+      {
+        titulo: 'Casa alagada e fio na rua',
+        itens: [
+          'Com a casa alagada, não toque em aparelhos nem no disjuntor que estiver na água.',
+          'Trate todo fio caído como se tivesse energia, mesmo sem faísca.',
+          'Não deixe ninguém chegar perto e avise logo a companhia de energia.',
+          'Nunca mexa em tomada ou aparelho com a mão molhada.',
+        ],
+      },
+    ],
+    ligacoes: [
+      { tipo: 'licao', id: 'rcp', titulo: 'Parada cardíaca: massagem no peito' },
+      { tipo: 'licao', id: 'eletrica-gerador', titulo: 'Fio caído e energia sem rede' },
+    ],
+    fontes: [
+      'Governo do Rio Grande do Sul: como agir para evitar acidentes com energia elétrica em eventos climáticos severos',
+      'Mayo Clinic: Electrical shock: first aid',
+      'St John Ambulance (Reino Unido): primeiros socorros em choque elétrico',
+    ],
+  },
+  {
     id: 'enchente',
     categoria: 'clima',
     nivel: 'medio',
