@@ -11,6 +11,7 @@
   "encanador-torneira": ["dripping faucet", "faucet repair", "wrench plumbing", "thread seal tape", "replacing faucet washer", "closing water valve", "kitchen faucet", "running water tap"],
   "encanador-trocar-cano": ["broken pipe leak", "pvc pipe", "cutting pvc pipe", "pipe glue", "plumber fixing pipe", "pipe fitting", "water valve", "water flowing pipe"],
   "mecanica-revisao-carro": ["car engine hood open", "checking engine oil dipstick", "car tire pressure", "windshield washer fluid", "car headlights", "car coolant", "mechanic checking car", "driving car road"],
+  "mecanica-carro-pronto": ["car fuel gauge", "filling gas tank", "car trunk emergency kit", "first aid kit", "flashlight batteries", "checking tire pressure", "spare tire trunk", "warning triangle road", "car mechanic inspection", "road trip preparation"],
   "mecanica-bike-pneu": ["bicycle flat tire", "bike tire repair", "tire levers", "bicycle inner tube", "bicycle pump", "patch kit", "bucket of water bubbles", "riding bicycle"],
   "mecanica-pneu-carro": ["flat tire car", "car jack", "lug wrench", "changing car tire", "spare tire", "hazard warning triangle", "roadside car", "car driving away"],
   "mecanica-ferramentas": ["toolbox", "screwdriver set", "pliers and wrench", "duct tape", "jumper cables car battery", "hammer and nails", "fixing broken pipe tape", "workshop tools wall"],

@@ -4,7 +4,7 @@ export const CURSO_MECANICA: ModuloCurso = {
   id: 'mecanica',
   area: 'oficios',
   titulo: 'Mecânica básica',
-  resumo: 'Remendar pneu de bicicleta, trocar pneu do carro e fazer a revisão de 5 minutos.',
+  resumo: 'Remendar pneu de bicicleta, trocar pneu do carro, fazer a revisão de 5 minutos e deixar o carro pronto para a emergência.',
   licoes: [
     {
       id: 'mecanica-bike-pneu',
@@ -303,6 +303,112 @@ export const CURSO_MECANICA: ModuloCurso = {
         },
       ],
       fontes: ['AutoPapo: conferir o nível do óleo exige 3 cuidados'],
+    },
+    {
+      id: 'mecanica-carro-pronto',
+      nivel: 'facil',
+      titulo: 'Carro pronto para sair na emergência',
+      objetivo: 'Deixar o carro com combustível, revisão em dia e um kit de emergência, para sair às pressas sem ficar parado no caminho.',
+      minutos: 5,
+      cenas: [
+        {
+          titulo: 'Tanque pelo menos pela metade',
+          texto: 'Nunca deixe o ponteiro baixar da metade. Em época de alerta, encha o tanque.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'marcador-tanque', x: 40, y: 44, largura: 50, movimento: 'entrar' },
+              { desenho: 'certo', x: 80, y: 40, largura: 18, movimento: 'entrar', atraso: 1.4 },
+            ],
+            rotulos: [{ texto: 'METADE OU MAIS', x: 50, y: 84, tamanho: 7, atraso: 1.8, destaque: true }],
+          },
+        },
+        {
+          titulo: 'Kit no porta-malas',
+          texto: 'Água, lanterna, caixa de primeiros socorros, cobertor e carregador de celular.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'caixa-socorro', x: 26, y: 46, largura: 30, movimento: 'cair' },
+              { desenho: 'garrafa-pet', x: 54, y: 46, largura: 12, movimento: 'deslizar', vindoDe: [0, -40], atraso: 0.6 },
+              { desenho: 'lanterna', x: 78, y: 46, largura: 26, movimento: 'acender', atraso: 1.2 },
+            ],
+          },
+        },
+        {
+          titulo: 'Confira o estepe também',
+          texto: 'Antes de viajar, calibre os pneus e o estepe e veja se o triângulo está no carro.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'roda-porcas', x: 36, y: 44, largura: 36, movimento: 'girar' },
+              { desenho: 'triangulo', x: 76, y: 46, largura: 28, movimento: 'surgir', atraso: 1 },
+            ],
+            rotulos: [{ texto: 'PNEUS E ESTEPE', x: 50, y: 86, tamanho: 7, atraso: 1.6 }],
+          },
+        },
+      ],
+      partes: [
+        {
+          titulo: 'Combustível',
+          passos: [
+            'Mantenha o tanque sempre pelo menos pela metade.',
+            'Em época de alerta, encha o tanque. Pode ser preciso sair às pressas, e sem energia o posto pode não funcionar.',
+          ],
+        },
+        {
+          titulo: 'O kit do carro',
+          passos: [
+            'Água para beber e comida que não estraga.',
+            'Lanterna com pilhas e carregador de celular para o carro.',
+            'Caixa de primeiros socorros, cobertor e um apito.',
+            'Cabos de chupeta, triângulo, macaco e chave de roda.',
+            'Um mapa da região, luvas e um sapato bom para caminhar.',
+          ],
+        },
+        {
+          titulo: 'Calor e revisão',
+          paragrafos: [
+            'Dentro do carro tudo esquenta muito. Ponha só o que aguenta calor e troque a água e a comida do kit mais vezes do que as de casa.',
+            'Antes de viagem, confira óleo, água e pressão dos pneus, inclusive do estepe. Peça ao mecânico para olhar bateria, freios, luzes e pisca-alerta e o limpador do para-brisa.',
+          ],
+        },
+        {
+          titulo: 'No caminho',
+          passos: [
+            'Rua alagada: não passe. 15 centímetros de água já podem fazer o carro perder o controle ou morrer o motor.',
+            'Se ficar difícil controlar o carro, encoste, pare e puxe o freio de mão.',
+            'Se um fio de energia cair em cima do carro, fique dentro até alguém treinado tirar o fio.',
+          ],
+        },
+      ],
+      erros: [
+        'Andar com o tanque quase vazio e deixar para abastecer quando o alerta chegar.',
+        'Esquecer o estepe vazio ou sem calibrar.',
+        'Deixar a mesma água no porta-malas por meses no calor.',
+        'Atravessar rua alagada achando que o carro passa.',
+      ],
+      teste: [
+        {
+          pergunta: 'Como deve ficar o tanque de combustível no dia a dia?',
+          opcoes: ['Sempre pelo menos pela metade', 'Só na reserva', 'Tanto faz'],
+          correta: 0,
+          explicacao: 'Com meio tanque ou mais, dá para sair às pressas mesmo se os postos pararem por falta de energia.',
+        },
+        {
+          pergunta: 'Por que trocar a água do kit do carro mais vezes?',
+          opcoes: ['Porque dentro do carro tudo esquenta muito', 'Porque a água fica salgada', 'Não precisa trocar'],
+          correta: 0,
+          explicacao: 'O carro fica muito quente no sol. Troque a água e a comida do kit mais vezes do que as de casa.',
+        },
+        {
+          pergunta: 'Um fio de energia caiu em cima do carro. O que fazer?',
+          opcoes: ['Sair correndo do carro', 'Ficar dentro até alguém treinado tirar o fio', 'Tirar o fio com a mão'],
+          correta: 1,
+          explicacao: 'O fio pode estar com energia. Fique dentro e espere alguém treinado tirar o fio.',
+        },
+      ],
+      fontes: ['Ready.gov (FEMA): Car Safety', 'Utah Division of Emergency Management: Vehicle Emergency Kit'],
     },
     {
       id: 'mecanica-ferramentas',

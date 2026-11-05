@@ -617,4 +617,16 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
     svg: `<path class="c" d="M12 34 V108 C14 136 86 136 88 108 V34 Z"/><rect class="r" x="12" y="60" width="76" height="36"/>
       <path class="r" d="M12 34 C14 6 86 6 88 34 C86 42 14 42 12 34 Z"/><path class="t" d="M50 2 V8 M22 6 L27 12 M78 6 L73 12"/>`,
   },
+  'marcador-tanque': {
+    largura: 120,
+    altura: 80,
+    svg: `<path class="c grosso" d="M8 72 A52 52 0 0 1 112 72 Z"/><path class="r" d="M18 72 A42 42 0 0 1 60 30 V72 Z"/>
+      <path class="t" d="M20 72 H30 M60 30 V40 M100 72 H90 M31 43 L37 49 M89 43 L83 49"/><path class="t grosso" d="M60 72 L60 36"/><circle class="f" cx="60" cy="72" r="7"/>`,
+  },
+  'caixa-socorro': {
+    largura: 120,
+    altura: 100,
+    svg: `<path class="t grosso" d="M42 26 V12 H78 V26"/><rect class="c" x="8" y="26" width="104" height="68" rx="10"/>
+      <path class="f" d="M52 40 H68 V52 H80 V68 H68 V80 H52 V68 H40 V52 H52 Z"/>`,
+  },
 }
