@@ -545,4 +545,10 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
     altura: 140,
     svg: `<rect class="c" x="66" y="6" width="12" height="70" rx="3"/><rect class="c" x="14" y="66" width="72" height="12" rx="3"/><path class="t grosso" d="M20 78 V134 M80 78 V134"/><path class="t" d="M20 108 H80"/>`,
   },
+  'vaso-sanitario': {
+    largura: 100,
+    altura: 130,
+    svg: `<rect class="c" x="58" y="6" width="36" height="56" rx="5"/><rect class="r" x="66" y="14" width="18" height="6" rx="2"/>
+      <path class="c" d="M8 62 H94 C94 84 80 96 62 98 L66 124 H30 L34 98 C18 94 8 82 8 62 Z"/><path class="agua" d="M18 66 H84 C82 78 72 86 52 86 C32 86 22 78 18 66 Z"/><path class="t" d="M4 126 H98"/>`,
+  },
 }

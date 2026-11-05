@@ -121,6 +121,141 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
         fontes: ['Ready.gov / FEMA: Managing Water', 'Secretaria da Saúde de São Paulo: uso do hipoclorito de sódio'],
       },
       {
+        id: 'agua-economizar',
+        nivel: 'facil',
+        titulo: 'Gastar menos água na seca',
+        objetivo: 'Fazer a água da casa durar mais no banho, na pia e na descarga.',
+        minutos: 5,
+        cenas: [
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'chuveiro', x: 28, y: 36, largura: 30, movimento: 'surgir' },
+                { desenho: 'relogio', x: 74, y: 30, largura: 20, movimento: 'girar', atraso: 0.8 },
+              ],
+              rotulos: [
+                { texto: '15 min = 135 L', x: 50, y: 70, tamanho: 6.5, atraso: 1.4 },
+                { texto: '5 min = 45 L', x: 50, y: 86, tamanho: 8, atraso: 2.4, destaque: true },
+              ],
+            },
+            titulo: 'Banho de 5 minutos',
+            texto: 'Feche o chuveiro enquanto se ensaboa. O banho cai de 135 para 45 litros.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'torneira', x: 30, y: 34, largura: 30, movimento: 'entrar' },
+                { desenho: 'copo', x: 74, y: 36, largura: 14, movimento: 'cair', atraso: 1 },
+              ],
+              rotulos: [
+                { texto: 'TORNEIRA ABERTA: 12 L', x: 50, y: 70, tamanho: 6, atraso: 1.6 },
+                { texto: 'COM COPO: MENOS DE 1 L', x: 50, y: 86, tamanho: 6.5, atraso: 2.4, destaque: true },
+              ],
+            },
+            titulo: 'Escove os dentes com um copo',
+            texto: 'Molhe a escova, feche a torneira e use um copo de água para enxaguar a boca.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'balde', x: 22, y: 42, largura: 24, movimento: 'deslizar' },
+                { desenho: 'seta', x: 50, y: 42, largura: 16, movimento: 'empurrar', atraso: 0.8 },
+                { desenho: 'vaso-sanitario', x: 78, y: 42, largura: 24, movimento: 'surgir', atraso: 1.4 },
+              ],
+              rotulos: [
+                { texto: 'ENXÁGUE DA MÁQUINA', x: 50, y: 76, tamanho: 6, atraso: 2 },
+                { texto: 'VAI PARA A DESCARGA', x: 50, y: 90, tamanho: 6.5, atraso: 2.6, destaque: true },
+              ],
+            },
+            titulo: 'Reaproveite na descarga',
+            texto: 'Cada descarga gasta de 10 a 14 litros. Use a água do enxágue da máquina de lavar.',
+            segundos: 9,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'copo', x: 34, y: 40, largura: 16, movimento: 'surgir' },
+                { desenho: 'errado', x: 34, y: 40, largura: 26, movimento: 'entrar', atraso: 0.8 },
+                { desenho: 'balde', x: 72, y: 42, largura: 22, movimento: 'entrar', atraso: 1.4 },
+                { desenho: 'tampa', x: 72, y: 29, largura: 24, movimento: 'cair', atraso: 2 },
+              ],
+              rotulos: [
+                { texto: 'NÃO BEBER', x: 50, y: 74, tamanho: 6.5, atraso: 1.2, destaque: true },
+                { texto: 'GUARDE EM BALDE TAMPADO', x: 50, y: 90, tamanho: 6, atraso: 2.4 },
+              ],
+            },
+            titulo: 'Água reaproveitada não se bebe',
+            texto: 'Nem para banho nem para regar verdura. Guarde no balde com tampa.',
+            segundos: 8,
+          },
+        ],
+        partes: [
+          {
+            titulo: 'No banho, na pia e na louça',
+            passos: [
+              'Banho: feche o chuveiro enquanto se ensaboa e termine em 5 minutos. Um banho de 15 minutos gasta 135 litros; o de 5 minutos, 45 litros.',
+              'Dentes: molhe a escova e feche a torneira. Use um copo de água para enxaguar a boca. Gasta menos de 1 litro, contra 12 litros com a torneira aberta.',
+              'Louça: tire os restos de comida, ensaboe tudo com a torneira fechada e enxágue de uma vez. Gasta 20 litros, contra 117 litros com a torneira aberta.',
+              'Torneira pingando perde pelo menos 16 mil litros por ano. Conserte logo: veja a lição do curso Encanador da casa.',
+              'Plantas: regue de manhã cedo, das 6h às 8h, ou depois das 17h, quando o sol não seca a água.',
+            ],
+          },
+          {
+            titulo: 'Reaproveitar a água',
+            passos: [
+              'Junte num balde a água do último enxágue da máquina de lavar e a água do banho.',
+              'Use essa água na descarga, jogando direto no vaso, e para lavar o chão e o quintal.',
+              'A água da lavagem de roupa muito suja fica escura e começa a cheirar mal em cerca de 12 horas. Use no mesmo dia.',
+              'Guarde sempre em balde ou tambor bem tampado, para não virar criadouro do mosquito da dengue.',
+            ],
+          },
+          {
+            titulo: 'Onde ela não pode ir',
+            paragrafos: [
+              'Mesmo que pareça limpa, a água reaproveitada tem sabão e micróbios. Ela nunca vira água de beber nem de cozinhar.',
+            ],
+            passos: [
+              'Não beba e não use para cozinhar.',
+              'Não use para tomar banho nem para dar banho em animais.',
+              'Não regue verdura, legume que se come cru, nem planta de comer.',
+              'Água com água sanitária ou alvejante não vai para planta nenhuma.',
+            ],
+          },
+        ],
+        erros: [
+          'Deixar o chuveiro aberto enquanto se ensaboa.',
+          'Escovar os dentes com a torneira aberta.',
+          'Regar a horta com a água da máquina de lavar.',
+          'Deixar o balde de água reaproveitada destampado.',
+        ],
+        teste: [
+          {
+            pergunta: 'Quanto gasta um banho de 5 minutos, fechando o chuveiro para se ensaboar?',
+            opcoes: ['45 litros', '135 litros', '10 litros'],
+            correta: 0,
+            explicacao: 'Com 15 minutos de chuveiro aberto são 135 litros. Com 5 minutos, 45 litros.',
+          },
+          {
+            pergunta: 'Para que serve a água do enxágue da máquina de lavar?',
+            opcoes: ['Para beber, se estiver clara', 'Para a descarga e para lavar o chão', 'Para regar a alface'],
+            correta: 1,
+            explicacao: 'Mesmo clara, ela tem sabão e micróbios. Só serve para a descarga e para a limpeza.',
+          },
+          {
+            pergunta: 'Como guardar a água reaproveitada?',
+            opcoes: ['Em balde destampado no quintal', 'Em balde bem tampado e usar logo', 'Junto com a água de beber'],
+            correta: 1,
+            explicacao: 'Tampada, ela não vira criadouro do mosquito da dengue. A água de roupa muito suja deve ser usada no mesmo dia.',
+          },
+        ],
+        fontes: [
+          'Copasa, pela Agência Minas (Governo de Minas Gerais): dicas de economia de água',
+          'IPT (Instituto de Pesquisas Tecnológicas de São Paulo): Manual de águas cinzas',
+        ],
+      },
+      {
         id: 'agua-tratar',
         nivel: 'medio',
         titulo: 'Tratar água em casa',
