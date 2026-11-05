@@ -94,6 +94,9 @@ O MoneyPrinterTurbo monta o vídeo com cenas reais do Pexels ou do Pixabay, voz 
 - Na ordem da narração: abertura, demonstração, cada passo, erros comuns.
 - Nada que mostre o oposto do que a lição ensina (ex.: gerador dentro de casa, pessoa tocando fio caído).
 - Para primeiros socorros, prefira `"first aid training"`, `"cpr training"`: cenas de treino, sem sangue.
+- Com `--match-materials-to-script` o MoneyPrinterTurbo vai em rodízio: 1º resultado de cada termo, depois o 2º de cada termo, e assim até cobrir a narração. Uma aula de 3 minutos com cortes de 4 s usa uns 7 resultados de cada termo, então o termo precisa render muitos resultados certos, não só o primeiro.
+- No Pixabay o termo casa com as etiquetas de cada vídeo. Palavra genérica junto (`water`, `delivery`) puxa porto, navio, cachoeira e praia; palavra sozinha e específica (`faucet`, `jerrycan`, `bottle cap`, `glass of water`) segura melhor. Evite `tanker` (vira navio) e `drops` (vira tinta colorida).
+- Prefira 10 a 12 termos: mais termos, menos resultados fundos de cada um.
 
 **Rodada de melhoria dos vídeos do MoneyPrinterTurbo:**
 1. Escolha a lição com vídeo mais antigo ou com menos conferência registrada em `MELHORIAS.md`.
