@@ -1444,6 +1444,153 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
         ],
       },
       {
+        id: 'comida-enlatados',
+        nivel: 'facil',
+        titulo: 'Conferir e usar os enlatados do estoque',
+        objetivo: 'Saber qual lata pode comer, guardar o estoque do jeito certo e não perder a sobra quando falta geladeira.',
+        minutos: 5,
+        cenas: [
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'lata-estufada', x: 36, y: 46, largura: 30, movimento: 'pulsar' },
+                { desenho: 'errado', x: 76, y: 42, largura: 26, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [{ texto: 'NÃO ABRA E NÃO PROVE', x: 50, y: 88, tamanho: 6.5, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Lata estufada: jogue fora',
+            texto: 'Estufada, vazando ou muito amassada: não abra e não prove.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'lata', x: 34, y: 46, largura: 28, movimento: 'entrar' },
+                { desenho: 'sol', x: 76, y: 36, largura: 22, movimento: 'girar', atraso: 0.8 },
+                { desenho: 'errado', x: 76, y: 36, largura: 16, movimento: 'entrar', atraso: 1.6 },
+              ],
+              rotulos: [{ texto: 'O IDEAL: ABAIXO DE 29 °C', x: 50, y: 88, tamanho: 6.5, atraso: 2, destaque: true }],
+            },
+            titulo: 'Lugar fresco e seco',
+            texto: 'Nunca em cima ou do lado do fogão, nem embaixo da pia.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'lata', x: 30, y: 48, largura: 24, movimento: 'deslizar', vindoDe: [-40, 0] },
+                { desenho: 'seta', x: 54, y: 48, largura: 18, movimento: 'entrar', atraso: 0.8 },
+                { desenho: 'lata', x: 76, y: 48, largura: 24, movimento: 'surgir', atraso: 1.2 },
+              ],
+              rotulos: [{ texto: 'A MAIS VELHA NA FRENTE', x: 50, y: 88, tamanho: 6.5, atraso: 1.8, destaque: true }],
+            },
+            titulo: 'Use primeiro a mais antiga',
+            texto: 'Lata nova vai para o fundo. A que vence antes fica na frente.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'lata', x: 34, y: 48, largura: 24, movimento: 'entrar' },
+                { desenho: 'geladeira', x: 74, y: 46, largura: 26, movimento: 'entrar', atraso: 1 },
+              ],
+              rotulos: [{ texto: 'SEM GELADEIRA: LATA PEQUENA', x: 50, y: 88, tamanho: 6, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Abra só o que vai comer',
+            texto: 'A sobra da lata aberta precisa de geladeira.',
+            segundos: 7,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'panela', x: 36, y: 48, largura: 36, movimento: 'entrar' },
+                { desenho: 'relogio', x: 78, y: 40, largura: 22, movimento: 'pulsar', atraso: 1 },
+              ],
+              rotulos: [{ texto: 'PELO MENOS 15 MINUTOS', x: 50, y: 88, tamanho: 6.5, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Conserva caseira: ferva antes',
+            texto: 'Ferva ou cozinhe a conserva feita em casa antes de comer.',
+            segundos: 7,
+          },
+        ],
+        partes: [
+          {
+            titulo: 'Antes de abrir, olhe a embalagem',
+            paragrafos: [
+              'Lata estragada pode ter a toxina do botulismo, uma intoxicação grave. Na dúvida, não prove.',
+            ],
+            passos: [
+              'Lata estufada, com a tampa ou o fundo inchados: jogue fora sem abrir.',
+              'Lata vazando ou com amassado fundo: jogue fora.',
+              'Amassado pequeno, com a lata inteira e boa: pode usar.',
+              'Ferrugem forte: jogue fora. Manchinha que sai passando o dedo ou papel-toalha não é problema.',
+              'Vidro de conserva embaçado, embalagem rasgada ou validade vencida: não coma.',
+            ],
+          },
+          {
+            titulo: 'Guardar o estoque',
+            passos: [
+              'Guarde em lugar fresco e seco. O ideal é abaixo de 29 °C.',
+              'Nunca em cima ou do lado do fogão, embaixo da pia, nem em garagem úmida. Calor acima de 38 °C faz mal à comida enlatada.',
+              'Confira o estoque a cada poucas semanas.',
+              'Use primeiro as latas que estão há mais tempo em casa. Lata nova vai para o fundo.',
+            ],
+          },
+          {
+            titulo: 'Abrir e comer',
+            passos: [
+              'Se a lata chiar forte ou o caldo espirrar ao abrir, jogue fora.',
+              'Cheiro ruim ou aparência estranha: jogue fora sem provar.',
+              'Sem geladeira, prefira latas pequenas e abra só o que vai comer naquela refeição.',
+              'Com geladeira, passe a sobra para um pote limpo de vidro ou plástico, com tampa.',
+              'Sobra de carne, frango, feijão, milho, ervilha ou sopa: até 3 a 4 dias na geladeira. Sobra de tomate, abacaxi, pêssego ou picles: até 5 a 7 dias.',
+            ],
+          },
+          {
+            titulo: 'Conserva caseira e sinais de alerta',
+            paragrafos: [
+              'Conserva feita em casa, ou comprada sem garantia de como foi feita, pede um cuidado a mais.',
+            ],
+            passos: [
+              'Antes de comer, ferva ou cozinhe a conserva por pelo menos 15 minutos.',
+              'Os sinais do botulismo aparecem de 2 horas a 10 dias depois de comer: visão turva ou dupla, pálpebra caída, dificuldade para engolir, boca seca e fraqueza.',
+              'Também pode vir enjoo, vômito, diarreia e dor de barriga.',
+              'Qualquer um desses sinais depois de comer conserva: procure atendimento na hora ou ligue 192.',
+            ],
+          },
+        ],
+        erros: [
+          'Provar um pouquinho para ver se a lata estragou.',
+          'Comprar lata estufada ou muito amassada porque está barata.',
+          'Guardar o estoque do lado do fogão ou embaixo da pia.',
+          'Deixar a sobra da lata aberta fora da geladeira para o dia seguinte.',
+        ],
+        teste: [
+          {
+            pergunta: 'A lata está com a tampa estufada. O que fazer?',
+            opcoes: ['Abrir e cheirar', 'Jogar fora sem abrir e sem provar', 'Cozinhar bem e comer'],
+            correta: 1,
+            explicacao: 'Lata estufada é sinal de botulismo. Não abra e não prove.',
+          },
+          {
+            pergunta: 'Onde guardar os enlatados?',
+            opcoes: ['Em lugar fresco e seco', 'Do lado do fogão', 'Embaixo da pia'],
+            correta: 0,
+            explicacao: 'O calor e a umidade estragam a lata. O ideal é abaixo de 29 °C.',
+          },
+          {
+            pergunta: 'Você está sem geladeira. Qual lata é melhor abrir?',
+            opcoes: ['A maior, para sobrar para amanhã', 'Uma pequena, para comer tudo na refeição', 'Tanto faz'],
+            correta: 1,
+            explicacao: 'A sobra da lata aberta precisa de geladeira. Sem ela, abra só o que vai comer.',
+          },
+        ],
+        fontes: [
+          'Ministério da Saúde: Botulismo (Saúde de A a Z) e Biblioteca Virtual em Saúde',
+          'Departamento de Agricultura dos EUA (USDA FSIS): segurança dos alimentos que não vão à geladeira (Shelf-Stable Food Safety)',
+        ],
+      },
+      {
         id: 'comida-secar-frutas',
         nivel: 'avancado',
         titulo: 'Secar frutas no sol para guardar',

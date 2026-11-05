@@ -96,6 +96,8 @@ export const DESENHOS = [
   'pessoa-bracos',
   'fatias-fruta',
   'tela-secagem',
+  'lata',
+  'lata-estufada',
 ] as const
 
 export type DesenhoId = (typeof DESENHOS)[number]

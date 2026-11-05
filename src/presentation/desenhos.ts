@@ -605,4 +605,16 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
     svg: `<circle class="c" cx="65" cy="22" r="14"/><path class="c" d="M48 42 H82 C88 42 90 46 90 52 V88 H80 V134 H68 V96 H62 V134 H50 V88 H40 V52 C40 46 42 42 48 42 Z"/>
       <rect class="c" x="24" y="6" width="14" height="50" rx="6" transform="rotate(-14 40 50)"/><rect class="c" x="88" y="44" width="14" height="48" rx="6" transform="rotate(-30 95 48)"/>`,
   },
+  lata: {
+    largura: 100,
+    altura: 124,
+    svg: `<path class="c" d="M12 16 V106 A38 10 0 0 0 88 106 V16 Z"/><rect class="r" x="12" y="44" width="76" height="40"/>
+      <path class="t fino" d="M12 28 A38 10 0 0 0 88 28 M12 96 A38 10 0 0 0 88 96"/><ellipse class="r" cx="50" cy="16" rx="38" ry="10"/><ellipse class="t fino" cx="50" cy="16" rx="30" ry="7"/>`,
+  },
+  'lata-estufada': {
+    largura: 100,
+    altura: 140,
+    svg: `<path class="c" d="M12 34 V108 C14 136 86 136 88 108 V34 Z"/><rect class="r" x="12" y="60" width="76" height="36"/>
+      <path class="r" d="M12 34 C14 6 86 6 88 34 C86 42 14 42 12 34 Z"/><path class="t" d="M50 2 V8 M22 6 L27 12 M78 6 L73 12"/>`,
+  },
 }
