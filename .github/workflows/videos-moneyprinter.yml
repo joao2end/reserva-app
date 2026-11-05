@@ -31,7 +31,7 @@ jobs:
       - name: Escolher o banco de vídeos
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
-          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY || secrets.PIXBAY_API_KEY }}
         run: |
           if [ -n "$PEXELS_API_KEY" ]; then
             echo "FONTE=pexels" >> "$GITHUB_ENV"
@@ -72,7 +72,7 @@ jobs:
       - name: Gerar os vídeos
         env:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
-          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY || secrets.PIXBAY_API_KEY }}
           LICOES: ${{ inputs.licoes }}
         run: |
           python scripts/videos/gerar_moneyprinter.py --mpt mpt --fonte "$FONTE" \
