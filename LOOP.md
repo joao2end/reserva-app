@@ -31,7 +31,7 @@ Cada rodada escolhe uma única tarefa, faz bem, testa e publica. Olhe `git log -
 - Lição completa: `nivel`, 3 ou mais cenas (até 60 s somadas), 2 ou mais partes, erros comuns, teste de 3 perguntas, fontes. Vídeos do YouTube só de canais oficiais ou profissionais conhecidos, em `cursos/youtube.ts`.
 - A lição entra no arquivo do curso. A ordem por nível é feita em `curso.ts`, não precisa reordenar.
 - Ao mudar o número de lições, atualize os textos "X de N lições" em `tests/e2e/cenarios.py` (cenários 28 e 30) e o README.
-- Toda lição nova ganha de 6 a 12 termos de busca em inglês em `scripts/videos/termos_moneyprinter.json`, na ordem em que o assunto aparece na narração (veja a seção 4). Depois do push, peça o vídeo dela: `gh workflow run videos-moneyprinter.yml -f licoes="<id>"`.
+- Toda lição nova ganha de 6 a 12 termos de busca em inglês em `scripts/videos/termos_moneyprinter.json`, na ordem em que o assunto aparece na narração (veja a seção 4). Depois do push, peça o vídeo dela: `gh api -X POST repos/joao2end/reserva-app/actions/workflows/videos-moneyprinter.yml/dispatches -f ref=main -f "inputs[licoes]=<ids>"` (o `gh workflow run` não funciona nesta sessão, porque usa GraphQL).
 
 ### 3. Qualidade dos vídeos
 
@@ -86,7 +86,7 @@ O MoneyPrinterTurbo monta o vídeo com cenas reais do Pexels, voz pt-BR (Edge TT
 
 - Quem gera: `scripts/videos/gerar_moneyprinter.py`, rodando no workflow **Vídeos MoneyPrinterTurbo** (`.github/workflows/videos-moneyprinter.yml`). Ele publica na release `videos-moneyprinter`, com `manifesto.json`. Só gera de novo as lições cuja narração, termos ou ajustes mudaram.
 - Precisa do secret `PEXELS_API_KEY`. Se o workflow falhar por falta dele, não tente contornar: diga no fim da rodada que a chave ainda falta.
-- Para pedir vídeos: `gh workflow run videos-moneyprinter.yml -f licoes="id1 id2"`. Com `-f licoes=""` gera todas as lições que mudaram.
+- Para pedir vídeos: `gh api -X POST repos/joao2end/reserva-app/actions/workflows/videos-moneyprinter.yml/dispatches -f ref=main -f "inputs[licoes]=<ids>"`, com os ids separados por espaço. Com `inputs[licoes]=` vazio, gera todas as lições que mudaram. Para ver o resultado: `gh api "repos/joao2end/reserva-app/actions/workflows/videos-moneyprinter.yml/runs?per_page=1"`.
 - Enquanto houver lição sem vídeo nesta release, gere até 5 por rodada.
 
 **Termos de busca bons** (o que mais muda a qualidade):
