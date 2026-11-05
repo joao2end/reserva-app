@@ -521,4 +521,17 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
     svg: `<rect class="r" x="4" y="22" width="152" height="16"/><path class="t fino" d="M4 27 H156"/><rect class="c" x="58" y="22" width="44" height="16"/>
       <rect class="f" x="34" y="14" width="34" height="32" rx="4"/><rect class="f" x="92" y="14" width="34" height="32" rx="4"/><path class="t fino" d="M40 14 V46 M120 14 V46"/>`,
   },
+  pulgao: {
+    largura: 60,
+    altura: 50,
+    svg: `<ellipse class="f" cx="30" cy="28" rx="18" ry="13"/><circle class="f" cx="48" cy="22" r="7"/><path class="t fino" d="M52 16 L58 6 M50 15 L52 4 M18 38 L10 46 M28 40 L24 48 M38 39 L40 48"/>`,
+  },
+  borrifador: {
+    largura: 90,
+    altura: 140,
+    svg: `<path class="c" d="M30 8 H62 V20 H76 L86 28 L82 32 L70 26 H62 V36 H30 Z"/><path class="f" d="M30 22 H14 V30 H30 Z"/>
+      <rect class="c" x="34" y="36" width="24" height="14"/><path class="c" d="M22 50 H70 V128 C70 134 66 136 60 136 H32 C26 136 22 134 22 128 Z"/>
+      <path class="agua" d="M25 74 H67 V127 C67 131 64 133 60 133 H32 C28 133 25 131 25 127 Z"/>
+      ${[0, 1, 2].map((i) => `<path class="gota-cai longe" style="animation-delay:${(i * 0.3).toFixed(2)}s" d="M${10 - i * 3} ${24 + i * 5} q3 6 0 9 q-3 -3 0 -9 Z"/>`).join('')}`,
+  },
 }

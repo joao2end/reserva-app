@@ -1,6 +1,7 @@
 import type { ModuloCurso } from './tipos'
 
 const EMBRAPA_HORTAS = 'Embrapa: Hortas — recomendações para cultivo (cartilha, 2024)'
+const EMBRAPA_PRAGAS = 'Embrapa Hortaliças: Recomendações para o controle de pragas em hortas urbanas (Circular Técnica 80, 2009)'
 
 export const CURSO_HORTA: ModuloCurso = {
   id: 'horta',
@@ -215,6 +216,141 @@ export const CURSO_HORTA: ModuloCurso = {
         },
       ],
       fontes: [EMBRAPA_HORTAS],
+    },
+    {
+      id: 'horta-pragas',
+      nivel: 'medio',
+      titulo: 'Pragas da horta sem veneno',
+      objetivo: 'Tirar pulgões, lagartas e lesmas da horta com catação e caldas feitas em casa.',
+      minutos: 7,
+      cenas: [
+        {
+          titulo: 'Olhe embaixo das folhas',
+          texto: 'Tire a folha cheia de bichinhos e esmague.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'muda', x: 36, y: 52, largura: 34, movimento: 'surgir' },
+              { desenho: 'pulgao', x: 28, y: 40, largura: 9, movimento: 'tremer', atraso: 0.8 },
+              { desenho: 'pulgao', x: 44, y: 36, largura: 8, movimento: 'tremer', atraso: 1 },
+              { desenho: 'mao', x: 74, y: 44, largura: 28, movimento: 'deslizar', vindoDe: [20, 0], atraso: 1.6 },
+            ],
+            rotulos: [{ texto: 'CATAÇÃO', x: 50, y: 88, tamanho: 7, atraso: 2.2, destaque: true }],
+          },
+        },
+        {
+          titulo: 'Calda de farinha',
+          texto: '20 g de farinha de trigo em 1 litro de água. Mexa e coe.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'copo', x: 30, y: 50, largura: 24, movimento: 'entrar' },
+              { desenho: 'seta', x: 52, y: 52, largura: 14, movimento: 'surgir', atraso: 1 },
+              { desenho: 'borrifador', x: 76, y: 50, largura: 24, movimento: 'cair', atraso: 1.4 },
+            ],
+            rotulos: [{ texto: '20 g em 1 litro', x: 50, y: 88, tamanho: 7, atraso: 2, destaque: true }],
+          },
+        },
+        {
+          titulo: 'Fim da tarde, sem vento',
+          texto: 'Borrife por cima e por baixo das folhas. Nunca com chuva.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'borrifador', x: 30, y: 50, largura: 24, movimento: 'balancar' },
+              { desenho: 'muda', x: 64, y: 54, largura: 30, movimento: 'entrar', atraso: 0.8 },
+              { desenho: 'relogio', x: 86, y: 22, largura: 18, movimento: 'entrar', atraso: 1.4 },
+            ],
+          },
+        },
+        {
+          titulo: '4 dias antes de colher',
+          texto: 'Pare de borrifar 96 horas antes de comer a verdura.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'relogio', x: 34, y: 46, largura: 30, movimento: 'pulsar' },
+              { desenho: 'muda', x: 72, y: 52, largura: 30, movimento: 'crescer', atraso: 1 },
+            ],
+            rotulos: [{ texto: '96 HORAS', x: 34, y: 84, tamanho: 7, atraso: 1.6, destaque: true }],
+          },
+        },
+      ],
+      partes: [
+        {
+          titulo: 'Olhar e catar',
+          passos: [
+            'Olhe as plantas, principalmente embaixo das folhas e nos brotos.',
+            'Tire as folhas cheias de pulgões ou de lagartas e esmague.',
+            'Contra pulgão, mosca-branca e tripes, pendure placas amarelas com cola ou graxa perto das plantas. Os bichinhos grudam.',
+          ],
+        },
+        {
+          titulo: 'Calda de farinha de trigo',
+          paragrafos: ['Serve para pulgão, mosca-branca, cochonilha, percevejo e lagarta. A calda seca nas folhas e sufoca os insetos.'],
+          passos: [
+            'Ponha 20 g de farinha de trigo, aos poucos, em 1 litro de água.',
+            'Mexa até misturar bem e coe.',
+            'Use logo depois de pronta.',
+            'Esta calda é a exceção do horário: passe de manhã, em dia quente, seco e de sol.',
+          ],
+        },
+        {
+          titulo: 'Calda de óleo de cozinha',
+          paragrafos: ['Serve para pulgão, mosca-branca e outros insetos que sugam a planta, e para ácaros.'],
+          passos: [
+            'Misture 5 ml de óleo de soja ou de algodão e meio ml de detergente neutro.',
+            'Complete com água até 1 litro.',
+            'Sacuda bem antes de usar.',
+          ],
+        },
+        {
+          titulo: 'Lesmas e caracóis',
+          passos: [
+            'Ao anoitecer, deixe panos ou estopas molhados em cerveja ou leite no meio da horta.',
+            'Bem cedo, recolha os panos com as lesmas, usando luva ou saco plástico.',
+            'Enterre as lesmas longe de poço e de cisterna.',
+            'Não jogue sal de cozinha na terra nem nas plantas.',
+          ],
+        },
+        {
+          titulo: 'Como borrifar',
+          passos: [
+            'Passe no fim da tarde, com vento fraco.',
+            'Não borrife em dia de chuva nem se puder chover depois.',
+            'Molhe por cima e por baixo das folhas, nos brotos e nos frutos pequenos.',
+            'Se precisar, repita a cada 7 dias.',
+            'Pare de borrifar 96 horas (4 dias) antes de colher para comer.',
+          ],
+        },
+      ],
+      erros: [
+        'Jogar sal na terra para matar lesma: estraga o solo e as plantas.',
+        'Borrifar com sol do meio-dia, com vento ou com chuva chegando.',
+        'Colher e comer a verdura no dia seguinte ao que borrifou.',
+        'Molhar só a parte de cima das folhas: o bichinho fica escondido embaixo.',
+      ],
+      teste: [
+        {
+          pergunta: 'Quanto de farinha de trigo vai em 1 litro de água para a calda?',
+          opcoes: ['20 g', '1 kg', 'Meio pacote'],
+          correta: 0,
+          explicacao: 'São 20 g de farinha em 1 litro de água, misturada aos poucos e coada.',
+        },
+        {
+          pergunta: 'Quanto tempo antes de colher é preciso parar de borrifar?',
+          opcoes: ['1 hora', '96 horas, ou 4 dias', 'Não precisa parar'],
+          correta: 1,
+          explicacao: 'A Embrapa pede para suspender qualquer calda 96 horas antes de comer a hortaliça.',
+        },
+        {
+          pergunta: 'Como tirar lesmas da horta?',
+          opcoes: ['Jogando sal na terra', 'Com panos molhados em cerveja ou leite, recolhidos cedo', 'Regando mais'],
+          correta: 1,
+          explicacao: 'As lesmas se juntam nos panos à noite. Sal na terra faz mal ao solo e às plantas.',
+        },
+      ],
+      fontes: [EMBRAPA_PRAGAS],
     },
     {
       id: 'horta-agua',
