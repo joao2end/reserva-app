@@ -1,6 +1,7 @@
 import type { ModuloCurso } from './tipos'
 
 const EMBRAPA_HORTAS = 'Embrapa: Hortas — recomendações para cultivo (cartilha, 2024)'
+const EMBRAPA_SEMENTES = 'Embrapa Hortaliças: Produção de sementes de hortaliças para a agricultura familiar (Circular Técnica 35, 2005)'
 const EMBRAPA_PRAGAS = 'Embrapa Hortaliças: Recomendações para o controle de pragas em hortas urbanas (Circular Técnica 80, 2009)'
 
 export const CURSO_HORTA: ModuloCurso = {
@@ -439,6 +440,149 @@ export const CURSO_HORTA: ModuloCurso = {
         },
       ],
       fontes: [EMBRAPA_HORTAS],
+    },
+    {
+      id: 'horta-sementes',
+      nivel: 'avancado',
+      titulo: 'Guardar sementes da própria horta',
+      objetivo: 'Tirar, secar e guardar sementes de tomate, alface e feijão-vagem para plantar de novo.',
+      minutos: 9,
+      cenas: [
+        {
+          titulo: 'Escolha as melhores plantas',
+          texto: 'Tire semente das plantas e dos frutos mais sadios e parecidos.',
+          segundos: 8,
+          desenho: {
+            pecas: [
+              { desenho: 'muda', x: 30, y: 54, largura: 30, movimento: 'surgir' },
+              { desenho: 'tomate', x: 66, y: 50, largura: 34, movimento: 'cair', atraso: 0.8 },
+              { desenho: 'certo', x: 86, y: 24, largura: 14, movimento: 'pulsar', atraso: 1.8 },
+            ],
+          },
+        },
+        {
+          titulo: 'Fermentar o tomate',
+          texto: 'Sementes com o caldo num balde, sem água: 1 dia no calor, 2 no frio.',
+          segundos: 9,
+          desenho: {
+            pecas: [
+              { desenho: 'tomate', x: 28, y: 46, largura: 30, movimento: 'entrar' },
+              { desenho: 'seta', x: 50, y: 50, largura: 14, movimento: 'surgir', atraso: 1 },
+              { desenho: 'balde', x: 74, y: 52, largura: 30, movimento: 'balancar', atraso: 1.4 },
+            ],
+            rotulos: [{ texto: '1 A 2 DIAS', x: 74, y: 86, tamanho: 7, atraso: 2.2, destaque: true }],
+          },
+        },
+        {
+          titulo: 'Secar no sol',
+          texto: 'Lave em água corrente e seque no sol pelo menos 2 dias, mexendo.',
+          segundos: 9,
+          desenho: {
+            pecas: [
+              { desenho: 'sol', x: 76, y: 22, largura: 26, movimento: 'pulsar' },
+              { desenho: 'semente', x: 30, y: 62, largura: 16, movimento: 'cair', atraso: 0.8 },
+              { desenho: 'semente', x: 46, y: 64, largura: 14, movimento: 'cair', atraso: 1 },
+              { desenho: 'semente', x: 60, y: 62, largura: 15, movimento: 'cair', atraso: 1.2 },
+            ],
+            rotulos: [{ texto: '2 DIAS NO SOL', x: 46, y: 86, tamanho: 7, atraso: 2, destaque: true }],
+          },
+        },
+        {
+          titulo: 'Guardar fechado e com nome',
+          texto: 'Vidro limpo e seco, com nome e data, em lugar fresco, seco e escuro.',
+          segundos: 9,
+          desenho: {
+            pecas: [
+              { desenho: 'pote-sementes', x: 40, y: 52, largura: 34, movimento: 'entrar' },
+              { desenho: 'geladeira', x: 76, y: 52, largura: 26, movimento: 'surgir', atraso: 1.2 },
+            ],
+          },
+        },
+      ],
+      partes: [
+        {
+          titulo: 'Que semente vale a pena guardar',
+          paragrafos: [
+            'A Embrapa recomenda guardar semente de variedades crioulas ou de polinização aberta. Semente híbrida é feita com técnica de laboratório, que não dá para repetir em casa.',
+            'Em quintal pequeno, comece pelas plantas que se polinizam sozinhas e quase não se misturam: alface, tomate, feijão-vagem, ervilha, pimentão, pimenta, berinjela, jiló e quiabo. Tomate, pimentão, pimenta, berinjela e quiabo ainda podem cruzar um pouco.',
+            'Abóbora, pepino, melancia, melão, milho, cenoura, cebola, coentro, couve-flor, brócolis e repolho cruzam com plantas vizinhas. Para guardar semente pura delas, a Embrapa pede de 2 a 3 quilômetros entre variedades diferentes, o que quase nunca dá em casa.',
+          ],
+        },
+        {
+          titulo: 'Escolher e colher',
+          passos: [
+            'Escolha as plantas e os frutos mais sadios e mais parecidos entre si.',
+            'Colha em dia seco e de sol.',
+            'Do tomate, colha só os frutos bem maduros.',
+            'Deixe os frutos colhidos descansando de 7 a 20 dias em lugar fresco, na sombra e protegido. A semente termina de amadurecer.',
+            'Alface, feijão-vagem e outras sementes secas: colha quando a planta secar e bata em cima de uma lona para soltar as sementes.',
+          ],
+        },
+        {
+          titulo: 'Tirar a semente do tomate',
+          passos: [
+            'Corte o tomate e ponha as sementes com o caldo num balde de plástico. Não ponha água.',
+            'Deixe fermentar 1 dia no tempo quente ou 2 dias no tempo frio.',
+            'Mexa 2 ou 3 vezes por dia.',
+            'Depois, lave as sementes em água corrente, numa peneira.',
+          ],
+        },
+        {
+          titulo: 'Secar',
+          passos: [
+            'Espalhe as sementes numa lona ou num estrado de cor clara.',
+            'Seque no sol por pelo menos 2 dias, mexendo várias vezes por dia.',
+            'À noite, cubra ou recolha.',
+            'Não deixe secar na sombra: demora mais e a semente pode estragar.',
+          ],
+        },
+        {
+          titulo: 'Guardar',
+          passos: [
+            'Use envelope aluminizado, garrafa PET, vidro ou lata, sempre limpos e bem secos.',
+            'Escreva o nome da planta, a variedade e a data.',
+            'Guarde em lugar fresco, seco e com pouca luz. Também pode ir na parte de baixo da geladeira, dentro de um saco plástico.',
+            'Regra da Embrapa: a temperatura em graus mais a umidade do ar em porcentagem devem dar menos de 55. Por exemplo, 10 °C e 45% de umidade.',
+            'Bem guardada, a semente dura de 3 a 10 anos ou mais, conforme a planta.',
+          ],
+        },
+        {
+          titulo: 'Testar antes de plantar',
+          passos: [
+            'Ponha 100 sementes entre duas folhas de papel-toalha úmidas, sem encharcar.',
+            'Espere de 7 a 14 dias e conte quantas brotaram.',
+            'Se brotaram 80, a germinação é de 80%. Se brotaram poucas, semeie mais junto ou use semente nova.',
+          ],
+        },
+      ],
+      erros: [
+        'Guardar semente de tomate ou de pimentão híbrido esperando a mesma planta.',
+        'Pôr água no balde da fermentação do tomate.',
+        'Secar a semente na sombra, onde ela pode estragar.',
+        'Guardar semente ainda úmida, em pote aberto ou sem nome e data.',
+        'Guardar semente de abóbora ou pepino plantados perto de outra variedade.',
+      ],
+      teste: [
+        {
+          pergunta: 'Quanto tempo a semente de tomate fica fermentando no caldo?',
+          opcoes: ['1 dia no calor, 2 dias no frio', '1 semana', '1 hora'],
+          correta: 0,
+          explicacao: 'A Embrapa indica 1 dia nas épocas quentes e 2 nas frias, mexendo 2 ou 3 vezes por dia e sem pôr água.',
+        },
+        {
+          pergunta: 'Onde secar as sementes?',
+          opcoes: ['Na sombra, dentro de casa', 'No sol, pelo menos 2 dias, mexendo', 'No forno bem quente'],
+          correta: 1,
+          explicacao: 'Secar no sol não estraga a semente. Na sombra a secagem demora e a semente pode deteriorar.',
+        },
+        {
+          pergunta: 'Qual destas plantas é mais fácil de guardar semente pura no quintal?',
+          opcoes: ['Abóbora', 'Pepino', 'Alface'],
+          correta: 2,
+          explicacao: 'A alface se poliniza sozinha. Abóbora e pepino cruzam com outras variedades por perto.',
+        },
+      ],
+      fontes: [EMBRAPA_SEMENTES],
     },
   ],
 }

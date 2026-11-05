@@ -551,4 +551,26 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
     svg: `<rect class="c" x="58" y="6" width="36" height="56" rx="5"/><rect class="r" x="66" y="14" width="18" height="6" rx="2"/>
       <path class="c" d="M8 62 H94 C94 84 80 96 62 98 L66 124 H30 L34 98 C18 94 8 82 8 62 Z"/><path class="agua" d="M18 66 H84 C82 78 72 86 52 86 C32 86 22 78 18 66 Z"/><path class="t" d="M4 126 H98"/>`,
   },
+  tomate: {
+    largura: 110,
+    altura: 110,
+    svg: `<path class="t" d="M55 14 V4 M55 14 L40 8 M55 14 L70 8 M55 14 L44 22 M55 14 L66 22"/><circle class="f" cx="55" cy="62" r="44"/><circle class="c" cx="55" cy="62" r="32"/>
+      <path class="t fino" d="M55 30 V94 M23 62 H87"/>${[
+        [40, 48],
+        [70, 48],
+        [40, 76],
+        [70, 76],
+        [46, 56],
+        [64, 70],
+      ]
+        .map(([x, y]) => `<ellipse class="r" cx="${x}" cy="${y}" rx="4" ry="2.6"/>`)
+        .join('')}`,
+  },
+  'pote-sementes': {
+    largura: 100,
+    altura: 130,
+    svg: `<rect class="f" x="22" y="6" width="56" height="18" rx="4"/><path class="c" d="M18 28 H82 V116 C82 122 78 126 72 126 H28 C22 126 18 122 18 116 Z"/>
+      ${Array.from({ length: 12 }, (_, i) => `<ellipse class="r" cx="${28 + (i % 6) * 9}" cy="${112 - Math.floor(i / 6) * 8}" rx="4" ry="2.6"/>`).join('')}
+      <rect class="r" x="26" y="50" width="48" height="36" rx="3"/><text class="letra-p" x="50" y="64">TOMATE</text><path class="t fino" d="M32 76 H68"/>`,
+  },
 }
