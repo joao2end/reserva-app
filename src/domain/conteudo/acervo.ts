@@ -328,6 +328,67 @@ export const ACERVO: GuiaAcervo[] = [
     fontes: ['Defesa Civil Nacional', 'Ready.gov: Make a Plan'],
   },
   {
+    id: 'ligar-emergencia',
+    categoria: 'comunicacao',
+    nivel: 'facil',
+    titulo: 'Ligar para a emergência: o que falar',
+    resumo: 'Qual número chamar e o que dizer para o socorro chegar rápido.',
+    aviso: {
+      critico: true,
+      titulo: 'Não desligue antes da hora',
+      texto: 'Fique na linha até o atendente liberar. Ele pode ensinar o que fazer até o socorro chegar.',
+    },
+    blocos: [
+      {
+        titulo: 'Qual número chamar',
+        itens: [
+          'SAMU 192: dor no peito, desmaio, sinal de derrame (AVC), convulsão, falta de ar ou parto com risco.',
+          'Bombeiros 193: incêndio, afogamento, desabamento, queda, enchente e vendaval.',
+          'Polícia Militar 190.',
+          'Defesa Civil 199.',
+          'A ligação é grátis e funciona 24 horas por dia.',
+        ],
+      },
+      {
+        titulo: 'O que falar',
+        itens: [
+          'Respire e fale com calma.',
+          'Diga o seu nome e um telefone para contato.',
+          'Conte o que está acontecendo.',
+          'Diga se tem gente ferida e quantas pessoas.',
+          'Diga o endereço completo, com número e um ponto de referência.',
+        ],
+      },
+      {
+        titulo: 'Enquanto espera',
+        itens: [
+          'Faça o que o atendente mandar.',
+          'Ligue de novo se a pessoa piorar ou melhorar.',
+          'Em acidente, sinalize o local.',
+          'Não mexa em quem se machucou num acidente de trânsito.',
+          'Não dê comida nem água ao ferido.',
+        ],
+      },
+      {
+        titulo: 'Deixe pronto antes',
+        itens: [
+          'Escreva no papel o endereço da casa e um ponto de referência, perto do telefone.',
+          'Não use esses números para pedir informação. A linha precisa ficar livre para quem está em perigo.',
+        ],
+      },
+    ],
+    ligacoes: [
+      { tipo: 'secao', id: 'socorros', titulo: 'Primeiros socorros' },
+      { tipo: 'curso', id: 'socorros', titulo: 'Curso de primeiros socorros' },
+    ],
+    fontes: [
+      'Prefeitura de São Paulo, Secretaria da Saúde: SAMU 192, como usar corretamente',
+      'Governo do Paraná: Acionar Corpo de Bombeiros 193',
+      'Governo de Minas Gerais: atendimento de urgência pelo Corpo de Bombeiros Militar',
+      'Defesa Civil de São Paulo: telefones de emergência',
+    ],
+  },
+  {
     id: 'desidratacao',
     categoria: 'saude',
     nivel: 'facil',
