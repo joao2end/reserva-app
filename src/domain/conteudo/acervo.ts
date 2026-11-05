@@ -934,6 +934,61 @@ export const ACERVO: GuiaAcervo[] = [
     ligacoes: [{ tipo: 'secao', id: 'deslocamento', titulo: 'Mochila de saída' }],
     fontes: ['Defesa Civil Nacional', 'Ready.gov: Financial Preparedness'],
   },
+  {
+    id: 'abrigo-publico',
+    categoria: 'casa',
+    nivel: 'facil',
+    titulo: 'Ir para um abrigo público',
+    resumo: 'Como sair de casa, o que levar e como se cuidar no abrigo.',
+    aviso: {
+      critico: true,
+      titulo: 'Mandaram sair: não espere',
+      texto:
+        'Se a Defesa Civil mandar sair, vá para o abrigo ou o ponto seguro indicado. Não volte para casa até a água baixar e o caminho estar seguro.',
+    },
+    blocos: [
+      {
+        titulo: 'Antes de sair de casa',
+        itens: [
+          'Pergunte à Defesa Civil, no 199, onde fica o abrigo mais perto.',
+          'Se der tempo, desligue o disjuntor geral e feche o registro da água.',
+          'Feche e tranque portas e janelas.',
+          'Deixe um bilhete com a hora em que saiu e para onde vai. Avise a família.',
+          'Vá pelo caminho indicado. Não pegue atalho, porque ele pode estar bloqueado.',
+        ],
+      },
+      {
+        titulo: 'O que levar',
+        itens: [
+          'Remédios, receitas e documentos de saúde.',
+          'Documentos num saco plástico bem fechado.',
+          'Roupa e um lençol ou coberta para dormir.',
+          'A mochila de saída.',
+          'Animal de estimação: pergunte antes se o abrigo recebe. Às vezes ele fica num lugar separado.',
+        ],
+      },
+      {
+        titulo: 'No abrigo',
+        itens: [
+          'Lave as mãos com água e sabão ou álcool em gel, antes de comer e depois do banheiro.',
+          'Não divida toalha, escova de dente, talher nem roupa.',
+          'Beba só água tratada. Se não tiver, ferva a água por pelo menos 5 minutos.',
+          'Toma remédio todo dia? Procure a equipe de saúde para não parar o tratamento.',
+          'Febre, diarreia, vômito, ferida, tosse que não passa ou falta de ar: peça atendimento, mesmo se for leve.',
+        ],
+      },
+    ],
+    ligacoes: [
+      { tipo: 'secao', id: 'deslocamento', titulo: 'Mochila de saída' },
+      { tipo: 'licao', id: 'agua-tratar', titulo: 'Tratar água em casa' },
+    ],
+    fontes: [
+      'Defesa Civil Nacional (Cenad): Inundações',
+      'Secretaria da Saúde do Rio Grande do Sul: cuidados para quem está em abrigos (Conass, 2025)',
+      'Cruz Vermelha Americana: Disaster Shelters',
+      'Ready.gov (FEMA): Evacuation Guidelines',
+    ],
+  },
 ]
 
 export function guiaDoAcervo(id: string): GuiaAcervo | undefined {
