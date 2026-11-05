@@ -103,6 +103,10 @@ Depois de mudar o código web, rode `npm run build && npx cap sync android` ante
 
 O ícone e a tela de abertura são gerados por `python3 scripts/gerar_icones.py` a partir do ícone Phosphor *package-bold*.
 
+## Vídeos com o MoneyPrinterTurbo
+
+O workflow **Vídeos MoneyPrinterTurbo** gera uma segunda versão do vídeo de cada lição com o [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo): a narração exata da lição, cenas reais do Pexels escolhidas pelos termos de `scripts/videos/termos_moneyprinter.json`, voz pt-BR do Edge TTS, legendas e trilha original. Publica na release `videos-moneyprinter`. Precisa do secret `PEXELS_API_KEY`. O app ainda mostra a aula narrada; a troca depende de comparar as duas versões.
+
 ## Loop de melhoria
 
 Uma tarefa agendada roda de hora em hora e segue `LOOP.md`: amplia o acervo, completa os níveis dos cursos e melhora os vídeos, uma mudança por rodada, sempre com testes.

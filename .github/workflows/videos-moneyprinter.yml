@@ -1,0 +1,84 @@
+name: Vídeos MoneyPrinterTurbo
+
+on:
+  workflow_dispatch:
+    inputs:
+      licoes:
+        description: 'Lições separadas por espaço (vazio = todas que mudaram)'
+        type: string
+        default: 'rcp'
+      todos:
+        description: 'Gerar de novo mesmo as que não mudaram'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: videos-moneyprinter
+  cancel-in-progress: false
+
+env:
+  MPT_REPO: https://github.com/harry0703/MoneyPrinterTurbo.git
+  MPT_VERSAO: 22c4671
+
+jobs:
+  videos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Conferir a chave do Pexels
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: |
+          if [ -z "$PEXELS_API_KEY" ]; then
+            echo "::error::Falta o secret PEXELS_API_KEY. Crie a chave gratuita em https://www.pexels.com/api/ e salve em Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Baixar o MoneyPrinterTurbo
+        run: |
+          git clone --filter=blob:none "$MPT_REPO" mpt
+          git -C mpt checkout "$MPT_VERSAO"
+
+      - name: Instalar dependências
+        run: |
+          npm ci
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -r mpt/requirements.txt numpy
+
+      - name: Buscar o manifesto anterior
+        if: ${{ !inputs.todos }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download videos-moneyprinter -p manifesto.json -D anterior || echo "Ainda não há vídeos publicados."
+
+      - name: Gerar os vídeos
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          LICOES: ${{ inputs.licoes }}
+        run: |
+          python scripts/videos/gerar_moneyprinter.py --mpt mpt --fonte pexels \
+            --manifesto-anterior anterior/manifesto.json --saida saida-moneyprinter \
+            ${LICOES:+--licoes $LICOES}
+
+      - name: Publicar na release videos-moneyprinter
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view videos-moneyprinter >/dev/null 2>&1; then
+            gh release create videos-moneyprinter --title "Vídeos das lições (MoneyPrinterTurbo)" --latest=false --prerelease --target "$GITHUB_SHA" \
+              --notes "Vídeos das lições do SBV gerados com o MoneyPrinterTurbo (MIT): roteiro da própria lição, imagens do Pexels, voz pt-BR Antonio do Edge TTS, legendas e trilha original."
+          fi
+          gh release upload videos-moneyprinter saida-moneyprinter/* --clobber

@@ -15,3 +15,5 @@ tsconfig.tsbuildinfo
 keystore.properties
 saida-videos/
 voz/
+__pycache__/
+saida-moneyprinter/
