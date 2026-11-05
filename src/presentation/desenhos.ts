@@ -573,4 +573,17 @@ export const DESENHO: Record<DesenhoId, Desenho> = {
       ${Array.from({ length: 12 }, (_, i) => `<ellipse class="r" cx="${28 + (i % 6) * 9}" cy="${112 - Math.floor(i / 6) * 8}" rx="4" ry="2.6"/>`).join('')}
       <rect class="r" x="26" y="50" width="48" height="36" rx="3"/><text class="letra-p" x="50" y="64">TOMATE</text><path class="t fino" d="M32 76 H68"/>`,
   },
+  'rosto-torto': {
+    largura: 120,
+    altura: 130,
+    svg: `<ellipse class="c" cx="60" cy="66" rx="46" ry="58"/><path class="t fino" d="M60 22 V110"/>
+      <circle class="f" cx="42" cy="52" r="6"/><path class="f" d="M72 50 H86 C86 56 82 58 79 58 C76 58 72 56 72 50 Z"/>
+      <path class="t" d="M58 64 L56 80 H62"/><path class="t grosso" d="M34 90 C42 98 52 98 60 96 C68 96 76 100 84 106"/>`,
+  },
+  'pessoa-bracos': {
+    largura: 130,
+    altura: 140,
+    svg: `<circle class="c" cx="65" cy="22" r="14"/><path class="c" d="M48 42 H82 C88 42 90 46 90 52 V88 H80 V134 H68 V96 H62 V134 H50 V88 H40 V52 C40 46 42 42 48 42 Z"/>
+      <rect class="c" x="24" y="6" width="14" height="50" rx="6" transform="rotate(-14 40 50)"/><rect class="c" x="88" y="44" width="14" height="48" rx="6" transform="rotate(-30 95 48)"/>`,
+  },
 }

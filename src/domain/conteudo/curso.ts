@@ -522,7 +522,7 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
     id: 'socorros',
     area: 'emergencias',
     titulo: 'Primeiros socorros',
-    resumo: 'Parada cardíaca, engasgo, sangramento, queimadura e quedas.',
+    resumo: 'Parada cardíaca, engasgo, derrame, sangramento, queimadura e quedas.',
     licoes: [
       {
         id: 'queda-levantar',
@@ -916,6 +916,145 @@ const CURSOS_EMERGENCIA: ModuloCurso[] = [
           },
         ],
         fontes: ['American Heart Association: diretrizes 2025 de engasgo'],
+      },
+      {
+        id: 'avc-reconhecer',
+        nivel: 'medio',
+        titulo: 'Derrame (AVC): reconhecer e chamar ajuda',
+        objetivo: 'Fazer o teste rápido do derrame, ligar 192 na hora e cuidar da pessoa até o socorro chegar.',
+        minutos: 6,
+        cenas: [
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'rosto-torto', x: 50, y: 48, largura: 40, movimento: 'surgir' },
+                { desenho: 'seta', x: 80, y: 62, largura: 12, giro: 160, movimento: 'pulsar', atraso: 1.2 },
+              ],
+              rotulos: [{ texto: 'SORRIA', x: 50, y: 90, tamanho: 8, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Peça para sorrir',
+            texto: 'Um lado da boca fica caído ou torto? É sinal de derrame.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa-bracos', x: 50, y: 52, largura: 34, movimento: 'entrar' },
+                { desenho: 'seta', x: 80, y: 46, largura: 12, giro: 90, movimento: 'pulsar', atraso: 1.4 },
+              ],
+              rotulos: [{ texto: 'LEVANTE OS 2 BRAÇOS', x: 50, y: 92, tamanho: 6.5, atraso: 1.8, destaque: true }],
+            },
+            titulo: 'Peça para levantar os dois braços',
+            texto: 'Um braço fica fraco ou vai caindo? É sinal de derrame.',
+            segundos: 8,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'pessoa', x: 34, y: 54, largura: 22, movimento: 'balancar' },
+                { desenho: 'relogio', x: 72, y: 40, largura: 24, movimento: 'deslizar', vindoDe: [16, 0], atraso: 0.8 },
+              ],
+              rotulos: [{ texto: 'REPITA UMA FRASE', x: 50, y: 90, tamanho: 7, atraso: 1.6, destaque: true }],
+            },
+            titulo: 'Peça para repetir uma frase',
+            texto: 'A fala sai enrolada ou estranha? Olhe o relógio e guarde a hora.',
+            segundos: 9,
+          },
+          {
+            desenho: {
+              pecas: [
+                { desenho: 'telefone', x: 40, y: 50, largura: 18, movimento: 'pulsar' },
+                { desenho: 'copo', x: 70, y: 52, largura: 14, movimento: 'cair', atraso: 0.8 },
+                { desenho: 'errado', x: 70, y: 52, largura: 22, movimento: 'surgir', atraso: 1.4 },
+              ],
+              rotulos: [{ texto: 'LIGUE 192', x: 50, y: 88, tamanho: 8, atraso: 2, destaque: true }],
+            },
+            titulo: 'Ligue 192 na hora',
+            texto: 'Um sinal só já basta. Não dê comida nem bebida enquanto espera.',
+            segundos: 9,
+          },
+        ],
+        partes: [
+          {
+            titulo: 'O que é o derrame',
+            paragrafos: [
+              'O derrame, chamado de AVC (acidente vascular cerebral), acontece quando falta sangue numa parte do cérebro.',
+              'Cada minuto conta. Quanto mais rápido a pessoa recebe atendimento, maior a chance de não ficar com sequelas.',
+            ],
+          },
+          {
+            titulo: 'Os sinais aparecem de repente',
+            passos: [
+              'Um lado do rosto caído ou a boca torta.',
+              'Fraqueza ou formigamento num braço, numa perna ou num lado do corpo.',
+              'Fala enrolada, dificuldade para falar ou para entender.',
+              'Perda da visão num olho ou nos dois.',
+              'Tontura forte, perda do equilíbrio ou dificuldade para andar.',
+              'Dor de cabeça muito forte, sem motivo.',
+            ],
+          },
+          {
+            titulo: 'O teste rápido',
+            passos: [
+              'Peça para a pessoa sorrir. Veja se a boca fica torta.',
+              'Peça para levantar os dois braços. Veja se um fica fraco ou vai caindo.',
+              'Peça para repetir uma frase simples. Veja se a fala sai enrolada ou estranha.',
+              'Se tiver dificuldade em qualquer um, ligue 192 na hora. Um sinal só já basta.',
+            ],
+          },
+          {
+            titulo: 'Enquanto o socorro não chega',
+            passos: [
+              'Olhe o relógio e anote a hora em que os sinais começaram. Se não sabe, anote a última hora em que a pessoa estava bem.',
+              'Fale essa hora para o atendente e para a equipe do socorro.',
+              'Fique junto da pessoa. Deixe-a confortável, apoiada, e acalme-a.',
+              'Não dê comida nem bebida: ela pode ter dificuldade para engolir.',
+              'Se ela estiver acordada mas sonolenta, babando ou com dificuldade para engolir, deite-a de lado.',
+              'Se ela desmaiar e não respirar, comece a massagem no peito.',
+            ],
+          },
+          {
+            titulo: 'Os sinais passaram?',
+            paragrafos: [
+              'Às vezes os sinais somem em poucos minutos. Isso também é grave: a pessoa tem risco muito alto de ter um derrame logo depois.',
+              'Mesmo que pareça que passou, procure atendimento médico na hora.',
+            ],
+          },
+        ],
+        erros: [
+          'Esperar para ver se melhora ou deixar a pessoa ir dormir.',
+          'Achar que os sinais sumiram e não procurar atendimento.',
+          'Dar água, café, comida ou remédio pela boca.',
+          'Esquecer a hora em que os sinais começaram.',
+        ],
+        teste: [
+          {
+            pergunta: 'Quais são os três pedidos do teste rápido do derrame?',
+            opcoes: ['Sorrir, levantar os dois braços e repetir uma frase', 'Andar, pular e cantar', 'Tomar água, deitar e dormir'],
+            correta: 0,
+            explicacao: 'Boca torta, braço fraco ou fala enrolada: qualquer um é sinal de derrame.',
+          },
+          {
+            pergunta: 'A pessoa está com a boca torta, mas o braço e a fala estão bem. O que fazer?',
+            opcoes: ['Esperar os outros sinais aparecerem', 'Ligar 192 na hora', 'Dar um copo de água com açúcar'],
+            correta: 1,
+            explicacao: 'Um sinal só já basta. Cada minuto conta.',
+          },
+          {
+            pergunta: 'O que anotar para contar ao socorro?',
+            opcoes: ['A hora em que os sinais começaram', 'O que a pessoa almoçou', 'Nada, eles descobrem sozinhos'],
+            correta: 0,
+            explicacao: 'A hora em que começou ajuda o médico a escolher o tratamento.',
+          },
+        ],
+        fontes: [
+          'Ministério da Saúde, Linhas de Cuidado: AVC no adulto (Sou paciente)',
+          'Biblioteca Virtual em Saúde do Ministério da Saúde: Dia Mundial do AVC',
+          'UNA-SUS: aprenda quais são os primeiros sinais de um AVC',
+          'Cruz Vermelha Americana: primeiros socorros no AVC',
+          'St John Ambulance (Reino Unido): primeiros socorros no AVC',
+          'CDC (Centros de Controle de Doenças dos EUA): sinais e sintomas de AVC',
+        ],
       },
       {
         id: 'sangramento-queimadura',
